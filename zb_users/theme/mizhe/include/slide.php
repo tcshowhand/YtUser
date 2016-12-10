@@ -1,0 +1,1 @@
+<li><a href='http://www.toyean.com/' style='background:url(zb_users/theme/mizhe/include/slide01.jpg) no-repeat center;' title='欢迎使用拓源ZBP团购主题mizhe!' target='_blank'></a></li>

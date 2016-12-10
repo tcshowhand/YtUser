@@ -4,6 +4,9 @@ Z-Blog PHP plug：YtUser
 插件特点：百搭
 plug-in features: all-match
 
+说明：
+本插件会通过“拓源米折主题”和“泡沫主题”为案例来充分教会大家怎么去更好的使用本插件。
+
 插件存放位置：zb_users/plugin/YtUser
 Plugin storage location: zb_users/plugin/YtUser
 

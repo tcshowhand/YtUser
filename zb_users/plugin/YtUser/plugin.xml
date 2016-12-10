@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <plugin version="php">
 <id>YtUser</id>
-<name>用户中心</name>
+<name>用户中心（百搭）</name>
 <url>http://www.ytecn.com/2016/11/548.html</url>
 <note>集成第三方登录的基础用户中心插件</note>
 <description>用户中心</description>
@@ -21,7 +21,7 @@
 <adapted>151626</adapted>
 <version>1.9</version>
 <pubdate>2016-10-30</pubdate>
-<modified>2016-11-30</modified>
+<modified>2016-12-09</modified>
 <price>510</price>
 <advanced>
   <dependency></dependency>
