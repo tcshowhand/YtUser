@@ -48,7 +48,7 @@
 		<div class="contitle"><h3>猜你喜欢</h3><a href="<?php  echo $article->Category->Url;  ?>">更多推荐»</a></div>
 		<div class="conbox">
 			<ul>
-				<?php  foreach ( GetList(15,$article->Category->ID) as $more) { ?>
+				<?php  foreach ( GetList(15,$category->ID) as $more) { ?>
 				<li>
 					<?php 
 					  $pattern="/<[img|IMG].*?src=[\'|\"](.*?(?:[\.gif|\.jpg|\.png]))[\'|\"].*?[\/]?>/";

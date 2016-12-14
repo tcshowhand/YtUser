@@ -78,7 +78,7 @@ function mizhe_Edit_Response(){
 function mizhe_CustomMeta_Response(&$object){
 
 	global $zbp;
-	$array=array();
+	$array=array(proprice,promarket,prourl,protime);
 	$proprice_intro = '产品价格';
 	$promarket_intro = '市场价';
 	$protime_intro = '结束时间';
