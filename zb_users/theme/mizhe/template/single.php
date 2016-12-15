@@ -16,7 +16,7 @@
 						</div>
 						<div class="sidecon">
 							<ul>
-								{foreach GetList(5,$category.ID) as $article}
+								{foreach GetList(5,$article.Category.ID) as $article}
 								<li>
 								{php}
 								  $pattern="/<[img|IMG].*?src=[\'|\"](.*?(?:[\.gif|\.jpg|\.png]))[\'|\"].*?[\/]?>/";

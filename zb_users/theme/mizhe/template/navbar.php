@@ -3,7 +3,7 @@
           <div class="topmain">
                <div class="leftnav">
                     <ul>
-                         {if $user.ID}<span>欢迎 {$user.StaticName}</span>{else}<li>登录：</li><li><div class="ds-login"></div></li>{/if}
+                         {if $user.ID}<span>欢迎 {$user.StaticName} <a href="{$host}?User">会员中心</a> <a href="{$host}zb_system/cmd.php?act=logout">退出</a></span>{else}<li>登录：</li><li><div class="ds-login"></div></li>{/if}
                     </ul>
                </div>
                <div class="rightnav">
