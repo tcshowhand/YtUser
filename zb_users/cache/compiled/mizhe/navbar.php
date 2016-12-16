@@ -3,7 +3,7 @@
           <div class="topmain">
                <div class="leftnav">
                     <ul>
-                         <?php if ($user->ID) { ?><span>欢迎 <?php  echo $user->StaticName;  ?></span><?php }else{  ?><li>登录：</li><li><div class="ds-login"></div></li><?php } ?>
+                         <?php if ($user->ID) { ?><span>欢迎 <?php  echo $user->StaticName;  ?> <a href="<?php  echo $host;  ?>?User">会员中心</a> <a href="<?php  echo $host;  ?>zb_system/cmd.php?act=logout">退出</a></span><?php }else{  ?><li>登录：</li><li><div class="ds-login"></div></li><?php } ?>
                     </ul>
                </div>
                <div class="rightnav">

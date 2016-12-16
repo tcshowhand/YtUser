@@ -11,12 +11,11 @@ function ActivePlugin_YtUser() {
     Add_Filter_Plugin('Filter_Plugin_Admin_TopMenu', 'YtUser_AddMenu');
     Add_Filter_Plugin('Filter_Plugin_ViewPost_Template','YtUser_Content');
     Add_Filter_Plugin('Filter_Plugin_Edit_Response3','YtUser_Edit');
-
 }
 
 function YtUser_AddMenu(&$m) {
 	global $zbp;
-	$m[] = MakeTopMenu("root", '用户中心', $zbp->host . "zb_users/plugin/YtUser/main.php", "", "topmenu_metro");
+	$m[] = MakeTopMenu("root", '用户中心', $zbp->host . "zb_users/plugin/YtUser/main.php?act=base", "", "topmenu_metro");
 }
 
 function YtUser_Main(){
@@ -24,7 +23,6 @@ function YtUser_Main(){
 	$data='<script type="text/javascript">var duoshuoQuery = {short_name:"'.$zbp->Config('YtUser')->dsurl.'",sso: { login: "'.$zbp->host.'zb_users/plugin/YtUser/login.php",logout: "'.$zbp->host.'zb_users/plugin/YtUser/logout.php/"}};(function() {var ds = document.createElement(\'script\');ds.type = \'text/javascript\';ds.async = true;ds.src = (document.location.protocol == \'https:\' ? \'https:\' : \'http:\') + \'//static.duoshuo.com/embed.js\';ds.charset = \'UTF-8\';(document.getElementsByTagName(\'head\')[0] || document.getElementsByTagName(\'body\')[0]).appendChild(ds);})();</script>';
 	$zbp->footer .= $data. "\r\n";
 }
-
 
 function YtUser_Edit(){
 	global $article;
@@ -50,6 +48,19 @@ function YtUser_Content(&$template){
 		    	$zbp->header .='<script src="'.$zbp->host.'zb_users/plugin/YtUser/Upgrade.js" type="text/javascript"></script>' . "\r\n";
 		    }
         $article->Content = $content;
+        $sql=$zbp->db->sql->Select($GLOBALS['tysuer_Table'],'*',array(array('=','tc_uid',$zbp->user->ID)),null,array(1),null);
+        $array=$zbp->GetListCustom($GLOBALS['tysuer_Table'],$GLOBALS['tysuer_DataInfo'],$sql);
+        $num=count($array);
+        if($num==0){
+            $article->Vipendtime =0;
+        }else{
+            $reg=$array[0];
+            $article->Vipendtime = $reg->Vipendtime;
+        }
+        $sql=$zbp->db->sql->Select($GLOBALS['YtUser_buy_Table'],'*',array(array('=','buy_LogID',$article->ID),array('=','buy_State',1)),null,1,null);
+        $array=$zbp->GetListCustom($GLOBALS['YtUser_buy_Table'],$GLOBALS['tyactivate_DataInfo'],$sql);
+        $num=count($array);
+        $article->paysum = $num+$article->Metas->paysum;
 		$template->SetTags('article', $article);
 		}
 	}
@@ -80,51 +91,6 @@ function YtUser_SyntaxHighlighter_print() {
     if($zbp->user->ID){echo '$(function() {var $cpLogin = $(".cp-login").find("a");var $cpVrs = $(".cp-vrs").find("a");$(".cp-hello").html("欢迎 '.$zbp->user->StaticName.'  <a href=\"'.$zbp->host.'?Articleedt\">投稿</a>");$cpLogin.html("会员中心");$cpLogin.attr("href", bloghost + "?User");$cpVrs.html("评论列表");$cpVrs.attr("href", bloghost + "?Commentlist");});';}else{echo '$(function() {$(".cp-hello").html("<div class=\"ds-login\"></div>");});';}
 }
 
-function YtUser_CreateCode($n){
-	global $zbp;
-	for ($i=0; $i < 10; $i++) { 
-		$r = new Base($GLOBALS['tyactivate_Table'],$GLOBALS['tyactivate_DataInfo']);
-		$r->InviteCode=GetGuid();
-		$r->Level=4;
-		$r->Save();
-	}
-}
-
-function YtUser_DelUsedCode(){
-	global $zbp;
-	$sql = $zbp->db->sql->Delete($GLOBALS['tyactivate_Table'],array(array('<>','reg_AuthorID',0)));
-	$zbp->db->Delete($sql);
-}
-
-
-function YtUser_EmptyCode(){
-	global $zbp;
-	$sql = $zbp->db->sql->Delete($GLOBALS['tyactivate_Table'],null);
-	$zbp->db->Delete($sql);
-}
-
-
-function YtUser_Price_CreateCode($n){
-	global $zbp;
-	for ($i=0; $i < 10; $i++) { 
-		$r = new Base($GLOBALS['typrepaid_Table'],$GLOBALS['typrepaid_DataInfo']);
-		$r->InviteCode=GetGuid();
-		$r->Price=100;
-		$r->Save();
-	}
-}
-
-function YtUser_Price_DelUsedCode(){
-	global $zbp;
-	$sql = $zbp->db->sql->Delete($GLOBALS['typrepaid_Table'],array(array('<>','tc_AuthorID',0)));
-	$zbp->db->Delete($sql);
-}
-
-function YtUser_Price_EmptyCode(){
-	global $zbp;
-	$sql = $zbp->db->sql->Delete($GLOBALS['typrepaid_Table'],null);
-	$zbp->db->Delete($sql);
-}
 
 function InstallPlugin_YtUser() {
 	global $zbp;

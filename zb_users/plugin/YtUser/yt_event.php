@@ -1,17 +1,25 @@
 <?php
 
+
+function YtUser_SubMenu($id){
+    $arySubMenu = array(
+        0 => array('网站设置', 'base', 'left', false),
+        1 => array('VIP月卡', 'upgrade', 'left', false),
+        2 => array('充值卡', 'recharge', 'left', false),
+        3 => array('购买记录', 'buy', 'left', false),
+        4 => array('检测表', 'testing', 'left', false),
+    );
+    foreach($arySubMenu as $k => $v){
+        echo '<a href="?act='.$v[1].'"><span class="m-'.$v[2].' '.($id==$v[1]?'m-now':'').'">'.$v[0].'</span></a>';
+    }
+}
+
+
 function YtUser_page(){
 	global $zbp;
     if($zbp->user->ID){
-        $tysuer_Table='%pre%ytuser';
-        $tysuer_DataInfo=array(
-            'ID'=>array('tc_id','integer','',0),
-            'Uid'=>array('tc_uid','integer','',0),
-            'Oid'=>array('tc_oid','string',255,''),
-            'Price'=>array('tc_Price','integer','',0),
-        );
-        $sql=$zbp->db->sql->Select($tysuer_Table,'*',array(array('=','tc_uid',$zbp->user->ID)),null,array(1),null);
-        $array=$zbp->GetListCustom($tysuer_Table,$tysuer_DataInfo,$sql);
+        $sql=$zbp->db->sql->Select($GLOBALS['tysuer_Table'],'*',array(array('=','tc_uid',$zbp->user->ID)),null,array(1),null);
+        $array=$zbp->GetListCustom($GLOBALS['tysuer_Table'],$GLOBALS['tysuer_DataInfo'],$sql);
         $num=count($array);
         if($num==0){
 	    $Price=0;
@@ -200,14 +208,19 @@ function YtUser_page(){
 	if(isset($_GET['Upgrade'])){
 	$zbp->header .='<script src="'.$zbp->host.'zb_users/plugin/YtUser/Upgrade.js" type="text/javascript"></script>' . "\r\n";
 	$article = new Post;
-	$article->Title="用户升级";
+	$article->Title="使用VIP月卡";
 	$article->IsLock=true;
 	$article->Type=ZC_POST_TYPE_PAGE;
 	
     if($zbp->user->ID){
     	$article->Content .='<table style="width:90%;border:none;font-size:1.1em;line-height:2.5em;">';
+        $article->Content .='<tr style=""><th style="border:none;" colspan="2" scope="col"><p>用户级别:'.$zbp->lang['user_level_name'][$zbp->user->Level].'</p></p></th></tr>';
+        if($zbp->user->Level <5){
+        if($Vipendtime==0){$temp="永久会员";}else{$temp=date("Y-m-d H:i:s",$Vipendtime);}
+        $article->Content .='<tr style=""><th style="border:none;" colspan="2" scope="col"><p>到期时间:'.$temp.'</p></p></th></tr>';
+        }
 		$article->Content .='<tr style=""><th style="border:none;" colspan="2" scope="col"><p>'.$zbp->Config('YtUser')->readme_text.'</p></th></tr>';
-		$article->Content .='<tr><td style="text-align:right;border:none;">(*)升级码：</td><td  style="border:none;" ><input required="required" type="text" name="invitecode" style="width:250px;font-size:1.2em;" />';
+		$article->Content .='<tr><td style="text-align:right;border:none;">(*)VIP月卡</td><td  style="border:none;" ><input required="required" type="text" name="invitecode" style="width:250px;font-size:1.2em;" />';
 		$article->Content .='</td></tr>';
 		$article->Content .='<tr><td style="text-align:right;border:none;">(*)</td><td  style="border:none;" ><input required="required" type="text" name="verifycode" style="width:150px;font-size:1.2em;" />&nbsp;&nbsp;<img style="border:none;vertical-align:middle;width:'.$zbp->option['ZC_VERIFYCODE_WIDTH']. 'px;height:' . $zbp->option['ZC_VERIFYCODE_HEIGHT'] . 'px;cursor:pointer;" src="' .$zbp->validcodeurl . '?id=RegPage" alt="" title="" onclick="javascript:this.src=\'' . $zbp->validcodeurl . '?id=RegPage&amp;tm=\'+Math.random();"/></td></tr>';
 		$article->Content .='<tr><td  style="border:none;" ></td><td  style="border:none;" ><input type="submit" style="width:100px;font-size:1.0em;padding:0.2em" value="提交" onclick="return RegPage()" /></td></tr>';
@@ -235,10 +248,7 @@ function YtUser_page(){
 	die();
 	}
 
-
     if(isset($_GET['buy'])){
-    
-
     $uid = (int)GetVars('uid', 'GET');
 	$zbp->header .='<script src="'.$zbp->host.'zb_users/plugin/YtUser/Upgrade.js" type="text/javascript"></script>' . "\r\n";
 	$article = new Post;
@@ -251,21 +261,8 @@ function YtUser_page(){
         die();
     }
     $articles = $zbp->GetPostByID($uid);
-
-    $YtUser_buy_Table='%pre%YtUser_buy';
-    $YtUser_buy_DataInfo=array(
-            'ID' => array('buy_ID', 'integer', '', 0),
-            'OrderID' => array('buy_OrderID', 'string', 30, 0),
-            'LogID' => array('buy_LogID', 'integer', '', 0),
-            'AuthorID' => array('buy_AuthorID', 'integer', '', 0),
-            'Title' => array('buy_Title', 'string', 20, ''),
-            'State' => array('buy_State', 'integer', '', 0),
-            'PostTime' => array('buy_PostTime', 'integer', '', 0),
-            'IP' => array('buy_IP', 'string', 15, ''),
-    );
-
-    $sql=$zbp->db->sql->Select($YtUser_buy_Table,'*',array(array('=','buy_LogID',$uid),array('=','buy_AuthorID',$zbp->user->ID),array('=','buy_State',1)),null,1,null);
-    $array=$zbp->GetListCustom($YtUser_buy_Table,$YtUser_buy_DataInfo,$sql);
+    $sql=$zbp->db->sql->Select($GLOBALS['YtUser_buy_Table'],'*',array(array('=','buy_LogID',$uid),array('=','buy_AuthorID',$zbp->user->ID),array('=','buy_State',1)),null,1,null);
+    $array=$zbp->GetListCustom($GLOBALS['YtUser_buy_Table'],$GLOBALS['YtUser_buy_DataInfo'],$sql);
     $num=count($array);
 
     if($zbp->user->ID){
@@ -358,11 +355,7 @@ function YtUser_page(){
         $article->Content .='<p><button id="btnPost" onclick="return checkArticleInfo();">确定</button></p>';
         $article->Content .='</form>';
         $article->Content .='<script type="text/javascript">function checkArticleInfo(){
-            document.getElementById("edit").action="'.$zbp->host.'zb_users/plugin/YtUser/cmd.php?act=ArticlePst&token='.$zbp->GetToken().'";isSubmit=true;}
-
-
-
-        </script>';
+            document.getElementById("edit").action="'.$zbp->host.'zb_users/plugin/YtUser/cmd.php?act=ArticlePst&token='.$zbp->GetToken().'";isSubmit=true;}</script>';
     }else{
         $article->Content .='<h2 style="font-size:60px;margin-bottom:32px;color:f00;">请登录用户</h2></div>';
     }
@@ -386,7 +379,6 @@ function YtUser_page(){
 	$zbp->template->Display();
 	die();
 	}
-
     if(isset($_GET['Articlelist'])){
     $template = 'index';
     if($zbp->template->hasTemplate('Articlelist')){
