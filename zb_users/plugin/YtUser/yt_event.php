@@ -27,6 +27,7 @@ function YtUser_page(){
         $reg=$array[0];
         $Price=$reg->Price;
         }
+        $Vipendtime=$reg->Vipendtime;
     }
 	
 	if(isset($_GET['Commentlist'])){
@@ -90,17 +91,6 @@ function YtUser_page(){
 	}
 
 	if(isset($_GET['Paylist'])){
-	$YtUser_buy_Table='%pre%YtUser_buy';
-	$YtUser_buy_DataInfo=array(
-        'ID' => array('buy_ID', 'integer', '', 0),
-        'OrderID' => array('buy_OrderID', 'string', 15, 0),
-        'LogID' => array('buy_LogID', 'integer', '', 0),
-        'AuthorID' => array('buy_AuthorID', 'integer', '', 0),
-        'Title' => array('buy_Title', 'string', 20, ''),
-        'State' => array('buy_State', 'integer', '', 0),
-        'PostTime' => array('buy_PostTime', 'integer', '', 0),
-        'IP' => array('buy_IP', 'string', 15, ''),
-	);
     $template = 'index';
     if($zbp->template->hasTemplate('Paylist')){
 		$template = 'Paylist';
@@ -119,9 +109,9 @@ function YtUser_page(){
 	$p->UrlRule->Rules['{%search%}']=urlencode(GetVars('search'));
 	$p->UrlRule->Rules['{%ischecking%}']=(boolean)GetVars('ischecking');
 
-	$sql= $zbp->db->sql->Select($YtUser_buy_Table,'*',array(array('=', 'buy_AuthorID', $zbp->user->ID)),'buy_ID ASC',null,null);
+	$sql= $zbp->db->sql->Select($GLOBALS['YtUser_buy_Table'],'*',array(array('=', 'buy_AuthorID', $zbp->user->ID)),'buy_ID ASC',null,null);
 
-	$array=$zbp->GetListCustom($YtUser_buy_Table,$YtUser_buy_DataInfo,$sql);
+	$array=$zbp->GetListCustom($GLOBALS['YtUser_buy_Table'],$GLOBALS['YtUser_buy_DataInfo'],$sql);
     foreach ($array as $a) {
         $articles = $zbp->GetPostByID($a->LogID);
         if ($articles->ID==0) $articles = NULL; 

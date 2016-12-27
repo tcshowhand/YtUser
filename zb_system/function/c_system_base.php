@@ -192,9 +192,9 @@ $GLOBALS['actions'] = array(
     'UploadPst' => 3,
     'UploadDel' => 3,
 
-    'ModuleEdt' => 3,
-    'ModulePst' => 3,
-    'ModuleDel' => 3,
+    'ModuleEdt' => 1,
+    'ModulePst' => 1,
+    'ModuleDel' => 1,
 
     'ThemeSet' => 1,
     'SidebarSet' => 1,

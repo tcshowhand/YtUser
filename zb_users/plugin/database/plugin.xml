@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <plugin version="php">
-<id>Searchlist</id>
-<name>搜索优化支持分页</name>
+<id>database</id>
+<name>数据库管理(mysql)</name>
 <url>http://www.ytecn.com/</url>
-<note>搜索优化支持分页</note>
-<description>搜索优化,默认调用index模板，存在search模板则调用search模板。</description>
-<path></path>
+<note>数据库管理(mysql)</note>
+<description></description>
+<path>main.php?act=base</path>
 <include>include.php</include>
 <level>1</level>
 <author>
@@ -19,9 +19,9 @@
   <url></url>
 </source>
 <adapted>151626</adapted>
-<version>1.2</version>
-<pubdate>2016-11-08</pubdate>
-<modified>2016-12-23</modified>
+<version>1.1</version>
+<pubdate>2016-12-23</pubdate>
+<modified>2016-12-26</modified>
 <price>0</price>
 <advanced>
   <dependency></dependency>
