@@ -22,3 +22,5 @@ We expect more people to join us.
 Z-Blog PHP应用中心：app.zblogcn.com
 
 Z-Blog PHP: https://github.com/zblogcn/zblogphp
+
+[我的博客](http://www.songzhenjiang.cn)  
