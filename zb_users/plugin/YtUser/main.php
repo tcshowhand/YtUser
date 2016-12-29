@@ -6,10 +6,7 @@ $action='root';
 if (!$zbp->CheckRights($action)) {$zbp->ShowError(6);die();}
 if (!$zbp->CheckPlugin('YtUser')) {$zbp->ShowError(48);die();}
 
-$act = "base";
-if ($_GET['act']){
-$act = $_GET['act'] == "" ? 'base' : $_GET['act'];
-}
+if (isset($_GET['act'])){$act = $_GET['act'];}else{$act = 'base';}
 
 $blogtitle='用户中心';
 require $blogpath . 'zb_system/admin/admin_header.php';

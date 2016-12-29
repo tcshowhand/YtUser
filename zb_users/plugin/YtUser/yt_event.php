@@ -91,6 +91,17 @@ function YtUser_page(){
 	}
 
 	if(isset($_GET['Paylist'])){
+	$YtUser_buy_Table='%pre%YtUser_buy';
+	$YtUser_buy_DataInfo=array(
+        'ID' => array('buy_ID', 'integer', '', 0),
+        'OrderID' => array('buy_OrderID', 'string', 15, 0),
+        'LogID' => array('buy_LogID', 'integer', '', 0),
+        'AuthorID' => array('buy_AuthorID', 'integer', '', 0),
+        'Title' => array('buy_Title', 'string', 20, ''),
+        'State' => array('buy_State', 'integer', '', 0),
+        'PostTime' => array('buy_PostTime', 'integer', '', 0),
+        'IP' => array('buy_IP', 'string', 15, ''),
+	);
     $template = 'index';
     if($zbp->template->hasTemplate('Paylist')){
 		$template = 'Paylist';
@@ -109,9 +120,9 @@ function YtUser_page(){
 	$p->UrlRule->Rules['{%search%}']=urlencode(GetVars('search'));
 	$p->UrlRule->Rules['{%ischecking%}']=(boolean)GetVars('ischecking');
 
-	$sql= $zbp->db->sql->Select($GLOBALS['YtUser_buy_Table'],'*',array(array('=', 'buy_AuthorID', $zbp->user->ID)),'buy_ID ASC',null,null);
+	$sql= $zbp->db->sql->Select($YtUser_buy_Table,'*',array(array('=', 'buy_AuthorID', $zbp->user->ID)),'buy_ID ASC',null,null);
 
-	$array=$zbp->GetListCustom($GLOBALS['YtUser_buy_Table'],$GLOBALS['YtUser_buy_DataInfo'],$sql);
+	$array=$zbp->GetListCustom($YtUser_buy_Table,$YtUser_buy_DataInfo,$sql);
     foreach ($array as $a) {
         $articles = $zbp->GetPostByID($a->LogID);
         if ($articles->ID==0) $articles = NULL; 
@@ -158,6 +169,11 @@ function YtUser_page(){
         $article->Content .='<input id="edtGuid" name="Guid" type="hidden" value="'.$zbp->user->Guid.'" />';
         $article->Content .='<table style="width:90%;border:none;font-size:1.1em;line-height:2.5em;">';
 	    $article->Content .='<tr style=""><th style="border:none;" colspan="2" scope="col"><p>用户级别:'.$zbp->lang['user_level_name'][$zbp->user->Level].' <a href="'.$zbp->host.'?Upgrade" class="">购买升级会员</a></p></p></th></tr>';
+	    if($zbp->user->Level <5){
+        if($Vipendtime==0){$temp="永久会员";}else{$temp=date("Y-m-d H:i:s",$Vipendtime);}
+        $article->Content .='<tr style=""><th style="border:none;" colspan="2" scope="col"><p>到期时间:'.$temp.'</p></p></th></tr>';
+        }
+	    
 	    $article->Content .='<tr style=""><th style="border:none;" colspan="2" scope="col"><p>用户积分:'.$Price.' <a href="'.$zbp->host.'?Integral" class="">购买积分</a></p></p></th></tr>';
 	    $article->Content .='<tr><td style="text-align:right;border:none;">(*)用户名：</td><td  style="border:none;" ><input required="required" type="text" id="edtAlias" name="Alias" value="'.$zbp->user->StaticName.'" style="width:250px;font-size:1.2em;" /></td></tr>';
 	    $article->Content .='<tr><td style="text-align:right;border:none;">(*)电话：</td><td  style="border:none;" ><input required="required" type="text" id="meta_Tel" name="meta_Tel" value="'.$zbp->user->Metas->Tel.'" style="width:250px;font-size:1.2em;" /></td></tr>';
@@ -284,6 +300,7 @@ function YtUser_page(){
 	$zbp->template->SetTemplate($article->Template);
 	$zbp->template->SetTags('page',1);
 	$zbp->template->SetTags('pagebar',null);
+	$zbp->template->SetTags('uid',$uid);
 	$zbp->template->SetTags('comments',array());
 	foreach ($GLOBALS['Filter_Plugin_ViewPost_Template'] as $fpname => &$fpsignal) {
 		$fpreturn=$fpname($zbp->template);

@@ -1,4 +1,4 @@
-[2016-12-27 10:16:27 .91306400 +08:00]
+[2016-12-29 09:19:21 .94976600 +08:00]
 array (
   0 => 'Exception',
   1 => '相关页面不存在',
@@ -6,7 +6,7 @@ array (
   3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
   4 => 2618,
 )
-[2016-12-27 10:16:27 .91342000 +08:00]
+[2016-12-29 09:19:21 .99306300 +08:00]
 array (
   0 => 'Exception',
   1 => '相关页面不存在',
@@ -14,7 +14,7 @@ array (
   3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
   4 => 2618,
 )
-[2016-12-27 10:16:27 .94941700 +08:00]
+[2016-12-29 09:19:22 .03701900 +08:00]
 array (
   0 => 'Exception',
   1 => '相关页面不存在',
@@ -22,7 +22,7 @@ array (
   3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
   4 => 2618,
 )
-[2016-12-27 10:16:27 .95217900 +08:00]
+[2016-12-29 09:19:22 .09970800 +08:00]
 array (
   0 => 'Exception',
   1 => '相关页面不存在',
@@ -30,7 +30,7 @@ array (
   3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
   4 => 2618,
 )
-[2016-12-27 10:16:28 .04987600 +08:00]
+[2016-12-29 09:19:22 .09971600 +08:00]
 array (
   0 => 'Exception',
   1 => '相关页面不存在',
@@ -38,7 +38,7 @@ array (
   3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
   4 => 2618,
 )
-[2016-12-27 10:16:28 .05001500 +08:00]
+[2016-12-29 09:30:48 .47360300 +08:00]
 array (
   0 => 'Exception',
   1 => '相关页面不存在',
@@ -46,7 +46,7 @@ array (
   3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
   4 => 2618,
 )
-[2016-12-27 10:16:32 .41767400 +08:00]
+[2016-12-29 09:30:48 .51690100 +08:00]
 array (
   0 => 'Exception',
   1 => '相关页面不存在',
@@ -54,7 +54,7 @@ array (
   3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
   4 => 2618,
 )
-[2016-12-27 10:16:32 .45912400 +08:00]
+[2016-12-29 09:30:48 .52142200 +08:00]
 array (
   0 => 'Exception',
   1 => '相关页面不存在',
@@ -62,7 +62,7 @@ array (
   3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
   4 => 2618,
 )
-[2016-12-27 10:16:32 .46297900 +08:00]
+[2016-12-29 09:30:48 .57556900 +08:00]
 array (
   0 => 'Exception',
   1 => '相关页面不存在',
@@ -70,7 +70,7 @@ array (
   3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
   4 => 2618,
 )
-[2016-12-27 10:16:32 .50427000 +08:00]
+[2016-12-29 09:30:48 .58372600 +08:00]
 array (
   0 => 'Exception',
   1 => '相关页面不存在',
@@ -78,7 +78,7 @@ array (
   3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
   4 => 2618,
 )
-[2016-12-27 10:16:32 .50544400 +08:00]
+[2016-12-29 09:30:48 .63332000 +08:00]
 array (
   0 => 'Exception',
   1 => '相关页面不存在',
@@ -86,7 +86,7 @@ array (
   3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
   4 => 2618,
 )
-[2016-12-27 10:16:32 .50559800 +08:00]
+[2016-12-29 09:30:48 .63338600 +08:00]
 array (
   0 => 'Exception',
   1 => '相关页面不存在',
@@ -94,7 +94,7 @@ array (
   3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
   4 => 2618,
 )
-[2016-12-27 10:16:32 .57972300 +08:00]
+[2016-12-29 09:30:48 .63609700 +08:00]
 array (
   0 => 'Exception',
   1 => '相关页面不存在',
@@ -102,7 +102,7 @@ array (
   3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
   4 => 2618,
 )
-[2016-12-27 10:16:32 .58121000 +08:00]
+[2016-12-29 09:30:48 .64389300 +08:00]
 array (
   0 => 'Exception',
   1 => '相关页面不存在',
@@ -110,7 +110,7 @@ array (
   3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
   4 => 2618,
 )
-[2016-12-27 10:16:32 .58953800 +08:00]
+[2016-12-29 09:30:48 .64394800 +08:00]
 array (
   0 => 'Exception',
   1 => '相关页面不存在',
@@ -118,7 +118,7 @@ array (
   3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
   4 => 2618,
 )
-[2016-12-27 10:16:32 .59471500 +08:00]
+[2016-12-29 09:30:48 .64468200 +08:00]
 array (
   0 => 'Exception',
   1 => '相关页面不存在',
@@ -126,7 +126,7 @@ array (
   3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
   4 => 2618,
 )
-[2016-12-27 10:16:32 .59689300 +08:00]
+[2016-12-29 09:30:48 .91544300 +08:00]
 array (
   0 => 'Exception',
   1 => '相关页面不存在',
@@ -134,7 +134,7 @@ array (
   3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
   4 => 2618,
 )
-[2016-12-27 10:16:32 .63993800 +08:00]
+[2016-12-29 09:30:51 .33571900 +08:00]
 array (
   0 => 'Exception',
   1 => '相关页面不存在',
@@ -142,7 +142,7 @@ array (
   3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
   4 => 2618,
 )
-[2016-12-27 10:16:32 .83975500 +08:00]
+[2016-12-29 09:31:06 .91012300 +08:00]
 array (
   0 => 'Exception',
   1 => '相关页面不存在',
@@ -150,15 +150,7 @@ array (
   3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
   4 => 2618,
 )
-[2016-12-27 10:17:19 .46043100 +08:00]
-array (
-  0 => 'Exception',
-  1 => '没有权限',
-  2 => 0,
-  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
-  4 => 2618,
-)
-[2016-12-27 10:32:21 .73554800 +08:00]
+[2016-12-29 09:31:06 .94629300 +08:00]
 array (
   0 => 'Exception',
   1 => '相关页面不存在',
@@ -166,7 +158,7 @@ array (
   3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
   4 => 2618,
 )
-[2016-12-27 10:32:21 .74792400 +08:00]
+[2016-12-29 09:31:06 .99062700 +08:00]
 array (
   0 => 'Exception',
   1 => '相关页面不存在',
@@ -174,7 +166,7 @@ array (
   3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
   4 => 2618,
 )
-[2016-12-27 10:32:21 .78157400 +08:00]
+[2016-12-29 09:31:07 .00140600 +08:00]
 array (
   0 => 'Exception',
   1 => '相关页面不存在',
@@ -182,7 +174,7 @@ array (
   3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
   4 => 2618,
 )
-[2016-12-27 10:32:21 .78264900 +08:00]
+[2016-12-29 09:31:07 .00377700 +08:00]
 array (
   0 => 'Exception',
   1 => '相关页面不存在',
@@ -190,7 +182,7 @@ array (
   3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
   4 => 2618,
 )
-[2016-12-27 10:32:21 .78343100 +08:00]
+[2016-12-29 09:31:07 .00934000 +08:00]
 array (
   0 => 'Exception',
   1 => '相关页面不存在',
@@ -198,7 +190,7 @@ array (
   3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
   4 => 2618,
 )
-[2016-12-27 10:32:21 .79452100 +08:00]
+[2016-12-29 09:31:07 .01103200 +08:00]
 array (
   0 => 'Exception',
   1 => '相关页面不存在',
@@ -206,7 +198,7 @@ array (
   3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
   4 => 2618,
 )
-[2016-12-27 10:32:21 .85443200 +08:00]
+[2016-12-29 09:31:07 .03501000 +08:00]
 array (
   0 => 'Exception',
   1 => '相关页面不存在',
@@ -214,7 +206,7 @@ array (
   3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
   4 => 2618,
 )
-[2016-12-27 10:32:21 .85465600 +08:00]
+[2016-12-29 09:31:07 .04432500 +08:00]
 array (
   0 => 'Exception',
   1 => '相关页面不存在',
@@ -222,7 +214,7 @@ array (
   3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
   4 => 2618,
 )
-[2016-12-27 10:32:21 .85530100 +08:00]
+[2016-12-29 09:31:07 .04439100 +08:00]
 array (
   0 => 'Exception',
   1 => '相关页面不存在',
@@ -230,7 +222,7 @@ array (
   3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
   4 => 2618,
 )
-[2016-12-27 10:32:21 .85639900 +08:00]
+[2016-12-29 09:31:07 .13842100 +08:00]
 array (
   0 => 'Exception',
   1 => '相关页面不存在',
@@ -238,7 +230,7 @@ array (
   3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
   4 => 2618,
 )
-[2016-12-27 10:32:21 .85662200 +08:00]
+[2016-12-29 09:31:07 .13931600 +08:00]
 array (
   0 => 'Exception',
   1 => '相关页面不存在',
@@ -246,7 +238,7 @@ array (
   3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
   4 => 2618,
 )
-[2016-12-27 10:32:21 .86478100 +08:00]
+[2016-12-29 09:31:07 .14060300 +08:00]
 array (
   0 => 'Exception',
   1 => '相关页面不存在',
@@ -254,7 +246,7 @@ array (
   3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
   4 => 2618,
 )
-[2016-12-27 11:27:10 .12641800 +08:00]
+[2016-12-29 09:31:07 .14062500 +08:00]
 array (
   0 => 'Exception',
   1 => '相关页面不存在',
@@ -262,7 +254,7 @@ array (
   3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
   4 => 2618,
 )
-[2016-12-27 11:40:14 .37554900 +08:00]
+[2016-12-29 09:31:07 .15306200 +08:00]
 array (
   0 => 'Exception',
   1 => '相关页面不存在',
@@ -270,7 +262,7 @@ array (
   3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
   4 => 2618,
 )
-[2016-12-27 11:40:14 .39192900 +08:00]
+[2016-12-29 09:31:07 .19026200 +08:00]
 array (
   0 => 'Exception',
   1 => '相关页面不存在',
@@ -278,7 +270,7 @@ array (
   3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
   4 => 2618,
 )
-[2016-12-27 11:40:14 .42846500 +08:00]
+[2016-12-29 09:31:07 .19189600 +08:00]
 array (
   0 => 'Exception',
   1 => '相关页面不存在',
@@ -286,7 +278,7 @@ array (
   3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
   4 => 2618,
 )
-[2016-12-27 11:40:14 .42865800 +08:00]
+[2016-12-29 09:31:07 .19322000 +08:00]
 array (
   0 => 'Exception',
   1 => '相关页面不存在',
@@ -294,7 +286,7 @@ array (
   3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
   4 => 2618,
 )
-[2016-12-27 11:40:14 .45377100 +08:00]
+[2016-12-29 09:31:07 .20135800 +08:00]
 array (
   0 => 'Exception',
   1 => '相关页面不存在',
@@ -302,7 +294,7 @@ array (
   3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
   4 => 2618,
 )
-[2016-12-27 11:40:14 .46873500 +08:00]
+[2016-12-29 09:31:08 .15401000 +08:00]
 array (
   0 => 'Exception',
   1 => '相关页面不存在',
@@ -310,7 +302,7 @@ array (
   3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
   4 => 2618,
 )
-[2016-12-27 11:40:14 .53178300 +08:00]
+[2016-12-29 09:31:08 .19079000 +08:00]
 array (
   0 => 'Exception',
   1 => '相关页面不存在',
@@ -318,7 +310,7 @@ array (
   3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
   4 => 2618,
 )
-[2016-12-27 11:40:14 .53241200 +08:00]
+[2016-12-29 09:31:08 .21669800 +08:00]
 array (
   0 => 'Exception',
   1 => '相关页面不存在',
@@ -326,7 +318,7 @@ array (
   3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
   4 => 2618,
 )
-[2016-12-27 11:40:14 .53437800 +08:00]
+[2016-12-29 09:31:08 .22543800 +08:00]
 array (
   0 => 'Exception',
   1 => '相关页面不存在',
@@ -334,7 +326,7 @@ array (
   3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
   4 => 2618,
 )
-[2016-12-27 11:40:14 .53723000 +08:00]
+[2016-12-29 09:31:08 .32466600 +08:00]
 array (
   0 => 'Exception',
   1 => '相关页面不存在',
@@ -342,7 +334,7 @@ array (
   3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
   4 => 2618,
 )
-[2016-12-27 11:40:14 .55391200 +08:00]
+[2016-12-29 09:31:08 .36448600 +08:00]
 array (
   0 => 'Exception',
   1 => '相关页面不存在',
@@ -350,7 +342,7 @@ array (
   3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
   4 => 2618,
 )
-[2016-12-27 11:40:14 .55530500 +08:00]
+[2016-12-29 09:31:08 .36624200 +08:00]
 array (
   0 => 'Exception',
   1 => '相关页面不存在',
@@ -358,123 +350,147 @@ array (
   3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
   4 => 2618,
 )
-[2016-12-27 11:40:15 .45824000 +08:00]
+[2016-12-29 09:32:44 .37665800 +08:00]
 array (
-  0 => 'Exception',
-  1 => '相关页面不存在',
-  2 => 0,
-  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
-  4 => 2618,
+  0 => 'Error',
+  1 => 8,
+  2 => 'Undefined index: act',
+  3 => 'E:\\songweb\\kangyijia\\zb_users\\plugin\\YtUser\\main.php',
+  4 => 10,
 )
-[2016-12-27 13:19:29 .06747200 +08:00]
+[2016-12-29 09:32:56 .18234300 +08:00]
 array (
-  0 => 'Exception',
-  1 => '相关页面不存在',
-  2 => 0,
-  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
-  4 => 2618,
+  0 => 'Error',
+  1 => 8,
+  2 => 'Undefined index: act',
+  3 => 'E:\\songweb\\kangyijia\\zb_users\\plugin\\YtUser\\main.php',
+  4 => 10,
 )
-[2016-12-27 14:19:46 .72613600 +08:00]
+[2016-12-29 09:33:14 .53614300 +08:00]
 array (
-  0 => 'Exception',
-  1 => '相关页面不存在',
-  2 => 0,
-  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
-  4 => 2618,
+  0 => 'Error',
+  1 => 8,
+  2 => 'Undefined index: act',
+  3 => 'E:\\songweb\\kangyijia\\zb_users\\plugin\\YtUser\\main.php',
+  4 => 10,
 )
-[2016-12-27 15:39:21 .51315600 +08:00]
+[2016-12-29 09:34:23 .47660300 +08:00]
 array (
-  0 => 'Exception',
-  1 => '相关页面不存在',
-  2 => 0,
-  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
-  4 => 2618,
+  0 => 'Error',
+  1 => 8,
+  2 => 'Undefined variable: act',
+  3 => 'E:\\songweb\\kangyijia\\zb_users\\plugin\\YtUser\\main.php',
+  4 => 21,
 )
-[2016-12-27 15:39:21 .53251900 +08:00]
+[2016-12-29 09:34:24 .28032700 +08:00]
 array (
-  0 => 'Exception',
-  1 => '相关页面不存在',
-  2 => 0,
-  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
-  4 => 2618,
+  0 => 'Error',
+  1 => 8,
+  2 => 'Undefined variable: act',
+  3 => 'E:\\songweb\\kangyijia\\zb_users\\plugin\\YtUser\\main.php',
+  4 => 21,
 )
-[2016-12-27 15:39:21 .57230900 +08:00]
+[2016-12-29 09:34:43 .40941500 +08:00]
 array (
-  0 => 'Exception',
-  1 => '相关页面不存在',
-  2 => 0,
-  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
-  4 => 2618,
+  0 => 'Error',
+  1 => 8,
+  2 => 'Undefined index: act',
+  3 => 'E:\\songweb\\kangyijia\\zb_users\\plugin\\YtUser\\main.php',
+  4 => 9,
 )
-[2016-12-27 15:39:21 .59044500 +08:00]
+[2016-12-29 09:34:44 .13907300 +08:00]
 array (
-  0 => 'Exception',
-  1 => '相关页面不存在',
-  2 => 0,
-  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
-  4 => 2618,
+  0 => 'Error',
+  1 => 8,
+  2 => 'Undefined index: act',
+  3 => 'E:\\songweb\\kangyijia\\zb_users\\plugin\\YtUser\\main.php',
+  4 => 9,
 )
-[2016-12-27 15:39:21 .65458600 +08:00]
+[2016-12-29 09:34:54 .80851100 +08:00]
 array (
-  0 => 'Exception',
-  1 => '相关页面不存在',
-  2 => 0,
-  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
-  4 => 2618,
+  0 => 'Error',
+  1 => 8,
+  2 => 'Undefined variable: act',
+  3 => 'E:\\songweb\\kangyijia\\zb_users\\plugin\\YtUser\\main.php',
+  4 => 21,
 )
-[2016-12-27 15:39:21 .65461900 +08:00]
+[2016-12-29 09:35:09 .73040200 +08:00]
 array (
-  0 => 'Exception',
-  1 => '相关页面不存在',
-  2 => 0,
-  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
-  4 => 2618,
+  0 => 'Error',
+  1 => 2,
+  2 => 'Missing argument 1 for YtUser_SubMenu(), called in E:\\songweb\\kangyijia\\zb_users\\plugin\\YtUser\\main.php on line 21 and defined',
+  3 => 'E:\\songweb\\kangyijia\\zb_users\\plugin\\YtUser\\yt_event.php',
+  4 => 4,
 )
-[2016-12-27 16:36:36 .11463100 +08:00]
+[2016-12-29 09:35:10 .46131900 +08:00]
 array (
-  0 => 'Exception',
-  1 => '相关页面不存在',
-  2 => 0,
-  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
-  4 => 2618,
+  0 => 'Error',
+  1 => 2,
+  2 => 'Missing argument 1 for YtUser_SubMenu(), called in E:\\songweb\\kangyijia\\zb_users\\plugin\\YtUser\\main.php on line 21 and defined',
+  3 => 'E:\\songweb\\kangyijia\\zb_users\\plugin\\YtUser\\yt_event.php',
+  4 => 4,
 )
-[2016-12-27 16:36:36 .13739400 +08:00]
+[2016-12-29 09:35:16 .84657200 +08:00]
 array (
-  0 => 'Exception',
-  1 => '相关页面不存在',
-  2 => 0,
-  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
-  4 => 2618,
+  0 => 'Error',
+  1 => 8,
+  2 => 'Undefined variable: act',
+  3 => 'E:\\songweb\\kangyijia\\zb_users\\plugin\\YtUser\\main.php',
+  4 => 21,
 )
-[2016-12-27 16:36:36 .17234100 +08:00]
+[2016-12-29 09:36:13 .86251300 +08:00]
 array (
-  0 => 'Exception',
-  1 => '相关页面不存在',
-  2 => 0,
-  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
-  4 => 2618,
+  0 => 'Error',
+  1 => 8,
+  2 => 'Undefined variable: act',
+  3 => 'E:\\songweb\\kangyijia\\zb_users\\plugin\\YtUser\\main.php',
+  4 => 22,
 )
-[2016-12-27 16:36:36 .19493100 +08:00]
+[2016-12-29 09:36:14 .55820100 +08:00]
 array (
-  0 => 'Exception',
-  1 => '相关页面不存在',
-  2 => 0,
-  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
-  4 => 2618,
+  0 => 'Error',
+  1 => 8,
+  2 => 'Undefined variable: act',
+  3 => 'E:\\songweb\\kangyijia\\zb_users\\plugin\\YtUser\\main.php',
+  4 => 22,
 )
-[2016-12-27 16:36:36 .25528600 +08:00]
+[2016-12-29 09:36:14 .88542900 +08:00]
 array (
-  0 => 'Exception',
-  1 => '相关页面不存在',
-  2 => 0,
-  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
-  4 => 2618,
+  0 => 'Error',
+  1 => 8,
+  2 => 'Undefined variable: act',
+  3 => 'E:\\songweb\\kangyijia\\zb_users\\plugin\\YtUser\\main.php',
+  4 => 22,
 )
-[2016-12-27 16:36:36 .25570400 +08:00]
+[2016-12-29 09:36:15 .07007900 +08:00]
 array (
-  0 => 'Exception',
-  1 => '相关页面不存在',
-  2 => 0,
-  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
-  4 => 2618,
+  0 => 'Error',
+  1 => 8,
+  2 => 'Undefined variable: act',
+  3 => 'E:\\songweb\\kangyijia\\zb_users\\plugin\\YtUser\\main.php',
+  4 => 22,
+)
+[2016-12-29 09:36:25 .21809100 +08:00]
+array (
+  0 => 'Error',
+  1 => 8,
+  2 => 'Undefined variable: act',
+  3 => 'E:\\songweb\\kangyijia\\zb_users\\plugin\\YtUser\\main.php',
+  4 => 23,
+)
+[2016-12-29 09:36:25 .72231500 +08:00]
+array (
+  0 => 'Error',
+  1 => 8,
+  2 => 'Undefined variable: act',
+  3 => 'E:\\songweb\\kangyijia\\zb_users\\plugin\\YtUser\\main.php',
+  4 => 23,
+)
+[2016-12-29 09:41:41 .83005700 +08:00]
+array (
+  0 => 'Error',
+  1 => 8,
+  2 => 'Undefined index: LogID',
+  3 => 'E:\\songweb\\kangyijia\\zb_users\\plugin\\YtUser\\Ytbuypay.php',
+  4 => 14,
 )

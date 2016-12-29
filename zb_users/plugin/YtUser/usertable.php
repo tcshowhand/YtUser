@@ -5,7 +5,7 @@ $tysuer_DataInfo=array(
     'Uid'=>array('tc_uid','integer','',0),
     'Oid'=>array('tc_oid','string',255,''),
     'Price'=>array('tc_Price','integer','',0),
-    'Vipendtime'=>array('tc_Vipendtime','int','11',0),
+    'Vipendtime'=>array('tc_Vipendtime','integer',11,0),
 );
 $tyactivate_Table='%pre%activate';
 $tyactivate_DataInfo=array(

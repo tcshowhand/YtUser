@@ -34,11 +34,12 @@ $zbpvers['131221']='1.1 Taichi Build 131221';
 $zbpvers['140220']='1.2 Hippo Build 140220';
 $zbpvers['140614']='1.3 Wonce Build 140614';
 $zbpvers['150101']='1.4 Deeplue Build 150101';
+$zbpvers['151626']='1.5 Zero Build 151626';
 if(!isset($zbpvers[$GLOBALS['blogversion']])){
-	if(defined('ZC_VERSION_DISPLAY'))
-        $zbpvers[$GLOBALS['blogversion']] = ZC_VERSION_DISPLAY;
-	else
-        $zbpvers[$GLOBALS['blogversion']] = ZC_BLOG_VERSION;
+    if(defined('ZC_VERSION_FULL'))
+    	$zbpvers[$GLOBALS['blogversion']] = ZC_VERSION_FULL;
+    else
+    	$zbpvers[$GLOBALS['blogversion']] = ZC_BLOG_VERSION;
 }
 
 function ActivePlugin_AppCentre() {
@@ -150,12 +151,12 @@ function AppCentre_Get_UserAgent(){
 		$u = 'ZBlogPHP/' . $GLOBALS['blogversion'] . ' AppCentre/'. $app->modified . ' ' . GetGuestAgent();
 	}
 	else {
-		$u = 'ZBlogPHP/' . substr($zbp->version, -6, 6) . ' AppCentre/'. $app->modified . ' ' . GetGuestAgent();
+		$u = 'ZBlogPHP/' . substr(ZC_BLOG_VERSION, -6, 6) . ' AppCentre/'. $app->modified . ' ' . GetGuestAgent();
 	}
 	return $u;
 }
 
-function AppCentre_Check_App_IsBuy($appid){
+function AppCentre_Check_App_IsBuy($appid,$throwerror=true){
 	global $zbp;
 	$ajax = Network::Create();
 
@@ -200,8 +201,12 @@ function AppCentre_Check_App_IsBuy($appid){
 	if(md5($zbp->Config('AppCentre')->username . 'ok') == $decrypted){
 		return true;
 	}else{
-		$zbp->ShowError($decrypted);
-		die();
+		if($throwerror == true){
+			$zbp->ShowError($decrypted);
+			die();
+		}else{
+			return false;
+		}
 	}
 
 	return false;

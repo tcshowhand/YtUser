@@ -57,6 +57,7 @@ function Ytbuypay(){
 			if((s.search("faultCode")>0)&&(s.search("faultString")>0))
 			{
 				alert(s.match("<string>.+?</string>")[0].replace("<string>","").replace("</string>",""))
+                window.location=bloghost+'?Integral';
 			}
 			else{
 				var s =data;

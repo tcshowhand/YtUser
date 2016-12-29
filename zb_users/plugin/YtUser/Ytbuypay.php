@@ -22,7 +22,7 @@ $reg=$array[0];
 $Price=$reg->Price;
 $articles = $zbp->GetPostByID($LogID);
 if($Price-$articles->Metas->price < 0){
-    $zbp->ShowError('积分不够，请充值.');die();
+    $zbp->ShowError('积分不够，请充值.');
 }
 $keyvalue=array();
 $keyvalue['buy_State']=1;
@@ -33,5 +33,4 @@ $keyvalue['tc_Price']=$Price-$articles->Metas->price;
 $sql = $zbp->db->sql->Update($tysuer_Table,$keyvalue,array(array('=','tc_uid',$zbp->user->ID)));
 $zbp->db->Update($sql);
 echo '购买成功！';
-
 ?>
