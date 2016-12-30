@@ -1,5 +1,9 @@
 <?php
-
+function YtUser_ReplacePre(&$s) {
+        global $zbp;
+        $s = str_replace('%pre%', $zbp->db->dbpre, $s);
+        return $s;
+}
 
 function YtUser_SubMenu($id){
     $arySubMenu = array(

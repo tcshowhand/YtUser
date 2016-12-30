@@ -494,3 +494,1059 @@ array (
   3 => 'E:\\songweb\\kangyijia\\zb_users\\plugin\\YtUser\\Ytbuypay.php',
   4 => 14,
 )
+[2016-12-29 09:58:36 .50790700 +08:00]
+array (
+  0 => 'Exception',
+  1 => '相关页面不存在',
+  2 => 0,
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 2618,
+)
+[2016-12-29 09:58:36 .52843900 +08:00]
+array (
+  0 => 'Exception',
+  1 => '相关页面不存在',
+  2 => 0,
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 2618,
+)
+[2016-12-29 09:58:36 .56745900 +08:00]
+array (
+  0 => 'Exception',
+  1 => '相关页面不存在',
+  2 => 0,
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 2618,
+)
+[2016-12-29 09:58:36 .58160600 +08:00]
+array (
+  0 => 'Exception',
+  1 => '相关页面不存在',
+  2 => 0,
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 2618,
+)
+[2016-12-29 09:58:36 .61817700 +08:00]
+array (
+  0 => 'Exception',
+  1 => '相关页面不存在',
+  2 => 0,
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 2618,
+)
+[2016-12-29 09:58:36 .62945800 +08:00]
+array (
+  0 => 'Exception',
+  1 => '相关页面不存在',
+  2 => 0,
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 2618,
+)
+[2016-12-29 10:02:09 .73897800 +08:00]
+array (
+  0 => 'Exception',
+  1 => '相关页面不存在',
+  2 => 0,
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 2618,
+)
+[2016-12-29 10:02:09 .75170200 +08:00]
+array (
+  0 => 'Exception',
+  1 => '相关页面不存在',
+  2 => 0,
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 2618,
+)
+[2016-12-29 10:02:09 .78480500 +08:00]
+array (
+  0 => 'Exception',
+  1 => '相关页面不存在',
+  2 => 0,
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 2618,
+)
+[2016-12-29 10:02:09 .78757900 +08:00]
+array (
+  0 => 'Exception',
+  1 => '相关页面不存在',
+  2 => 0,
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 2618,
+)
+[2016-12-29 10:02:09 .79642500 +08:00]
+array (
+  0 => 'Exception',
+  1 => '相关页面不存在',
+  2 => 0,
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 2618,
+)
+[2016-12-29 10:02:09 .80130200 +08:00]
+array (
+  0 => 'Exception',
+  1 => '相关页面不存在',
+  2 => 0,
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 2618,
+)
+[2016-12-29 10:02:09 .85995100 +08:00]
+array (
+  0 => 'Exception',
+  1 => '相关页面不存在',
+  2 => 0,
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 2618,
+)
+[2016-12-29 10:02:09 .86045800 +08:00]
+array (
+  0 => 'Exception',
+  1 => '相关页面不存在',
+  2 => 0,
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 2618,
+)
+[2016-12-29 10:02:09 .86081300 +08:00]
+array (
+  0 => 'Exception',
+  1 => '相关页面不存在',
+  2 => 0,
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 2618,
+)
+[2016-12-29 10:02:09 .86422300 +08:00]
+array (
+  0 => 'Exception',
+  1 => '相关页面不存在',
+  2 => 0,
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 2618,
+)
+[2016-12-29 10:02:09 .87433200 +08:00]
+array (
+  0 => 'Exception',
+  1 => '相关页面不存在',
+  2 => 0,
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 2618,
+)
+[2016-12-29 10:02:09 .87435200 +08:00]
+array (
+  0 => 'Exception',
+  1 => '相关页面不存在',
+  2 => 0,
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 2618,
+)
+[2016-12-29 10:02:13 .08420000 +08:00]
+array (
+  0 => 'Exception',
+  1 => '相关页面不存在',
+  2 => 0,
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 2618,
+)
+[2016-12-29 10:09:53 .85888000 +08:00]
+array (
+  0 => 'Exception',
+  1 => '相关页面不存在',
+  2 => 0,
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 2618,
+)
+[2016-12-29 10:09:53 .90319200 +08:00]
+array (
+  0 => 'Exception',
+  1 => '相关页面不存在',
+  2 => 0,
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 2618,
+)
+[2016-12-29 10:09:53 .90374900 +08:00]
+array (
+  0 => 'Exception',
+  1 => '相关页面不存在',
+  2 => 0,
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 2618,
+)
+[2016-12-29 10:09:53 .90727500 +08:00]
+array (
+  0 => 'Exception',
+  1 => '相关页面不存在',
+  2 => 0,
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 2618,
+)
+[2016-12-29 10:09:53 .90932300 +08:00]
+array (
+  0 => 'Exception',
+  1 => '相关页面不存在',
+  2 => 0,
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 2618,
+)
+[2016-12-29 10:09:53 .90971200 +08:00]
+array (
+  0 => 'Exception',
+  1 => '相关页面不存在',
+  2 => 0,
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 2618,
+)
+[2016-12-29 10:09:53 .99727200 +08:00]
+array (
+  0 => 'Exception',
+  1 => '相关页面不存在',
+  2 => 0,
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 2618,
+)
+[2016-12-29 10:09:53 .99828200 +08:00]
+array (
+  0 => 'Exception',
+  1 => '相关页面不存在',
+  2 => 0,
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 2618,
+)
+[2016-12-29 10:09:53 .99875200 +08:00]
+array (
+  0 => 'Exception',
+  1 => '相关页面不存在',
+  2 => 0,
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 2618,
+)
+[2016-12-29 10:09:53 .99982300 +08:00]
+array (
+  0 => 'Exception',
+  1 => '相关页面不存在',
+  2 => 0,
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 2618,
+)
+[2016-12-29 10:09:54 .00194700 +08:00]
+array (
+  0 => 'Exception',
+  1 => '相关页面不存在',
+  2 => 0,
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 2618,
+)
+[2016-12-29 10:09:54 .00926200 +08:00]
+array (
+  0 => 'Exception',
+  1 => '相关页面不存在',
+  2 => 0,
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 2618,
+)
+[2016-12-29 10:10:44 .54946000 +08:00]
+array (
+  0 => 'Shutdown',
+  1 => 1,
+  2 => 'Using $this when not in object context',
+  3 => 'E:\\songweb\\kangyijia\\txt.php',
+  4 => 7,
+)
+[2016-12-29 10:29:26 .62280600 +08:00]
+array (
+  0 => 'Shutdown',
+  1 => 1,
+  2 => 'Call to undefined method DbMySQLi::get()',
+  3 => 'E:\\songweb\\kangyijia\\txt.php',
+  4 => 28,
+)
+[2016-12-29 10:29:34 .88166700 +08:00]
+array (
+  0 => 'Error',
+  1 => 512,
+  2 => '未知方法或属性',
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 331,
+)
+[2016-12-29 10:29:35 .62198900 +08:00]
+array (
+  0 => 'Error',
+  1 => 512,
+  2 => '未知方法或属性',
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 331,
+)
+[2016-12-29 10:30:14 .58976900 +08:00]
+array (
+  0 => 'Shutdown',
+  1 => 1,
+  2 => 'Call to undefined function get()',
+  3 => 'E:\\songweb\\kangyijia\\txt.php',
+  4 => 28,
+)
+[2016-12-29 10:30:15 .19791500 +08:00]
+array (
+  0 => 'Shutdown',
+  1 => 1,
+  2 => 'Call to undefined function get()',
+  3 => 'E:\\songweb\\kangyijia\\txt.php',
+  4 => 28,
+)
+[2016-12-29 10:30:21 .92545800 +08:00]
+array (
+  0 => 'Shutdown',
+  1 => 1,
+  2 => 'Using $this when not in object context',
+  3 => 'E:\\songweb\\kangyijia\\txt.php',
+  4 => 33,
+)
+[2016-12-29 10:30:52 .32449700 +08:00]
+array (
+  0 => 'Exception',
+  1 => '相关页面不存在',
+  2 => 0,
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 2618,
+)
+[2016-12-29 10:31:15 .84702400 +08:00]
+array (
+  0 => 'Error',
+  1 => 8,
+  2 => 'Undefined variable: zbp',
+  3 => 'E:\\songweb\\kangyijia\\txt.php',
+  4 => 33,
+)
+[2016-12-29 10:31:16 .62297100 +08:00]
+array (
+  0 => 'Error',
+  1 => 8,
+  2 => 'Undefined variable: zbp',
+  3 => 'E:\\songweb\\kangyijia\\txt.php',
+  4 => 33,
+)
+[2016-12-29 10:31:24 .10334000 +08:00]
+array (
+  0 => 'Error',
+  1 => 8,
+  2 => 'Undefined variable: zbp',
+  3 => 'E:\\songweb\\kangyijia\\txt.php',
+  4 => 33,
+)
+[2016-12-29 10:31:53 .98171500 +08:00]
+array (
+  0 => 'Error',
+  1 => 512,
+  2 => '未知方法或属性',
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 360,
+)
+[2016-12-29 10:31:54 .53810000 +08:00]
+array (
+  0 => 'Error',
+  1 => 512,
+  2 => '未知方法或属性',
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 360,
+)
+[2016-12-29 10:34:23 .96755200 +08:00]
+array (
+  0 => 'Error',
+  1 => 2,
+  2 => 'Missing argument 2 for DbSql::Export(), called in E:\\songweb\\kangyijia\\txt.php on line 11 and defined',
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\dbsql.php',
+  4 => 233,
+)
+[2016-12-29 10:35:12 .31671900 +08:00]
+array (
+  0 => 'Error',
+  1 => 2,
+  2 => 'addslashes() expects parameter 1 to be string, array given',
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\dbmysql.php',
+  4 => 44,
+)
+[2016-12-29 10:35:13 .14358600 +08:00]
+array (
+  0 => 'Error',
+  1 => 2,
+  2 => 'addslashes() expects parameter 1 to be string, array given',
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\dbmysql.php',
+  4 => 44,
+)
+[2016-12-29 10:35:36 .11457400 +08:00]
+array (
+  0 => 'Error',
+  1 => 2,
+  2 => 'addslashes() expects parameter 1 to be string, array given',
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\dbmysql.php',
+  4 => 44,
+)
+[2016-12-29 10:38:27 .53401400 +08:00]
+array (
+  0 => 'Error',
+  1 => 2,
+  2 => 'addslashes() expects parameter 1 to be string, array given',
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\dbmysql.php',
+  4 => 44,
+)
+[2016-12-29 10:38:41 .07739400 +08:00]
+array (
+  0 => 'Error',
+  1 => 8,
+  2 => 'Undefined variable: sql',
+  3 => 'E:\\songweb\\kangyijia\\txt.php',
+  4 => 11,
+)
+[2016-12-29 10:38:41 .84994700 +08:00]
+array (
+  0 => 'Error',
+  1 => 8,
+  2 => 'Undefined variable: sql',
+  3 => 'E:\\songweb\\kangyijia\\txt.php',
+  4 => 11,
+)
+[2016-12-29 10:39:25 .01701800 +08:00]
+array (
+  0 => 'Error',
+  1 => 2,
+  2 => 'mysqli_query() expects parameter 2 to be string, array given',
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\dbmysqli.php',
+  4 => 164,
+)
+[2016-12-29 10:39:35 .35060000 +08:00]
+array (
+  0 => 'Error',
+  1 => 1024,
+  2 => 'You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near \'1\' at line 1',
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\dbmysqli.php',
+  4 => 166,
+)
+[2016-12-29 10:40:07 .48944200 +08:00]
+array (
+  0 => 'Error',
+  1 => 1024,
+  2 => 'You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near \'1,2,3\' at line 1',
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\dbmysqli.php',
+  4 => 166,
+)
+[2016-12-29 10:40:07 .99039800 +08:00]
+array (
+  0 => 'Error',
+  1 => 1024,
+  2 => 'You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near \'1,2,3\' at line 1',
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\dbmysqli.php',
+  4 => 166,
+)
+[2016-12-29 10:41:18 .68155100 +08:00]
+array (
+  0 => 'Error',
+  1 => 1024,
+  2 => 'You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near \'1\' at line 1',
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\dbmysqli.php',
+  4 => 166,
+)
+[2016-12-29 10:41:19 .21676100 +08:00]
+array (
+  0 => 'Error',
+  1 => 1024,
+  2 => 'You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near \'1\' at line 1',
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\dbmysqli.php',
+  4 => 166,
+)
+[2016-12-29 10:41:19 .39463400 +08:00]
+array (
+  0 => 'Error',
+  1 => 1024,
+  2 => 'You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near \'1\' at line 1',
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\dbmysqli.php',
+  4 => 166,
+)
+[2016-12-29 10:41:19 .61038100 +08:00]
+array (
+  0 => 'Error',
+  1 => 1024,
+  2 => 'You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near \'1\' at line 1',
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\dbmysqli.php',
+  4 => 166,
+)
+[2016-12-29 10:41:19 .79817500 +08:00]
+array (
+  0 => 'Error',
+  1 => 1024,
+  2 => 'You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near \'1\' at line 1',
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\dbmysqli.php',
+  4 => 166,
+)
+[2016-12-29 10:41:20 .01498900 +08:00]
+array (
+  0 => 'Error',
+  1 => 1024,
+  2 => 'You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near \'1\' at line 1',
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\dbmysqli.php',
+  4 => 166,
+)
+[2016-12-29 10:41:20 .28660500 +08:00]
+array (
+  0 => 'Error',
+  1 => 1024,
+  2 => 'You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near \'1\' at line 1',
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\dbmysqli.php',
+  4 => 166,
+)
+[2016-12-29 10:41:38 .90023200 +08:00]
+array (
+  0 => 'Error',
+  1 => 1024,
+  2 => 'You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near \'1\' at line 1',
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\dbmysqli.php',
+  4 => 166,
+)
+[2016-12-29 10:41:44 .75508900 +08:00]
+array (
+  0 => 'Error',
+  1 => 1024,
+  2 => 'You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near \'1,2\' at line 1',
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\dbmysqli.php',
+  4 => 166,
+)
+[2016-12-29 10:41:45 .38571600 +08:00]
+array (
+  0 => 'Error',
+  1 => 1024,
+  2 => 'You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near \'1,2\' at line 1',
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\dbmysqli.php',
+  4 => 166,
+)
+[2016-12-29 10:42:00 .62685500 +08:00]
+array (
+  0 => 'Error',
+  1 => 1024,
+  2 => 'You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near \'1,2\' at line 1',
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\dbmysqli.php',
+  4 => 166,
+)
+[2016-12-29 10:42:01 .15413900 +08:00]
+array (
+  0 => 'Error',
+  1 => 1024,
+  2 => 'You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near \'1,2\' at line 1',
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\dbmysqli.php',
+  4 => 166,
+)
+[2016-12-29 10:42:22 .31036500 +08:00]
+array (
+  0 => 'Error',
+  1 => 1024,
+  2 => 'You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near \'1,2\' at line 1',
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\dbmysqli.php',
+  4 => 166,
+)
+[2016-12-29 10:42:22 .90127000 +08:00]
+array (
+  0 => 'Error',
+  1 => 1024,
+  2 => 'You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near \'1,2\' at line 1',
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\dbmysqli.php',
+  4 => 166,
+)
+[2016-12-29 10:42:23 .22678100 +08:00]
+array (
+  0 => 'Error',
+  1 => 1024,
+  2 => 'You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near \'1,2\' at line 1',
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\dbmysqli.php',
+  4 => 166,
+)
+[2016-12-29 10:42:23 .41296400 +08:00]
+array (
+  0 => 'Error',
+  1 => 1024,
+  2 => 'You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near \'1,2\' at line 1',
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\dbmysqli.php',
+  4 => 166,
+)
+[2016-12-29 10:42:41 .10748600 +08:00]
+array (
+  0 => 'Error',
+  1 => 1024,
+  2 => 'You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near \'1,2\' at line 1',
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\dbmysqli.php',
+  4 => 166,
+)
+[2016-12-29 10:42:41 .68740600 +08:00]
+array (
+  0 => 'Error',
+  1 => 1024,
+  2 => 'You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near \'1,2\' at line 1',
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\dbmysqli.php',
+  4 => 166,
+)
+[2016-12-29 10:42:46 .02825900 +08:00]
+array (
+  0 => 'Error',
+  1 => 1024,
+  2 => 'You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near \'1,2\' at line 1',
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\dbmysqli.php',
+  4 => 166,
+)
+[2016-12-29 10:42:46 .51333400 +08:00]
+array (
+  0 => 'Error',
+  1 => 1024,
+  2 => 'You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near \'1,2\' at line 1',
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\dbmysqli.php',
+  4 => 166,
+)
+[2016-12-29 10:42:51 .01810800 +08:00]
+array (
+  0 => 'Error',
+  1 => 1024,
+  2 => 'You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near \'1,2\' at line 1',
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\dbmysqli.php',
+  4 => 166,
+)
+[2016-12-29 10:43:07 .74527500 +08:00]
+array (
+  0 => 'Error',
+  1 => 1024,
+  2 => 'You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near \'1,2\' at line 1',
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\dbmysqli.php',
+  4 => 166,
+)
+[2016-12-29 10:43:08 .33093100 +08:00]
+array (
+  0 => 'Error',
+  1 => 1024,
+  2 => 'You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near \'1,2\' at line 1',
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\dbmysqli.php',
+  4 => 166,
+)
+[2016-12-29 10:44:38 .49307500 +08:00]
+array (
+  0 => 'Error',
+  1 => 1024,
+  2 => 'You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near \'1,2\' at line 1',
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\dbmysqli.php',
+  4 => 166,
+)
+[2016-12-29 10:44:47 .24293900 +08:00]
+array (
+  0 => 'Error',
+  1 => 1024,
+  2 => 'You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near \'1,2\' at line 1',
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\dbmysqli.php',
+  4 => 166,
+)
+[2016-12-29 10:45:12 .02993100 +08:00]
+array (
+  0 => 'Error',
+  1 => 1024,
+  2 => 'You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near \'1,2\' at line 1',
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\dbmysqli.php',
+  4 => 166,
+)
+[2016-12-29 10:45:12 .56330900 +08:00]
+array (
+  0 => 'Error',
+  1 => 1024,
+  2 => 'You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near \'1,2\' at line 1',
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\dbmysqli.php',
+  4 => 166,
+)
+[2016-12-29 10:45:33 .68487200 +08:00]
+array (
+  0 => 'Error',
+  1 => 1024,
+  2 => 'You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near \'1,2\' at line 1',
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\dbmysqli.php',
+  4 => 166,
+)
+[2016-12-29 10:47:59 .16987600 +08:00]
+array (
+  0 => 'Error',
+  1 => 8,
+  2 => 'Undefined index: %pre%ytuser',
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 1621,
+)
+[2016-12-29 10:48:00 .17391400 +08:00]
+array (
+  0 => 'Error',
+  1 => 8,
+  2 => 'Undefined index: %pre%ytuser',
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 1621,
+)
+[2016-12-29 10:48:14 .14063800 +08:00]
+array (
+  0 => 'Error',
+  1 => 8,
+  2 => 'Undefined index: %pre%ytuser',
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 1621,
+)
+[2016-12-29 10:48:14 .53498600 +08:00]
+array (
+  0 => 'Error',
+  1 => 8,
+  2 => 'Undefined index: %pre%ytuser',
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 1621,
+)
+[2016-12-29 10:48:14 .77227800 +08:00]
+array (
+  0 => 'Error',
+  1 => 8,
+  2 => 'Undefined index: %pre%ytuser',
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 1621,
+)
+[2016-12-29 10:48:19 .87033800 +08:00]
+array (
+  0 => 'Error',
+  1 => 8,
+  2 => 'Undefined index: %pre%ytuser',
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 1621,
+)
+[2016-12-29 10:48:20 .31219500 +08:00]
+array (
+  0 => 'Error',
+  1 => 8,
+  2 => 'Undefined index: %pre%ytuser',
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 1621,
+)
+[2016-12-29 10:48:20 .47711300 +08:00]
+array (
+  0 => 'Error',
+  1 => 8,
+  2 => 'Undefined index: %pre%ytuser',
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 1621,
+)
+[2016-12-29 10:49:35 .34296200 +08:00]
+array (
+  0 => 'Error',
+  1 => 2,
+  2 => 'implode(): Invalid arguments passed',
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 1562,
+)
+[2016-12-29 10:54:38 .87591500 +08:00]
+array (
+  0 => 'Error',
+  1 => 8,
+  2 => 'Undefined variable: zbp',
+  3 => 'E:\\songweb\\kangyijia\\txt.php',
+  4 => 17,
+)
+[2016-12-29 10:54:39 .85743000 +08:00]
+array (
+  0 => 'Error',
+  1 => 8,
+  2 => 'Undefined variable: zbp',
+  3 => 'E:\\songweb\\kangyijia\\txt.php',
+  4 => 17,
+)
+[2016-12-29 10:55:09 .05767800 +08:00]
+array (
+  0 => 'Error',
+  1 => 512,
+  2 => '未知方法或属性',
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 331,
+)
+[2016-12-29 10:55:10 .33720800 +08:00]
+array (
+  0 => 'Error',
+  1 => 512,
+  2 => '未知方法或属性',
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 331,
+)
+[2016-12-29 10:55:17 .15818800 +08:00]
+array (
+  0 => 'Error',
+  1 => 512,
+  2 => '未知方法或属性',
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 331,
+)
+[2016-12-29 10:55:17 .67543900 +08:00]
+array (
+  0 => 'Error',
+  1 => 512,
+  2 => '未知方法或属性',
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 331,
+)
+[2016-12-29 10:55:17 .77521800 +08:00]
+array (
+  0 => 'Error',
+  1 => 512,
+  2 => '未知方法或属性',
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 331,
+)
+[2016-12-29 10:55:34 .70808000 +08:00]
+array (
+  0 => 'Error',
+  1 => 512,
+  2 => '未知方法或属性',
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 331,
+)
+[2016-12-29 13:51:29 .91203700 +08:00]
+array (
+  0 => 'Exception',
+  1 => '相关页面不存在',
+  2 => 0,
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 2618,
+)
+[2016-12-29 13:51:29 .91797400 +08:00]
+array (
+  0 => 'Exception',
+  1 => '相关页面不存在',
+  2 => 0,
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 2618,
+)
+[2016-12-29 13:51:30 .02886100 +08:00]
+array (
+  0 => 'Exception',
+  1 => '相关页面不存在',
+  2 => 0,
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 2618,
+)
+[2016-12-29 13:51:30 .03294300 +08:00]
+array (
+  0 => 'Exception',
+  1 => '相关页面不存在',
+  2 => 0,
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 2618,
+)
+[2016-12-29 13:51:30 .03837600 +08:00]
+array (
+  0 => 'Exception',
+  1 => '相关页面不存在',
+  2 => 0,
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 2618,
+)
+[2016-12-29 13:51:30 .06154200 +08:00]
+array (
+  0 => 'Exception',
+  1 => '相关页面不存在',
+  2 => 0,
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 2618,
+)
+[2016-12-29 13:51:30 .17217100 +08:00]
+array (
+  0 => 'Exception',
+  1 => '相关页面不存在',
+  2 => 0,
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 2618,
+)
+[2016-12-29 13:51:30 .18002600 +08:00]
+array (
+  0 => 'Exception',
+  1 => '相关页面不存在',
+  2 => 0,
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 2618,
+)
+[2016-12-29 13:51:30 .18674200 +08:00]
+array (
+  0 => 'Exception',
+  1 => '相关页面不存在',
+  2 => 0,
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 2618,
+)
+[2016-12-29 13:51:30 .19315600 +08:00]
+array (
+  0 => 'Exception',
+  1 => '相关页面不存在',
+  2 => 0,
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 2618,
+)
+[2016-12-29 13:51:30 .20135200 +08:00]
+array (
+  0 => 'Exception',
+  1 => '相关页面不存在',
+  2 => 0,
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 2618,
+)
+[2016-12-29 13:51:30 .20480000 +08:00]
+array (
+  0 => 'Exception',
+  1 => '相关页面不存在',
+  2 => 0,
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 2618,
+)
+[2016-12-29 13:51:31 .68893400 +08:00]
+array (
+  0 => 'Exception',
+  1 => '相关页面不存在',
+  2 => 0,
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 2618,
+)
+[2016-12-29 13:51:37 .59658600 +08:00]
+array (
+  0 => 'Exception',
+  1 => '相关页面不存在',
+  2 => 0,
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 2618,
+)
+[2016-12-29 13:51:37 .67460700 +08:00]
+array (
+  0 => 'Exception',
+  1 => '相关页面不存在',
+  2 => 0,
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 2618,
+)
+[2016-12-29 13:51:37 .67724500 +08:00]
+array (
+  0 => 'Exception',
+  1 => '相关页面不存在',
+  2 => 0,
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 2618,
+)
+[2016-12-29 13:51:37 .68034900 +08:00]
+array (
+  0 => 'Exception',
+  1 => '相关页面不存在',
+  2 => 0,
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 2618,
+)
+[2016-12-29 13:51:37 .68350100 +08:00]
+array (
+  0 => 'Exception',
+  1 => '相关页面不存在',
+  2 => 0,
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 2618,
+)
+[2016-12-29 13:51:37 .68747000 +08:00]
+array (
+  0 => 'Exception',
+  1 => '相关页面不存在',
+  2 => 0,
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 2618,
+)
+[2016-12-29 13:51:37 .88411400 +08:00]
+array (
+  0 => 'Exception',
+  1 => '相关页面不存在',
+  2 => 0,
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 2618,
+)
+[2016-12-29 13:51:37 .88736600 +08:00]
+array (
+  0 => 'Exception',
+  1 => '相关页面不存在',
+  2 => 0,
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 2618,
+)
+[2016-12-29 13:51:37 .89037500 +08:00]
+array (
+  0 => 'Exception',
+  1 => '相关页面不存在',
+  2 => 0,
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 2618,
+)
+[2016-12-29 13:51:37 .89773200 +08:00]
+array (
+  0 => 'Exception',
+  1 => '相关页面不存在',
+  2 => 0,
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 2618,
+)
+[2016-12-29 13:51:37 .90085900 +08:00]
+array (
+  0 => 'Exception',
+  1 => '相关页面不存在',
+  2 => 0,
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 2618,
+)
+[2016-12-29 13:51:37 .90445600 +08:00]
+array (
+  0 => 'Exception',
+  1 => '相关页面不存在',
+  2 => 0,
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 2618,
+)
+[2016-12-29 13:56:33 .69835600 +08:00]
+array (
+  0 => 'Shutdown',
+  1 => 1,
+  2 => 'Call to undefined function CreateOptoinsOfMember()',
+  3 => 'E:\\songweb\\kangyijia\\zb_users\\plugin\\Tcnews\\main.php',
+  4 => 124,
+)
+[2016-12-29 13:57:32 .15347300 +08:00]
+array (
+  0 => 'Shutdown',
+  1 => 1,
+  2 => 'Call to undefined function CreateOptoinsOfMemberLevel()',
+  3 => 'E:\\songweb\\kangyijia\\zb_users\\plugin\\Tcnews\\main.php',
+  4 => 124,
+)
+[2016-12-29 13:57:32 .89277700 +08:00]
+array (
+  0 => 'Shutdown',
+  1 => 1,
+  2 => 'Call to undefined function CreateOptoinsOfMemberLevel()',
+  3 => 'E:\\songweb\\kangyijia\\zb_users\\plugin\\Tcnews\\main.php',
+  4 => 124,
+)
+[2016-12-29 14:02:45 .33949200 +08:00]
+array (
+  0 => 'Exception',
+  1 => '没有权限',
+  2 => 0,
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 2618,
+)
+[2016-12-29 14:23:20 .00670000 +08:00]
+array (
+  0 => 'Shutdown',
+  1 => 1,
+  2 => 'Call to a member function hasTemplate() on a non-object',
+  3 => 'E:\\songweb\\kangyijia\\zb_users\\plugin\\Tcnews\\tcnewstable.php',
+  4 => 589,
+)
+[2016-12-29 14:25:06 .22608800 +08:00]
+array (
+  0 => 'Error',
+  1 => 8,
+  2 => 'Undefined variable: article',
+  3 => 'E:\\songweb\\kangyijia\\zb_users\\plugin\\Tcnews\\tcnewstable.php',
+  4 => 621,
+)
+[2016-12-29 14:25:29 .32909900 +08:00]
+array (
+  0 => 'Error',
+  1 => 8,
+  2 => 'Undefined variable: article',
+  3 => 'E:\\songweb\\kangyijia\\zb_users\\plugin\\Tcnews\\tcnewstable.php',
+  4 => 622,
+)

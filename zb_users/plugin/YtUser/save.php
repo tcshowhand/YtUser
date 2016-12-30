@@ -54,7 +54,10 @@ if($_GET['type'] == 'recharge' ){
 
 if($_GET['type'] == 'testing' ){
 	global $zbp;
-	$zbp->SetHint('good','预留功能');
+    $usertable=YtUser_ReplacePre($tysuer_Table);
+    $s = 'ALTER TABLE ' . $usertable . ' ADD COLUMN tc_Vipendtime int(11) NOT NULL DEFAULT \'0\';';
+	$zbp->db->QueryMulit($s);
+	$zbp->SetHint('good','修复成功');
 	Redirect('./main.php?act=testing');
 }
 
