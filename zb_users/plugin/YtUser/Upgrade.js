@@ -18,7 +18,6 @@ function Ytbuy(){
 			}
 		}
 	);
-	
 }
 
 function RegPage(){
@@ -90,4 +89,32 @@ function Integral(){
 		}
 	);
 	
+}
+
+
+
+function register(){
+	
+	$.post(bloghost+'zb_users/plugin/YtUser/register.php',
+		{
+		"name":$("input[name='name']").val(),
+		"password":$("input[name='password']").val(),
+		"repassword":$("input[name='repassword']").val(),
+		"email":$("input[name='email']").val(),
+		"homepage":$("input[name='homepage']").val(),
+		"verifycode":$("input[name='verifycode']").val(),
+		},
+		function(data){
+			var s =data;
+			if((s.search("faultCode")>0)&&(s.search("faultString")>0))
+			{
+				alert(s.match("<string>.+?</string>")[0].replace("<string>","").replace("</string>",""))
+			}
+			else{
+				var s =data;
+				alert(s);
+				window.location=bloghost+'?User';
+			}
+		}
+	);
 }

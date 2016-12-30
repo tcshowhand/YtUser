@@ -5,11 +5,26 @@ $zbp->Load();
 
 $action=GetVars('act','GET');
 
+if($action=="verify"){
+}else{
+    if($zbp->user->ID==0){Redirect($zbp->host);}
+}
+
 foreach ($GLOBALS['Filter_Plugin_Cmd_Begin'] as $fpname => &$fpsignal) {$fpname();}
 
 if(!$zbp->CheckRights($action)){$zbp->ShowError(6,__FILE__,__LINE__);die();}
 
 switch ($action) {
+    case 'verify':
+    if (VerifyLogin()) {
+        if ($zbp->user->ID > 0 && GetVars('redirect', 'COOKIE')) {
+            Redirect(GetVars('redirect', 'COOKIE'));
+        }
+        Redirect($zbp->host);
+    } else {
+        Redirect($zbp->host);
+    }
+    break;
     case 'ArticlePst':
     	if(empty($_POST['Title']) || empty($_POST['Content'])){
     		$zbp->ShowError('骚年，不要捣乱！！！');die();

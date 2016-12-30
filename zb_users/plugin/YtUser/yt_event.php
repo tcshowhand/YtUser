@@ -192,7 +192,7 @@ function YtUser_page(){
         $article->Content .='</form>';
         $article->Content .='<script type="text/javascript">function checkInfo(){document.getElementById("edit").action="'.$zbp->host.'zb_users/plugin/YtUser/cmd.php?act=MemberPst&token='.$zbp->GetToken().'";}</script>';
     }else{
-        $article->Content .='<h2 style="font-size:60px;margin-bottom:32px;color:f00;">请登录用户</h2></div>';
+        Redirect($zbp->host."?Login");die();
     }
 
 	$mt=microtime();
@@ -236,7 +236,7 @@ function YtUser_page(){
 		$article->Content .='<tr><td  style="border:none;" ></td><td  style="border:none;" ><input type="submit" style="width:100px;font-size:1.0em;padding:0.2em" value="提交" onclick="return RegPage()" /></td></tr>';
 		$article->Content .='</table>';
     }else{
-        $article->Content .='<h2 style="font-size:60px;margin-bottom:32px;color:f00;">请登录用户</h2></div>';
+        Redirect($zbp->host."?Login");die();
     }
 	$mt=microtime();
 	$s=	'';
@@ -290,7 +290,7 @@ function YtUser_page(){
 		}
         $article->Content .='</table>';
     }else{
-        $article->Content .='<h2 style="font-size:60px;margin-bottom:32px;color:f00;">请登录用户</h2></div>';
+        Redirect($zbp->host."?Login");die();
     }
 	$mt=microtime();
 	$s=	'';
@@ -330,7 +330,7 @@ function YtUser_page(){
 		$article->Content .='<tr><td  style="border:none;" ></td><td  style="border:none;" ><input type="submit" style="width:100px;font-size:1.0em;padding:0.2em" value="提交" onclick="return Integral()" /></td></tr>';
 		$article->Content .='</table>';
     }else{
-        $article->Content .='<h2 style="font-size:60px;margin-bottom:32px;color:f00;">请登录用户</h2></div>';
+        Redirect($zbp->host."?Login");die();
     }
 	$mt=microtime();
 	$s=	'';
@@ -368,7 +368,7 @@ function YtUser_page(){
         $article->Content .='<script type="text/javascript">function checkArticleInfo(){
             document.getElementById("edit").action="'.$zbp->host.'zb_users/plugin/YtUser/cmd.php?act=ArticlePst&token='.$zbp->GetToken().'";isSubmit=true;}</script>';
     }else{
-        $article->Content .='<h2 style="font-size:60px;margin-bottom:32px;color:f00;">请登录用户</h2></div>';
+        Redirect($zbp->host."?Login");die();
     }
 
 	$mt=microtime();
@@ -428,6 +428,111 @@ function YtUser_page(){
     } else {
         $zbp->template->SetTemplate('index');
     }
+	$zbp->template->Display();
+	die();
+	}
+
+
+    if(isset($_GET['Register'])){
+	$zbp->header .='<script src="'.$zbp->host.'zb_users/plugin/YtUser/Upgrade.js" type="text/javascript"></script>' . "\r\n";
+	$article = new Post;
+	$article->Title="会员注册";
+	$article->IsLock=true;
+	$article->Type=ZC_POST_TYPE_PAGE;
+
+	$article->Content .='<table style="width:90%;border:none;font-size:1.1em;line-height:2.5em;">';
+	$article->Content .='<tr><td style="text-align:right;border:none;">(*)名称：</td><td  style="border:none;" ><input required="required" type="text" name="name" style="width:250px;font-size:1.2em;" /></td></tr>';
+	$article->Content .='<tr><td style="text-align:right;border:none;">(*)密码：</td><td  style="border:none;" ><input required="required" type="password" name="password" style="width:250px;font-size:1.2em;" /></td></tr>';
+	$article->Content .='<tr><td style="text-align:right;border:none;">(*)确认密码：</td><td  style="border:none;" ><input required="required" type="password" name="repassword" style="width:250px;font-size:1.2em;" /></td></tr>';
+	$article->Content .='<tr><td style="text-align:right;border:none;">(*)邮箱：</td><td  style="border:none;" ><input type="text" name="email" style="width:250px;font-size:1.2em;" /></td></tr>';
+	$article->Content .='<tr><td style="text-align:right;border:none;">网站：</td><td  style="border:none;" ><input type="text" name="homepage" style="width:250px;font-size:1.2em;" /></td></tr>';
+	
+	$article->Content .='</td></tr>';
+
+	$article->Content .='<tr><td style="text-align:right;border:none;">(*)</td><td  style="border:none;" ><input required="required" type="text" name="verifycode" style="width:150px;font-size:1.2em;" />&nbsp;&nbsp;<img style="border:none;vertical-align:middle;width:'.$zbp->option['ZC_VERIFYCODE_WIDTH']. 'px;height:' . $zbp->option['ZC_VERIFYCODE_HEIGHT'] . 'px;cursor:pointer;" src="' .$zbp->validcodeurl . '?id=RegPage" alt="" title="" onclick="javascript:this.src=\'' . $zbp->validcodeurl . '?id=register&amp;tm=\'+Math.random();"/></td></tr>';
+	
+	$article->Content .='<tr><td  style="border:none;" ></td><td  style="border:none;" ><input type="submit" style="width:100px;font-size:1.0em;padding:0.2em" value="提交" onclick="return register()" /></td></tr>';
+
+	$article->Content .='</table>';
+
+    $article->Content .='使用其它帐号登录：<div class="ds-login"></div>';
+    
+
+	$mt=microtime();
+	$s=	'';
+	$article->Content .=$s;	
+    if($zbp->template->hasTemplate('Register')){
+        $article->Template = 'Register';
+	}
+	$zbp->template->SetTags('title',$article->Title);
+	$zbp->template->SetTags('article',$article);
+	$zbp->template->SetTags('type',$article->type=0?'article':'page');
+	$zbp->template->SetTemplate($article->Template);
+	$zbp->template->SetTags('page',1);
+	$zbp->template->SetTags('pagebar',null);
+	$zbp->template->SetTags('comments',array());
+	foreach ($GLOBALS['Filter_Plugin_ViewPost_Template'] as $fpname => &$fpsignal) {
+		$fpreturn=$fpname($zbp->template);
+	}
+	$zbp->template->Display();
+	die();
+	}
+
+	if(isset($_GET['Login'])){
+    $zbp->header .='<script src="'.$zbp->host.'zb_system/script/md5.js" type="text/javascript"></script>' . "\r\n";
+	$article = new Post;
+	$article->Title="会员登录";
+	$article->IsLock=true;
+	$article->Type=ZC_POST_TYPE_PAGE;
+    $article->Content .='<form method="post" action="#">';
+	$article->Content .='<table style="width:90%;border:none;font-size:1.1em;line-height:2.5em;">';
+	$article->Content .='<tr><td style="text-align:right;border:none;">账户：</td><td  style="border:none;" ><input required="required" type="text" id="edtUserName" name="edtUserName" value="'.GetVars('username', 'COOKIE').'" style="width:250px;font-size:1.2em;" /></td></tr>';
+	$article->Content .='<tr><td style="text-align:right;border:none;">密码：</td><td  style="border:none;" ><input required="required" type="password" id="edtPassWord" name="edtPassWord" style="width:250px;font-size:1.2em;" /></td></tr>';
+	$article->Content .='</td></tr>';
+	$article->Content .='<tr><td style="text-align:right;border:none;"><input type="checkbox" name="chkRemember" id="chkRemember"  tabindex="3" /></td><td  style="border:none;" >下次自动登录</td></tr>';
+    $article->Content .='<tr><td  style="border:none;" ></td><td  style="border:none;" ><input id="btnPost" name="btnPost" type="submit" value="登录" class="button" tabindex="4"/></td></tr>';
+	$article->Content .='</table>';
+    $article->Content .='<input type="hidden" name="username" id="username" value="" />';
+    $article->Content .='<input type="hidden" name="password" id="password" value="" />';
+    $article->Content .='<input type="hidden" name="savedate" id="savedate" value="0" />';
+    $article->Content .='<input type="hidden" name="dishtml5" id="dishtml5" value="0" />';
+    $article->Content .='</form>';
+    $article->Content .='使用其它帐号登录：<div class="ds-login"></div>';
+
+    $article->Content .='<script type="text/javascript">
+$("#btnPost").click(function(){
+	var strUserName=$("#edtUserName").val();
+	var strPassWord=$("#edtPassWord").val();
+	var strSaveDate=$("#savedate").val()
+	if((strUserName=="")||(strPassWord=="")){
+		alert("用户名和密码不能为空");
+		return false;
+	}
+	$("#edtUserName").remove();
+	$("#edtPassWord").remove();
+	$("form").attr("action","'.$zbp->host.'zb_users/plugin/YtUser/cmd.php?act=verify");
+	$("#username").val(strUserName);
+	$("#password").val(MD5(strPassWord));
+	$("#savedate").val(strSaveDate);
+})
+$("#chkRemember").click(function(){
+	$("#savedate").attr("value",$("#chkRemember").attr("checked")=="checked"?30:0);
+})
+</script>';
+
+    if($zbp->template->hasTemplate('Login')){
+        $article->Template = 'Login';
+	}
+	$zbp->template->SetTags('title',$article->Title);
+	$zbp->template->SetTags('article',$article);
+	$zbp->template->SetTags('type',$article->type=0?'article':'page');
+	$zbp->template->SetTemplate($article->Template);
+	$zbp->template->SetTags('page',1);
+	$zbp->template->SetTags('pagebar',null);
+	$zbp->template->SetTags('comments',array());
+	foreach ($GLOBALS['Filter_Plugin_ViewPost_Template'] as $fpname => &$fpsignal) {
+		$fpreturn=$fpname($zbp->template);
+	}
 	$zbp->template->Display();
 	die();
 	}
