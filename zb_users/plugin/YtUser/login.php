@@ -1,6 +1,19 @@
 <?php
 require_once('global.php');
-$ytUrl=$_SERVER['HTTP_REFERER'];
+    $regex = '/android|adr|iphone|ipad|windows\sphone|kindle|gt\-p|gt\-n|rim\stablet|opera|meego/i';
+    //UC浏览器是傻逼！
+    $mobile = false;
+    if (GetVars('alwaystheme', 'COOKIE') == 'mobile') {
+        $mobile = true;
+    }
+    if (preg_match($regex, GetVars('HTTP_USER_AGENT', 'SERVER'))) {
+        $mobile = true;
+    }
+    if ($mobile) {
+        $ytUrl=$zbp->host;
+    }else{
+        $ytUrl=$_SERVER['HTTP_REFERER'];
+    }
 $code = $_GET['code']; 
 $dsurl=$zbp->Config('YtUser')->dsurl;
 $http = Network::Create();

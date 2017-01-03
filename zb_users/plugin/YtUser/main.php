@@ -146,7 +146,7 @@ foreach ($array as $key => $reg) {
     echo '<td class="td15">'.$reg->ID.'</td>';
 	echo '<td class="td15">'.$reg->OrderID.'</td>';
 	$post=GetPost((int)$reg->LogID);
-	echo '<td>'.$zbp->members[$reg->AuthorID]->Name.'</td>';
+	echo '<td>'.$zbp->members[$reg->AuthorID]->StaticName.'</td>';
 	echo '<td class="td20">'.$reg->Title.'</td>';
 	echo '<td>'.$post->Metas->price.'</td>';
     echo '<td class="td20">'.date("Y-m-d H:i:s",$reg->PostTime).'</td>';

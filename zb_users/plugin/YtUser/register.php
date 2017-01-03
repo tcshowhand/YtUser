@@ -74,7 +74,6 @@ if(CheckRegExp($homepage,'[homepage]')){
 
 $member->Save();
 
-foreach ($GLOBALS['Filter_Plugin_RegPage_RegSucceed'] as $fpname => &$fpsignal) $fpname($member);
 $YtdsSlide_Table='%pre%ytuser';
 $DataArr = array(
     'tc_uid' => $member->ID,
