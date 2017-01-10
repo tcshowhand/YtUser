@@ -1,0 +1,48 @@
+[2017-01-06 09:42:57 .06746800 +08:00]
+array (
+  0 => 'Exception',
+  1 => '相关页面不存在',
+  2 => 0,
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 2618,
+)
+[2017-01-06 09:42:58 .62715200 +08:00]
+array (
+  0 => 'Exception',
+  1 => '相关页面不存在',
+  2 => 0,
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 2618,
+)
+[2017-01-06 09:42:59 .45704700 +08:00]
+array (
+  0 => 'Exception',
+  1 => '没有权限',
+  2 => 0,
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 2618,
+)
+[2017-01-06 13:39:37 .09533800 +08:00]
+array (
+  0 => 'Exception',
+  1 => '相关页面不存在',
+  2 => 0,
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 2618,
+)
+[2017-01-06 13:46:49 .88530200 +08:00]
+array (
+  0 => 'Error',
+  1 => 8,
+  2 => 'Indirect modification of overloaded property Metas::$imgs has no effect',
+  3 => 'E:\\songweb\\kangyijia\\zb_users\\plugin\\Post_Carousel\\include.php',
+  4 => 15,
+)
+[2017-01-06 13:51:59 .14939100 +08:00]
+array (
+  0 => 'Shutdown',
+  1 => 1,
+  2 => 'Cannot use object of type Post as array',
+  3 => 'E:\\songweb\\kangyijia\\zb_users\\plugin\\Post_Carousel\\include.php',
+  4 => 19,
+)

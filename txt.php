@@ -6,12 +6,13 @@ require 'zb_system/function/c_system_admin.php';
 $zbp->Load();
 
 
-$aaa = '%pre%zcenter_member';
-$sql=array(1,2);
-$array=$zbp->GetListCustomByArray($GLOBALS['tysuer_Table'],$GLOBALS['tysuer_DataInfo'],$sql);
-$aaaa=YtUser_ReplacePre($aaa);
+$domain = $zbp->host;
+$userinfo = Network::Create();
+$userinfo->open('GET',"https://manage.gentie.163.com/key?url=".$domain);
+$userinfo->send();
+$userinfo = json_decode($userinfo->responseText,true);
 
-print_r($aaaa);
+print_r($userinfo);
 
 
 

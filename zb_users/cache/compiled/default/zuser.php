@@ -1,4 +1,4 @@
-<?php  /* Template Name:文章页单页 */  ?>
+<?php  /* Template Name:用户中心 */  ?>
 <?php  include $this->GetTemplate('header');  ?>
 <body class="single <?php  echo $type;  ?>">
 <div id="divAll">

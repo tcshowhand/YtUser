@@ -31,6 +31,18 @@ $keyvalue=array();
 $keyvalue['tc_AuthorID']=$zbp->user->ID;
 $sql = $zbp->db->sql->Update($typrepaid_Table,$keyvalue,array(array('=','tc_ID',$reg->ID)));
 $zbp->db->Update($sql);
+
+$sql=$zbp->db->sql->Select($tysuer_Table,'*',array(array('=','tc_uid',$zbp->user->ID)),null,null,null);
+$array=$zbp->GetListCustom($tysuer_Table,$tysuer_DataInfo,$sql);
+$num=count($array);
+if($num==0){
+            $DataArr = array(
+                'tc_uid'    => $zbp->user->ID,
+                'tc_oid'    => 0000,
+            );
+        	$sql= $zbp->db->sql->Insert($tysuer_Table,$DataArr);
+        	$zbp->db->Insert($sql);
+}
 $keyvalue=array();
 $keyvalue['tc_Price']=$Price+$reg->Price;
 $sql = $zbp->db->sql->Update('%pre%ytuser',$keyvalue,array(array('=','tc_uid',$zbp->user->ID)));

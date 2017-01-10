@@ -11,7 +11,7 @@ function YtUser_SubMenu($id){
         1 => array('VIP月卡', 'upgrade', 'left', false),
         2 => array('充值卡', 'recharge', 'left', false),
         3 => array('购买记录', 'buy', 'left', false),
-        4 => array('检测表', 'testing', 'left', false),
+        4 => array('修复插件', 'testing', 'left', false),
     );
     foreach($arySubMenu as $k => $v){
         echo '<a href="?act='.$v[1].'"><span class="m-'.$v[2].' '.($id==$v[1]?'m-now':'').'">'.$v[0].'</span></a>';
@@ -33,6 +33,8 @@ function YtUser_page(){
         $Price=$reg->Price;
         $Vipendtime=$reg->Vipendtime;
         }
+        $zbp->user->Vipendtime=$Vipendtime;
+        $zbp->user->Price=$Price;
     }
 	
 	if(isset($_GET['Commentlist'])){
@@ -126,6 +128,7 @@ function YtUser_page(){
         $a->IsTop=0;
         $a->ViewNums=$articles->ViewNums;
         $a->CommNums=$articles->CommNums;
+        $a->PostTime=date("Y-m-d H:i:s",$a->PostTime);
         $arr=array('ID'=>$articles->Category->ID,'Name'=>$articles->Category->Name);
         $a->Category=(object)$arr;
         $arr=array();
