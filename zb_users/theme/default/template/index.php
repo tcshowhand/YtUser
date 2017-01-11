@@ -14,6 +14,8 @@
 </ul>
 		</div>
 		<div id="divMain">
+
+            {$user.Price}
 {foreach $articles as $article}
 
 {if $article.IsTop}

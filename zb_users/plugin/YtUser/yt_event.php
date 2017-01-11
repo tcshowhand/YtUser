@@ -1,4 +1,25 @@
 <?php
+    if($zbp->user->ID){
+        $sql=$zbp->db->sql->Select($GLOBALS['tysuer_Table'],'*',array(array('=','tc_uid',$zbp->user->ID)),null,array(1),null);
+        $array=$zbp->GetListCustom($GLOBALS['tysuer_Table'],$GLOBALS['tysuer_DataInfo'],$sql);
+        $num=count($array);
+        if($num==0){
+        $DataArr = array(
+            'tc_uid'    => $zbp->user->ID,
+            'tc_oid'    => 0,
+        );
+        $sql= $zbp->db->sql->Insert($tysuer_Table,$DataArr);
+        $zbp->db->Insert($sql);
+	    $Price=0;
+	    $Vipendtime=0;
+        }else{
+        $reg=$array[0];
+        $Price=$reg->Price;
+        $Vipendtime=$reg->Vipendtime;
+        }
+        $zbp->user->Vipendtime=$Vipendtime;
+        $zbp->user->Price=$Price;
+    }
 function YtUser_ReplacePre(&$s) {
         global $zbp;
         $s = str_replace('%pre%', $zbp->db->dbpre, $s);

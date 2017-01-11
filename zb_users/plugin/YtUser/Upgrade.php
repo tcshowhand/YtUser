@@ -37,6 +37,13 @@ if(!$zbp->CheckValidCode($verifycode,'RegPage')){
     $array=$zbp->GetListCustom($GLOBALS['tysuer_Table'],$GLOBALS['tysuer_DataInfo'],$sql);
     $num=count($array);
     if($num==0){
+            $DataArr = array(
+                'tc_uid'    => $zbp->user->ID,
+                'tc_oid'    => 0,
+            );
+        	$sql= $zbp->db->sql->Insert($tysuer_Table,$DataArr);
+        	$zbp->db->Insert($sql);
+            $Vipendtime=0;
     }else{
     $reg=$array[0];
     $Vipendtime=$reg->Vipendtime;
