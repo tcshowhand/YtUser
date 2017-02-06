@@ -12,25 +12,11 @@ ob_start();
 defined('ZBP_PATH') || define('ZBP_PATH', rtrim(str_replace('\\', '/', realpath(dirname(__FILE__) . '/../../')), '/') . '/');
 defined('ZBP_HOOKERROR') || define('ZBP_HOOKERROR', true);
 
-/**
- * 定义版本号
- * 因为版本号要经常改，所以往上面放
- */
-define('ZC_VERSION_MAJOR', '1');
-define('ZC_VERSION_MINOR', '5');
-define('ZC_VERSION_BUILD', '0');
-define('ZC_VERSION_COMMIT', '1626');
-define('ZC_VERSION_CODENAME', 'Zero');
-define('ZC_VERSION', ZC_VERSION_MAJOR . '.' . ZC_VERSION_MINOR . '.' . ZC_VERSION_BUILD . '.' . ZC_VERSION_COMMIT);
-define('ZC_VERSION_DISPLAY', ZC_VERSION_MAJOR . '.' . ZC_VERSION_MINOR . ' ' . ZC_VERSION_CODENAME);
-define('ZC_VERSION_FULL', ZC_VERSION . ' (' . ZC_VERSION_CODENAME . ')');
-define('ZC_BLOG_VERSION', ZC_VERSION_DISPLAY); // 原变量名
-define('ZC_BLOG_COMMIT', ZC_VERSION_COMMIT); // 为写入系统配置统一风格
-$GLOBALS['blogversion'] = ZC_VERSION_MAJOR . ZC_VERSION_MINOR . ZC_VERSION_COMMIT;
 
 /**
  * 加载系统基础函数
  */
+require ZBP_PATH . 'zb_system/function/c_system_version.php';
 require ZBP_PATH . 'zb_system/function/c_system_plugin.php';
 require ZBP_PATH . 'zb_system/function/c_system_debug.php';
 require ZBP_PATH . 'zb_system/function/c_system_common.php';
@@ -59,6 +45,8 @@ define('SERVER_IIS', 2);
 define('SERVER_NGINX', 3);
 define('SERVER_LIGHTTPD', 4);
 define('SERVER_KANGLE', 5);
+define('SERVER_CADDY', 6);
+define('SERVER_BUILTIN', 7);
 /**
  * PHP引擎
  */
@@ -82,7 +70,9 @@ define('IS_APACHE', PHP_SERVER === SERVER_APACHE);
 define('IS_IIS', PHP_SERVER === SERVER_IIS);
 define('IS_NGINX', PHP_SERVER === SERVER_NGINX);
 define('IS_LIGHTTPD', PHP_SERVER === SERVER_LIGHTTPD);
-define('IS_KANGLE', PHP_SERVER === PHP_SERVER);
+define('IS_KANGLE', PHP_SERVER === SERVER_KANGLE);
+define('IS_CADDY', PHP_SERVER === SERVER_CADDY);
+define('IS_BUILTIN', PHP_SERVER === SERVER_BUILTIN);
 define('IS_HHVM', PHP_ENGINE === ENGINE_HHVM);
 
 /**
@@ -271,7 +261,7 @@ $GLOBALS['datainfo'] = array(
     ),
     'Category' => array(
         'ID' => array('cate_ID', 'integer', '', 0),
-        'Name' => array('cate_Name', 'string', 50, ''),
+        'Name' => array('cate_Name', 'string', 250, ''),
         'Order' => array('cate_Order', 'integer', '', 0),
         'Count' => array('cate_Count', 'integer', '', 0),
         'Alias' => array('cate_Alias', 'string', 50, ''),
@@ -289,7 +279,7 @@ $GLOBALS['datainfo'] = array(
         'RootID' => array('comm_RootID', 'integer', '', 0),
         'ParentID' => array('comm_ParentID', 'integer', '', 0),
         'AuthorID' => array('comm_AuthorID', 'integer', '', 0),
-        'Name' => array('comm_Name', 'string', 20, ''),
+        'Name' => array('comm_Name', 'string', 50, ''),
         'Content' => array('comm_Content', 'string', '', ''),
         'Email' => array('comm_Email', 'string', 50, ''),
         'HomePage' => array('comm_HomePage', 'string', 250, ''),
@@ -300,7 +290,7 @@ $GLOBALS['datainfo'] = array(
     ),
     'Module' => array(
         'ID' => array('mod_ID', 'integer', '', 0),
-        'Name' => array('mod_Name', 'string', 100, ''),
+        'Name' => array('mod_Name', 'string', 250, ''),
         'FileName' => array('mod_FileName', 'string', 50, ''),
         'Content' => array('mod_Content', 'string', '', ''),
         'HtmlID' => array('mod_HtmlID', 'string', 50, ''),

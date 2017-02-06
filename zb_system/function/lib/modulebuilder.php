@@ -32,7 +32,7 @@ class ModuleBuilder {
         if(function_exists($userfunc)){
             ModuleBuilder::$List[$modfilename]['function'] = $userfunc;
         } elseif (strpos($userfunc, '::') !== false) {
-            $a=explode('::', $userfunc);
+            $a = explode('::', $userfunc);
             if(method_exists($a[0], $a[1])){
                 ModuleBuilder::$List[$modfilename]['function'] = $userfunc;
             }
@@ -385,7 +385,7 @@ class ModuleBuilder {
         ksort($array2);
 
         foreach ($array2 as $tag) {
-            $urls[]=$tag;
+            $urls[] = $tag;
         }
 
         $tags['tags'] = $urls;
@@ -401,22 +401,27 @@ class ModuleBuilder {
      * @param int $level 要导出的用户最低等级，默认为4（即协作者）
      * @return string 模块内容
      */
-    public static function Authors($level = 4) {
+    public static function Authors() {
         global $zbp;
         $template = $zbp->template;
         $tags = array();
         $authors = array();
+        $level = $zbp->actions['ArticleEdt'];
 
         $w = array();
         $w[] = array('<=', 'mem_Level', $level);
 
-        $array = $zbp->GetMemberList('*', $w, array('mem_ID' => 'ASC'), null, null);
+        $i = $zbp->modulesbyfilename['authors']->MaxLi;
+        if ($i == 0) {
+            $i = 10;
+        }
+
+        $array = $zbp->GetMemberList('*', $w, array('mem_ID' => 'ASC'), $i, null);
 
         foreach ($array as $member) {
-            $m = Metas::ConvertArray($member->GetData());
-            unset($m->Guid);
-            unset($m->Password);
-            $authors[]=$m;
+            $member->Guid = '';
+            $member->Password = '';
+            $authors[] = $member;
         }
 
         $tags['authors'] = $authors;
@@ -472,13 +477,13 @@ class ModuleBuilder {
             $all_comments = $array[5];
         }
 
-        $allinfo['all_artiles']=array('name'=>$zbp->lang['msg']['all_artiles'],'count'=>$all_artiles);
-        $allinfo['all_pages']=array('name'=>$zbp->lang['msg']['all_pages'],'count'=>$all_pages);
-        $allinfo['all_categorys']=array('name'=>$zbp->lang['msg']['all_categorys'],'count'=>$all_categorys);
-        $allinfo['all_tags']=array('name'=>$zbp->lang['msg']['all_tags'],'count'=>$all_tags);
-        $allinfo['all_comments']=array('name'=>$zbp->lang['msg']['all_comments'],'count'=>$all_comments);
+        $allinfo['all_artiles'] = array('name' => $zbp->lang['msg']['all_artiles'], 'count' => $all_artiles);
+        $allinfo['all_pages'] = array('name' => $zbp->lang['msg']['all_pages'], 'count' => $all_pages);
+        $allinfo['all_categorys'] = array('name' => $zbp->lang['msg']['all_categorys'], 'count' => $all_categorys);
+        $allinfo['all_tags'] = array('name' => $zbp->lang['msg']['all_tags'], 'count' => $all_tags);
+        $allinfo['all_comments'] = array('name' => $zbp->lang['msg']['all_comments'], 'count' => $all_comments);
         if (!$zbp->option['ZC_VIEWNUMS_TURNOFF'] || $zbp->option['ZC_LARGE_DATA']) {
-            $allinfo['all_views']=array('name'=>$zbp->lang['msg']['all_views'],'count'=>$all_views);
+            $allinfo['all_views'] = array('name' => $zbp->lang['msg']['all_views'], 'count' => $all_views);
         }
 
         $zbp->modulesbyfilename['statistics']->Type = "ul";

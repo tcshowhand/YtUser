@@ -13,7 +13,6 @@ class Category extends Base {
     public $SubCategories = array(); //子分类
     public $SubCategorys = null; // 拼写错误，保持兼容
     public $ChildrenCategories = array(); //子孙分类
-    private $_rootid = null;
 
     /**
      * 构造函数
@@ -35,9 +34,8 @@ class Category extends Base {
      */
     public function __call($method, $args) {
         foreach ($GLOBALS['hooks']['Filter_Plugin_Category_Call'] as $fpname => &$fpsignal) {
-            $fpsignal = PLUGIN_EXITSIGNAL_NONE;
             $fpreturn = $fpname($this, $method, $args);
-            if ($fpsignal == PLUGIN_EXITSIGNAL_RETURN) {return $fpreturn;}
+            if ($fpsignal == PLUGIN_EXITSIGNAL_RETURN) {$fpsignal = PLUGIN_EXITSIGNAL_NONE;return $fpreturn;}
         }
     }
 
@@ -88,9 +86,8 @@ class Category extends Base {
         global $zbp;
         if ($name == 'Url') {
             foreach ($GLOBALS['hooks']['Filter_Plugin_Category_Url'] as $fpname => &$fpsignal) {
-                $fpsignal = PLUGIN_EXITSIGNAL_NONE;
                 $fpreturn = $fpname($this);
-                if ($fpsignal == PLUGIN_EXITSIGNAL_RETURN) {return $fpreturn;}
+                if ($fpsignal == PLUGIN_EXITSIGNAL_RETURN) {$fpsignal = PLUGIN_EXITSIGNAL_NONE;return $fpreturn;}
             }
             $backAttr = $zbp->option['ZC_ALIAS_BACK_ATTR'];
             $u = new UrlRule($zbp->option['ZC_CATEGORY_REGEX']);
@@ -137,13 +134,6 @@ class Category extends Base {
 
             return $value;
         }
-        if ($name == 'RootID') {
-            if($this->_rootid === null){
-                $this->_rootid = (int) $this->GetRoot($this->ParentID);
-                $this->RootID = $this->_rootid;
-            }
-            return $this->_rootid;
-        }
 
         return parent::__get($name);
     }
@@ -161,11 +151,12 @@ class Category extends Base {
         if ($this->LogTemplate == $zbp->option['ZC_POST_DEFAULT_TEMPLATE']) {
             $this->data['LogTemplate'] = '';
         }
+
         $this->RootID = (int) $this->GetRoot($this->ParentID);
+
         foreach ($GLOBALS['hooks']['Filter_Plugin_Category_Save'] as $fpname => &$fpsignal) {
-            $fpsignal = PLUGIN_EXITSIGNAL_NONE;
             $fpreturn = $fpname($this);
-            if ($fpsignal == PLUGIN_EXITSIGNAL_RETURN) {return $fpreturn;}
+            if ($fpsignal == PLUGIN_EXITSIGNAL_RETURN) {$fpsignal = PLUGIN_EXITSIGNAL_NONE;return $fpreturn;}
         }
 
         return parent::Save();
@@ -175,10 +166,15 @@ class Category extends Base {
      * @return bool
      */
     public function Del() {
+        global $zbp;
+        if ($this->ID > 0){
+            unset($zbp->categories[$this->ID]);
+            unset($zbp->categoriesbyorder[$this->ID]);
+        }
+
         foreach ($GLOBALS['hooks']['Filter_Plugin_Category_Del'] as $fpname => &$fpsignal) {
-            $fpsignal = PLUGIN_EXITSIGNAL_NONE;
             $fpreturn = $fpname($this);
-            if ($fpsignal == PLUGIN_EXITSIGNAL_RETURN) {return $fpreturn;}
+            if ($fpsignal == PLUGIN_EXITSIGNAL_RETURN) {$fpsignal = PLUGIN_EXITSIGNAL_NONE;return $fpreturn;}
         }
 
         return parent::Del();
@@ -208,7 +204,7 @@ class Category extends Base {
     private function GetRoot($parentid) {
         global $zbp;
         if ($parentid == 0){
-            return 0;
+        	return 0;
         }
         if (isset($zbp->categories[$parentid])){
             if($zbp->categories[$parentid]->ParentID > 0){
@@ -220,4 +216,6 @@ class Category extends Base {
         }
 
     }
+
+
 }

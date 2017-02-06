@@ -17,6 +17,7 @@ if (!$zbp->CheckRights($action)) {$zbp->ShowError(6, __FILE__, __LINE__);die();}
 
 $blogtitle = $lang['msg']['module_edit'];
 
+
 require ZBP_PATH . 'zb_system/admin/admin_header.php';
 require ZBP_PATH . 'zb_system/admin/admin_top.php';
 
@@ -79,7 +80,13 @@ if ($mod->Source == 'theme') {
 <div id="divMain">
 <div class="divHeader2">
 <?php echo $lang['msg']['module_edit']?></div>
-<div class="SubMenu"></div>
+<div class="SubMenu">
+<?php
+    foreach ($GLOBALS['hooks']['Filter_Plugin_Module_Edit_SubMenu'] as $fpname => &$fpsignal) {
+        $fpname();
+    }
+?>
+</div>
 <div id="divMain2" class="edit tag_edit">
 <form id="edit" name="edit" method="post" action="#">
 	<input id="edtID" name="ID" type="hidden" value="<?php echo $mod->ID;?>" />
@@ -90,7 +97,7 @@ if ($mod->Source == 'theme') {
 			<?php echo $lang['msg']['name']?>:</span>
 		<span class="star">(*)</span>
 		<br />
-		<input id="edtName" class="edit" size="40" name="Name" maxlength="50" type="text" value="<?php echo $mod->Name;?>" />
+		<input id="edtName" class="edit" size="40" name="Name" maxlength="<?php echo $option['ZC_MODULE_NAME_MAX']; ?>" type="text" value="<?php echo $mod->Name;?>" />
 		 (
 		<?php echo $lang['msg']['hide_title']?>
 		:

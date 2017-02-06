@@ -34,8 +34,8 @@ $p .= '<option value="0">' . $lang['msg']['none'] . '</option>';
 
 foreach ($zbp->categoriesbyorder as $k => $v) {
     if ($v->ID == $cate->ID) {continue;}
-    #if($v->RootID==$cate->ID){continue;}
-    #if($cate->RootID>0){if($v->RootID==$cate->RootID){continue;}}
+    if ($cate->ID > 0 && $v->RootID == $cate->ID) {continue;}
+    if ($cate->RootID>0) { if ($v->RootID == $cate->RootID && $v->Level >= $cate->Level) {continue;} }
     if ($v->Level < 3) {
         $p .= '<option ' . ($v->ID == $cate->ParentID ? 'selected="selected"' : '') . ' value="' . $v->ID . '">' . $v->SymbolName . '</option>';
     }
@@ -45,7 +45,13 @@ foreach ($zbp->categoriesbyorder as $k => $v) {
 <div id="divMain">
 	<div class="divHeader2">
 		<?php echo $lang['msg']['category_edit']?></div>
-	<div class="SubMenu"></div>
+	<div class="SubMenu">
+<?php
+    foreach ($GLOBALS['hooks']['Filter_Plugin_Category_Edit_SubMenu'] as $fpname => &$fpsignal) {
+        $fpname();
+    }
+?>
+	</div>
 	<div id="divMain2" class="edit category_edit">
 		<form id="edit" name="edit" method="post" action="#">
 			<input id="edtID" name="ID" type="hidden" value="<?php echo $cate->ID;?>" />
@@ -54,7 +60,7 @@ foreach ($zbp->categoriesbyorder as $k => $v) {
 					<?php echo $lang['msg']['name']?>:</span>
 				<span class="star">(*)</span>
 				<br />
-				<input id="edtName" class="edit" size="40" name="Name" maxlength="50" type="text" value="<?php echo $cate->Name;?>" /></p>
+				<input id="edtName" class="edit" size="40" name="Name" maxlength="<?php echo $option['ZC_CATEGORY_NAME_MAX']; ?>" type="text" value="<?php echo $cate->Name;?>" /></p>
 			<p>
 				<span class="title">
 					<?php echo $lang['msg']['alias']?>:</span>

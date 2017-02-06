@@ -54,8 +54,16 @@ function YtUser_page(){
         $Price=$reg->Price;
         $Vipendtime=$reg->Vipendtime;
         }
-        $zbp->user->Vipendtime=$Vipendtime;
         $zbp->user->Price=$Price;
+        if($zbp->user->Level <5){
+            if($Vipendtime==0){
+                $zbp->user->Vipendtime="永久会员";
+            }else{
+                $zbp->user->Vipendtime=date("Y-m-d H:i:s",$Vipendtime);
+            }
+        }else{
+            $zbp->user->Vipendtime="请升级会员";
+        }
     }
 	
 	if(isset($_GET['Commentlist'])){
@@ -180,7 +188,7 @@ function YtUser_page(){
 	$article->Title="用户中心";
 	$article->IsLock=true;
 	$article->Type=ZC_POST_TYPE_PAGE;
-	
+	$article->verifycode ='<img style="border:none;vertical-align:middle;width:'.$zbp->option['ZC_VERIFYCODE_WIDTH']. 'px;height:' . $zbp->option['ZC_VERIFYCODE_HEIGHT'] . 'px;cursor:pointer;" src="' .$zbp->validcodeurl . '?id=User" alt="" title="" onclick="javascript:this.src=\'' . $zbp->validcodeurl . '?id=User&amp;tm=\'+Math.random();"/>';
     if($zbp->user->ID){
         $article->Content .='<form class="ytuseredit" id="edit" method="post" action="#">';
         $article->Content .='<input id="edtID" name="ID" type="hidden" value="'.$zbp->user->ID.'" />';
@@ -188,10 +196,8 @@ function YtUser_page(){
         $article->Content .='<table style="width:90%;border:none;font-size:1.1em;line-height:2.5em;">';
 	    $article->Content .='<tr style=""><th style="border:none;" colspan="2" scope="col"><p>用户级别:'.$zbp->lang['user_level_name'][$zbp->user->Level].' <a href="'.$zbp->host.'?Upgrade" class="">购买升级会员</a></p></p></th></tr>';
 	    if($zbp->user->Level <5){
-        if($Vipendtime==0){$temp="永久会员";}else{$temp=date("Y-m-d H:i:s",$Vipendtime);}
-        $article->Content .='<tr style=""><th style="border:none;" colspan="2" scope="col"><p>到期时间:'.$temp.'</p></p></th></tr>';
+        $article->Content .='<tr style=""><th style="border:none;" colspan="2" scope="col"><p>到期时间:'.$zbp->user->Vipendtime.'</p></p></th></tr>';
         }
-	    
 	    $article->Content .='<tr style=""><th style="border:none;" colspan="2" scope="col"><p>用户积分:'.$Price.' <a href="'.$zbp->host.'?Integral" class="">购买积分</a></p></p></th></tr>';
 	    $article->Content .='<tr><td style="text-align:right;border:none;">(*)用户名：</td><td  style="border:none;" ><input required="required" type="text" id="edtAlias" name="Alias" value="'.$zbp->user->StaticName.'" style="width:250px;font-size:1.2em;" /></td></tr>';
 	    $article->Content .='<tr><td style="text-align:right;border:none;">(*)电话：</td><td  style="border:none;" ><input required="required" type="text" id="meta_Tel" name="meta_Tel" value="'.$zbp->user->Metas->Tel.'" style="width:250px;font-size:1.2em;" /></td></tr>';
@@ -200,7 +206,7 @@ function YtUser_page(){
 	    $article->Content .='<tr><td style="text-align:right;border:none;">网站：</td><td  style="border:none;" ><input type="text" id="edtHomePage" name="HomePage" value="'.$zbp->user->HomePage.'" style="width:250px;font-size:1.2em;" /></td></tr>';
 	    $article->Content .='<tr><td style="text-align:right;border:none;">(*)摘要：</td><td  style="border:none;" ><textarea cols="3" rows="6" id="edtIntro" name="Intro" style="width:250px;font-size:1.2em;">'.$zbp->user->Intro.'</textarea>';
 	    $article->Content .='</td></tr>';
-	    $article->Content .='<tr><td style="text-align:right;border:none;">(*)</td><td  style="border:none;" ><input required="required" type="text" name="verifycode" style="width:150px;font-size:1.2em;" />&nbsp;&nbsp;<img style="border:none;vertical-align:middle;width:'.$zbp->option['ZC_VERIFYCODE_WIDTH']. 'px;height:' . $zbp->option['ZC_VERIFYCODE_HEIGHT'] . 'px;cursor:pointer;" src="' .$zbp->validcodeurl . '?id=RegPage" alt="" title="" onclick="javascript:this.src=\'' . $zbp->validcodeurl . '?id=RegPage&amp;tm=\'+Math.random();"/></td></tr>';
+	    $article->Content .='<tr><td style="text-align:right;border:none;">(*)</td><td  style="border:none;" ><input required="required" type="text" name="verifycode" style="width:150px;font-size:1.2em;" />&nbsp;&nbsp;'.$article->verifycode.'</td></tr>';
 	    $article->Content .='<tr><td  style="border:none;" ></td><td  style="border:none;" ><button onclick="return checkInfo();">确定</button></td></tr>';
 	    $article->Content .='</table>';
         $article->Content .='</form>';
@@ -373,21 +379,19 @@ function YtUser_page(){
 	$article->IsLock=true;
 	$article->Type=ZC_POST_TYPE_PAGE;
     if($zbp->user->ID){
+        $article->UEditor ='<script type="text/javascript" src="'.$zbp->host.'zb_users/plugin/UEditor/ueditor.config.php"></script><script type="text/javascript" src="'.$zbp->host.'zb_users/plugin/UEditor/ueditor.all.min.js"></script><div id=\'tarea\' class="editmod editmod3"><textarea id="editor_intro" name="Content"></textarea><script type="text/javascript">var editor_api={editor:{content:{obj:{},get:function(){return ""},insert:function(){return ""},put:function(){return ""},focus:function(){return ""}},intro:{obj:{},get:function(){return ""},insert:function(){return ""},put:function(){return ""},focus:function(){return ""}}}};function editor_init(){editor_api.editor.content.obj=$(\'#editor_content\');editor_api.editor.intro.obj=$(\'#editor_intro\');editor_api.editor.content.get=function(){return this.obj.val()};editor_api.editor.content.put=function(str){return this.obj.val(str)};editor_api.editor.content.focus=function(){return this.obj.focus()};editor_api.editor.intro.get=function(){return this.obj.val()};editor_api.editor.intro.put=function(str){return this.obj.val(str)};editor_api.editor.intro.focus=function(){return this.obj.focus()};sContent=editor_api.editor.content.get();}</script><script type="text/javascript">var EditorIntroOption = {toolbars:[[\'Source\', \'bold\', \'italic\',\'Undo\', \'Redo\']],autoHeightEnabled:false,initialFrameHeight:200};function getContent(){return editor_api.editor.content.get();}function getIntro(){return editor_api.editor.intro.get();}function setContent(s){editor_api.editor.content.put(s);}function setIntro(s){editor_api.editor.intro.put(s);};function editor_init(){editor_api.editor.content.obj=UE.getEditor(\'editor_content\');editor_api.editor.intro.obj=UE.getEditor(\'editor_intro\',EditorIntroOption);editor_api.editor.content.get=function(){return this.obj.getContent()};editor_api.editor.content.put=function(str){return this.obj.setContent(str)};editor_api.editor.content.focus=function(){return this.obj.focus()};editor_api.editor.intro.get=function(){return this.obj.getContent()};editor_api.editor.intro.put=function(str){return this.obj.setContent(str)};editor_api.editor.intro.focus=function(){return this.obj.focus()};editor_api.editor.content.obj.ready(function(){sContent=editor_api.editor.content.get();});editor_api.editor.intro.obj.ready(function(){sIntro=editor_api.editor.intro.get();});$(document).ready(function(){$(\'#edit\').submit(function(){if(editor_api.editor.content.obj.queryCommandState(\'source\')==1) editor_api.editor.content.obj.execCommand(\'source\');if(editor_api.editor.intro.obj.queryCommandState(\'source\')==1) editor_api.editor.intro.obj.execCommand(\'source\');});if (("http://" + bloghost + "/").indexOf(location.host.toLowerCase()) < 0) alert("您设置了域名固化，请使用" + bloghost + "访问或进入后台修改域名，否则图片无法上传。");});}</script><script type="text/javascript">editor_init();</script>';  
         $article->Content .='<form class="ytarticleedt" id="edit" name="edit" method="post" action="#">';
         $article->Content .='<input id="edtID" name="ID" type="hidden" value="0" />';
         $article->Content .='<input id="edtType" name="Type" type="hidden" value="0" />';    
 	    $article->Content .='<p><span class="title">标题:</span><br><input id="edtTitle" class="edit" size="40" name="Title" type="text"></p>';
-        $article->Content .='<script type="text/javascript" src="'.$zbp->host.'zb_users/plugin/UEditor/ueditor.config.php"></script><script type="text/javascript" src="'.$zbp->host.'zb_users/plugin/UEditor/ueditor.all.min.js"></script><div id=\'tarea\' class="editmod editmod3"><span class="title">内容:</span><br><textarea id="editor_intro" name="Content"></textarea></div><script type="text/javascript">var editor_api={editor:{content:{obj:{},get:function(){return ""},insert:function(){return ""},put:function(){return ""},focus:function(){return ""}},intro:{obj:{},get:function(){return ""},insert:function(){return ""},put:function(){return ""},focus:function(){return ""}}}};function editor_init(){editor_api.editor.content.obj=$(\'#editor_content\');editor_api.editor.intro.obj=$(\'#editor_intro\');editor_api.editor.content.get=function(){return this.obj.val()};editor_api.editor.content.put=function(str){return this.obj.val(str)};editor_api.editor.content.focus=function(){return this.obj.focus()};editor_api.editor.intro.get=function(){return this.obj.val()};editor_api.editor.intro.put=function(str){return this.obj.val(str)};editor_api.editor.intro.focus=function(){return this.obj.focus()};sContent=editor_api.editor.content.get();}</script><script type="text/javascript">var EditorIntroOption = {toolbars:[[\'Source\', \'bold\', \'italic\',\'Undo\', \'Redo\']],autoHeightEnabled:false,initialFrameHeight:200};function getContent(){return editor_api.editor.content.get();}function getIntro(){return editor_api.editor.intro.get();}function setContent(s){editor_api.editor.content.put(s);}function setIntro(s){editor_api.editor.intro.put(s);};function editor_init(){editor_api.editor.content.obj=UE.getEditor(\'editor_content\');editor_api.editor.intro.obj=UE.getEditor(\'editor_intro\',EditorIntroOption);editor_api.editor.content.get=function(){return this.obj.getContent()};editor_api.editor.content.put=function(str){return this.obj.setContent(str)};editor_api.editor.content.focus=function(){return this.obj.focus()};editor_api.editor.intro.get=function(){return this.obj.getContent()};editor_api.editor.intro.put=function(str){return this.obj.setContent(str)};editor_api.editor.intro.focus=function(){return this.obj.focus()};editor_api.editor.content.obj.ready(function(){sContent=editor_api.editor.content.get();});editor_api.editor.intro.obj.ready(function(){sIntro=editor_api.editor.intro.get();});$(document).ready(function(){$(\'#edit\').submit(function(){if(editor_api.editor.content.obj.queryCommandState(\'source\')==1) editor_api.editor.content.obj.execCommand(\'source\');if(editor_api.editor.intro.obj.queryCommandState(\'source\')==1) editor_api.editor.intro.obj.execCommand(\'source\');});if (("http://" + bloghost + "/").indexOf(location.host.toLowerCase()) < 0) alert("您设置了域名固化，请使用" + bloghost + "访问或进入后台修改域名，否则图片无法上传。");});}</script><script type="text/javascript">editor_init();</script>';  
+        $article->Content .= '<span class="title">内容:</span><br>'.$article->UEditor.'</div>';
         $article->Content .='<p><button onclick="return checkArticleInfo();">确定</button></p>';
         $article->Content .='</form>';
-        $article->Content .='<script type="text/javascript">function checkArticleInfo(){
-            document.getElementById("edit").action="'.$zbp->host.'zb_users/plugin/YtUser/cmd.php?act=ArticlePst&token='.$zbp->GetToken().'";isSubmit=true;}</script>';
     }else{
         Redirect($zbp->host."?Login");die();
     }
-    $article->footer .='<script type="text/javascript">function checkArticleInfo(){
+    $zbp->footer .='<script type="text/javascript">function checkArticleInfo(){
             document.getElementById("edit").action="'.$zbp->host.'zb_users/plugin/YtUser/cmd.php?act=ArticlePst&token='.$zbp->GetToken().'";isSubmit=true;}</script>';
-
 	$mt=microtime();
 	$s=	'';
 	$article->Content .=$s;	
@@ -458,28 +462,19 @@ function YtUser_page(){
 	$article->Title="会员注册";
 	$article->IsLock=true;
 	$article->Type=ZC_POST_TYPE_PAGE;
-
-	$article->Content .='<table style="width:90%;border:none;font-size:1.1em;line-height:2.5em;">';
+    $article->verifycode ='<img style="border:none;vertical-align:middle;width:'.$zbp->option['ZC_VERIFYCODE_WIDTH']. 'px;height:' . $zbp->option['ZC_VERIFYCODE_HEIGHT'] . 'px;cursor:pointer;" src="' .$zbp->validcodeurl . '?id=RegPage" alt="" title="" onclick="javascript:this.src=\'' . $zbp->validcodeurl . '?id=register&amp;tm=\'+Math.random();"/>';
+    $article->Content .='<table style="width:90%;border:none;font-size:1.1em;line-height:2.5em;">';
 	$article->Content .='<tr><td style="text-align:right;border:none;">(*)名称：</td><td  style="border:none;" ><input required="required" type="text" name="name" style="width:250px;font-size:1.2em;" /></td></tr>';
 	$article->Content .='<tr><td style="text-align:right;border:none;">(*)密码：</td><td  style="border:none;" ><input required="required" type="password" name="password" style="width:250px;font-size:1.2em;" /></td></tr>';
 	$article->Content .='<tr><td style="text-align:right;border:none;">(*)确认密码：</td><td  style="border:none;" ><input required="required" type="password" name="repassword" style="width:250px;font-size:1.2em;" /></td></tr>';
 	$article->Content .='<tr><td style="text-align:right;border:none;">(*)邮箱：</td><td  style="border:none;" ><input type="text" name="email" style="width:250px;font-size:1.2em;" /></td></tr>';
 	$article->Content .='<tr><td style="text-align:right;border:none;">网站：</td><td  style="border:none;" ><input type="text" name="homepage" style="width:250px;font-size:1.2em;" /></td></tr>';
-	
 	$article->Content .='</td></tr>';
-
-	$article->Content .='<tr><td style="text-align:right;border:none;">(*)</td><td  style="border:none;" ><input required="required" type="text" name="verifycode" style="width:150px;font-size:1.2em;" />&nbsp;&nbsp;<img style="border:none;vertical-align:middle;width:'.$zbp->option['ZC_VERIFYCODE_WIDTH']. 'px;height:' . $zbp->option['ZC_VERIFYCODE_HEIGHT'] . 'px;cursor:pointer;" src="' .$zbp->validcodeurl . '?id=RegPage" alt="" title="" onclick="javascript:this.src=\'' . $zbp->validcodeurl . '?id=register&amp;tm=\'+Math.random();"/></td></tr>';
-	
+	$article->Content .='<tr><td style="text-align:right;border:none;">(*)</td><td  style="border:none;" ><input required="required" type="text" name="verifycode" style="width:150px;font-size:1.2em;" />&nbsp;&nbsp;'.$article->verifycode.'</td></tr>';
 	$article->Content .='<tr><td  style="border:none;" ></td><td  style="border:none;" ><input type="submit" style="width:100px;font-size:1.0em;padding:0.2em" value="提交" onclick="return register()" /></td></tr>';
-
 	$article->Content .='</table>';
-
     $article->Content .='使用其它帐号登录：<div class="ds-login"></div>';
-    
-
 	$mt=microtime();
-	$s=	'';
-	$article->Content .=$s;	
     if($zbp->template->hasTemplate('t_register')){
         $article->Template = 't_register';
 	}
@@ -506,21 +501,7 @@ function YtUser_page(){
 	$article->Title="会员登录";
 	$article->IsLock=true;
 	$article->Type=ZC_POST_TYPE_PAGE;
-    $article->Content .='<form method="post" action="#">';
-	$article->Content .='<table style="width:90%;border:none;font-size:1.1em;line-height:2.5em;">';
-	$article->Content .='<tr><td style="text-align:right;border:none;">账户：</td><td  style="border:none;" ><input required="required" type="text" id="edtUserName" name="edtUserName" value="'.GetVars('username', 'COOKIE').'" style="width:250px;font-size:1.2em;" /></td></tr>';
-	$article->Content .='<tr><td style="text-align:right;border:none;">密码：</td><td  style="border:none;" ><input required="required" type="password" id="edtPassWord" name="edtPassWord" style="width:250px;font-size:1.2em;" /></td></tr>';
-	$article->Content .='</td></tr>';
-	$article->Content .='<tr><td style="text-align:right;border:none;"><input type="checkbox" name="chkRemember" id="chkRemember"  tabindex="3" /></td><td  style="border:none;" >下次自动登录</td></tr>';
-    $article->Content .='<tr><td  style="border:none;" ></td><td  style="border:none;" ><input id="loginbtnPost" name="loginbtnPost" type="submit" value="登录" class="button" tabindex="4"/></td></tr>';
-	$article->Content .='</table>';
-    $article->Content .='<input type="hidden" name="username" id="username" value="" />';
-    $article->Content .='<input type="hidden" name="password" id="password" value="" />';
-    $article->Content .='<input type="hidden" name="savedate" id="savedate" value="0" />';
-    $article->Content .='<input type="hidden" name="dishtml5" id="dishtml5" value="0" />';
-    $article->Content .='</form>';
-    $article->Content .='使用其它帐号登录：<div class="ds-login"></div>';
-    $article->Content .='<script type="text/javascript">
+    $zbp->footer .='<script type="text/javascript">
 $("#loginbtnPost").click(function(){
 	var strUserName=$("#edtUserName").val();
 	var strPassWord=$("#edtPassWord").val();
@@ -540,6 +521,20 @@ $("#chkRemember").click(function(){
 	$("#savedate").attr("value",$("#chkRemember").attr("checked")=="checked"?30:0);
 })
 </script>';
+    $article->Content .='<form method="post" action="#">';
+	$article->Content .='<table style="width:90%;border:none;font-size:1.1em;line-height:2.5em;">';
+	$article->Content .='<tr><td style="text-align:right;border:none;">账户：</td><td  style="border:none;" ><input required="required" type="text" id="edtUserName" name="edtUserName" value="'.GetVars('username', 'COOKIE').'" style="width:250px;font-size:1.2em;" /></td></tr>';
+	$article->Content .='<tr><td style="text-align:right;border:none;">密码：</td><td  style="border:none;" ><input required="required" type="password" id="edtPassWord" name="edtPassWord" style="width:250px;font-size:1.2em;" /></td></tr>';
+	$article->Content .='</td></tr>';
+	$article->Content .='<tr><td style="text-align:right;border:none;"><input type="checkbox" name="chkRemember" id="chkRemember"  tabindex="3" /></td><td  style="border:none;" >下次自动登录</td></tr>';
+    $article->Content .='<tr><td  style="border:none;" ></td><td  style="border:none;" ><input id="loginbtnPost" name="loginbtnPost" type="submit" value="登录" class="button" tabindex="4"/></td></tr>';
+	$article->Content .='</table>';
+    $article->Content .='<input type="hidden" name="username" id="username" value="" />';
+    $article->Content .='<input type="hidden" name="password" id="password" value="" />';
+    $article->Content .='<input type="hidden" name="savedate" id="savedate" value="0" />';
+    $article->Content .='<input type="hidden" name="dishtml5" id="dishtml5" value="0" />';
+    $article->Content .='</form>';
+    $article->Content .='使用其它帐号登录：<div class="ds-login"></div>';
 
     if($zbp->template->hasTemplate('t_login')){
         $article->Template = 't_login';

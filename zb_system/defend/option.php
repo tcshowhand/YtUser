@@ -65,6 +65,7 @@ return array(
     // '固定域名,默认为false
     'ZC_PERMANENT_DOMAIN_ENABLE' => false,
     'ZC_PERMANENT_DOMAIN_REDIRECT' => true,
+    'ZC_PERMANENT_DOMAIN_WITH_ADMIN' => false,
 
     //
     'ZC_DEBUG_MODE' => false,
@@ -115,7 +116,7 @@ return array(
     'ZC_EMOTICONS_FILESIZE' => '16',
 
     // '上传相关
-    'ZC_UPLOAD_FILETYPE' => 'jpg|gif|png|jpeg|bmp|psd|wmf|ico|rpm|deb|tar|gz|sit|7z|bz2|zip|rar|xml|xsl|svg|svgz|doc|docx|ppt|pptx|xls|xlsx|wps|chm|txt|pdf|mp3|avi|mpg|rm|ra|rmvb|mov|wmv|wma|swf|fla|torrent|apk|zba',
+    'ZC_UPLOAD_FILETYPE' => 'jpg|gif|png|jpeg|bmp|psd|wmf|ico|rpm|deb|tar|gz|sit|7z|bz2|zip|rar|xml|xsl|svg|svgz|rtf|doc|docx|ppt|pptx|xls|xlsx|wps|chm|txt|pdf|mp3|mp4|avi|mpg|rm|ra|rmvb|mov|wmv|wma|swf|fla|torrent|apk|zba|gzba',
 
     'ZC_UPLOAD_FILESIZE' => 2,
 
@@ -133,6 +134,11 @@ return array(
     'ZC_HOMEPAGE_MAX' => 100,
 
     'ZC_CONTENT_MAX' => 1000,
+
+    'ZC_ARTICLE_TITLE_MAX' => 100,
+    'ZC_CATEGORY_NAME_MAX' => 50,
+    'ZC_TAGS_NAME_MAX' => 50,
+    'ZC_MODULE_NAME_MAX' => 50,
 
     // '自动摘要字数
     'ZC_ARTICLE_EXCERPT_MAX' => 250,
@@ -196,4 +202,6 @@ return array(
     'ZC_COMPATIBLE_ASP_URL' => true,
     'ZC_LARGE_DATA' => false,
     'ZC_JS_304_ENABLE' => false,
+    'ZC_XMLRPC_ENABLE' => true,
+    'ZC_XMLRPC_USE_WEBTOKEN' => false,
 );

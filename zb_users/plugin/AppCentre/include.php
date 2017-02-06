@@ -35,6 +35,8 @@ $zbpvers['140220']='1.2 Hippo Build 140220';
 $zbpvers['140614']='1.3 Wonce Build 140614';
 $zbpvers['150101']='1.4 Deeplue Build 150101';
 $zbpvers['151626']='1.5 Zero Build 151626';
+$zbpvers['151740']='1.5.1 Zero Build 151740';
+
 if(!isset($zbpvers[$GLOBALS['blogversion']])){
     if(defined('ZC_VERSION_FULL'))
     	$zbpvers[$GLOBALS['blogversion']] = ZC_VERSION_FULL;
@@ -147,11 +149,12 @@ function AppCentre_Get_Cookies(){
 function AppCentre_Get_UserAgent(){
 	global $zbp;
     $app = $zbp->LoadApp('plugin', 'AppCentre');
+    $pv = strpos(phpversion(), '-')===false? phpversion() : substr(phpversion(),0,strpos(phpversion(), '-'));
 	if(isset($GLOBALS['blogversion'])) {
-		$u = 'ZBlogPHP/' . $GLOBALS['blogversion'] . ' AppCentre/'. $app->modified . ' ' . GetGuestAgent();
+		$u = 'ZBlogPHP/' . $GLOBALS['blogversion'] . ' AppCentre/'. $app->modified . 'PhpVer/' . $pv . ' ' . GetGuestAgent();
 	}
 	else {
-		$u = 'ZBlogPHP/' . substr(ZC_BLOG_VERSION, -6, 6) . ' AppCentre/'. $app->modified . ' ' . GetGuestAgent();
+		$u = 'ZBlogPHP/' . substr(ZC_BLOG_VERSION, -6, 6) . ' AppCentre/'. $app->modified . 'PhpVer/' . $pv . ' ' . GetGuestAgent();
 	}
 	return $u;
 }

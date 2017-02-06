@@ -163,7 +163,7 @@ function notify(s){
 function statistic(s){
 	$("#statloading").show();
 	$("#updatatime").hide();
-	$.get("<?php echo $bloghost; ?>zb_system/cmd.php"+s,{},
+	$.get("<?php echo $bloghost; ?>zb_system/cmd.php"+s+"&tm="+Math.random(),{},
 		function(data){
 			$("#tbStatistic tr:first ~ tr").remove();
 			$("#tbStatistic tr:first").after(data);
@@ -176,7 +176,7 @@ function statistic(s){
 
 function updateinfo(s){
 	$("#infoloading").show();
-	$.get("<?php echo $bloghost; ?>zb_system/cmd.php"+s,{},
+	$.get("<?php echo $bloghost; ?>zb_system/cmd.php"+s+"&tm="+Math.random(),{},
 		function(data){
 			$("#tbUpdateInfo tr:first ~ tr").remove();
 			$("#tbUpdateInfo tr:first").after(data);
@@ -187,8 +187,7 @@ function updateinfo(s){
 
 
 function AddHeaderIcon(s){
-	if ($.support.leadingWhitespace)
-		$("div.divHeader,div.divHeader2").first().css({"padding-left":"38px","background":"url('"+s+"') 3px 9px no-repeat","background-size":"32px"});
+  $("div.divHeader,div.divHeader2").first().css({"background-image":"url('"+s+"')"});
 }
 
 
@@ -231,7 +230,7 @@ $(document).ready(function(){
 	$('input.checkbox[value!="1"]').after('<span class="imgcheck"></span>');
 
 
-	$('span.imgcheck').click(function(){ChangeCheckValue(this)})
+	$("body").on("click","span.imgcheck", function(){ChangeCheckValue(this)});
 
 	//batch
 	$("#batch a").bind("click", function(){ BatchContinue();$("#batch p").html("<?php echo $lang['msg']['batch_operation_in_progress']; ?>");});
@@ -240,40 +239,35 @@ $(document).ready(function(){
 
 	$("img[width='16']").each(function(){if($(this).parent().is("a")){$(this).parent().addClass("button")}});
 
-	$("input[type='file']").click(function(){
-		if(/(MSIE (10|9).+?WPDesktop)|(IEMobile\/(10|9))/g.test(navigator.userAgent)&&$(this).val()==""){
-			alert('<?php echo $lang['error'][65] ?>')
-		}
-	})
-
-	if (!$.support.leadingWhitespace) {
-
-	}else{
-		<?php
-echo 'if($("div.divHeader,div.divHeader2").first().css("background-image")=="none"){AddHeaderIcon("' . $bloghost . 'zb_system/image/common/window.png");}';
-?>
+	if ($("div.divHeader,div.divHeader2").first().css("background-image") == "none") { 
+		AddHeaderIcon("<?php echo $bloghost ?>zb_system/image/common/window.png");
 	}
 
 	AutoHideTips();
 
 	SetCookie("timezone",(new Date().getTimezoneOffset()/60)*(-1));
+
+	var s = $("div.divHeader,div.divHeader2").first().css("background-image");
+	if(s != undefined && s.indexOf("none.gif") != -1 ){
+		AddHeaderIcon(bloghost + "zb_system/image/common/window.png");
+	}
 });
 
 
-var SetCookie = function () { return zbp.cookie.set.apply(null, arguments); }
-var GetCookie = function () { return zbp.cookie.get.apply(null, arguments); }
-var LoadRememberInfo = function () { zbp.userinfo.output.apply(null); return false;}
-var SaveRememberInfo = function () { zbp.userinfo.saveFromHtml.apply(null); return false;}
-var RevertComment = function () { zbp.comment.reply.apply(null); return false;}
-var GetComments = function () { zbp.comment.get.apply(null); return false;}
-var VerifyMessage = function () { zbp.comment.post.apply(null); return false;}
+var SetCookie = function () { return zbp.cookie.set.apply(null, arguments); };
+var GetCookie = function () { return zbp.cookie.get.apply(null, arguments); };
+var LoadRememberInfo = function () { zbp.userinfo.output.apply(null); return false;};
+var SaveRememberInfo = function () { zbp.userinfo.saveFromHtml.apply(null); return false;};
+var RevertComment = function () { zbp.comment.reply.apply(null, arguments); return false;} ;
+var GetComments = function () { zbp.comment.get.apply(null, arguments); return false;} ;
+var VerifyMessage = function () { zbp.comment.post.apply(null); return false;};
 
 
 <?php
 foreach ($GLOBALS['hooks']['Filter_Plugin_Admin_Js_Add'] as $fpname => &$fpsignal) {$fpname();}
 
 $s = ob_get_clean();
-$m = md5($s);
+$m = 'W/' . md5($s);
 
 header('Content-Type: application/x-javascript; charset=utf-8');
 header('Etag: ' . $m);

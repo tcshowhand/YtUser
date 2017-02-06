@@ -19,10 +19,9 @@ function VerifyLogin() {
     if ($zbp->Verify_MD5(GetVars('username', 'POST'), GetVars('password', 'POST'), $m)) {
         $zbp->user = $m;
         $un = $m->Name;
-        $ps = $m->PassWord_MD5Path;
+        $ps = $zbp->VerifyResult($m);
         $sd = (int) GetVars('savedate');
         $addinfo = array();
-        $addinfo['dishtml5'] = (int) GetVars('dishtml5', 'POST');
         $addinfo['chkadmin'] = (int) $zbp->CheckRights('admin');
         $addinfo['chkarticle'] = (int) $zbp->CheckRights('ArticleEdt');
         $addinfo['levelname'] = $m->LevelName;
@@ -45,6 +44,10 @@ function VerifyLogin() {
             setcookie("addinfo" . str_replace('/', '', $zbp->cookiespath), json_encode($addinfo), $sdt, $zbp->cookiespath);
         }
 
+        foreach ($GLOBALS['hooks']['Filter_Plugin_VerifyLogin_Succeed'] as $fpname => &$fpsignal) {
+            $fpname();
+        }
+
         return true;
     } else {
         $zbp->ShowError(8, __FILE__, __LINE__);
@@ -61,6 +64,9 @@ function Logout() {
     setcookie('password', '', time() - 3600, $zbp->cookiespath);
     setcookie("addinfo" . str_replace('/', '', $zbp->cookiespath), '', time() - 3600, $zbp->cookiespath);
 
+    foreach ($GLOBALS['hooks']['Filter_Plugin_Logout_Succeed'] as $fpname => &$fpsignal) {
+        $fpname();
+    }
 }
 
 ################################################################################################################
@@ -658,7 +664,8 @@ function ViewList($page, $cate, $auth, $date, $tags, $isrewrite = false) {
     global $zbp;
 
     foreach ($GLOBALS['hooks']['Filter_Plugin_ViewList_Begin'] as $fpname => &$fpsignal) {
-        $fpreturn = $fpname($page, $cate, $auth, $date, $tags);
+        $fpargs = func_get_args();
+        $fpreturn = call_user_func_array( $fpname, $fpargs );
         if ($fpsignal == PLUGIN_EXITSIGNAL_RETURN) {
             $fpsignal = PLUGIN_EXITSIGNAL_NONE;
 
@@ -777,11 +784,11 @@ function ViewList($page, $cate, $auth, $date, $tags, $isrewrite = false) {
         if (isset($auth['id'])) {
             $author = $zbp->GetMemberByID($auth['id']);
         } else {
-            $author = $zbp->GetMemberByAliasOrName($auth['alias']);
+            $author = $zbp->GetMemberByNameOrAlias($auth['alias']);
         }
 
         if ($author->ID == 0) {
-            if ($isrewrite == true) {
+            if ($isrewrite) {
                 return false;
             }
 
@@ -808,8 +815,8 @@ function ViewList($page, $cate, $auth, $date, $tags, $isrewrite = false) {
             $datetime = $date['date'];
         }
 
-        $dateregex_ymd='/[0-9]{1,4}-[0-9]{1,2}-[0-9]{1,2}/i';
-        $dateregex_ym='/[0-9]{1,4}-[0-9]{1,2}/i';
+        $dateregex_ymd = '/[0-9]{1,4}-[0-9]{1,2}-[0-9]{1,2}/i';
+        $dateregex_ym = '/[0-9]{1,4}-[0-9]{1,2}/i';
 
         if(preg_match($dateregex_ymd, $datetime) == 0 && preg_match($dateregex_ym, $datetime) == 0){
             return false;
@@ -931,7 +938,7 @@ function ViewList($page, $cate, $auth, $date, $tags, $isrewrite = false) {
     $limit = array(($pagebar->PageNow - 1) * $pagebar->PageCount, $pagebar->PageCount);
     $option = array('pagebar' => $pagebar);
 
-    foreach ($GLOBALS['hooks']['Filter_Plugin_LargeData_Aritcle'] as $fpname => &$fpsignal) {
+    foreach ($GLOBALS['hooks']['Filter_Plugin_LargeData_Article'] as $fpname => &$fpsignal) {
         $fpreturn = $fpname($select, $w, $order, $limit, $option);
     }
 
@@ -996,7 +1003,10 @@ function ViewPost($object, $theSecondParam, $isrewrite = false) {
     }
 
     foreach ($GLOBALS['hooks']['Filter_Plugin_ViewPost_Begin'] as $fpname => &$fpsignal) {
-        $fpreturn = $fpname($id, $alias);
+        $fpargs = func_get_args();
+        $fpargs[0] = $id;
+        $fpargs[1] = $alias;
+        $fpreturn = call_user_func_array( $fpname, $fpargs );
         if ($fpsignal == PLUGIN_EXITSIGNAL_RETURN) {
             $fpsignal = PLUGIN_EXITSIGNAL_NONE;
 
@@ -2258,6 +2268,7 @@ function PostMember() {
             $zbp->ShowError(73, __FILE__, __LINE__);
         }
         $data['IP'] = GetGuestIP();
+        if ($mem->Guid == '') $mem->Guid = GetGuid();
     } else {
         $mem->LoadInfoByID($data['ID']);
     }
@@ -2293,7 +2304,7 @@ function PostMember() {
 
     FilterMember($mem);
 
-    CountMember($mem);
+    CountMember($mem, array(null, null, null, null));
 
     // 查询同名
     if (isset($data['Name'])) {
@@ -2444,7 +2455,8 @@ function PostModule() {
 
     $mod->Save();
 
-    $zbp->AddBuildModule($mod->FileName);
+    if( (int)GetVars('ID', 'POST') > 0 )
+        $zbp->AddBuildModule($mod->FileName);
 
     foreach ($GLOBALS['hooks']['Filter_Plugin_PostModule_Succeed'] as $fpname => &$fpsignal) {
         $fpname($mod);
@@ -2714,7 +2726,8 @@ function SaveSetting() {
             $key == 'ZC_GZIP_ENABLE' ||
             $key == 'ZC_SYNTAXHIGHLIGHTER_ENABLE' ||
             $key == 'ZC_COMMENT_VERIFY_ENABLE' ||
-            $key == 'ZC_CLOSE_SITE'
+            $key == 'ZC_CLOSE_SITE' ||
+            $key == 'ZC_PERMANENT_DOMAIN_WITH_ADMIN'
         ) {
             $zbp->option[$key] = (boolean) $value;
             continue;
@@ -2750,13 +2763,20 @@ function SaveSetting() {
     }
 
 
-    $Punycode = new Punycode();
     $zbp->option['ZC_BLOG_HOST'] = trim($zbp->option['ZC_BLOG_HOST']);
     $zbp->option['ZC_BLOG_HOST'] = trim($zbp->option['ZC_BLOG_HOST'], '/') . '/';
     if ($zbp->option['ZC_BLOG_HOST'] == '/') {
         $zbp->option['ZC_BLOG_HOST'] = $zbp->host;
     }
-    $zbp->option['ZC_BLOG_HOST'] = $Punycode->encode($zbp->option['ZC_BLOG_HOST']);
+    $usePC = false;
+    for ($i = 0; $i < strlen($zbp->option['ZC_BLOG_HOST']) - 1; $i++) {
+        $l = substr($zbp->option['ZC_BLOG_HOST'], $i, 1);
+        if(ord($l) >= 192) $usePC = true;
+    }
+    if ($usePC && function_exists('mb_strtolower')) {
+        $Punycode = new Punycode();
+        $zbp->option['ZC_BLOG_HOST'] = $Punycode->encode($zbp->option['ZC_BLOG_HOST']);
+    }
     $lang = require $zbp->usersdir . 'language/' . $zbp->option['ZC_BLOG_LANGUAGEPACK'] . '.php';
     $zbp->option['ZC_BLOG_LANGUAGE'] = $lang['lang'];
     $zbp->option['ZC_BLOG_PRODUCT'] = 'Z-BlogPHP';
@@ -2805,9 +2825,9 @@ function FilterComment(&$comment) {
         $zbp->ShowError(30, __FILE__, __LINE__);
     }
 
-    $comment->Name = SubStrUTF8_Start($comment->Name, 0, 20);
-    $comment->Email = SubStrUTF8_Start($comment->Email, 0, 30);
-    $comment->HomePage = SubStrUTF8_Start($comment->HomePage, 0, 100);
+    $comment->Name = SubStrUTF8_Start($comment->Name, 0, $zbp->option['ZC_USERNAME_MAX']);
+    $comment->Email = SubStrUTF8_Start($comment->Email, 0, $zbp->option['ZC_EMAIL_MAX']);
+    $comment->HomePage = SubStrUTF8_Start($comment->HomePage, 0, $zbp->option['ZC_HOMEPAGE_MAX']);
 
     $comment->Content = TransferHTML($comment->Content, '[nohtml]');
 
@@ -2867,6 +2887,10 @@ function FilterMember(&$member) {
 
     if (!CheckRegExp($member->Name, '[username]')) {
         $zbp->ShowError(77, __FILE__, __LINE__);
+    }
+
+    if ($member->Alias !== '' && !CheckRegExp($member->Alias, '[nickname]')) {
+        $zbp->ShowError(90, __FILE__, __LINE__);
     }
 
     if (!CheckRegExp($member->Email, '[email]')) {
@@ -3107,6 +3131,7 @@ function CountTagArrayString($string, $plus = null, $articleid = null) {
         $fpreturn = $fpname($array, $plus, $articleid);
         if ($fpsignal == PLUGIN_EXITSIGNAL_RETURN) {
             $fpsignal = PLUGIN_EXITSIGNAL_NONE;
+
             return $fpreturn;
         }
     }
@@ -3147,9 +3172,11 @@ function CountMember(&$member, $plus = array(null, null, null, null)) {
     }
 
     if ($plus[2] === null) {
-        $s = $zbp->db->sql->Count($zbp->table['Comment'], array(array('COUNT', '*', 'num')), array(array('=', 'comm_AuthorID', $id)));
-        $member_Comments = GetValueInArrayByCurrent($zbp->db->Query($s), 'num');
-        $member->Comments = $member_Comments;
+        if ($member->ID > 0){
+            $s = $zbp->db->sql->Count($zbp->table['Comment'], array(array('COUNT', '*', 'num')), array(array('=', 'comm_AuthorID', $id)));
+            $member_Comments = GetValueInArrayByCurrent($zbp->db->Query($s), 'num');
+            $member->Comments = $member_Comments;
+        }
     } else {
         $member->Comments += $plus[2];
     }

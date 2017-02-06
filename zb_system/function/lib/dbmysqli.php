@@ -122,10 +122,11 @@ class DbMySQLi implements iDataBase {
             }
         }
         if ($c == 0) {
-            mysqli_query($this->db, $this->sql->Filter('CREATE DATABASE ' . $dbmysql_name));
-
+            $r=mysqli_query($this->db, $this->sql->Filter('CREATE DATABASE ' . $dbmysql_name));
+            if($r === false)return false;
             return true;
         }
+
     }
 
     /**
@@ -134,8 +135,8 @@ class DbMySQLi implements iDataBase {
     public function Close() {
         if (is_object($this->db)) {
             mysqli_close($this->db);
+            $this->db = null;
         }
-
     }
 
     /**

@@ -61,18 +61,6 @@ class Module extends Base {
         if ($name == 'NoRefresh') {
             return (bool) $this->Metas->norefresh;
         }
-        if ($name == 'Name' && $this->Source == 'system') {
-            switch ($this->FileName) {
-                case 'calendar':
-                    return $zbp->lang['msg']['calendar'];
-                case 'controlpanel':
-                    return $zbp->lang['msg']['control_panel'];
-                case 'searchpanel':
-                    return $zbp->lang['msg']['search'];
-                default:
-                    return $zbp->lang['msg']['module_'.$this->FileName];
-            }
-        }
 
         return parent::__get($name);
     }
@@ -83,12 +71,9 @@ class Module extends Base {
     public function Save() {
         global $zbp;
 
-        $this->Content = str_replace($zbp->host, '{$host}', $this->Content);
-
         foreach ($GLOBALS['hooks']['Filter_Plugin_Module_Save'] as $fpname => &$fpsignal) {
-            $fpsignal = PLUGIN_EXITSIGNAL_NONE;
             $fpreturn = $fpname($this);
-            if ($fpsignal == PLUGIN_EXITSIGNAL_RETURN) {return $fpreturn;}
+            if ($fpsignal == PLUGIN_EXITSIGNAL_RETURN) {$fpsignal = PLUGIN_EXITSIGNAL_NONE;return $fpreturn;}
         }
         if ($this->Source == 'theme') {
             if (!$this->FileName) {
@@ -105,7 +90,7 @@ class Module extends Base {
 
             return true;
         }
-        //return parent::Save();
+
         //防Module重复保存的机制
         $m=$zbp->GetListType('Module',
                     $zbp->db->sql->get()->select($zbp->table['Module'])
@@ -127,6 +112,16 @@ class Module extends Base {
      */
     public function Del() {
         global $zbp;
+        foreach ($zbp->modules as $key => $m) {
+            if ($this->ID >0 && $m->ID == $this->ID) unset($zbp->modules[$key]);
+            if ($this->Source == 'theme') {
+                if ($this->FileName != '' && $m->FileName == $this->FileName) unset($zbp->modules[$key]);
+            }
+        }
+        foreach ($zbp->modulesbyfilename as $key => $m) {
+            if ($this->FileName != '' && $m->FileName == $this->FileName) unset($zbp->modulesbyfilename[$this->FileName]);
+        }
+
         foreach ($GLOBALS['hooks']['Filter_Plugin_Module_Del'] as $fpname => &$fpsignal) {
             $fpsignal = PLUGIN_EXITSIGNAL_NONE;
             $fpreturn = $fpname($this);

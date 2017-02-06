@@ -25,6 +25,7 @@ $userinfo = Network::Create();
 $userinfo->open('GET',"http://api.duoshuo.com/users/profile.json?user_id=".$user['user_id']);
 $userinfo->send();
 $userinfo = json_decode($userinfo->responseText,true);
+
 //打印获得的数据
 if($user['user_id']>0){
             $YtdsSlide_Table='%pre%ytuser';

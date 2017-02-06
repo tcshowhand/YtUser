@@ -153,8 +153,8 @@ return array(
         'theme' => '主题',
         'system_module' => '系统模块',
         'user_module' => '用户自定义模块',
-        'theme_module' => '主题自带模块',
-        'plugin_module' => '插件创建模块',
+        'theme_module' => '主题include文件夹存储的文件型模块',
+        'plugin_module' => '主题和插件创建的模块',
         'sidebar' => '默认侧栏 ',
         'sidebar2' => '侧栏 2',
         'sidebar3' => '侧栏 3',
@@ -240,6 +240,7 @@ return array(
         'comment_audit' => '审核评论',
         'comment_audit_comment' => '打开后所有非管理员发布的评论都将进入审核状态',
         'debugging_warning' => '您的Z-BlogPHP打开了开发模式。此模式下网站有被黑的风险，实际部署在线上的网站请及时关闭开发模式！',
+        'permanent_domain_with_admin' => '后台也使用固定域名',
         '' => '',
     ),
 
@@ -484,10 +485,13 @@ return array(
         '83' => '启用该应用，需要先启用依赖应用%s',
         '84' => '停用该应用，需要先停用被依赖应用%s',
         '85' => '启用该应用，需要先停用冲突应用%s',
-        '86' => '主题模板的编译文件不存在',
-        '87' => '注册类型失败',
-        '88' => '上传的文件不存在，可能超过了服务器最大上传限制',
-        '89' => '后台JavaScript加载失败',
+        '86' => '主题模板的编译文件不存在。',
+        '87' => '注册类型失败。',
+        '88' => '上传的文件不存在，可能超过了服务器最大上传限制。',
+        '89' => '后台JavaScript加载失败！',
+        '90' => '别名不允许使用特殊符号。',
+        '91' => 'PHP版本太旧，该应用要求使用 %s 及以上版本。',
+        '92' => '缺少 %s 函数，无法启用本应用',
     ),
 
     'offical_urls' => array(
@@ -510,6 +514,14 @@ return array(
 			如果您是网站管理员且忘记了密码，可以点击<a href="https://wiki.zblogcn.com/doku.php?id=zblogphp:error:%E9%A6%96%E9%A1%B5#error-8" target="_blank">【登录失败】</a>。<br/>
 			<br/>
 		',
+        '91' => '
+            您的PHP版本可能太旧，请您联系您的主机商，把PHP版本升级为他们所能提供的最新版本。<br/>
+            为了安全与效率，我们也强烈建议您把您的PHP更新到最新版本。
+        ',
+        '92' => '
+            您的主机环境可能缺少某些必要组件，请联系您的主机商启用这些组件，才可使用本应用。<br/>
+            您可以<a href="https://wiki.zblogcn.com/doku.php?id=zblogphp:error:%E9%A6%96%E9%A1%B5#error-92" target="_blank">点击这里，来获得缺少组件的大致列表。</a>
+        ',
 
         'other' => array(
             // Other errors then

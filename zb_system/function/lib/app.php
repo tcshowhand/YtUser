@@ -96,6 +96,10 @@ class App {
      */
     public $advanced_rewritefunctions;
     /**
+     * @var string 高级选项：必须函数列表（以|分隔）
+     */
+    public $advanced_existsfunctions;    
+    /**
      * @var string 高级选项：冲突插件列表（以|分隔）
      */
     public $advanced_conflict;
@@ -119,6 +123,10 @@ class App {
      * @var string 设置主题侧栏5
      */
     public $sidebars_sidebar5;
+    /**
+     * @var string PHP最低版本
+     */
+    public $phpver;
     /**
      * 得到详细信息数组
      * @return array
@@ -278,9 +286,14 @@ class App {
         $this->modified = (string) $xml->modified;
         $this->description = (string) $xml->description;
         $this->price = (string) $xml->price;
-
+        if(empty($xml->phpver)) {
+            $this->phpver = '5.2';
+        } else {
+            $this->phpver = (string) $xml->phpver;
+        }
         $this->advanced_dependency = (string) $xml->advanced->dependency;
         $this->advanced_rewritefunctions = (string) $xml->advanced->rewritefunctions;
+        $this->advanced_existsfunctions = (string) $xml->advanced->existsfunctions;
         $this->advanced_conflict = (string) $xml->advanced->conflict;
 
         $this->sidebars_sidebar1 = (string) $xml->sidebars->sidebar1;
@@ -328,12 +341,15 @@ class App {
         $s .= '<pubdate>' . htmlspecialchars($this->pubdate) . '</pubdate>' . "\r\n";
         $s .= '<modified>' . htmlspecialchars($this->modified) . '</modified>' . "\r\n";
         $s .= '<price>' . htmlspecialchars($this->price) . '</price>' . "\r\n";
+        $s .= '<phpver>' . htmlspecialchars($this->phpver) . '</phpver>' . "\r\n";        
 
         $s .= '<advanced>' . "\r\n";
         $s .= '  <dependency>' . htmlspecialchars($this->advanced_dependency) . '</dependency>' . "\r\n";
         $s .= '  <rewritefunctions>' . htmlspecialchars($this->advanced_rewritefunctions) . '</rewritefunctions>' . "\r\n";
+        $s .= '  <existsfunctions>' . htmlspecialchars($this->advanced_existsfunctions) . '</existsfunctions>' . "\r\n";        
         $s .= '  <conflict>' . htmlspecialchars($this->advanced_conflict) . '</conflict>' . "\r\n";
         $s .= '</advanced>' . "\r\n";
+
 
         $s .= '<sidebars>' . "\r\n";
         $s .= '  <sidebar1>' . htmlspecialchars($this->sidebars_sidebar1) . '</sidebar1>' . "\r\n";
@@ -373,7 +389,7 @@ class App {
             foreach (scandir($dir) as $d) {
                 if (is_dir($dir . $d)) {
                     if ((substr($d, 0, 1) != '.') &&
-                        !($d == 'compile' && $this->type=='theme' && ((int) $this->adapted > 150101))) {
+                        !($d == 'compile' && $this->type=='theme')) {
                         $this->GetAllFileDir($dir . $d . '/');
                         $this->dirs[] = $dir . $d . '/';
                     }
@@ -386,12 +402,12 @@ class App {
                 while (false !== ($file = readdir($handle))) {
                     if (is_dir($dir . $file)) {
                         if ((substr($file, 0, 1) != '.') &&
-                            !($file == 'compile' && $this->type=='theme' && ((int) $this->adapted > 150101))) {
+                            !($file == 'compile' && $this->type=='theme')) {
                             $this->dirs[] = $dir . $file . '/';
                             $this->GetAllFileDir($dir . $file . '/');
-                        } else {
-                            $this->files[] = $dir . $file;
                         }
+                    } else {
+                        $this->files[] = $dir . $file;
                     }
                 }
                 closedir($handle);
@@ -409,6 +425,10 @@ class App {
 
         $dir = $this->GetDir();
         $this->GetAllFileDir($dir);
+
+        foreach ($GLOBALS['hooks']['Filter_Plugin_App_Pack'] as $fpname => &$fpsignal) {
+            $fpreturn = $fpname($this, $this->dirs, $this->files);
+        }
 
         $s = '<?xml version="1.0" encoding="utf-8"?>';
         $s .= '<app version="php" type="' . $this->type . '">';
@@ -440,10 +460,12 @@ class App {
         $s .= '<pubdate>' . htmlspecialchars($this->pubdate) . '</pubdate>';
         $s .= '<modified>' . htmlspecialchars($this->modified) . '</modified>';
         $s .= '<price>' . htmlspecialchars($this->price) . '</price>';
+        $s .= '<phpver>' . htmlspecialchars($this->phpver) . '</phpver>';        
 
         $s .= '<advanced>';
         $s .= '<dependency>' . htmlspecialchars($this->advanced_dependency) . '</dependency>';
         $s .= '<rewritefunctions>' . htmlspecialchars($this->advanced_rewritefunctions) . '</rewritefunctions>';
+        $s .= '<existsfunctions>' . htmlspecialchars($this->advanced_existsfunctions) . '</existsfunctions>' . "\r\n";   
         $s .= '<conflict>' . htmlspecialchars($this->advanced_conflict) . '</conflict>';
         $s .= '</advanced>';
 
@@ -456,8 +478,9 @@ class App {
         $s .= '</sidebars>';
 
         foreach ($this->dirs as $key => $value) {
+            $value = str_replace($dir, '', $value);
             $value = preg_replace('/[^(\x20-\x7F)]*/', '', $value);
-            $d = $this->id . '/' . str_replace($dir, '', $value);
+            $d = $this->id . '/' . $value;
             $s .= '<folder><path>' . htmlspecialchars($d) . '</path></folder>';
         }
         foreach ($this->files as $key => $value) {
@@ -545,6 +568,23 @@ class App {
 
         if ((int) $this->adapted > (int) $zbp->version) {
             $zbp->ShowError(str_replace('%s', $this->adapted, $zbp->lang['error'][78]), __FILE__, __LINE__);
+        }
+
+        if( trim($this->phpver) == '' ) $this->phpver = '5.2';
+        if ( version_compare($this->phpver, GetPHPVersion()) > 0 ){
+            $zbp->ShowError(str_replace('%s', $this->phpver, $zbp->lang['error'][91]), __FILE__, __LINE__);
+        }
+
+        $ae = explode('|', $this->advanced_existsfunctions);
+        foreach ($ae as $e) {
+            $e = trim($e);
+            if (!$e) {
+                continue;
+            }
+
+            if(function_exists($e) == false){
+                $zbp->ShowError(str_replace('%s', $e, $zbp->lang['error'][92]), __FILE__, __LINE__);
+            }
         }
 
         $ad = explode('|', $this->advanced_dependency);

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<theme version="php">
+<id>YT_johndoe</id>
+<name>蓝色风格视差滑动网站模板</name>
+<url>http://www.tyytwl.top</url>
+<note>蓝色风格视差滑动网站模板</note>
+<description>蓝色风格视差滑动网站模板</description>
+<path></path>
+<include></include>
+<level>1</level>
+<author>
+  <name>豫唐网络</name>
+  <email>79300975@qq.com</email>
+  <url>http://www.tyytwl.top</url>
+</author>
+<source>
+  <name></name>
+  <email></email>
+  <url></url>
+</source>
+<adapted>150101</adapted>
+<version>1.0</version>
+<pubdate>2016-07-07</pubdate>
+<modified>2016-07-07</modified>
+<price>0</price>
+<advanced>
+  <dependency></dependency>
+  <rewritefunctions></rewritefunctions>
+  <conflict></conflict>
+</advanced>
+<sidebars>
+  <sidebar1>sf_skin1_3tag|sf_music|tags|comments|catalog|archives|link|controlpanel</sidebar1>
+  <sidebar2></sidebar2>
+  <sidebar3></sidebar3>
+  <sidebar4></sidebar4>
+  <sidebar5></sidebar5>
+</sidebars>
+</theme>

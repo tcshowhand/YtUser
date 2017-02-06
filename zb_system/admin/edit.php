@@ -11,6 +11,7 @@ require '../function/c_system_admin.php';
 
 $zbp->CheckGzip();
 $zbp->Load();
+$zbp->template->LoadTemplates();
 
 $action = '';
 if (GetVars('act', 'GET') == 'PageEdt') {
@@ -30,6 +31,7 @@ if (isset($_COOKIE['timezone'])) {
     }
     unset($tz);
 }
+
 
 $article = new Post;
 $article->AuthorID = $zbp->user->ID;
@@ -78,7 +80,13 @@ require ZBP_PATH . 'zb_system/admin/admin_top.php';
 <div class="divHeader2"><?php echo $ispage ? $lang['msg']['page_edit'] : $lang['msg']['article_edit']; ?></div>
 
 
-<div class="SubMenu"></div>
+<div class="SubMenu">
+<?php
+    foreach ($GLOBALS['hooks']['Filter_Plugin_Edit_SubMenu'] as $fpname => &$fpsignal) {
+        $fpname();
+    }
+?>
+</div>
 <div id="divMain2" class="edit post_edit">
 <form id="edit" name="edit" method="post" action="#">
   <div id="divEditLeft">
@@ -94,7 +102,7 @@ foreach ($GLOBALS['hooks']['Filter_Plugin_Edit_Response4'] as $fpname => &$fpsig
       <!-- title( -->
 		<div id="titleheader" class="editmod">
 			<label for="edtTitle" class="editinputname" ><?php echo $lang['msg']['title'] ?></label>
-			<div><input type="text" name="Title" id="edtTitle"  maxlength="100" onBlur="if(this.value=='') this.value='<?php echo $lang['msg']['unnamed'] ?>'" onFocus="if(this.value=='<?php echo $lang['msg']['unnamed'] ?>') this.value=''" value="<?php echo $article->Title; ?>" /></div>
+			<div><input type="text" name="Title" id="edtTitle"  maxlength="<?php echo $option['ZC_ARTICLE_TITLE_MAX']; ?>" onBlur="if(this.value=='') this.value='<?php echo $lang['msg']['unnamed'] ?>'" onFocus="if(this.value=='<?php echo $lang['msg']['unnamed'] ?>') this.value=''" value="<?php echo $article->Title; ?>" /></div>
       </div>
       <!-- )title -->
 
@@ -175,7 +183,7 @@ foreach ($GLOBALS['hooks']['Filter_Plugin_Edit_Response2'] as $fpname => &$fpsig
 
           <!-- level -->
           <div id='level' class="editmod"> <label for="cmbPostStatus" class="editinputname" style="max-width:65px;text-overflow:ellipsis;"><?php echo $lang['msg']['status'] ?></label>
-            <select class="edit" style="width:180px;" size="1" name="Status" id="cmbPostStatus" onChange="edtLevel.value=this.options[this.selectedIndex].value">
+            <select class="edit" style="width:180px;" size="1" name="Status" id="cmbPostStatus" onChange="cmbPostStatus.value=this.options[this.selectedIndex].value">
 <?php echo OutputOptionItemsOfPostStatus($article->Status); ?>
             </select>
           </div>
@@ -184,7 +192,7 @@ foreach ($GLOBALS['hooks']['Filter_Plugin_Edit_Response2'] as $fpname => &$fpsig
           <!-- template( -->
 
           <div id='template' class="editmod"> <label for="cmbTemplate" class="editinputname" style="max-width:65px;text-overflow:ellipsis;"><?php echo $lang['msg']['template'] ?></label>
-            <select style="width:180px;" class="edit" size="1" name="Template" id="cmbTemplate" onChange="edtTemplate.value=this.options[this.selectedIndex].value">
+            <select style="width:180px;" class="edit" size="1" name="Template" id="cmbTemplate" onChange="cmbTemplate.value=this.options[this.selectedIndex].value">
 <?php echo OutputOptionItemsOfTemplate($article->Template); ?>
             </select>
           </div>
@@ -192,7 +200,7 @@ foreach ($GLOBALS['hooks']['Filter_Plugin_Edit_Response2'] as $fpname => &$fpsig
 
           <!-- user( -->
           <div id='user' class="editmod"> <label for="cmbUser" class="editinputname" style="max-width:65px;text-overflow:ellipsis;"><?php echo $lang['msg']['author'] ?></label>
-            <select style="width:180px;" size="1" name="AuthorID" id="cmbUser" onChange="edtAuthorID.value=this.options[this.selectedIndex].value">
+            <select style="width:180px;" size="1" name="AuthorID" id="cmbUser" onChange="cmbUser.value=this.options[this.selectedIndex].value">
 				<?php echo OutputOptionItemsOfMember($article->AuthorID); ?>
             </select>
           </div>

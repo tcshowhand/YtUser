@@ -709,6 +709,138 @@ DefinePluginFilter('Filter_Plugin_Admin_SettingMng_SubMenu');
 /*
 '**************************************************<
 '类型:Filter
+'名称:Filter_Plugin_Edit_SubMenu
+'参数:
+'说明:编辑页菜单(1.5.1加入)
+'调用:
+'**************************************************>
+ */
+DefinePluginFilter('Filter_Plugin_Edit_SubMenu');
+
+/*
+'**************************************************<
+'类型:Filter
+'名称:Filter_Plugin_Tag_Edit_SubMenu
+'参数:
+'说明:标签编辑页菜单(1.5.1加入)
+'调用:
+'**************************************************>
+ */
+DefinePluginFilter('Filter_Plugin_Tag_Edit_SubMenu');
+
+/*
+'**************************************************<
+'类型:Filter
+'名称:Filter_Plugin_Module_Edit_SubMenu
+'参数:
+'说明:模块编辑页菜单(1.5.1加入)
+'调用:
+'**************************************************>
+ */
+DefinePluginFilter('Filter_Plugin_Module_Edit_SubMenu');
+
+/*
+'**************************************************<
+'类型:Filter
+'名称:Filter_Plugin_Member_Edit_SubMenu
+'参数:
+'说明:用户编辑页菜单(1.5.1加入)
+'调用:
+'**************************************************>
+ */
+DefinePluginFilter('Filter_Plugin_Member_Edit_SubMenu');
+
+/*
+'**************************************************<
+'类型:Filter
+'名称:Filter_Plugin_Category_Edit_SubMenu
+'参数:
+'说明:分类编辑页菜单(1.5.1加入)
+'调用:
+'**************************************************>
+ */
+DefinePluginFilter('Filter_Plugin_Category_Edit_SubMenu');
+
+/*
+'**************************************************<
+'类型:Filter
+'名称:Filter_Plugin_Admin_ArticleMng_Table
+'参数:&$article,&$tabletds,&$tableths
+'说明:文章管理页表处理(1.5.1加入)
+'调用:
+'**************************************************>
+ */
+DefinePluginFilter('Filter_Plugin_Admin_ArticleMng_Table');
+
+/*
+'**************************************************<
+'类型:Filter
+'名称:Filter_Plugin_Admin_PageMng_Table
+'参数:&$article,&$tabletds,&$tableths
+'说明:页面管理页表处理(1.5.1加入)
+'调用:
+'**************************************************>
+ */
+DefinePluginFilter('Filter_Plugin_Admin_PageMng_Table');
+
+/*
+'**************************************************<
+'类型:Filter
+'名称:Filter_Plugin_Admin_CategoryMng_Table
+'参数:&$category,&$tabletds,&$tableths
+'说明:分类管理页表处理(1.5.1加入)
+'调用:
+'**************************************************>
+ */
+DefinePluginFilter('Filter_Plugin_Admin_CategoryMng_Table');
+
+/*
+'**************************************************<
+'类型:Filter
+'名称:Filter_Plugin_Admin_CommentMng_Table
+'参数:&$cmt,&$tabletds,&$tableths,$article
+'说明:评论管理页表处理(1.5.1加入)
+'调用:
+'**************************************************>
+ */
+DefinePluginFilter('Filter_Plugin_Admin_CommentMng_Table');
+
+/*
+'**************************************************<
+'类型:Filter
+'名称:Filter_Plugin_Admin_MemberMng_Table
+'参数:&$member,&$tabletds,&$tableths
+'说明:会员管理页表处理(1.5.1加入)
+'调用:
+'**************************************************>
+ */
+DefinePluginFilter('Filter_Plugin_Admin_MemberMng_Table');
+
+/*
+'**************************************************<
+'类型:Filter
+'名称:Filter_Plugin_Admin_UploadMng_Table
+'参数:&$upload,&$tabletds,&$tableths
+'说明:附件管理页表处理(1.5.1加入)
+'调用:
+'**************************************************>
+ */
+DefinePluginFilter('Filter_Plugin_Admin_UploadMng_Table');
+
+/*
+'**************************************************<
+'类型:Filter
+'名称:Filter_Plugin_Admin_TagMng_Table
+'参数:&$tag,&$tabletds,&$tableths
+'说明:Tag管理页表处理(1.5.1加入)
+'调用:
+'**************************************************>
+ */
+DefinePluginFilter('Filter_Plugin_Admin_TagMng_Table');
+
+/*
+'**************************************************<
+'类型:Filter
 '名称:Filter_Plugin_Edit_Begin
 '参数:
 '说明:文章页面编辑页开始接口
@@ -851,6 +983,28 @@ DefinePluginFilter('Filter_Plugin_OutputOptionItemsOfCategories');
 
 ################################################################################################################
 #Event里的接口
+/*
+'**************************************************<
+'类型:Filter
+'名称:Filter_Plugin_VerifyLogin_Succeed
+'参数:
+'说明:VerifyLogin成功的接口
+'调用:
+'**************************************************>
+ */
+DefinePluginFilter('Filter_Plugin_VerifyLogin_Succeed');
+
+/*
+'**************************************************<
+'类型:Filter
+'名称:Filter_Plugin_Logout_Succeed
+'参数:
+'说明:Logout成功的接口
+'调用:
+'**************************************************>
+ */
+DefinePluginFilter('Filter_Plugin_Logout_Succeed');
+
 /*
 '**************************************************<
 '类型:Filter
@@ -1616,6 +1770,17 @@ DefinePluginFilter('Filter_Plugin_Upload_Dir');
 /*
 '**************************************************<
 '类型:Filter
+'名称:Filter_Plugin_App_Pack
+'参数:$this, $this->dirs, $this->files
+'说明:App类的Pack方法接口
+'调用:
+'**************************************************>
+ */
+DefinePluginFilter('Filter_Plugin_App_Pack');
+
+/*
+'**************************************************<
+'类型:Filter
 '名称:Filter_Plugin_Template_Compiling_Begin
 '参数:$this,$content
 '说明:Template类编译一个模板前的接口
@@ -1661,13 +1826,13 @@ DefinePluginFilter('Filter_Plugin_Template_MakeTemplatetags');
 /*
 '**************************************************<
 '类型:Filter
-'名称:Filter_Plugin_LargeData_Aritcle
+'名称:Filter_Plugin_LargeData_Article
 '参数:&$select,&$where,&$order,&$limit,&$option
 '说明:大数据文章接口
 '调用:
 '**************************************************>
  */
-DefinePluginFilter('Filter_Plugin_LargeData_Aritcle');
+DefinePluginFilter('Filter_Plugin_LargeData_Article');
 
 /*
 '**************************************************<
@@ -1712,3 +1877,14 @@ DefinePluginFilter('Filter_Plugin_LargeData_CountTagArray');
 '**************************************************>
  */
 DefinePluginFilter('Filter_Plugin_LargeData_GetList');
+
+/*
+'**************************************************<
+'类型:Filter
+'名称:Filter_Plugin_Xmlrpc_Begin
+'参数:&xml
+'说明:xml-rpc页的begin接口(1.5.1加入)
+'调用:
+'**************************************************>
+ */
+DefinePluginFilter('Filter_Plugin_Xmlrpc_Begin');
