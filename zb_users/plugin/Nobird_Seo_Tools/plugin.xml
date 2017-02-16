@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<plugin version="php">
+<id>Nobird_Seo_Tools</id>
+<name>SEO工具大全</name>
+<url>http://www.birdol.com</url>
+<note>SEO工具大全，功能多多，乐趣多多. seo插件... 大概功能如下： 1、评论高级管理：屏蔽昵称、屏蔽网址、屏蔽内容。 可以显示IP、所在地址。 2、首页外链检测，类似站长工具的友情链接检测。 3、php版本的灭外链，comment-&gt;url 内部跳转 4、关键词、描述、canonical标签设置 5、标题优化   6、内链系统 7、蜘蛛查询、支持查询蜘蛛访问页面的状态 8、sitemap，支持自动更新，比zx.asd做的那个多了更改时间和更新频率</note>
+<description>SEO工具大全，功能多多，乐趣多多.
+seo插件...
+大概功能如下：
+1、评论高级管理：屏蔽昵称、屏蔽网址、屏蔽内容、评论编辑。
+可以显示IP、所在地址。
+2、首页外链检测，类似站长工具的友情链接检测。
+3、php版本的灭外链，comment-&gt;url 内部跳转
+4、关键词、描述、canonical标签设置
+5、标题优化  
+6、内链系统
+7、蜘蛛查询、支持查询蜘蛛访问页面的状态
+8、sitemap，支持自动更新，比zx.asd做的那个多了更改时间和更新频率</description>
+<path>main.php</path>
+<include>include.php</include>
+<level>1</level>
+<author>
+  <name>Nobird</name>
+  <email>admin@birdol.com</email>
+  <url>http://www.birdol.com</url>
+</author>
+<source>
+  <name></name>
+  <email></email>
+  <url></url>
+</source>
+<adapted>151626</adapted>
+<version>10.3</version>
+<pubdate>2014-08-20</pubdate>
+<modified>2017-02-07</modified>
+<price>168</price>
+<phpver>5.3</phpver>
+<advanced>
+  <dependency></dependency>
+  <rewritefunctions></rewritefunctions>
+  <existsfunctions></existsfunctions>
+  <conflict>Cate_DesKey|SEOTools|sf_inlink|Sitemap|CodeCompress|ajaxTemplate|duxx|dmam|xiu-x|show|dm_fy</conflict>
+</advanced>
+<sidebars>
+  <sidebar1></sidebar1>
+  <sidebar2></sidebar2>
+  <sidebar3></sidebar3>
+  <sidebar4></sidebar4>
+  <sidebar5></sidebar5>
+</sidebars>
+</plugin>

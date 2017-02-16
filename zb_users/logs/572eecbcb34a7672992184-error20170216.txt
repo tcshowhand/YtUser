@@ -1,0 +1,48 @@
+[2017-02-16 09:29:07 .86517600 +08:00]
+array (
+  0 => 'Error',
+  1 => 8,
+  2 => 'Undefined index: Price',
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\base.php',
+  4 => 78,
+)
+[2017-02-16 09:29:08 .12926500 +08:00]
+array (
+  0 => 'Error',
+  1 => 8,
+  2 => 'Undefined index: Price',
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\base.php',
+  4 => 78,
+)
+[2017-02-16 09:29:34 .51932100 +08:00]
+array (
+  0 => 'Error',
+  1 => 8,
+  2 => 'Undefined index: Price',
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\base.php',
+  4 => 78,
+)
+[2017-02-16 09:30:36 .94876400 +08:00]
+array (
+  0 => 'Error',
+  1 => 8,
+  2 => 'Undefined index: Price',
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\base.php',
+  4 => 78,
+)
+[2017-02-16 09:30:58 .91579100 +08:00]
+array (
+  0 => 'Error',
+  1 => 8,
+  2 => 'Undefined index: Price',
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\base.php',
+  4 => 78,
+)
+[2017-02-16 09:30:59 .67020800 +08:00]
+array (
+  0 => 'Error',
+  1 => 8,
+  2 => 'Undefined index: Price',
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\base.php',
+  4 => 78,
+)

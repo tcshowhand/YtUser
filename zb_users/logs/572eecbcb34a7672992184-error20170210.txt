@@ -1,0 +1,24 @@
+[2017-02-10 10:28:35 .92784000 +08:00]
+array (
+  0 => 'Exception',
+  1 => '相关页面不存在',
+  2 => 0,
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 2711,
+)
+[2017-02-10 11:21:32 .52963200 +08:00]
+array (
+  0 => 'Exception',
+  1 => '相关页面不存在',
+  2 => 0,
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 2711,
+)
+[2017-02-10 14:08:15 .99698200 +08:00]
+array (
+  0 => 'Exception',
+  1 => '相关页面不存在',
+  2 => 0,
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 2711,
+)

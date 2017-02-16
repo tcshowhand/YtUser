@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<theme version="php">
+<id>mipsong</id>
+<name>MIP主题</name>
+<url>http://www.toyean.com/post/mizhe.html</url>
+<note>MIP主题</note>
+<description>MIP主题</description>
+<path></path>
+<include></include>
+<level>1</level>
+<author>
+  <name>toyean</name>
+  <email>toyean@qq.com</email>
+  <url>http://www.toyean.com/</url>
+</author>
+<source>
+  <name>toyean</name>
+  <email>toyean@qq.com</email>
+  <url>http://www.toyean.com/</url>
+</source>
+<adapted>140614</adapted>
+<version>1.1</version>
+<pubdate>2014-07-12</pubdate>
+<modified>2014-07-27</modified>
+<price>0</price>
+<advanced>
+  <dependency></dependency>
+  <rewritefunctions></rewritefunctions>
+  <conflict></conflict>
+</advanced>
+<sidebars>
+  <sidebar1></sidebar1>
+  <sidebar2></sidebar2>
+  <sidebar3></sidebar3>
+  <sidebar4></sidebar4>
+  <sidebar5></sidebar5>
+</sidebars>
+</theme>

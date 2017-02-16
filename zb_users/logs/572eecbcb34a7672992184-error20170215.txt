@@ -1,0 +1,16 @@
+[2017-02-15 09:22:49 .24411600 +08:00]
+array (
+  0 => 'Error',
+  1 => 8,
+  2 => 'Undefined index: Price',
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\base.php',
+  4 => 78,
+)
+[2017-02-15 09:22:49 .60118300 +08:00]
+array (
+  0 => 'Error',
+  1 => 8,
+  2 => 'Undefined index: Price',
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\base.php',
+  4 => 78,
+)
