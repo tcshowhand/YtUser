@@ -28,7 +28,6 @@ if($num==0){
 $reg=$array[0];
 $Price=$reg->Price;
 }
-
 $sql=$zbp->db->sql->Select($typrepaid_Table,'*',array(array('=','tc_InviteCode',$invitecode),array('=','tc_AuthorID',0)),null,null,null);
 $array=$zbp->GetListCustom($typrepaid_Table,$typrepaid_DataInfo,$sql);
 $num=count($array);
