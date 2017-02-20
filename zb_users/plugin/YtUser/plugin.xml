@@ -3,7 +3,7 @@
 <id>YtUser</id>
 <name>用户中心（百搭）</name>
 <url>http://www.ytecn.com/2016/11/548.html</url>
-<note>集成第三方登录的基础用户中心插件</note>
+<note>集成第三方登录,支持投稿</note>
 <description>用户中心</description>
 <path>main.php</path>
 <include>include.php</include>
@@ -18,14 +18,16 @@
   <email></email>
   <url></url>
 </source>
-<adapted>151626</adapted>
-<version>3.7</version>
+<adapted>151740</adapted>
+<version>3.8</version>
 <pubdate>2016-10-30</pubdate>
-<modified>2017-01-23</modified>
-<price>0</price>
+<modified>2017-02-19</modified>
+<price>10</price>
+<phpver>5.2</phpver>
 <advanced>
   <dependency></dependency>
   <rewritefunctions></rewritefunctions>
+  <existsfunctions></existsfunctions>
   <conflict></conflict>
 </advanced>
 <sidebars>

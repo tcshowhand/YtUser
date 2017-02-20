@@ -1,1 +1,0 @@
-<label id="cmt<?php  echo $comment->ID;  ?>"></label>

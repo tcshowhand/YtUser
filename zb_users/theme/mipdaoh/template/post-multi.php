@@ -1,1 +1,0 @@
-<li><a href="{$article.Metas.jiang_url}" title="{$article.Title}" target="_blank">{$article.Title}</a><br>{$article.Metas.itbulu_info}</li>

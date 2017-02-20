@@ -1,1 +1,0 @@
-<h2>{$article.Title}</h2>
