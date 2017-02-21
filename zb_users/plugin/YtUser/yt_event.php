@@ -286,19 +286,23 @@ function YtUser_page(){
 	$article->Title="支付状态";
 	$article->IsLock=true;
 	$article->Type=ZC_POST_TYPE_PAGE;
-
     if($uid<1){
         print_r('<h2 style="font-size:60px;margin-bottom:32px;color:f00;">骚年，你在做什么</h2></div>');
         die();
     }
+    $article->verifycode ='<img style="border:none;vertical-align:middle;width:'.$zbp->option['ZC_VERIFYCODE_WIDTH']. 'px;height:' . $zbp->option['ZC_VERIFYCODE_HEIGHT'] . 'px;cursor:pointer;" src="' .$zbp->validcodeurl . '?id=Ytbuypay" alt="" title="" onclick="javascript:this.src=\'' . $zbp->validcodeurl . '?id=Ytbuypay&amp;tm=\'+Math.random();"/>';
     $articles = $zbp->GetPostByID($uid);
     $sql=$zbp->db->sql->Select($GLOBALS['YtUser_buy_Table'],'*',array(array('=','buy_LogID',$uid),array('=','buy_AuthorID',$zbp->user->ID),array('=','buy_State',1)),null,1,null);
     $array=$zbp->GetListCustom($GLOBALS['YtUser_buy_Table'],$GLOBALS['YtUser_buy_DataInfo'],$sql);
     $num=count($array);
-
+    $article->buynum=$num;
+    $article->BuyID=$articles->ID;
+    $article->BuyTitle=$articles->Title;
+    $article->BuyTUrl=$articles->Url;
+    $article->BuyPrice=$articles->Metas->price;
     if($zbp->user->ID){
     	$article->Content .='<input type="hidden" name="LogID" id="LogID" value="'.$uid.'" />';
-        $article->Content .='<input type="hidden" name="LogUrl" id="LogUrl" value="'.$articles->Url.'" />';
+        $article->Content .='<input type="hidden" name="LogUrl" id="LogUrl" value="'.$article->Url.'" />';
         $article->Content .='<table style="width:90%;border:none;font-size:1.1em;line-height:2.5em;">';
         $article->Content .='<tr><td style="text-align:right;border:none;">产品：</td><td  style="border:none;" >'.$articles->Title.'</td></tr>';
         $article->Content .='<tr><td style="text-align:right;border:none;">价格：</td><td  style="border:none;" >'.$articles->Metas->price.'</td></tr>';
@@ -306,7 +310,9 @@ function YtUser_page(){
         if($num){
         $article->Content .='<tr><td style="text-align:right;border:none;">状态：</td><td  style="border:none;" >已购买</td></tr>';
         }else{
-		$article->Content .='<tr><td style="text-align:right;border:none;">验证码(*)：</td><td  style="border:none;" ><input required="required" type="text" name="verifycode" style="width:150px;font-size:1.2em;" />&nbsp;&nbsp;<img style="border:none;vertical-align:middle;width:'.$zbp->option['ZC_VERIFYCODE_WIDTH']. 'px;height:' . $zbp->option['ZC_VERIFYCODE_HEIGHT'] . 'px;cursor:pointer;" src="' .$zbp->validcodeurl . '?id=Ytbuypay" alt="" title="" onclick="javascript:this.src=\'' . $zbp->validcodeurl . '?id=Ytbuypay&amp;tm=\'+Math.random();"/></td></tr>';
+		$article->Content .='<tr><td style="text-align:right;border:none;">验证码(*)：</td><td  style="border:none;" ><input required="required" type="text" name="verifycode" style="width:150px;font-size:1.2em;" />&nbsp;&nbsp;';
+        $article->Content .= $article->verifycode;
+        $article->Content .='</td></tr>';
 		$article->Content .='<tr><td  style="border:none;" ></td><td  style="border:none;" ><input type="submit" style="width:100px;font-size:1.0em;padding:0.2em" value="付款" onclick="return Ytbuypay()" /></td></tr>';
 		}
         $article->Content .='</table>';
@@ -381,7 +387,7 @@ function YtUser_page(){
 	$article->IsLock=true;
 	$article->Type=ZC_POST_TYPE_PAGE;
     if($zbp->user->ID){
-        $article->UEditor ='<script type="text/javascript" src="'.$zbp->host.'zb_users/plugin/UEditor/ueditor.config.php"></script><script type="text/javascript" src="'.$zbp->host.'zb_users/plugin/UEditor/ueditor.all.min.js"></script><div id=\'tarea\' class="editmod editmod3"><textarea id="editor_intro" name="Content"></textarea><script type="text/javascript">var editor_api={editor:{content:{obj:{},get:function(){return ""},insert:function(){return ""},put:function(){return ""},focus:function(){return ""}},intro:{obj:{},get:function(){return ""},insert:function(){return ""},put:function(){return ""},focus:function(){return ""}}}};function editor_init(){editor_api.editor.content.obj=$(\'#editor_content\');editor_api.editor.intro.obj=$(\'#editor_intro\');editor_api.editor.content.get=function(){return this.obj.val()};editor_api.editor.content.put=function(str){return this.obj.val(str)};editor_api.editor.content.focus=function(){return this.obj.focus()};editor_api.editor.intro.get=function(){return this.obj.val()};editor_api.editor.intro.put=function(str){return this.obj.val(str)};editor_api.editor.intro.focus=function(){return this.obj.focus()};sContent=editor_api.editor.content.get();}</script><script type="text/javascript">var EditorIntroOption = {toolbars:[[\'Source\', \'bold\', \'italic\',\'Undo\', \'Redo\']],autoHeightEnabled:false,initialFrameHeight:200};function getContent(){return editor_api.editor.content.get();}function getIntro(){return editor_api.editor.intro.get();}function setContent(s){editor_api.editor.content.put(s);}function setIntro(s){editor_api.editor.intro.put(s);};function editor_init(){editor_api.editor.content.obj=UE.getEditor(\'editor_content\');editor_api.editor.intro.obj=UE.getEditor(\'editor_intro\',EditorIntroOption);editor_api.editor.content.get=function(){return this.obj.getContent()};editor_api.editor.content.put=function(str){return this.obj.setContent(str)};editor_api.editor.content.focus=function(){return this.obj.focus()};editor_api.editor.intro.get=function(){return this.obj.getContent()};editor_api.editor.intro.put=function(str){return this.obj.setContent(str)};editor_api.editor.intro.focus=function(){return this.obj.focus()};editor_api.editor.content.obj.ready(function(){sContent=editor_api.editor.content.get();});editor_api.editor.intro.obj.ready(function(){sIntro=editor_api.editor.intro.get();});$(document).ready(function(){$(\'#edit\').submit(function(){if(editor_api.editor.content.obj.queryCommandState(\'source\')==1) editor_api.editor.content.obj.execCommand(\'source\');if(editor_api.editor.intro.obj.queryCommandState(\'source\')==1) editor_api.editor.intro.obj.execCommand(\'source\');});if (("http://" + bloghost + "/").indexOf(location.host.toLowerCase()) < 0) alert("您设置了域名固化，请使用" + bloghost + "访问或进入后台修改域名，否则图片无法上传。");});}</script><script type="text/javascript">editor_init();</script>';  
+        $article->UEditor ='<script type="text/javascript" src="'.$zbp->host.'zb_users/plugin/UEditor/ueditor.config.php"></script><script type="text/javascript" src="'.$zbp->host.'zb_users/plugin/UEditor/ueditor.all.min.js"></script><div id=\'tarea\' class="editmod editmod3"><textarea id="editor_intro" name="Content"></textarea></div><script type="text/javascript">var editor_api={editor:{content:{obj:{},get:function(){return ""},insert:function(){return ""},put:function(){return ""},focus:function(){return ""}},intro:{obj:{},get:function(){return ""},insert:function(){return ""},put:function(){return ""},focus:function(){return ""}}}};function editor_init(){editor_api.editor.content.obj=$(\'#editor_content\');editor_api.editor.intro.obj=$(\'#editor_intro\');editor_api.editor.content.get=function(){return this.obj.val()};editor_api.editor.content.put=function(str){return this.obj.val(str)};editor_api.editor.content.focus=function(){return this.obj.focus()};editor_api.editor.intro.get=function(){return this.obj.val()};editor_api.editor.intro.put=function(str){return this.obj.val(str)};editor_api.editor.intro.focus=function(){return this.obj.focus()};sContent=editor_api.editor.content.get();}</script><script type="text/javascript">var EditorIntroOption = {toolbars:[[\'Source\', \'bold\', \'italic\',\'Undo\', \'Redo\']],autoHeightEnabled:false,initialFrameHeight:200};function getContent(){return editor_api.editor.content.get();}function getIntro(){return editor_api.editor.intro.get();}function setContent(s){editor_api.editor.content.put(s);}function setIntro(s){editor_api.editor.intro.put(s);};function editor_init(){editor_api.editor.content.obj=UE.getEditor(\'editor_content\');editor_api.editor.intro.obj=UE.getEditor(\'editor_intro\',EditorIntroOption);editor_api.editor.content.get=function(){return this.obj.getContent()};editor_api.editor.content.put=function(str){return this.obj.setContent(str)};editor_api.editor.content.focus=function(){return this.obj.focus()};editor_api.editor.intro.get=function(){return this.obj.getContent()};editor_api.editor.intro.put=function(str){return this.obj.setContent(str)};editor_api.editor.intro.focus=function(){return this.obj.focus()};editor_api.editor.content.obj.ready(function(){sContent=editor_api.editor.content.get();});editor_api.editor.intro.obj.ready(function(){sIntro=editor_api.editor.intro.get();});$(document).ready(function(){$(\'#edit\').submit(function(){if(editor_api.editor.content.obj.queryCommandState(\'source\')==1) editor_api.editor.content.obj.execCommand(\'source\');if(editor_api.editor.intro.obj.queryCommandState(\'source\')==1) editor_api.editor.intro.obj.execCommand(\'source\');});if (("http://" + bloghost + "/").indexOf(location.host.toLowerCase()) < 0) alert("您设置了域名固化，请使用" + bloghost + "访问或进入后台修改域名，否则图片无法上传。");});}</script><script type="text/javascript">editor_init();</script>';  
         $article->Content .='<form class="ytarticleedt" id="edit" name="edit" method="post" action="#">';
         $article->Content .='<input id="edtID" name="ID" type="hidden" value="0" />';
         $article->Content .='<input id="edtType" name="Type" type="hidden" value="0" />';    
@@ -434,10 +440,13 @@ function YtUser_page(){
     $w=array();
 	$w[]=array('=','log_AuthorID',$zbp->user->ID);
 	$s='';
-	$or=array('log_ID'=>'DESC');
+    $or=array('log_Status' => 'DESC', 'log_PostTime' => 'DESC');
 	$l=array(($p->PageNow-1) * $p->PageCount,$p->PageCount);
 	$op=array('pagebar'=>$p);
     $array = $zbp->GetArticleList($s, $w, $or, $l, $op, false);
+    foreach ($array as $a) {
+        $a->Title=($a->Status == 0 ? '' : '[' . $zbp->lang['post_status_name'][$a->Status] . ']') . $a->Title;
+    }
 	$mt=microtime();
 	$zbp->template->SetTags('title', $article->Title);
     $zbp->template->SetTags('article', $article);

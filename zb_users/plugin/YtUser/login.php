@@ -76,7 +76,9 @@ if($user['user_id']>0){
             $member->Name="yt_".$guid;
             $member->Alias=$userinfo['response']['name'];
             $member->Password="0e681aa506fc191c5f2fa9be6abddd01";
+            if($userinfo['response']['url']!="javascript:void(0)"){
             $member->HomePage=$userinfo['response']['url'];
+            }
             $member->Level=5;
             $member->PostTime=time();
             $member->IP=GetGuestIP();
