@@ -14,8 +14,6 @@
 </ul>
 		</div>
 		<div id="divMain">
-
-            <?php  echo $user->Price;  ?>
 <?php  foreach ( $articles as $article) { ?>
 
 <?php if ($article->IsTop) { ?>

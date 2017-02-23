@@ -145,8 +145,10 @@ function Server_SendRequest($url, $data = array(), $u = '', $c = '') {
 	$c = AppCentre_Get_Cookies();
 	$u = AppCentre_Get_UserAgent();
 
-	if (class_exists('Network')) {
-		return Server_SendRequest_Network($url, $data, $u, $c);
+	if (!class_exists('NetworkFactory', false)) {
+		if (class_exists('Network')) {
+			return Server_SendRequest_Network($url, $data, $u, $c);
+		}
 	}
 
 	if (function_exists("curl_init") && function_exists('curl_exec')) {
@@ -156,7 +158,42 @@ function Server_SendRequest($url, $data = array(), $u = '', $c = '') {
 	if (!ini_get("allow_url_fopen")) {
 		return "";
 	}
-	return "";
+
+	if ($data) {
+//POST
+		$data = http_build_query($data);
+		$opts = array(
+			'http' => array(
+				'method' => 'POST',
+				'header' => "Content-Type:application/x-www-form-urlencoded\r\n" .
+				'Content-Length: ' . strlen($data) . "\r\n" .
+				"Cookie: " . $c . "\r\n",
+				'user_agent' => $u,
+				'content' => $data,
+			),
+		);
+		$content = stream_context_create($opts);
+	} else {
+//GET
+		$opts = array(
+			'http' => array(
+				'method' => 'GET',
+				'header' => "Cookie: " . $c . "\r\n",
+				'user_agent' => $u,
+			),
+		);
+		$content = stream_context_create($opts);
+	}
+
+	if (function_exists('ini_set')) {
+		ini_set('default_socket_timeout', 120);
+	}
+
+	if (extension_loaded('zlib')) {
+		return file_get_contents('compress.zlib://' . $url, false, $content);
+	} else {
+		return file_get_contents($url, false, $content);
+	}
 }
 
 function Server_SendRequest_CUrl($url, $data = array(), $u, $c) {
@@ -168,11 +205,6 @@ function Server_SendRequest_CUrl($url, $data = array(), $u, $c) {
 	}
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 	curl_setopt($ch, CURLOPT_TIMEOUT, 120);
-	if(isset($_SERVER['HTTP_ACCEPT'])){
-		curl_setopt($ch,CURLOPT_HTTPHEADER,array (
-	         'Accept: ' . $_SERVER['HTTP_ACCEPT']
-	    ));
-	}
 	curl_setopt($ch, CURLOPT_USERAGENT, $u);
 	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
 	curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
@@ -185,11 +217,10 @@ function Server_SendRequest_CUrl($url, $data = array(), $u, $c) {
 	}
 
 	if ($data) {
-		//POST
+//POST
 		curl_setopt($ch, CURLOPT_POST, 1);
 		curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-	} else {
-		//GET
+	} else { //GET
 	}
 
 	$r = curl_exec($ch);
@@ -214,8 +245,6 @@ function Server_SendRequest_Network($url, $data = array(), $u, $c) {
 		$ajax->setRequestHeader('User-Agent', $u);
 		$ajax->setRequestHeader('Cookie', $c);
 		$ajax->setRequestHeader('Website',$zbp->host);
-		if(isset($_SERVER['HTTP_ACCEPT']))
-			$ajax->setRequestHeader('Accept',$_SERVER['HTTP_ACCEPT']);
 		$ajax->send($data);
 	} else {
 		$ajax->open('GET', $url);
@@ -224,8 +253,6 @@ function Server_SendRequest_Network($url, $data = array(), $u, $c) {
 		$ajax->setRequestHeader('User-Agent', $u);
 		$ajax->setRequestHeader('Cookie', $c);
 		$ajax->setRequestHeader('Website',$zbp->host);
-		if(isset($_SERVER['HTTP_ACCEPT']))
-			$ajax->setRequestHeader('Accept',$_SERVER['HTTP_ACCEPT']);
 		$ajax->send();
 	}
 
@@ -329,24 +356,4 @@ function AppCentre_Pack($app, $gzip) {
 		return $s;
 	}
 
-}
-
-function AppCentre_PHPVersion($default) {
-	global $zbp;
-
-	$s = null;
-	$array = array(
-		'5.2'=>'5.2',
-		'5.3'=>'5.3',
-		'5.4'=>'5.4',
-		'5.5'=>'5.5',
-		'5.6'=>'5.6',
-		'7.0'=>'7.0',
-		'7.1'=>'7.1',
-		);
-	$i = 0;
-	foreach ($array as $key => $value) {
-		$s .= '<option value="' . $key . '" ' . ($default == $key ? 'selected="selected"' : '') . ' >' . $value . '</option>';
-	}
-	return $s;
 }

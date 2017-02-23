@@ -2,6 +2,17 @@
 	<div class="postblock">
 		<h3 class="posttitle"><?php  echo $article->Title;  ?></h3>
 		<div class="postintro">
+
+
+
+
+<?php  foreach ( $article->imgs as $slides) { ?>
+<?php  echo $slides;  ?>
+<br>
+<?php }   ?>
+
+
+
 			<?php  echo $article->Content;  ?>
 		</div>
 		<p class="posttags">Tags：

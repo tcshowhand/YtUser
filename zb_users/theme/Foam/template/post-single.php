@@ -2,6 +2,17 @@
 	<div class="postblock">
 		<h3 class="posttitle">{$article.Title}</h3>
 		<div class="postintro">
+
+
+
+
+{foreach $article.imgs as $slides}
+{$slides}
+<br>
+{/foreach}
+
+
+
 			{$article.Content}
 		</div>
 		<p class="posttags">Tags：
