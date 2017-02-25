@@ -4,6 +4,9 @@
 		<div class="box">
 			{template:navbar}
 			<div class="main">
+
+                <input type="submit" value="签到" onclick="return Ytbuypay()"/>
+
 {foreach $articles as $article}
 
 {if $article.IsTop}
@@ -13,7 +16,7 @@
 {/if}
 
 {/foreach}
-				
+
 				<div class="pagebar">{template:pagebar}</div>
 			</div>
 			<div class="clear"></div>

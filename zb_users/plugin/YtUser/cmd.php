@@ -3,6 +3,7 @@ require '../../../zb_system/function/c_system_base.php';
 
 $zbp->Load();
 
+Add_Filter_Plugin('Filter_Plugin_Zbp_ShowError','RespondError',PLUGIN_EXITSIGNAL_RETURN);
 $action=GetVars('act','GET');
 
 if($action=="verify"){
@@ -16,13 +17,11 @@ if(!$zbp->CheckRights($action)){$zbp->ShowError(6,__FILE__,__LINE__);die();}
 
 switch ($action) {
     case 'verify':
+    $_POST['username']=$_POST['username'];
+    $_POST['password']=$_POST['edtPassWord'];
+    $_POST['savedate']=$_POST['strSaveDate'];
     if (VerifyLogin()) {
-        if ($zbp->user->ID > 0 && GetVars('redirect', 'COOKIE')) {
-            Redirect(GetVars('redirect', 'COOKIE'));
-        }
-        Redirect($zbp->host);
-    } else {
-        Redirect($zbp->host);
+        echo '登录成功！';
     }
     break;
     case 'ArticlePst':
@@ -41,8 +40,12 @@ switch ($action) {
 		if(!$zbp->ValidToken(GetVars('token','GET'))){$zbp->ShowError(5,__FILE__,__LINE__);die();}
 		$_POST['Password'] = null;
 		$_POST['PasswordRe'] = null;
+        if (isset($_POST["meta_Tel"])) {
         $_POST['meta_Tel']=TransferHTML($_POST['meta_Tel'], '[noscript]');
-        $_POST['meta_Add']=TransferHTML($_POST['meta_Add'], '[noscript]');
+        }
+        if (isset($_POST["meta_Add"])) {
+            $_POST['meta_Add']=TransferHTML($_POST['meta_Add'], '[noscript]');
+        }
         $_POST['meta_buysuccess']='';
 		PostMember();
 		$zbp->BuildModule();

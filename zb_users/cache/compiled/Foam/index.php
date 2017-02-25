@@ -4,6 +4,9 @@
 		<div class="box">
 			<?php  include $this->GetTemplate('navbar');  ?>
 			<div class="main">
+
+                <input type="submit" value="签到" onclick="return Ytbuypay()"/>
+
 <?php  foreach ( $articles as $article) { ?>
 
 <?php if ($article->IsTop) { ?>
@@ -13,7 +16,7 @@
 <?php } ?>
 
 <?php }   ?>
-				
+
 				<div class="pagebar"><?php  include $this->GetTemplate('pagebar');  ?></div>
 			</div>
 			<div class="clear"></div>

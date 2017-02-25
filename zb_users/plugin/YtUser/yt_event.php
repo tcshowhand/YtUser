@@ -242,7 +242,7 @@ function YtUser_page(){
 	$article->Title="使用VIP月卡";
 	$article->IsLock=true;
 	$article->Type=ZC_POST_TYPE_PAGE;
-	
+	$article->verifycode ='<img style="border:none;vertical-align:middle;width:'.$zbp->option['ZC_VERIFYCODE_WIDTH']. 'px;height:' . $zbp->option['ZC_VERIFYCODE_HEIGHT'] . 'px;cursor:pointer;" src="' .$zbp->validcodeurl . '?id=RegPage" alt="" title="" onclick="javascript:this.src=\'' . $zbp->validcodeurl . '?id=RegPage&amp;tm=\'+Math.random();"/>';
     if($zbp->user->ID){
     	$article->Content .='<table style="width:90%;border:none;font-size:1.1em;line-height:2.5em;">';
         $article->Content .='<tr style=""><th style="border:none;" colspan="2" scope="col"><p>用户级别:'.$zbp->lang['user_level_name'][$zbp->user->Level].'</p></p></th></tr>';
@@ -253,7 +253,8 @@ function YtUser_page(){
 		$article->Content .='<tr style=""><th style="border:none;" colspan="2" scope="col"><p>'.$zbp->Config('YtUser')->readme_text.'</p></th></tr>';
 		$article->Content .='<tr><td style="text-align:right;border:none;">(*)VIP月卡</td><td  style="border:none;" ><input required="required" type="text" name="invitecode" style="width:250px;font-size:1.2em;" />';
 		$article->Content .='</td></tr>';
-		$article->Content .='<tr><td style="text-align:right;border:none;">(*)</td><td  style="border:none;" ><input required="required" type="text" name="verifycode" style="width:150px;font-size:1.2em;" />&nbsp;&nbsp;<img style="border:none;vertical-align:middle;width:'.$zbp->option['ZC_VERIFYCODE_WIDTH']. 'px;height:' . $zbp->option['ZC_VERIFYCODE_HEIGHT'] . 'px;cursor:pointer;" src="' .$zbp->validcodeurl . '?id=RegPage" alt="" title="" onclick="javascript:this.src=\'' . $zbp->validcodeurl . '?id=RegPage&amp;tm=\'+Math.random();"/></td></tr>';
+		$article->Content .='<tr><td style="text-align:right;border:none;">(*)</td><td  style="border:none;" ><input required="required" type="text" name="verifycode" style="width:150px;font-size:1.2em;" />&nbsp;&nbsp;';
+        $article->Content .='</td></tr>';
 		$article->Content .='<tr><td  style="border:none;" ></td><td  style="border:none;" ><input type="submit" style="width:100px;font-size:1.0em;padding:0.2em" value="提交" onclick="return RegPage()" /></td></tr>';
 		$article->Content .='</table>';
     }else{
@@ -508,45 +509,19 @@ function YtUser_page(){
         Redirect($zbp->host."?User");die();
     }
     $zbp->header .='<script src="'.$zbp->host.'zb_system/script/md5.js" type="text/javascript"></script>' . "\r\n";
+    $zbp->header .='<script src="'.$zbp->host.'zb_users/plugin/YtUser/Upgrade.js" type="text/javascript"></script>' . "\r\n";
 	$article = new Post;
 	$article->Title="会员登录";
 	$article->IsLock=true;
 	$article->Type=ZC_POST_TYPE_PAGE;
-    $zbp->footer .='<script type="text/javascript">
-$("#loginbtnPost").click(function(){
-	var strUserName=$("#edtUserName").val();
-	var strPassWord=$("#edtPassWord").val();
-	var strSaveDate=$("#savedate").val()
-	if((strUserName=="")||(strPassWord=="")){
-		alert("用户名和密码不能为空");
-		return false;
-	}
-	$("#edtUserName").remove();
-	$("#edtPassWord").remove();
-	$("form").attr("action","'.$zbp->host.'zb_users/plugin/YtUser/cmd.php?act=verify");
-	$("#username").val(strUserName);
-	$("#password").val(MD5(strPassWord));
-	$("#savedate").val(strSaveDate);
-})
-$("#chkRemember").click(function(){
-	$("#savedate").attr("value",$("#chkRemember").attr("checked")=="checked"?30:0);
-})
-</script>';
-    $article->Content .='<form method="post" action="#">';
 	$article->Content .='<table style="width:90%;border:none;font-size:1.1em;line-height:2.5em;">';
 	$article->Content .='<tr><td style="text-align:right;border:none;">账户：</td><td  style="border:none;" ><input required="required" type="text" id="edtUserName" name="edtUserName" value="'.GetVars('username', 'COOKIE').'" style="width:250px;font-size:1.2em;" /></td></tr>';
 	$article->Content .='<tr><td style="text-align:right;border:none;">密码：</td><td  style="border:none;" ><input required="required" type="password" id="edtPassWord" name="edtPassWord" style="width:250px;font-size:1.2em;" /></td></tr>';
 	$article->Content .='</td></tr>';
 	$article->Content .='<tr><td style="text-align:right;border:none;"><input type="checkbox" name="chkRemember" id="chkRemember"  tabindex="3" /></td><td  style="border:none;" >下次自动登录</td></tr>';
-    $article->Content .='<tr><td  style="border:none;" ></td><td  style="border:none;" ><input id="loginbtnPost" name="loginbtnPost" type="submit" value="登录" class="button" tabindex="4"/></td></tr>';
+    $article->Content .='<tr><td  style="border:none;" ></td><td  style="border:none;" ><input id="loginbtnPost" onclick="return Ytuser_Login()" name="loginbtnPost" type="submit" value="登录" class="button" tabindex="4"/></td></tr>';
 	$article->Content .='</table>';
-    $article->Content .='<input type="hidden" name="username" id="username" value="" />';
-    $article->Content .='<input type="hidden" name="password" id="password" value="" />';
-    $article->Content .='<input type="hidden" name="savedate" id="savedate" value="0" />';
-    $article->Content .='<input type="hidden" name="dishtml5" id="dishtml5" value="0" />';
-    $article->Content .='</form>';
     $article->Content .='使用其它帐号登录：<div class="ds-login"></div>';
-
     if($zbp->template->hasTemplate('t_login')){
         $article->Template = 't_login';
 	}
