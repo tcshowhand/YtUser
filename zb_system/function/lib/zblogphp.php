@@ -2435,7 +2435,7 @@ class ZBlogPHP {
      */
     public function GetWebToken($wt_id = '', $day = 1 ) {
         $t = intval( $day * 24 * 3600 ) + time();
-        return CreateWebToken($wt_id, $t ,$this->guid, $this->user->Guid, $this->user->ID, $this->user->Password);
+        return CreateWebToken($wt_id, $t ,$this->guid, $this->user->Status, $this->user->ID, $this->user->Password);
     }
 
     /**
@@ -2446,7 +2446,7 @@ class ZBlogPHP {
      */
     public function ValidWebToken($wt, $wt_id = '') {
 
-        if( VerifyWebToken($wt, $wt_id, $this->guid, $this->user->Guid, $this->user->ID, $this->user->Password) === true ){
+        if( VerifyWebToken($wt, $wt_id, $this->guid, $this->user->Status, $this->user->ID, $this->user->Password) === true ){
             return true;
         }
 
@@ -2459,7 +2459,8 @@ class ZBlogPHP {
      * @return string
      */
     public function GetToken($id = '') {
-        return md5($this->guid . $this->user->Guid . $id . date('Ymdh'));
+        $s = $this->user->ID . $this->user->Password . $this->user->Status;
+        return md5($this->guid . $s . $id . date('Ymdh'));
     }
 
     /**
@@ -2469,10 +2470,11 @@ class ZBlogPHP {
      * @return bool
      */
     public function ValidToken($t, $id = '') {
-        if ($t == md5($this->guid . $this->user->Guid . $id . date('Ymdh'))) {
+        $s = $this->user->ID . $this->user->Password . $this->user->Status;
+        if ($t == md5($this->guid . $s . $id . date('Ymdh'))) {
             return true;
         }
-        if ($t == md5($this->guid . $this->user->Guid . $id. date('Ymdh', time() - (3600 * 1)))) {
+        if ($t == md5($this->guid . $s . $id. date('Ymdh', time() - (3600 * 1)))) {
             return true;
         }
 

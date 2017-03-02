@@ -1,0 +1,4 @@
+@charset "utf-8";
+table.appinfo caption {
+    font-weight: bold;text-align:center;
+}

@@ -1,0 +1,14 @@
+.dm-edit5 input,.dm-edit5{width:99%}
+.dm-edit5 td, .dm-edit5 th {border: none;}
+
+.dmam_Edit_3_title,#dmam_Edit_3 ul,.user_metas{background-color:#ebebeb}
+#dmam-content {background-color: #ebebeb;display: none;margin: 5px 0 10px;padding: 10px;position: absolute;width: 20%;z-index: 2000;left:20%;top: 10%;}
+#dmam-con p input {width: 80%;}
+#dmam-con p {text-align:center;}
+
+#dmam_Edit_3 ul{width:100%;min-height: 130px;}
+#dmam_Edit_3 ul,#dmam_Edit_3:hover .dmam_Edit_3_title{display:none;}
+#dmam_Edit_3:hover ul{display:block;}
+#dmam_Edit_3 li{height:30px;line-height:30px;float:left;width:100%;}
+#dmam_Edit_3 li label{text-align:right;text-overflow: ellipsis;padding: 0 5px 0 3px;line-height: 1em;font-size: 1.1em;font-weight: bold;display: inline-block;cursor: pointer;}
+#dmam_Edit_3 li input,#dmam_Edit_3 li textarea{width:180px;}

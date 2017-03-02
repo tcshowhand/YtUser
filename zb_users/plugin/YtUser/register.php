@@ -11,8 +11,14 @@ if (!$zbp->CheckPlugin('YtUser')) {$zbp->ShowError(48);die();}
 $name=trim($_POST['name']);
 $password=trim($_POST['password']);
 $repassword=trim($_POST['repassword']);
-$email=trim($_POST['email']);
-$homepage=trim($_POST['homepage']);
+if (isset($_POST["email"])) {
+    $email=trim($_POST['email']);
+}
+if (isset($_POST["homepage"])) {
+    $homepage=trim($_POST['homepage']);
+}else{
+    $homepage=$zbp->host;
+}
 $verifycode=trim($_POST['verifycode']);
 
 if(!$zbp->CheckValidCode($verifycode,'register')){

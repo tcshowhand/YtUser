@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<theme version="php">
+<id>dmam</id>
+<name>D_M 主题</name>
+<url>http://www.imlgm.com/</url>
+<note>Z-BlogPHP的 D_M 主题</note>
+<description></description>
+<path>main.php?act=notice</path>
+<include>include.php</include>
+<level>1</level>
+<author>
+  <name>大谋</name>
+  <email>76453189@qq.com</email>
+  <url>http://www.imlgm.com/</url>
+</author>
+<source>
+  <name>大谋</name>
+  <email>76453189@qq.com</email>
+  <url>http://www.imlgm.com/</url>
+</source>
+<adapted>151626</adapted>
+<version>1.4</version>
+<pubdate>2016-08-08</pubdate>
+<modified>2017-02-28</modified>
+<price>0</price>
+<phpver>5.2</phpver>
+<advanced>
+  <dependency>ggravatar|dm_tools</dependency>
+  <rewritefunctions></rewritefunctions>
+  <existsfunctions></existsfunctions>
+  <conflict>gravatar|AdvancedSearch|IMAGE|Searchlist|SearchPlus</conflict>
+</advanced>
+<sidebars>
+  <sidebar1></sidebar1>
+  <sidebar2></sidebar2>
+  <sidebar3></sidebar3>
+  <sidebar4></sidebar4>
+  <sidebar5></sidebar5>
+</sidebars>
+</theme>

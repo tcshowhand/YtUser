@@ -190,7 +190,6 @@ function YtUser_page(){
 	$article->Type=ZC_POST_TYPE_PAGE;
 	$article->verifycode ='<img style="border:none;vertical-align:middle;width:'.$zbp->option['ZC_VERIFYCODE_WIDTH']. 'px;height:' . $zbp->option['ZC_VERIFYCODE_HEIGHT'] . 'px;cursor:pointer;" src="' .$zbp->validcodeurl . '?id=User" alt="" title="" onclick="javascript:this.src=\'' . $zbp->validcodeurl . '?id=User&amp;tm=\'+Math.random();"/>';
     if($zbp->user->ID){
-        $article->Content .='<form class="ytuseredit" id="edit" method="post" action="#">';
         $article->Content .='<input id="edtID" name="ID" type="hidden" value="'.$zbp->user->ID.'" />';
         $article->Content .='<input id="edtGuid" name="Guid" type="hidden" value="'.$zbp->user->Guid.'" />';
         $article->Content .='<table style="width:90%;border:none;font-size:1.1em;line-height:2.5em;">';
@@ -209,13 +208,38 @@ function YtUser_page(){
 	    $article->Content .='<tr><td style="text-align:right;border:none;">(*)</td><td  style="border:none;" ><input required="required" type="text" name="verifycode" style="width:150px;font-size:1.2em;" />&nbsp;&nbsp;'.$article->verifycode.'</td></tr>';
 	    $article->Content .='<tr><td  style="border:none;" ></td><td  style="border:none;" ><button onclick="return checkInfo();">确定</button></td></tr>';
 	    $article->Content .='</table>';
-        $article->Content .='</form>';
     }else{
         Redirect($zbp->host."?Login");die();
     }
-
-    $zbp->footer .='<script type="text/javascript">function checkInfo(){document.getElementById("edit").action="'.$zbp->host.'zb_users/plugin/YtUser/cmd.php?act=MemberPst&token='.$zbp->GetToken().'";}</script>';
-
+    $zbp->footer .=<<<js
+    <script type="text/javascript">function checkInfo(){
+    $.post(bloghost+'zb_users/plugin/YtUser/cmd.php?act=MemberPst&token={$zbp->GetToken()}',
+        {
+        "ID":$("input[name='ID']").val(),
+        "Guid":$("input[name='Guid']").val(),
+        "Alias":$("input[name='Alias']").val(),
+        "meta_Tel":$("input[name='meta_Tel']").val(),
+        "meta_Add":$("input[name='meta_Add']").val(),
+        "Email":$("input[name='Email']").val(),
+        "HomePage":$("input[name='HomePage']").val(),
+        "Intro":$("input[name='Intro']").val(),
+        "verifycode":$("input[name='verifycode']").val(),
+        },
+        function(data){
+            var s =data;
+            if((s.search("faultCode")>0)&&(s.search("faultString")>0))
+            {
+                alert(s.match("<string>.+?</string>")[0].replace("<string>","").replace("</string>",""))
+            }
+            else{
+                var s =data;
+                alert(s);
+                window.location=bloghost+'?User';
+            }
+        }
+    );
+    }</script>
+js;
 	$mt=microtime();
 	$s=	'';
 	$article->Content .=$s;	

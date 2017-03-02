@@ -108,9 +108,16 @@ if (count($_POST) > 0) {
 	$app->level = (int) $_POST['app_level'];
 	$app->price = (float) $_POST['app_price'];
 
+  if(property_exists($app,'phpver')){
+    $app->phpver = trim($_POST['app_phpver']);
+  }
+  if(property_exists($app,'advanced_existsfunctions')){
+    $app->advanced_existsfunctions = trim($_POST['app_advanced_existsfunctions']);
+  }
+
 	$app->advanced_dependency = trim($_POST['app_advanced_dependency']);
-	$app->advanced_rewritefunctions = trim($_POST['app_advanced_rewritefunctions']);
 	$app->advanced_conflict = trim($_POST['app_advanced_conflict']);
+  $app->advanced_rewritefunctions = trim($_POST['app_advanced_rewritefunctions']);
 
 	$app->description = trim($_POST['app_description']);
 
@@ -276,6 +283,16 @@ require $blogpath . 'zb_system/admin/admin_top.php';
           </select>
         </p></td>
     </tr>
+<?php if(property_exists($app,'phpver')){ ?>
+    <tr>
+      <td><p><b>· PHP最低要求版本</b> (可选)</p></td>
+      <td><p>&nbsp;
+          <select name="app_phpver" id="app_phpver" style="width:400px;">
+<?php echo AppCentre_PHPVersion($app->phpver);?>
+          </select>
+        </p></td>
+    </tr>
+<?php } ?>
     <tr>
       <td><p><b>· 主题定价</b></p></td>
       <td><p>&nbsp;
@@ -283,23 +300,31 @@ require $blogpath . 'zb_system/admin/admin_top.php';
         </p></td>
     </tr>
     <tr>
-      <td><p><b>· 【高级】依赖插件（以|分隔）</b>(可选)</p></td>
+      <td><p><b>· 【高级】主题依赖插件列表（以|分隔）</b>(可选)</p></td>
       <td><p>&nbsp;
           <input id="app_advanced_dependency" name="app_advanced_dependency" style="width:550px;"  type="text" value="<?php echo $app->advanced_dependency;?>" />
         </p></td>
     </tr>
-    <tr style="display:none;">
-      <td><p><b>· 【高级】内置插件重写系统函数列表（以|分隔）</b>(可选)</p></td>
-      <td><p>&nbsp;
-          <input id="app_advanced_rewritefunctions" name="app_advanced_rewritefunctions" style="width:550px;"  type="text" value="<?php echo $app->advanced_rewritefunctions;?>" />
-        </p></td>
-    </tr>
     <tr>
-      <td><p><b>· 【高级】内置插件冲突插件列表（以|分隔）</b>(可选)</p></td>
+      <td><p><b>· 【高级】与主题冲突插件列表（以|分隔）</b>(可选)</p></td>
       <td><p>&nbsp;
           <input id="app_advanced_conflict" name="app_advanced_conflict" style="width:550px;"  type="text" value="<?php echo $app->advanced_conflict;?>" />
         </p></td>
     </tr>
+    <tr style="display:none;">
+      <td><p><b>· 【高级】主题重写系统函数列表（以|分隔）</b>(可选)</p></td>
+      <td><p>&nbsp;
+          <input id="app_advanced_rewritefunctions" name="app_advanced_rewritefunctions" style="width:550px;"  type="text" value="<?php echo $app->advanced_rewritefunctions;?>" />
+        </p></td>
+    </tr>
+<?php if(property_exists($app,'advanced_existsfunctions')){ ?>
+    <tr>
+      <td><p><b>· 【高级】主题依赖函数列表（以|分隔）</b>(可选)</p></td>
+      <td><p>&nbsp;
+          <input id="app_advanced_existsfunctions" name="app_advanced_existsfunctions" style="width:550px;"  type="text" value="<?php echo $app->advanced_existsfunctions;?>" />
+        </p></td>
+    </tr>
+<?php } ?>
     <tr>
       <td><p><b>· 详细说明</b> (可选)</p></td>
       <td><p>&nbsp;

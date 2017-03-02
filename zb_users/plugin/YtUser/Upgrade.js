@@ -1,5 +1,4 @@
 function Ytbuy(){
-	
 	$.post(bloghost+'zb_users/plugin/YtUser/Ytbuy.php',
 		{
 		"LogID":$("input[name='LogID']").val(),
@@ -21,7 +20,6 @@ function Ytbuy(){
 }
 
 function RegPage(){
-	
 	$.post(bloghost+'zb_users/plugin/YtUser/Upgrade.php',
 		{
 		"invitecode":$("input[name='invitecode']").val(),
@@ -45,7 +43,6 @@ function RegPage(){
 
 
 function Ytbuypay(){
-	
 	$.post(bloghost+'zb_users/plugin/YtUser/Ytbuypay.php',
 		{
 		"LogID":$("input[name='LogID']").val(),
@@ -69,7 +66,6 @@ function Ytbuypay(){
 }
 
 function Integral(){
-	
 	$.post(bloghost+'zb_users/plugin/YtUser/Integral.php',
 		{
 		"invitecode":$("input[name='invitecode']").val(),
@@ -94,7 +90,6 @@ function Integral(){
 
 
 function register(){
-	
 	$.post(bloghost+'zb_users/plugin/YtUser/register.php',
 		{
 		"name":$("input[name='name']").val(),
@@ -121,7 +116,6 @@ function register(){
 
 
 function Ytuser_Login(){
-	
 	$.post(bloghost+'zb_users/plugin/YtUser/cmd.php?act=verify',
 		{
 		"username":$("input[name='edtUserName']").val(),

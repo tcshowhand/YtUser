@@ -5,11 +5,13 @@ $zbp->Load();
 $action = 'UploadPst';
 if (!$zbp->CheckRights($action)) {$zbp->ShowError(6);die();}
 
-$upload_dir = 'zb_users/upload/' . date('Y/m') . '/';
-//$upload_path = $bloghost . $upload_dir;
+$f_dir = $blogpath.'zb_users/upload/';
+$f_dira = $blogpath.'zb_users/m/';
+$f_dirb = $blogpath.'zb_users/ai/';
+$upload_dir = $blogpath.'zb_users/upload/' . date('Y/m') . '/';
+
 $upload_path = ''; // = $upload_dir = '';
 
-$upload_dir = $bloghost . $upload_dir;
 $upload_allow = explode('|', '.' . str_replace('|', '|.', $zbp->option['ZC_UPLOAD_FILETYPE']));
 $max_size = $zbp->option['ZC_UPLOAD_FILESIZE'] * 1024 * 1024;
 
@@ -46,15 +48,6 @@ $CONFIG = array(
     "scrawlAllowFiles" => $upload_allow, /* 上传图片格式显示 */
     "scrawlInsertAlign" => "none",
 
-    /* 抓取远程图片配置 */
-    "catcherLocalDomain" => array("127.0.0.1", "localhost", "img.baidu.com", parse_url($zbp->host, PHP_URL_HOST)),
-    "catcherActionName" => "catchimage", /* 执行抓取远程图片的action名称 */
-    "catcherFieldName" => "source", /* 提交的图片列表表单名称 */
-    "catcherPathFormat" => $upload_dir . "{yyyy}{mm}{dd}{time}{rand:6}", /* 上传保存路径,可以自定义保存路径和文件名格式 */
-    "catcherUrlPrefix" => "", /* 图片访问路径前缀 */
-    "catcherMaxSize" => $max_size, /* 上传大小限制，单位B */
-    "catcherAllowFiles" => $upload_allow, /* 抓取图片格式显示 */
-
     /* 上传视频配置 */
     "videoActionName" => "uploadvideo", /* 执行上传视频的action名称 */
     "videoFieldName" => "upfile", /* 提交的视频表单名称 */
@@ -70,5 +63,29 @@ $CONFIG = array(
     "fileUrlPrefix" => "", /* 文件访问路径前缀 */
     "fileMaxSize" => $max_size, /* 上传大小限制，单位B，默认50MB */
     "fileAllowFiles" => $upload_allow, /* 上传文件格式显示 */
+	
+	/* 列出指定目录下的图片 */
+    "imageManagerActionName"=>"listimage", /* 执行图片管理的action名称 */
+    "imageManagerListPath"=>$f_dir, /* 指定要列出图片的目录 */
+    "imageManagerListPatha"=>$f_dira, /* 指定要列出图片的目录 */
+    "imageManagerListPathb"=>$f_dirb, /* 指定要列出图片的目录 */
+    "imageManagerListSize"=>20, /* 每次列出文件数量 */
+    "imageManagerUrlPrefix"=>$zbp->host, /* 图片访问路径前缀 */
+    "imageManagerInsertAlign"=>"none", /* 插入的图片浮动方式 */
+    "imageManagerAllowFiles"=>[".png", ".jpg", ".jpeg", ".gif", ".bmp"], /* 列出的文件类型 */
 
+    /* 列出指定目录下的文件 */
+    "fileManagerActionName"=>"listfile", /* 执行文件管理的action名称 */
+    "fileManagerListPath"=>$f_dir, /* 指定要列出文件的目录 */
+    "fileManagerListPath"=>$f_dira, /* 指定要列出图片的目录 */
+    "fileManagerListPath"=>$f_dirb, /* 指定要列出图片的目录 */
+    "fileManagerUrlPrefix"=>$zbp->host, /* 文件访问路径前缀 */
+    "fileManagerListSize"=>20, /* 每次列出文件数量 */
+    "fileManagerAllowFiles"=>[
+        ".zip",".rar",".7z",".png", ".jpg", ".jpeg", ".gif", ".bmp",
+        ".flv", ".swf", ".mkv", ".avi", ".rm", ".rmvb", ".mpeg", ".mpg",
+        ".ogg", ".ogv", ".mov", ".wmv", ".mp4", ".webm", ".mp3", ".wav", ".mid",
+        ".rar", ".zip", ".tar", ".gz", ".7z", ".bz2", ".cab", ".iso",
+        ".doc", ".docx", ".xls", ".xlsx", ".ppt", ".pptx", ".pdf", ".txt", ".md", ".xml"
+    ] /* 列出的文件类型 */
 );

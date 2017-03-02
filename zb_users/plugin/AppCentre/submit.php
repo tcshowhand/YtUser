@@ -15,32 +15,32 @@ if (!$zbp->CheckPlugin('AppCentre')) {$zbp->ShowError(48);die();}
 $blogtitle = '应用中心-提交应用';
 
 $s = '';
-$t = '';
+$w = [];
 
-$app = New App;
+$app = new App;
 $app->LoadInfoByXml($_GET['type'], $_GET['id']);
 
-$t['id'] = $app->id;
-$t['author'] = $app->author_name;
-$t['modified'] = $app->modified;
+$w['id'] = $app->id;
+$w['author'] = $app->author_name;
+$w['modified'] = $app->modified;
 
-$t = json_encode($t);
+$t = json_encode($w);
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-	$s = Server_Open('submitpre');
+    $s = Server_Open('submitpre');
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-	$url = Server_Open('submit');
-	if (substr($url, 0, 4) == 'http') {
-		Redirect($url);
-	} else {
-		echo '<script type="text/javascript">alert(\'' . $url . '\')</script>';
-	}
+    $url = Server_Open('submit');
+    if (substr($url, 0, 4) == 'http') {
+        Redirect($url);
+    } else {
+        echo '<script type="text/javascript">alert(\'' . $url . '\')</script>';
+    }
 }
 
 if (!$s) {
-	$s = '{"id":"未提交","author":"未提交","modified":"未提交"}';
+    $s = '{"id":"未提交","author":"未提交","modified":"未提交"}';
 }
 
 require $blogpath . 'zb_system/admin/admin_header.php';

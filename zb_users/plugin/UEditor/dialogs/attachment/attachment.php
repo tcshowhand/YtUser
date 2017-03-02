@@ -17,9 +17,10 @@
 </head>
 <body>
 
-    <div class="wrapper">
+ <div class="wrapper">
         <div id="tabhead" class="tabhead">
             <span class="tab focus" data-content-id="upload"><var id="lang_tab_upload"></var></span>
+            <span class="tab" data-content-id="online"><var id="lang_tab_online"></var></span>
         </div>
         <div id="tabbody" class="tabbody">
             <!-- 上传图片 -->
@@ -46,6 +47,10 @@
                 </div>
             </div>
 
+            <!-- 在线图片 -->
+            <div id="online" class="panel">
+                <div id="fileList"><var id="lang_imgLoading"></var></div>
+            </div>
 
         </div>
     </div>

@@ -3,6 +3,14 @@ require '../../../zb_system/function/c_system_base.php';
 
 require '../../../zb_system/function/c_system_admin.php';
 
+if($blogversion <= 151626){
+	if (class_exists('Network', false) == false) {
+	AutoloadClass('Network');
+	require dirname(__FILE__) . '/networkcurl.php';
+	require dirname(__FILE__) . '/networkfile_get_contents.php';
+	require dirname(__FILE__) . '/networkfsockopen.php';
+	}
+}
 require dirname(__FILE__) . '/function.php';
 
 $zbp->Load();
@@ -84,7 +92,7 @@ if (GetVars('update', 'GET') != '') {
 
 if (GetVars('restore', 'GET') != '') {
 	$file = base64_decode(GetVars('restore', 'GET'));
-	$url = APPCENTRE_SYSTEM_UPDATE . '?' . substr(ZC_BLOG_VERSION, -6, 6) . '\\' . $file;
+	$url = APPCENTRE_SYSTEM_UPDATE . '?' . substr($zbp->version, -6, 6) . '\\' . $file;
 	$f = AppCentre_GetHttpContent($url);
 	$file = $zbp->path . str_replace('\\', '/', $file);
 	$dir = dirname($file);
@@ -98,7 +106,7 @@ if (GetVars('restore', 'GET') != '') {
 }
 
 if (GetVars('check', 'GET') == 'now') {
-	$r = AppCentre_GetHttpContent(APPCENTRE_SYSTEM_UPDATE . array_search(ZC_BLOG_VERSION, $zbpvers) . '.xml');
+	$r = AppCentre_GetHttpContent(APPCENTRE_SYSTEM_UPDATE . $zbp->version . '.xml');
 	//file_put_contents($zbp->usersdir . 'cache/now.xml', $r);
 	$nowxml = $r;
 	$checkbegin = true;
@@ -108,7 +116,6 @@ require $blogpath . 'zb_system/admin/admin_header.php';
 require $blogpath . 'zb_system/admin/admin_top.php';
 
 $newversion = AppCentre_GetHttpContent(APPCENTRE_SYSTEM_UPDATE . ($zbp->Config('AppCentre')->checkbeta == true ? '?beta' : ''));
-
 ?>
 <div id="divMain">
 
@@ -176,14 +183,22 @@ if ($nowxml != '') {
 			if (file_exists($f = $zbp->path . str_replace('\\', '/', $file['name']))) {
 				$f = file_get_contents($f);
 				$newcrc32 = substr(strtoupper(dechex(AppCentre_crc32_signed($f))), -8);
-				$f = str_replace("\n", "\r\n", $f);
-				$newcrc32_2 = substr(strtoupper(dechex(AppCentre_crc32_signed($f))), -8);
+				$md5 = strtoupper(md5($f));
+				$f = str_replace("\r\n", "\r", $f);
+				$f = str_replace("\n", "\r", $f);
+				$md5_r = strtoupper(md5($f));
+				$f = str_replace("\r", "\n", $f);
+				$md5_n = strtoupper(md5($f));
 			} else {
 				$newcrc32 = '';
-				$newcrc32_2 = '';
+				$md5 = '';
+				$md5_r = '';
+				$md5_n = '';
 			}
-			//echo PHP_INT_SIZE;
-			if (($newcrc32 == $file['crc32']) || ($newcrc32_2 == $file['crc32'])) {
+
+			$ar=array($file['crc32'],$file['md5'],$file['md5_r'],$file['md5_n']);
+
+			if( in_array($newcrc32,$ar) || in_array($md5,$ar) || in_array($md5_r,$ar) || in_array($md5_n,$ar) ){
 				echo '<tr style="display:none;"><td><b>' . str_replace('\\', '/', $file['name']) . '</b></td>';
 				$s = '<img src="' . $zbp->host . 'zb_system/image/admin/ok.png" width="16" alt="" />';
 			} else {
