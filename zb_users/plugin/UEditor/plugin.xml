@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <plugin version="php">
 <id>UEditor</id>
-<name>A-UEditor编辑器 大谋优化版</name>
+<name>UEditor编辑器</name>
 <url>http://www.rainbowsoft.org/</url>
-<note>不求人！ZB的UE不好用？大谋帮你改</note>
+<note>UEditor编辑器.</note>
 <description>ZBP的默认编辑器；
 现版本号1.4.4.3。</description>
 <path></path>
@@ -20,15 +20,13 @@
   <url></url>
 </source>
 <adapted>150101</adapted>
-<version>1.7</version>
+<version>1.6</version>
 <pubdate>2013-07-07</pubdate>
-<modified>2017-02-25</modified>
+<modified>2016-10-30</modified>
 <price>0</price>
-<phpver>5.2</phpver>
 <advanced>
   <dependency></dependency>
   <rewritefunctions></rewritefunctions>
-  <existsfunctions></existsfunctions>
   <conflict></conflict>
 </advanced>
 <sidebars>

@@ -52,8 +52,12 @@ function Ytbuypay(){
 			var s =data;
 			if((s.search("faultCode")>0)&&(s.search("faultString")>0))
 			{
-				alert(s.match("<string>.+?</string>")[0].replace("<string>","").replace("</string>",""))
-                window.location=bloghost+'?Integral';
+                var yt=s.match("<string>.+?</string>")[0].replace("<string>","").replace("</string>","");
+				alert(yt);
+				$("#reg_verfiycode").attr("src",bloghost+"zb_system/script/c_validcode.php?id=Ytbuypay&amp;tm="+Math.random());
+                if(yt =="积分不够，请充值."){
+                    window.location=bloghost+'?Integral';
+                }
 			}
 			else{
 				var s =data;
@@ -75,7 +79,8 @@ function Integral(){
 			var s =data;
 			if((s.search("faultCode")>0)&&(s.search("faultString")>0))
 			{
-				alert(s.match("<string>.+?</string>")[0].replace("<string>","").replace("</string>",""))
+				alert(s.match("<string>.+?</string>")[0].replace("<string>","").replace("</string>",""));
+				$("#reg_verfiycode").attr("src",bloghost+"zb_system/script/c_validcode.php?id=Integral&amp;tm="+Math.random());
 			}
 			else{
 				var s =data;
@@ -103,7 +108,8 @@ function register(){
 			var s =data;
 			if((s.search("faultCode")>0)&&(s.search("faultString")>0))
 			{
-				alert(s.match("<string>.+?</string>")[0].replace("<string>","").replace("</string>",""))
+				alert(s.match("<string>.+?</string>")[0].replace("<string>","").replace("</string>",""));
+				$("#reg_verfiycode").attr("src",bloghost+"zb_system/script/c_validcode.php?id=register&amp;tm="+Math.random());
 			}
 			else{
 				var s =data;

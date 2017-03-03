@@ -117,6 +117,38 @@
               </div>
             </div>
           </form>
+<script type="text/javascript">function checkInfo(){
+    $.post(bloghost+'zb_users/plugin/YtUser/cmd.php?act=MemberPst&token=<?php  echo $zbp->GetToken();  ?>',
+        {
+        "ID":$("input[name='ID']").val(),
+        "Guid":$("input[name='Guid']").val(),
+        "Alias":$("input[name='Alias']").val(),
+        "meta_Tel":$("input[name='meta_Tel']").val(),
+        "meta_qq":$("input[name='meta_Add']").val(),
+		"meta_txwb":$("input[name='meta_Add']").val(),
+		"meta_xlwb":$("input[name='meta_Add']").val(),
+		"meta_renren":$("input[name='meta_Add']").val(),
+        "Email":$("input[name='Email']").val(),
+        "HomePage":$("input[name='HomePage']").val(),
+        "Intro":$("textarea[name='Intro']").val(),
+        "verifycode":$("input[name='verifycode']").val(),
+        },
+        function(data){
+            var s =data;
+            if((s.search("faultCode")>0)&&(s.search("faultString")>0))
+            {
+            alert(s.match("<string>.+?</string>")[0].replace("<string>","").replace("</string>",""));
+            $("#reg_verfiycode").attr("src",bloghost+"zb_system/script/c_validcode.php?id=User&amp;tm="+Math.random());
+            }
+            else{
+                var s =data;
+                alert(s);
+                window.location=bloghost+'?User';
+            }
+        }
+    );
+}
+</script>
     </div>
 	 </div>
   </div>

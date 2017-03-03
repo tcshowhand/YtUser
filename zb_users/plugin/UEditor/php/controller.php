@@ -22,12 +22,12 @@ switch ($action) {
     case 'uploadfile':
         $result = include "action_upload.php";
         break;
-    /* 列出图片 */
-    case 'listimage':
-    /* 列出文件 */
-    case 'listfile':
-        $result = include("action_list.php");
+
+    /* 抓取远程文件 */
+    case 'catchimage':
+        $result = include "action_crawler.php";
         break;
+
     default:
         $result = json_encode(array(
             'state' => '请求地址出错'

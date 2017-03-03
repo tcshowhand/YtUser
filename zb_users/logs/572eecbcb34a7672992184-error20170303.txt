@@ -1,0 +1,8 @@
+[2017-03-03 16:30:28 .39472000 +08:00]
+array (
+  0 => 'Exception',
+  1 => '没有权限',
+  2 => 0,
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 2713,
+)

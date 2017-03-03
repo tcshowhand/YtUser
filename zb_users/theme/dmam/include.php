@@ -61,22 +61,7 @@ function dmam_Cmd_Begin() {
         }
     }
 }
-function dmam_cover($a_content){
-	global $zbp;
-	$img_cover = '';
-	$img_cover = $zbp->host.'zb_users/theme/'.$zbp->theme.'/style/images/covers/'.rand(1,20).'.jpg';
-	if ($zbp->CheckPlugin('dm_tools')) {
-		dm_tools_thumb::getPics($a_content,400,250,4);
-		if ($a_content->dm_tools_thumb_COUNT>0){
-			$img_cover = $a_content->dm_tools_thumb[0];
-			if ($a_content->Metas->post_style_order && !strpos($a_content->Metas->post_style_order,',')){
-			$img_cover = $a_content->Metas->post_style_order > 1?$a_content->dm_tools_thumb[$a_content->Metas->post_style_order-1]:$img_cover;
-			}
-			$img_cover = $a_content->Metas->thumbnail?dm_tools_thumb::getPicUrlBy($a_content->Metas->thumbnail,400,250,4):$img_cover;
-		}
-	}
-	//return $img_cover;
-}
+
 //PHP JS内添加版本
 function dmam_AddJS(){
 	global $zbp,$dmam_ver;

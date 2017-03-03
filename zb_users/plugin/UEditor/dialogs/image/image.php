@@ -6,7 +6,7 @@
     <script type="text/javascript" src="../internal.js"></script>
 
     <!-- jquery -->
-    <script type="text/javascript" src="../../../../../zb_system/script/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="../../../../../zb_system/script/common.js"></script>
 
     <!-- webuploader -->
     <script src="../../third-party/webuploader/webuploader.min.js"></script>
@@ -21,7 +21,6 @@
         <div id="tabhead" class="tabhead">
             <span class="tab" data-content-id="remote"><var id="lang_tab_remote"></var></span>
             <span class="tab focus" data-content-id="upload"><var id="lang_tab_upload"></var></span>
-            <span class="tab" data-content-id="online"><var id="lang_tab_online"></var></span>
             <span class="tab" data-content-id="search"><var id="lang_tab_search"></var></span>
         </div>
         <div class="alignBar">
@@ -91,10 +90,6 @@
                 </div>
             </div>
 
-            <!-- 在线图片 -->
-            <div id="online" class="panel">
-                <div id="imageList"><var id="lang_imgLoading"></var></div>
-            </div>
 
             <!-- 搜索图片 -->
             <div id="search" class="panel">

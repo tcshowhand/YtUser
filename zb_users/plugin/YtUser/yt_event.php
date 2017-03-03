@@ -188,7 +188,7 @@ function YtUser_page(){
 	$article->Title="用户中心";
 	$article->IsLock=true;
 	$article->Type=ZC_POST_TYPE_PAGE;
-	$article->verifycode ='<img style="border:none;vertical-align:middle;width:'.$zbp->option['ZC_VERIFYCODE_WIDTH']. 'px;height:' . $zbp->option['ZC_VERIFYCODE_HEIGHT'] . 'px;cursor:pointer;" src="' .$zbp->validcodeurl . '?id=User" alt="" title="" onclick="javascript:this.src=\'' . $zbp->validcodeurl . '?id=User&amp;tm=\'+Math.random();"/>';
+	$article->verifycode ='<img id="reg_verfiycode" style="border:none;vertical-align:middle;width:'.$zbp->option['ZC_VERIFYCODE_WIDTH']. 'px;height:' . $zbp->option['ZC_VERIFYCODE_HEIGHT'] . 'px;cursor:pointer;" src="' .$zbp->validcodeurl . '?id=User" alt="" title="" onclick="javascript:this.src=\'' . $zbp->validcodeurl . '?id=User&amp;tm=\'+Math.random();"/>';
     if($zbp->user->ID){
         $article->Content .='<input id="edtID" name="ID" type="hidden" value="'.$zbp->user->ID.'" />';
         $article->Content .='<input id="edtGuid" name="Guid" type="hidden" value="'.$zbp->user->Guid.'" />';
@@ -208,10 +208,7 @@ function YtUser_page(){
 	    $article->Content .='<tr><td style="text-align:right;border:none;">(*)</td><td  style="border:none;" ><input required="required" type="text" name="verifycode" style="width:150px;font-size:1.2em;" />&nbsp;&nbsp;'.$article->verifycode.'</td></tr>';
 	    $article->Content .='<tr><td  style="border:none;" ></td><td  style="border:none;" ><button onclick="return checkInfo();">确定</button></td></tr>';
 	    $article->Content .='</table>';
-    }else{
-        Redirect($zbp->host."?Login");die();
-    }
-    $zbp->footer .=<<<js
+        $article->js =<<<js
     <script type="text/javascript">function checkInfo(){
     $.post(bloghost+'zb_users/plugin/YtUser/cmd.php?act=MemberPst&token={$zbp->GetToken()}',
         {
@@ -222,14 +219,15 @@ function YtUser_page(){
         "meta_Add":$("input[name='meta_Add']").val(),
         "Email":$("input[name='Email']").val(),
         "HomePage":$("input[name='HomePage']").val(),
-        "Intro":$("input[name='Intro']").val(),
+        "Intro":$("textarea[name='Intro']").val(),
         "verifycode":$("input[name='verifycode']").val(),
         },
         function(data){
             var s =data;
             if((s.search("faultCode")>0)&&(s.search("faultString")>0))
             {
-                alert(s.match("<string>.+?</string>")[0].replace("<string>","").replace("</string>",""))
+                alert(s.match("<string>.+?</string>")[0].replace("<string>","").replace("</string>",""));
+				$("#reg_verfiycode").attr("src",bloghost+"zb_system/script/c_validcode.php?id=User&amp;tm="+Math.random());
             }
             else{
                 var s =data;
@@ -240,11 +238,16 @@ function YtUser_page(){
     );
     }</script>
 js;
+    }else{
+        Redirect($zbp->host."?Login");die();
+    }
 	$mt=microtime();
 	$s=	'';
 	$article->Content .=$s;	
     if($zbp->template->hasTemplate('t_user')){
         $article->Template = 't_user';
+	}else{
+	    $zbp->footer.=$article->js;
 	}
 	$zbp->template->SetTags('title',$article->Title);
 	$zbp->template->SetTags('article',$article);
@@ -315,7 +318,7 @@ js;
         print_r('<h2 style="font-size:60px;margin-bottom:32px;color:f00;">骚年，你在做什么</h2></div>');
         die();
     }
-    $article->verifycode ='<img style="border:none;vertical-align:middle;width:'.$zbp->option['ZC_VERIFYCODE_WIDTH']. 'px;height:' . $zbp->option['ZC_VERIFYCODE_HEIGHT'] . 'px;cursor:pointer;" src="' .$zbp->validcodeurl . '?id=Ytbuypay" alt="" title="" onclick="javascript:this.src=\'' . $zbp->validcodeurl . '?id=Ytbuypay&amp;tm=\'+Math.random();"/>';
+    $article->verifycode ='<img id="reg_verfiycode" style="border:none;vertical-align:middle;width:'.$zbp->option['ZC_VERIFYCODE_WIDTH']. 'px;height:' . $zbp->option['ZC_VERIFYCODE_HEIGHT'] . 'px;cursor:pointer;" src="' .$zbp->validcodeurl . '?id=Ytbuypay" alt="" title="" onclick="javascript:this.src=\'' . $zbp->validcodeurl . '?id=Ytbuypay&amp;tm=\'+Math.random();"/>';
     $articles = $zbp->GetPostByID($uid);
     $sql=$zbp->db->sql->Select($GLOBALS['YtUser_buy_Table'],'*',array(array('=','buy_LogID',$uid),array('=','buy_AuthorID',$zbp->user->ID),array('=','buy_State',1)),null,1,null);
     $array=$zbp->GetListCustom($GLOBALS['YtUser_buy_Table'],$GLOBALS['YtUser_buy_DataInfo'],$sql);
@@ -371,7 +374,7 @@ js;
 	$article->Title="用户积分充值";
 	$article->IsLock=true;
 	$article->Type=ZC_POST_TYPE_PAGE;
-	$article->verifycode ='<img style="border:none;vertical-align:middle;width:'.$zbp->option['ZC_VERIFYCODE_WIDTH']. 'px;height:' . $zbp->option['ZC_VERIFYCODE_HEIGHT'] . 'px;cursor:pointer;" src="' .$zbp->validcodeurl . '?id=Integral" alt="" title="" onclick="javascript:this.src=\'' . $zbp->validcodeurl . '?id=Integral&amp;tm=\'+Math.random();"/>';
+	$article->verifycode ='<img id="reg_verfiycode" style="border:none;vertical-align:middle;width:'.$zbp->option['ZC_VERIFYCODE_WIDTH']. 'px;height:' . $zbp->option['ZC_VERIFYCODE_HEIGHT'] . 'px;cursor:pointer;" src="' .$zbp->validcodeurl . '?id=Integral" alt="" title="" onclick="javascript:this.src=\'' . $zbp->validcodeurl . '?id=Integral&amp;tm=\'+Math.random();"/>';
     if($zbp->user->ID){
     	$article->Content .='<table style="width:90%;border:none;font-size:1.1em;line-height:2.5em;">';
         $article->Content .='<tr style=""><th style="border:none;" colspan="2" scope="col"><p>用户积分:'.$Price.'</p></th></tr>';
@@ -498,7 +501,7 @@ js;
 	$article->Title="会员注册";
 	$article->IsLock=true;
 	$article->Type=ZC_POST_TYPE_PAGE;
-    $article->verifycode ='<img style="border:none;vertical-align:middle;width:'.$zbp->option['ZC_VERIFYCODE_WIDTH']. 'px;height:' . $zbp->option['ZC_VERIFYCODE_HEIGHT'] . 'px;cursor:pointer;" src="' .$zbp->validcodeurl . '?id=RegPage" alt="" title="" onclick="javascript:this.src=\'' . $zbp->validcodeurl . '?id=register&amp;tm=\'+Math.random();"/>';
+    $article->verifycode ='<img id="reg_verfiycode" style="border:none;vertical-align:middle;width:'.$zbp->option['ZC_VERIFYCODE_WIDTH']. 'px;height:' . $zbp->option['ZC_VERIFYCODE_HEIGHT'] . 'px;cursor:pointer;" src="' .$zbp->validcodeurl . '?id=RegPage" alt="" title="" onclick="javascript:this.src=\'' . $zbp->validcodeurl . '?id=register&amp;tm=\'+Math.random();"/>';
     $article->Content .='<table style="width:90%;border:none;font-size:1.1em;line-height:2.5em;">';
 	$article->Content .='<tr><td style="text-align:right;border:none;">(*)名称：</td><td  style="border:none;" ><input required="required" type="text" name="name" style="width:250px;font-size:1.2em;" /></td></tr>';
 	$article->Content .='<tr><td style="text-align:right;border:none;">(*)密码：</td><td  style="border:none;" ><input required="required" type="password" name="password" style="width:250px;font-size:1.2em;" /></td></tr>';
