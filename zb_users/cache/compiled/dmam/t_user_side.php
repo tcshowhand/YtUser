@@ -1,4 +1,4 @@
-<?php  /* Template Name:文章和页面 */  ?>
+<?php  /* Template Name:用户中心左侧栏 */  ?>
 
 	<?php if ($zbp->user->ID) { ?>
 	<dl>

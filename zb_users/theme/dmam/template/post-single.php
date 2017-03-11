@@ -50,6 +50,18 @@
 			<div class="dm-article-copyright"><span>{$article.Author.StaticName}</span><time>发布于：{$article.Time('Y年m月d日')}</time></div>
 			{else}
 			{/if}
+
+
+
+            <div class="sf-praise-sdk" sfa='click' data-postid='{$sf_praise_sdk.postid}' data-value="1" data-ok='zijiqugemingzi'>
+顶（<span class="sf-praise-sdk" sfa='num' data-value='1' data-postid='{$sf_praise_sdk.postid}'>{$sf_praise_sdk.value1}</span>）
+</div>
+<div class="sf-praise-sdk" sfa='click' data-postid='{$sf_praise_sdk.postid}' data-value="2">
+踩<span class="sf-praise-sdk" sfa='num' data-value='2' data-postid='{$sf_praise_sdk.postid}'>{$sf_praise_sdk.value2}</span>）
+</div>
+
+
+
 {php}
 $dm_social = array();
 $dm_social_n = '';

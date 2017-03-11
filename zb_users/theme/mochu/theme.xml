@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<theme version="php">
+<id>mochu</id>
+<name>墨初主题高级版</name>
+<url>http://feiniaomy.com/post/17.html</url>
+<note>一款简单大气的响应式主题</note>
+<description></description>
+<path></path>
+<include>include.php</include>
+<level>1</level>
+<author>
+  <name>墨初</name>
+  <email>xiaoqihv@126.com</email>
+  <url>http://www.feiniaomy.com</url>
+</author>
+<source>
+  <name></name>
+  <email></email>
+  <url></url>
+</source>
+<adapted>151626</adapted>
+<version>3.2</version>
+<pubdate>2017-01-08</pubdate>
+<modified>2017-03-08</modified>
+<price>49.9</price>
+<phpver>5.2</phpver>
+<advanced>
+  <dependency>sf_praise_sdk</dependency>
+  <rewritefunctions></rewritefunctions>
+  <existsfunctions></existsfunctions>
+  <conflict></conflict>
+</advanced>
+<sidebars>
+  <sidebar1></sidebar1>
+  <sidebar2></sidebar2>
+  <sidebar3></sidebar3>
+  <sidebar4></sidebar4>
+  <sidebar5></sidebar5>
+</sidebars>
+</theme>

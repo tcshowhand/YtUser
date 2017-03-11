@@ -1,4 +1,4 @@
-<?php  /* Template Name:文章和页面 */  ?>
+<?php  /* Template Name:登录 */  ?>
 
 <?php  include $this->GetTemplate('header');  ?>
 <?php  include $this->GetTemplate('b_nav_top');  ?>
@@ -49,7 +49,7 @@
       <br />
       <div class="am-cf">
         <input type="submit" id="loginbtnPost" name="loginbtnPost" onclick="return Ytuser_Login()" class="am-btn am-btn-primary am-btn-sm am-fl">
-        <input type="submit" name="" value="忘记密码 ^_^? " class="am-btn am-btn-default am-btn-sm am-fr">
+       <small class="am-fr"><a href="<?php  echo $host;  ?>zb_users/theme/dmam/login.php">管理员？</a></small>
       </div>
       </div>
 

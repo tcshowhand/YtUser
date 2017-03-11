@@ -1,4 +1,4 @@
-<?php  /* Template Name:文章和页面 */  ?>
+<?php  /* Template Name:购买列表 */  ?>
 
 <?php  include $this->GetTemplate('header');  ?>
 <?php  include $this->GetTemplate('b_nav_top');  ?>
@@ -46,7 +46,7 @@
 				<?php if ($article->State) { ?>
 				<td class="am-text-success">已支付</td>
 				<?php }else{  ?>
-				<td><a class="am-text-danger" href="<?php  echo $host;  ?>?buy&uid=<?php  echo $article->ID;  ?>">未支付</a></td>
+				<td><a class="am-text-danger" href="<?php  echo $host;  ?>?buy&uid=<?php  echo $article->LogID;  ?>">未支付</a></td>
 				<?php } ?>
               </tr>
 			  <?php }   ?>

@@ -13,10 +13,9 @@ if ($zbp->Config('dmam')->admin_id){
 
             <div class="am-u-md-12">
               <div class="topbar-right am-text-right am-fr">
-                Follow : 
+                
 				<?php if ($adminid) { ?>
 				<?php if ($zbp->members[$adminid]->Metas->user_xlwb) { ?><a <?php  echo dmam_isblank(true);  ?> href="<?php  echo $zbp->members[$adminid]->Metas->user_xlwb;  ?>"><i class="am-icon-weibo"></i></a><?php } ?>
-				
 				<?php if ($zbp->members[$adminid]->Metas->user_txwb) { ?><a <?php  echo dmam_isblank(true);  ?> href="<?php  echo $zbp->members[$adminid]->Metas->user_txwb;  ?>"><i class="am-icon-tencent-weibo"></i></a><?php } ?>
 				<?php if ($zbp->members[$adminid]->Metas->user_renren) { ?><a <?php  echo dmam_isblank(true);  ?> href="<?php  echo $zbp->members[$adminid]->Metas->user_renren;  ?>"><i class="am-icon-renren"></i></a><?php } ?>
 				<?php if ($zbp->Config('dmam')->pics_qq) { ?><a href="javascript:void(0)" class="qq_button" data-am-modal="{target: '#qq-modal', closeViaDimmer: true, width: 200}" data-pic="<?php  echo $zbp->Config('dmam')->pics_qq;  ?>"><i class="am-icon-qq"></i></a><?php } ?>
@@ -31,9 +30,13 @@ if ($zbp->Config('dmam')->admin_id){
                 <i class="am-icon-linkedin"></i>
                 <i class="am-icon-youtube-play"></i>
                 <i class="am-icon-rss"></i> -->
+
 <?php if ($user->ID>0) { ?>
+<div class="top_user">
 <a href="<?php  echo $host;  ?>zb_system/admin/?act=admin">【<?php  echo $user->StaticName;  ?>】</a>
+ </div>
 <?php }else{  ?>
+<div class="top_user">
 	<?php if ($zbp->Config('dmam')->top_login) { ?>
 		<?php if ($zbp->CheckPlugin('YtUser')) { ?>
 		<a href="<?php  echo $host;  ?>?Login">登录</a>
@@ -43,7 +46,9 @@ if ($zbp->Config('dmam')->admin_id){
 		<?php if ($zbp->CheckPlugin('RegPage')) { ?><a href="<?php  echo $host;  ?>?reg">注册</a><?php } ?>
 		<?php } ?>
 	<?php } ?>
+ </div>
 <?php } ?>
+
                 
               </div>
             </div>

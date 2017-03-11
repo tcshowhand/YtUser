@@ -13,10 +13,9 @@ if ($zbp->Config('dmam')->admin_id){
 
             <div class="am-u-md-12">
               <div class="topbar-right am-text-right am-fr">
-                Follow : 
+                
 				{if $adminid}
 				{if $zbp.members[$adminid].Metas.user_xlwb}<a {dmam_isblank(true)} href="{$zbp.members[$adminid].Metas.user_xlwb}"><i class="am-icon-weibo"></i></a>{/if}
-				
 				{if $zbp.members[$adminid].Metas.user_txwb}<a {dmam_isblank(true)} href="{$zbp.members[$adminid].Metas.user_txwb}"><i class="am-icon-tencent-weibo"></i></a>{/if}
 				{if $zbp.members[$adminid].Metas.user_renren}<a {dmam_isblank(true)} href="{$zbp.members[$adminid].Metas.user_renren}"><i class="am-icon-renren"></i></a>{/if}
 				{if $zbp->Config('dmam')->pics_qq}<a href="javascript:void(0)" class="qq_button" data-am-modal="{target: '#qq-modal', closeViaDimmer: true, width: 200}" data-pic="{$zbp->Config('dmam')->pics_qq}"><i class="am-icon-qq"></i></a>{/if}
@@ -31,9 +30,13 @@ if ($zbp->Config('dmam')->admin_id){
                 <i class="am-icon-linkedin"></i>
                 <i class="am-icon-youtube-play"></i>
                 <i class="am-icon-rss"></i> -->
+
 {if $user.ID>0}
+<div class="top_user">
 <a href="{$host}zb_system/admin/?act=admin">【{$user.StaticName}】</a>
+ </div>
 {else}
+<div class="top_user">
 	{if $zbp->Config('dmam')->top_login}
 		{if $zbp->CheckPlugin('YtUser')}
 		<a href="{$host}?Login">登录</a>
@@ -43,7 +46,9 @@ if ($zbp->Config('dmam')->admin_id){
 		{if $zbp->CheckPlugin('RegPage')}<a href="{$host}?reg">注册</a>{/if}
 		{/if}
 	{/if}
+ </div>
 {/if}
+
                 
               </div>
             </div>

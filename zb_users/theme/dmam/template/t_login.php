@@ -1,4 +1,4 @@
-{* Template Name:文章和页面 *}
+{* Template Name:登录 *}
 <?php echo'<meta charset="UTF-8"><div style="text-align:center;padding:60px 0;font-size:16px;"><h2 style="font-size:60px;margin-bottom:32px;">打开这个网页的是傻逼</h2>吼吼!</div>';die();?>
 {template:header}
 {template:b_nav_top}
@@ -49,7 +49,7 @@
       <br />
       <div class="am-cf">
         <input type="submit" id="loginbtnPost" name="loginbtnPost" onclick="return Ytuser_Login()" class="am-btn am-btn-primary am-btn-sm am-fl">
-        <input type="submit" name="" value="忘记密码 ^_^? " class="am-btn am-btn-default am-btn-sm am-fr">
+       <small class="am-fr"><a href="{$host}zb_users/theme/dmam/login.php">管理员？</a></small>
       </div>
       </div>
 

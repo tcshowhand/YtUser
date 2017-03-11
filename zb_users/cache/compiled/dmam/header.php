@@ -1,5 +1,13 @@
 <?php  /* Template Name:页头 */  ?>
 
+<?php 
+$post_css = null;
+$post_js = null;
+if ($type == 'article'){
+	if ($article->Metas->post_css)$post_css = $article->Metas->post_css;
+	if ($article->Metas->post_script)$post_js = $article->Metas->post_script;
+}
+ ?>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -17,7 +25,7 @@
 <!-- 主题自带SEO关闭 -->
 <title><?php  echo $name;  ?><?php if ($title) { ?>-<?php  echo $title;  ?><?php } ?></title>
 <?php } ?>
-<?php  echo dmam_load_source('header',$type);  ?>
+<?php  echo dmam_load_source('header',$type,$post_js);  ?>
 <?php  echo $header;  ?>
 <link rel="stylesheet" href="<?php  echo $host;  ?>zb_users/theme/<?php  echo $theme;  ?>/style/<?php  echo $style;  ?>.css" type="text/css" media="all"/>
 <?php if ($zbp->Config('dmam')->apple_ico) { ?>
@@ -34,6 +42,6 @@
 <?php if ($zbp->Config('dmam')->pics_fv) { ?>
 <link rel="shortcut icon" href="<?php  echo $zbp->Config('dmam')->pics_fv;  ?>"><?php }else{  ?><link rel="shortcut icon" href="<?php  echo $host;  ?>favicon.ico">
 <?php } ?>
-<?php dmam_head_css() ?>
+<?php  echo dmam_head_css($post_css);  ?>
 </head>
 <body class="D_M <?php  echo $type;  ?> <?php  echo $zbp->Config('dmam')->topbar_fix?'dm-topbar-fixed':'';  ?>">

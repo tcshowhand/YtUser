@@ -1,0 +1,24 @@
+[2017-03-11 10:29:25 .81390600 +08:00]
+array (
+  0 => 'Exception',
+  1 => '没有权限',
+  2 => 0,
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 2713,
+)
+[2017-03-11 10:37:42 .42779600 +08:00]
+array (
+  0 => 'Error',
+  1 => 8,
+  2 => 'Undefined variable: sf_praise_sdk',
+  3 => 'E:\\songweb\\kangyijia\\zb_users\\cache\\compiled\\mochu\\post-single.php',
+  4 => 25,
+)
+[2017-03-11 10:39:18 .29218400 +08:00]
+array (
+  0 => 'Error',
+  1 => 8,
+  2 => 'Undefined variable: sf_praise_sdk',
+  3 => 'E:\\songweb\\kangyijia\\zb_users\\cache\\compiled\\mochu\\post-page.php',
+  4 => 25,
+)

@@ -7,7 +7,6 @@
     */
     var browser = function () {
         var uA = navigator.userAgent.toLowerCase();
-        //var app = navigator.appVersion.toLowerCase();
         return {
             txt: uA, // 浏览器版本信息
             version: (uA.match(/.+(?:rv|it|ra|ie)[\/: ]([\d.]+)/) || [])[1], // 版本号       
@@ -33,6 +32,6 @@
 })(window)
 
 
-if(window.browser.mobile){
+/* if(window.browser.mobile){
 	var hrefValue = window.location.href;
-}
+} */

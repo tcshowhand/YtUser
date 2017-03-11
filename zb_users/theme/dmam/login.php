@@ -32,9 +32,7 @@ if (!$zbp->Config('dmam')->new_login) {
   	<script src="../../../zb_system/script/common.js" type="text/javascript"></script>
 	<script src="../../../zb_system/script/md5.js" type="text/javascript"></script>
 	<script src="../../../zb_system/script/c_admin_js_add.php" type="text/javascript"></script>
-	<?php
-foreach ($GLOBALS['Filter_Plugin_Login_Header'] as $fpname => &$fpsignal) {$fpname();}
-?>
+
   <style>
     .header {
       text-align: center;
@@ -53,24 +51,11 @@ foreach ($GLOBALS['Filter_Plugin_Login_Header'] as $fpname => &$fpsignal) {$fpna
 <div class="header">
   <div class="am-g">
     <h1><?php echo htmlspecialchars($blogname) ?></h1>
-    <p><?php echo $zbp->subname; ?></p>
   </div>
   <hr />
 </div>
 <div class="am-g">
   <div class="am-u-lg-6 am-u-md-8 am-u-sm-centered">
-    <h3>登录</h3>
-    <hr>
-    
-	<?php if ($zbp->CheckPlugin('HaloQQ')) echo '<div class="am-btn-group"><a href="'.$zbp->host.'zb_users/plugin/HaloQQ/qqcmd.php" class="am-btn am-btn-secondary am-btn-sm"><i class="am-icon-qq am-icon-sm"></i> QQ</a><!-- <a href="#" class="am-btn am-btn-warning am-btn-sm"><i class="am-icon-weibo am-icon-sm"></i> 微博</a>
-      <a href="#" class="am-btn am-btn-success am-btn-sm"><i class="am-icon-wechat am-icon-sm"></i> 微信</a> -->
-    </div>';?>
-	
-
-		
-    <br>
-    <br>
-
     <form method="post" class="am-form">
       <label for="email"><?php echo $lang['msg']['username'] ?>:</label>
       <input type="email" name="edtUserName" id="email" value="<?php echo GetVars('username', 'COOKIE') ?>">
@@ -85,7 +70,7 @@ foreach ($GLOBALS['Filter_Plugin_Login_Header'] as $fpname => &$fpsignal) {$fpna
       <br />
       <div class="am-cf">
         <input id="btnPost" type="submit" name="btnPost" value="<?php echo $lang['msg']['login'] ?>" class="am-btn am-btn-primary am-btn-sm am-fl">
-        <input type="submit" name="" value="忘记密码 ^_^? " class="am-btn am-btn-default am-btn-sm am-fr">
+        <small class="am-fr"><a href="<?php echo $zbp->host; ?>" >返回首页</a></small>
 		
 	<input type="hidden" name="username" id="username" value="" />
 	<input type="hidden" name="password" id="password" value="" />
@@ -94,9 +79,10 @@ foreach ($GLOBALS['Filter_Plugin_Login_Header'] as $fpname => &$fpsignal) {$fpna
       </div>
     </form>
     <hr>
-<p class="copyright">&copy; <?php echo date('Y'); ?> <?php echo $zbp->name; ?><br/>Powered By <a href="http://www.zblogcn.com/" title="RainbowSoft Z-BlogPHP" target="_blank">Z-BlogPHP</a></p>
+<p class="copyright">&copy; <?php echo date('Y'); ?> <a href="<?php echo $zbp->host; ?>"><?php echo $zbp->name; ?></a><br/>Powered By <a href="http://www.zblogcn.com/" title="RainbowSoft Z-BlogPHP" target="_blank">Z-BlogPHP</a></p>
   </div>
 </div>
+
 <script type="text/javascript">
 $("#btnPost").click(function(){
 	var strUserName=$("#email").val();

@@ -1,6 +1,6 @@
 $(document).ready(function(){
 editor_api.editor.content.obj.ready(function(){
-var str='<link rel="stylesheet" rev="stylesheet" href="'+bloghost+'zb_users/plugin/dmt/editorplugs/uebuttons-post.css" type="text/css" media="all"/>';
+var str='<link rel="stylesheet" rev="stylesheet" href="'+bloghost+'zb_users/plugin/dm_tools/editorplugs/uebuttons-post.css" type="text/css" media="all"/>';
 for(var i=0;i<window.frames.length;i++){
 $(window.frames[i].document.head).append(str);
 }

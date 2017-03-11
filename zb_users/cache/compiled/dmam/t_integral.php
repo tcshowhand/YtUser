@@ -1,4 +1,4 @@
-<?php  /* Template Name:文章和页面 */  ?>
+<?php  /* Template Name:积分充值 */  ?>
 
 <?php  include $this->GetTemplate('header');  ?>
 <?php  include $this->GetTemplate('b_nav_top');  ?>

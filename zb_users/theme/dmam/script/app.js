@@ -126,6 +126,7 @@ if (!$('#istop_list li h3').length){
 	
 	if( $("#dm-site-nav").length){
 		var nav = $("#dm-site-nav").html();
+		var mtop = $("#dm-topbar .topbar-right").html();
 		$('body').append('\
 	<!-- 链接触发器， href 属性为目标元素 ID -->\
 <a href="#dm-mnav" class="mnavmenu" data-am-offcanvas> <i class="am-menu-toggle-icon am-icon-bars"></i></a>\
@@ -133,6 +134,7 @@ if (!$('#istop_list li h3').length){
 		<div id="dm-mnav" class="am-offcanvas">\
 		  <div class="am-offcanvas-bar">\
 			<div class="am-offcanvas-content">\
+		<div class="mtopmenu">'+mtop+'</div>\
 		<ul class="am-menu-nav sm-block-grid-1">'+nav+'</ul>\
 			</div>\
 		  </div>\

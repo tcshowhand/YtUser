@@ -1,4 +1,4 @@
-{* Template Name:文章和页面 *}
+{* Template Name:购买列表 *}
 <?php echo'<meta charset="UTF-8"><div style="text-align:center;padding:60px 0;font-size:16px;"><h2 style="font-size:60px;margin-bottom:32px;">打开这个网页的是傻逼</h2>吼吼!</div>';die();?>
 {template:header}
 {template:b_nav_top}
@@ -46,7 +46,7 @@
 				{if $article.State}
 				<td class="am-text-success">已支付</td>
 				{else}
-				<td><a class="am-text-danger" href="{$host}?buy&uid={$article.ID}">未支付</a></td>
+				<td><a class="am-text-danger" href="{$host}?buy&uid={$article.LogID}">未支付</a></td>
 				{/if}
               </tr>
 			  {/foreach}

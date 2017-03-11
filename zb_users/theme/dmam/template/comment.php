@@ -2,7 +2,7 @@
 <?php echo'<meta charset="UTF-8"><div style="text-align:center;padding:60px 0;font-size:16px;"><h2 style="font-size:60px;margin-bottom:32px;">打开这个网页的是傻逼</h2>吼吼!</div>';die();?>
 {if $zbp->CheckPlugin('CommentUA')}{$comment.CommentUA_GetUserAgent()}{/if}
 <li id="cmt-{$comment.ID}" class="am-comment">
-	<a class="avatar_a" href="{$comment.Author.HomePage}"><img {dmam_islasy("avatar",$comment.Author.Avatar)} class="am-comment-avatar">{if $comment.Author.Email == $zbp.members[1].Email}<i class="bb am-icon-gavel"></i>{/if}</a>
+	<a class="avatar_a" href="{$comment.Author.HomePage}"><img {dmam_islasy("avatar",$comment.Author.Avatar)} class="am-comment-avatar">{if $zbp->Config('dmam')->admin_id}{if $comment.Author.Email == $zbp.members[$zbp->Config('dmam')->admin_id].Email}<i class="bb am-icon-gavel"></i>{/if}{/if}</a>
 	<div class="am-comment-main">
 		<header class="am-comment-hd">
 			<div class="am-comment-meta">

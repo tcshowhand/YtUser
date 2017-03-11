@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<plugin version="php">
+<id>sf_praise_sdk</id>
+<name>文章点赞开发版</name>
+<url>http://www.iasuna.com/post/27.html</url>
+<note>提供给主题开发者使用</note>
+<description>提供给主题开发者使用，无css版，给主题开发者足够的空间定义自己的界面</description>
+<path>main.php</path>
+<include>include.php</include>
+<level>1</level>
+<author>
+  <name>shellingford</name>
+  <email>shellingford@vip.qq.com</email>
+  <url>http://www.iasuna.com</url>
+</author>
+<source>
+  <name></name>
+  <email></email>
+  <url></url>
+</source>
+<adapted>140614</adapted>
+<version>1.5</version>
+<pubdate>2014-08-25</pubdate>
+<modified>2014-10-26</modified>
+<price>0</price>
+<advanced>
+  <dependency></dependency>
+  <rewritefunctions></rewritefunctions>
+  <conflict>sf_praise</conflict>
+</advanced>
+<sidebars>
+  <sidebar1></sidebar1>
+  <sidebar2></sidebar2>
+  <sidebar3></sidebar3>
+  <sidebar4></sidebar4>
+  <sidebar5></sidebar5>
+</sidebars>
+</plugin>

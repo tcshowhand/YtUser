@@ -1,5 +1,13 @@
 {* Template Name:页头 *}
 <?php echo'<meta charset="UTF-8"><div style="text-align:center;padding:60px 0;font-size:16px;"><h2 style="font-size:60px;margin-bottom:32px;">打开这个网页的是傻逼</h2>吼吼!</div>';die();?>
+{php}
+$post_css = null;
+$post_js = null;
+if ($type == 'article'){
+	if ($article->Metas->post_css)$post_css = $article->Metas->post_css;
+	if ($article->Metas->post_script)$post_js = $article->Metas->post_script;
+}
+{/php}
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -17,7 +25,7 @@
 <!-- 主题自带SEO关闭 -->
 <title>{$name}{if $title}-{$title}{/if}</title>
 {/if}
-{dmam_load_source('header',$type)}
+{dmam_load_source('header',$type,$post_js)}
 {$header}
 <link rel="stylesheet" href="{$host}zb_users/theme/{$theme}/style/{$style}.css" type="text/css" media="all"/>
 {if $zbp->Config('dmam')->apple_ico}
@@ -34,6 +42,6 @@
 {if $zbp->Config('dmam')->pics_fv}
 <link rel="shortcut icon" href="{$zbp->Config('dmam')->pics_fv}">{else}<link rel="shortcut icon" href="{$host}favicon.ico">
 {/if}
-{php}dmam_head_css(){/php}
+{dmam_head_css($post_css)}
 </head>
 <body class="D_M {$type} {$zbp->Config('dmam')->topbar_fix?'dm-topbar-fixed':''}">

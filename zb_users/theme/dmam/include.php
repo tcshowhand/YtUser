@@ -7,11 +7,12 @@ require dirname(__FILE__) . DIRECTORY_SEPARATOR . 'plugin/searchplus.php';
 
 require dirname(__FILE__) . DIRECTORY_SEPARATOR . 'plugin/prise.php';
 RegisterPlugin("dmam","ActivePlugin_dmam");
-$dmam_ver = "20170227";
+$dmam_ver = "20170309";
 //函数接口
 function ActivePlugin_dmam(){
 	global $zbp;
-	Add_Filter_Plugin('Filter_Plugin_Admin_Header','dmam_editor_style');
+//	Add_Filter_Plugin('Filter_Plugin_Admin_Header','dmam_editor_style');
+	Add_Filter_Plugin('Filter_Plugin_Edit_Response','dmam_editor_style');
 	Add_Filter_Plugin('Filter_Plugin_Admin_TopMenu','dmam_AddMenu');
 	Add_Filter_Plugin('Filter_Plugin_Edit_Response3','dmam_Edit_3');
 	Add_Filter_Plugin('Filter_Plugin_Edit_Response5','dmam_Edit_5');
@@ -22,7 +23,7 @@ function ActivePlugin_dmam(){
 	Add_Filter_Plugin('Filter_Plugin_Category_Edit_Response','dmam_Edit_cat');
 	Add_Filter_Plugin('Filter_Plugin_ViewPost_Template','dmam_Content');
 	Add_Filter_Plugin('Filter_Plugin_Zbp_BuildTemplate','dmam_create_module');
-	Add_Filter_Plugin('Filter_Plugin_Edit_End','dmam_new_intro');
+	//Add_Filter_Plugin('Filter_Plugin_Edit_End','dmam_new_intro');
 	Add_Filter_Plugin('Filter_Plugin_Cmd_Ajax', 'dmam_prise_do');
 	Add_Filter_Plugin('Filter_Plugin_Cmd_Begin','dmam_Cmd_Begin');
 	Add_Filter_Plugin('Filter_Plugin_Zbp_MakeTemplatetags','dmam_Tmptags');
@@ -106,22 +107,32 @@ function dmam_check_pluin(){
 //文章编辑页面 编辑器js css
 function dmam_editor_style(){
 	global $zbp;
+/* 	echo '<script src="' . $zbp->host . 'zb_users/theme/'.$zbp->theme.'/script/editor.js" type="text/javascript"></script>'; */
 	echo '<link rel="stylesheet" href="' . $zbp->host . 'zb_users/theme/'.$zbp->theme.'/source/editor.css" type="text/css" media="screen" />';
 }
 
 function dmam_Content(&$template){
 	global $zbp;
 	$article = $template->GetTags('article');
+	if($article->Type == ZC_POST_TYPE_ARTICLE){
 	$pattern = "/<img(.*?)src=('|\")([^>]*).(bmp|gif|jpeg|jpg|png|tiff?|icon?)('|\")(.*?)>/i";
 	if ($zbp->Config('dmam')->lasyload_imgs){
 	$replacement = '<img class="thumb-post" src="'.$zbp->host.'zb_users/theme/'.$zbp->theme.'/style/images/loader.gif" data-echo="$3.$4" $1 $6>';
 	}else{
 	$replacement = '<img class="thumb-post" src="$3.$4" $1 $6>';	
 	}
-
 	$content = preg_replace($pattern, $replacement, $article->Content);
 	$article->Content = $content;
+/* 	
+	
+	$article->Intro = preg_replace("/\[hide_pay\](.*)\[\/hide_pay\]/Uims", '<p>****本段是付费内容***</p>',$article->Intro);
+	$article->Content = preg_replace("/\[hide_pay\](.*)\[\/hide_pay\]/Uims", '<p>****本段是付费内容***</p><p><input type="hidden" name="LogID" id="LogID" value="'.$userid.'" /><input type="submit" style="width:100px;font-size:1.0em;padding:0.2em" value="购买" onclick="return Ytbuy()" /></p>',$article->Content); */
+	
+if ($article->Metas->post_loginview && !$zbp->user->ID){
+	$article->Content = '当前状态不可见';	
+}
 	$template->SetTags('article', $article);
+	}
 }
 
 //纯文处理	
@@ -141,12 +152,12 @@ function dmam_txt($a,$b,$c,$d) {
 }
 
 //摘要优化
-function dmam_new_intro(){
+/* function dmam_new_intro(){
 	global $zbp;
 	echo <<<JS
 	<script type="text/javascript">function AutoIntro(d){var a=[],i=0,l=0,m={$zbp->option['ZC_ARTICLE_EXCERPT_MAX']},t="",s=editor_api.editor.content.get(),c=s.match(/<hr.*?class=['|"]more['|"].*?>/i),o=$("#divIntro");if(c){s=s.substr(0,c.index)}else{t=s.replace(/(<a.*?>.*?<\/a>|<strong.*?>.*?<\/strong>|<b.*?>.*?<\/b>|<img.*?>)/img,function(b){a.push(b);l+=b.match(/<[a-z]+.*?>(.*?)<\/[a-z]>/)?b.match(/<[a-z]+.*?>(.*?)<\/[a-z]>/)[1].length:0;return"<meta/>"}).substr(0,m+l);s=t.replace(/(<meta\/>)/img,function(){return a[i++]})}editor_api.editor.intro.put(s+(d?d:""));o[d?"hide":"show"]();!d&&$("html,body").animate({scrollTop:o.offset().top})}$("#edit").submit(function(){if(!editor_api.editor.intro.get())AutoIntro("<!--autointro-->")});</script>
 JS;
-}
+} */
 
 //图片延迟加载
 function dmam_islasy($lasy,$real){
@@ -273,11 +284,11 @@ function dmam_istoplist($a_tyle){
 	if ($a_tyle){return $avg.' '.$avgstyle.' istop-'.$a_tyle;}else{return $avg.' '.$avgstyle;}
 }
 //添加自定义CSS
-function dmam_head_css() {
+function dmam_head_css($post_css) {
 global $zbp;
     $styles = '';
     if ($zbp->Config('dmam')->site_maxwidth){
-		$styles .= ".D_M section.am-container,.dm-topbar-fixed header#dm-topbar,dm-footer{max-width:{$zbp->Config('dmam')->site_maxwidth}px}"."\r\n";
+		$styles .= ".D_M section.am-container,.dm-topbar-fixed header#dm-topbar,.dm-footer .am-container,header#dm-topbar{max-width:{$zbp->Config('dmam')->site_maxwidth}px;margin-left: auto;margin-right: auto;}"."\r\n";
 		}
 
     if( $zbp->Config('dmam')->site_gray ){
@@ -291,12 +302,15 @@ global $zbp;
     }
 	if ($zbp->Config('dmam')->logo_width){
 		$styles .= '#dm-topbar .am-container{padding-left:'.($zbp->Config('dmam')->logo_width+50).'px}'."\r\n";
-		$styles .= '@media (max-width:640px) {#dm-topbar .am-topbar-brand{margin-left:-'.($zbp->Config('dmam')->logo_width/2).'px;}}'."\r\n";
+		$styles .= '@media (max-width:640px) {#dm-topbar .am-container{padding-left:0;}#dm-topbar .am-topbar-brand{margin-left:-'.($zbp->Config('dmam')->logo_width/2).'px;}}'."\r\n";
 	}
 	
 	
 	if ($zbp->Config('dmam')->user_css){
-		$styles .= $zbp->Config('dmam')->user_css;
+		$styles .= "\r\n".$zbp->Config('dmam')->user_css."\r\n";
+		}
+	if ($post_css){
+		$styles .= "\r\n".$post_css."\r\n";
 		}
     if( $styles ){
 		echo '<style>'."\r\n".$styles."\r\n".'</style>';
@@ -403,20 +417,21 @@ function dmam_GetCount($hello) {
 	return $s;
 }
 
-function dmam_load_source($a_loc,$b_page) {
+function dmam_load_source($a_loc,$b_page,$c_postjs) {
 	global $zbp;
 	if (!$a_loc) $a_loc = null;
 	if (!$b_page) $b_page = null;
+	if (!$c_postjs) $c_postjs = null;
 	$s = '';
 	if ($a_loc == 'header'){
-	if ($zbp->Config('dmam')->site_cdn=='1'){
+		if ($zbp->Config('dmam')->site_cdn=='1'){
 		$s .= "\r\n".'<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js" type="text/javascript"></script>'."\r\n";
 		$s .= '<!--[if lt IE 9]><script src="//cdn.bootcss.com/amazeui/2.7.2/js/amazeui.ie8polyfill.min.js"></script><![endif]-->'."\r\n";
 		$s .= '<link rel="stylesheet" href="//cdn.bootcss.com/amazeui/2.7.2/css/amazeui.min.css" type="text/css" media="all" />'."\r\n";
 		$s .= '<script src="//cdn.bootcss.com/amazeui/2.7.2/js/amazeui.min.js"></script>'."\r\n";
 		$s .= $zbp->Config('dmam')->lasyload_imgs?'<script id="lazyload" src="//cdn.bootcss.com/echo.js/1.7.3/echo.min.js"></script>'."\r\n":'';
 		$s .= $zbp->Config('dmam')->pjax?'<script id="pjaxid" src="//cdn.bootcss.com/jquery.pjax/1.9.6/jquery.pjax.min.js"></script>'."\r\n":'';
-	}else{
+		}else{
 		$s .= "\r\n".'<script src="'.$zbp->host.'zb_system/script/jquery-2.2.4.min.js" type="text/javascript"></script>'."\r\n";
 		$s .= '<!--[if lt IE 9]><script src="'.$zbp->host.'zb_users/theme/'.$zbp->theme.'/style/amaze/js/amazeui.ie8polyfill.min.js"></script><![endif]-->'."\r\n";
 		$s .= '<script src="'.$zbp->host.'zb_users/theme/'.$zbp->theme.'/style/amaze/js/amazeui.min.js"></script>'."\r\n";
@@ -426,6 +441,9 @@ function dmam_load_source($a_loc,$b_page) {
 		}
 		$s .= '<script src="'.$zbp->host.'zb_system/script/zblogphp.js" type="text/javascript"></script>'."\r\n";
 		$s .= '<script src="'.$zbp->host.'zb_system/script/c_html_js_add.php" type="text/javascript"></script>'."\r\n";
+		if ($c_postjs){
+		$s .= $c_postjs."\r\n";
+		}
 		$s .= '<script type="text/javascript" src="'.$zbp->host.'zb_users/theme/'.$zbp->theme.'/script/main.js"></script>'."\r\n";
 		$s .= '<link rel="stylesheet" href="'.$zbp->host.'zb_users/theme/'.$zbp->theme.'/style/css/main.css" type="text/css" media="all"/>'."\r\n";
 	}else{

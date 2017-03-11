@@ -3,14 +3,14 @@
 function dmam_Edit_3(){
 	global $zbp,$article;
 	if ($_GET['act'] == 'PageEdt') {
-		$array = array('post_nosidebar'=>'无侧栏');
+		$array = array('post_nosidebar'=>'无侧栏','post_loginview'=>'登录可见');
 	} else {
-		$array = array('post_copy'=>'版权开关','post_nosidebar'=>'无侧栏','post_style'=>'文章列表','post_ispro_ids'=>'专题内容');
+		$array = array('post_copy'=>'版权开关','post_nosidebar'=>'无右侧栏','post_loginview'=>'登录可见','post_style'=>'文章列表','post_ispro_ids'=>'专题内容');
 	}
 	echo '<div id="dmam_Edit_3"><p class="dmam_Edit_3_title">+----+-----主题自定义参数-----+----+</p><ul>';
 	foreach ($array as $key => $value) {
 		if(!$value) $value = 'Metas.' . $key;
-		if ($key == 'post_copy'||$key == 'post_ispro'||$key == 'post_nosidebar'){
+		if ($key == 'post_copy'||$key == 'post_loginview'||$key == 'post_nosidebar'){
 			echo '<li><label for="'. $key .'" >' . $value . '</label><input name="meta_' . $key . '" type="text" value="'.htmlspecialchars($article->Metas->$key).'" class="checkbox"></li>';
 		}elseif($key == 'post_style') {
 			if ($article->Metas->$key == 'pics'){
@@ -103,7 +103,7 @@ echo '</table>';
 
 function dmam_Edit_cat(){
 global $zbp,$cate;
-echo '<p><span class="title">关键词：</span><br><input style="width:50%" placeholder="用英文逗号 &quot;,&quot;隔开 如:博客,模版,网站 " type="text" name="meta_keyword" value="'.htmlspecialchars($cate->Metas->keyword).'"></p>';
+echo '<p><span class="title">关键词：</span><br><input style="width:50%" placeholder="用英文逗号 &quot;,&quot;隔开 如:博客,模版,网站 " type="text" name="meta_keywords" value="'.htmlspecialchars($cate->Metas->keywords).'"></p>';
 }
 
 function dmam_Edit_user(){

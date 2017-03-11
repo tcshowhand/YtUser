@@ -45,17 +45,48 @@ if(count($_POST)>0){
 <?php if ($act == 'notice'){?>
 	<table class="themeset-form"  id="set-notice">
 		 <tr><td>【使用须知】</td></tr>
-		 <tr><td>1，如此主题为收费使用，请勿公开共享此主题</td></tr>
+		 <tr><td>1，请进群提问！！请进群提问！！请进群提问！！</br>
+		 →→→→<a href="https://jq.qq.com/?_wv=1027&k=45fX2q6 target="_blank">点击链接加入群【ZBLOG PHP 互助交流群】</a>←←←←</td></tr>
 		 <tr><td>2，请详细阅读此页面的须知，千万莫做“问题儿童”</td></tr>
 		 <tr><td>3，版权可以选择不显示，但是不显示版权的不提供任何帮助</td></tr>
 		 <tr><td>4，主题首页、首页分页和分类页、文章页、独立页面侧栏分别是sidebar 1/2/3/4</td></tr>
-		 <tr><td>5，使用此主题必装IMAGE和avatar插件，其他插件会做兼容处理</td></tr>
+		 <tr><td>5，使用此主题必装dm_tools和ggavatar插件，其他插件会做兼容处理</td></tr>
 	</table>
 <?php }
 if ($act == 'updata'){
 ?>
 	<table class="themeset-form"  id="set-updata">
 		 <tr><th colspan="2" style="text-align:left;">【更新日志】</th></tr>
+<tr>
+<td style="text-align:right;">20170309:</td>
+<td>1，移动端头部修改；2，头部和底部html调整；</td>
+</tr>
+<tr>
+<td style="text-align:right;">20170306:</td>
+<td>1，修复t_paylist模版一处字段错误</td>
+</tr>
+<tr>
+<td style="text-align:right;">20170306:</td>
+<td>1，修复一些没有完善的自定义字段；2，更换主题封面</td>
+</tr>
+<tr>
+<td style="text-align:right;">20170303:</td>
+<td>1，YTUSER插件变动适配</td>
+</tr>
+<tr>
+<td style="text-align:right;">20170301:</td>
+<td>1，正式开始适配 YT USER用户中心插件</td>
+</tr>	
+<tr>
+<td style="text-align:right;">20170227:</td>
+<td>1，修复独立页面；2，修复文章下面的几个按钮，调整了LOGO位置处理方式</td>
+</tr>	
+<tr>
+<td style="text-align:right;">20170225:</td>
+<td>1，修复文章归档</td>
+</tr>	
+ 
+		 
 <tr><td style="text-align:right;">20161119:</td><td>1，后台一些没完成的功能暂时屏蔽;2，滚动加载设置选择方式修改;</td></tr>
 		 		 <tr>
 		 <td style="text-align:right;">20161007:</td>

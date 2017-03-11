@@ -1,7 +1,10 @@
 <?php
 require dirname(__FILE__) . DIRECTORY_SEPARATOR .'thumb/dm_tools_thumb.php';
+
 require dirname(__FILE__) . DIRECTORY_SEPARATOR .'remoteimg/dm_tools_remoteimg.php';
+
 require dirname(__FILE__) . DIRECTORY_SEPARATOR .'articleimg/dm_tools_articleimg.php';
+
 $dm_tools = array(
 	"name" => "dm_tools",
 	"id" => "",
@@ -74,14 +77,14 @@ function dm_tools_make_templatetags(&$template){
             }, 2000);
         }
     });
-		</script>\n";
+		</script>\n"."\r\n";
 	}
 	if ($zbp->CheckPlugin('UEditor')&&$zbp->Config($dm_tools['name'])->dm_tools_ueditorplugs_ueditor) {
-		$zbp->header .='<link rel="stylesheet" rev="stylesheet" href="'. $dm_tools['url'].'editorplugs/uebuttons-post.css" type="text/css" media="all"/>';
+		$zbp->header .='<link rel="stylesheet" rev="stylesheet" href="'. $dm_tools['url'].'editorplugs/uebuttons-post.css" type="text/css" media="all"/>'."\r\n";
 	}
-		$zbp->footer .= $zbp->Config($dm_tools['name'])->dm_tools_autobaidu_switch?"<script>(function(){var bp = document.createElement('script');bp.src = '//push.zhanzhang.baidu.com/push.js';var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bp, s);})();</script>":'';
+		$zbp->footer .= $zbp->Config($dm_tools['name'])->dm_tools_autobaidu_switch?"<script>(function(){var bp = document.createElement('script');bp.src = '//push.zhanzhang.baidu.com/push.js';var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bp, s);})();</script>"."\r\n":'';
 		if ($zbp->Config($dm_tools['name'])->dm_tools_autoso){
-		$zbp->footer .= '<script>(function(){var src = (document.location.protocol == "http:") ? "http://js.passport.qihucdn.com/11.0.1.js?'.$zbp->Config($dm_tools['name'])->dm_tools_autoso.'":"https://jspassport.ssl.qhimg.com/11.0.1.js?'.$zbp->Config($dm_tools['name'])->dm_tools_autoso.'";document.write(\'<script src="\' + src + \'" id="sozz"><\/script>\');})();</script>';	
+		$zbp->footer .= '<script>(function(){var src = (document.location.protocol == "http:") ? "http://js.passport.qihucdn.com/11.0.1.js?'.$zbp->Config($dm_tools['name'])->dm_tools_autoso.'":"https://jspassport.ssl.qhimg.com/11.0.1.js?'.$zbp->Config($dm_tools['name'])->dm_tools_autoso.'";document.write(\'<script src="\' + src + \'" id="sozz"><\/script>\');})();</script>'."\r\n";	
 		}	
 
 }
@@ -105,15 +108,15 @@ global $zbp,$dm_tools;
 }
 function dm_tools_my_tinymce_addcss(&$mce_css){
   global $zbp,$dm_tools;
-  $mce_css[]=$dm_tools['url'].'editorplugs/tinymcebuttons.css';
+  $mce_css[]=$dm_tools['url'].'editorplugs/tinymcebuttons.css'."\r\n";
 }
 
 //Uditor按钮
 function dm_tools_editor_begin(){
 	global $zbp,$dm_tools;
-	 echo $zbp->Config($dm_tools['name'])->dm_tools_autotags_switch?"<script src='" . $dm_tools['url'] . "autotags/plugin.js' type='text/javascript'></script>":'';
+	 echo $zbp->Config($dm_tools['name'])->dm_tools_autotags_switch?"<script src='" . $dm_tools['url'] . "autotags/plugin.js' type='text/javascript'></script>"."\r\n":'';
 	if ($zbp->CheckPlugin('UEditor')&&$zbp->Config($dm_tools['name'])->dm_tools_ueditorplugs_ueditor) {
-	echo '<script src="'. $dm_tools['url'].'editorplugs/uebuttons-editor.js" type="text/javascript"></script>';
+	echo '<script src="'. $dm_tools['url'].'editorplugs/uebuttons-editor.js" type="text/javascript"></script>'."\r\n";
 	}
 }
 

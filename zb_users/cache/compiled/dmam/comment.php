@@ -2,7 +2,7 @@
 
 <?php if ($zbp->CheckPlugin('CommentUA')) { ?><?php  echo $comment->CommentUA_GetUserAgent();  ?><?php } ?>
 <li id="cmt-<?php  echo $comment->ID;  ?>" class="am-comment">
-	<a class="avatar_a" href="<?php  echo $comment->Author->HomePage;  ?>"><img <?php  echo dmam_islasy("avatar",$comment->Author->Avatar);  ?> class="am-comment-avatar"><?php if ($comment->Author->Email == $zbp->members[1]->Email) { ?><i class="bb am-icon-gavel"></i><?php } ?></a>
+	<a class="avatar_a" href="<?php  echo $comment->Author->HomePage;  ?>"><img <?php  echo dmam_islasy("avatar",$comment->Author->Avatar);  ?> class="am-comment-avatar"><?php if ($zbp->Config('dmam')->admin_id) { ?><?php if ($comment->Author->Email == $zbp->members[$zbp->Config('dmam')->admin_id]->Email) { ?><i class="bb am-icon-gavel"></i><?php } ?><?php } ?></a>
 	<div class="am-comment-main">
 		<header class="am-comment-hd">
 			<div class="am-comment-meta">
