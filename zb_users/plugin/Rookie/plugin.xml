@@ -1,34 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <plugin version="php">
-<id>dm_tools</id>
-<name>ZB小工具集合</name>
-<url>https://www.imlgm.com.com/</url>
-<note>ZB小工具集合</note>
-<description></description>
-<path>set.php</path>
+<id>Rookie</id>
+<name>消灭侧边下移错位</name>
+<url>http://www.songzhenjiang.cn/</url>
+<note>修复常用主题错位神器</note>
+<description>修复常用主题错位神器</description>
+<path></path>
 <include>include.php</include>
 <level>1</level>
 <author>
-  <name>大谋</name>
-  <email>76453189@qq.com</email>
-  <url>http://www.imlgm.com</url>
+  <name>唐朝</name>
+  <email>79300975@qq.com</email>
+  <url>http://www.songzhenjiang.cn</url>
 </author>
 <source>
   <name></name>
   <email></email>
   <url></url>
 </source>
-<adapted>151740</adapted>
+<adapted>150101</adapted>
 <version>1.1</version>
-<pubdate>2014-08-27</pubdate>
-<modified>2017-03-04</modified>
+<pubdate>2015-09-30</pubdate>
+<modified>2015-09-30</modified>
 <price>0</price>
-<phpver>5.2</phpver>
 <advanced>
   <dependency></dependency>
   <rewritefunctions></rewritefunctions>
-  <existsfunctions></existsfunctions>
-  <conflict>IMAGE</conflict>
+  <conflict></conflict>
 </advanced>
 <sidebars>
   <sidebar1></sidebar1>

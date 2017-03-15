@@ -1,0 +1,328 @@
+[2017-03-15 13:31:01 .39320700 +08:00]
+array (
+  0 => 'Error',
+  1 => 8,
+  2 => 'Undefined index: imgs',
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\base.php',
+  4 => 78,
+)
+[2017-03-15 13:43:48 .65566700 +08:00]
+array (
+  0 => 'Shutdown',
+  1 => 4,
+  2 => 'syntax error, unexpected \'；\' (T_STRING)',
+  3 => 'E:\\songweb\\kangyijia\\zb_users\\plugin\\YtUser\\include.php',
+  4 => 73,
+)
+[2017-03-15 13:44:00 .74218600 +08:00]
+array (
+  0 => 'Shutdown',
+  1 => 1,
+  2 => 'Call to undefined function shortcode_atts()',
+  3 => 'E:\\songweb\\kangyijia\\zb_users\\plugin\\YtUser\\include.php',
+  4 => 74,
+)
+[2017-03-15 13:58:03 .65968300 +08:00]
+array (
+  0 => 'Error',
+  1 => 2,
+  2 => 'preg_replace(): Unknown modifier \'(\'',
+  3 => 'E:\\songweb\\kangyijia\\zb_users\\plugin\\YtUser\\include.php',
+  4 => 48,
+)
+[2017-03-15 13:58:12 .12642700 +08:00]
+array (
+  0 => 'Error',
+  1 => 2,
+  2 => 'preg_replace(): Unknown modifier \'(\'',
+  3 => 'E:\\songweb\\kangyijia\\zb_users\\plugin\\YtUser\\include.php',
+  4 => 48,
+)
+[2017-03-15 13:58:17 .80191700 +08:00]
+array (
+  0 => 'Error',
+  1 => 2,
+  2 => 'preg_replace(): Compilation failed: missing terminating ] for character class at offset 28',
+  3 => 'E:\\songweb\\kangyijia\\zb_users\\plugin\\YtUser\\include.php',
+  4 => 48,
+)
+[2017-03-15 13:58:30 .64956000 +08:00]
+array (
+  0 => 'Error',
+  1 => 2,
+  2 => 'preg_replace(): No ending delimiter \'/\' found',
+  3 => 'E:\\songweb\\kangyijia\\zb_users\\plugin\\YtUser\\include.php',
+  4 => 48,
+)
+[2017-03-15 13:58:37 .65571600 +08:00]
+array (
+  0 => 'Error',
+  1 => 2,
+  2 => 'preg_replace(): Compilation failed: missing terminating ] for character class at offset 28',
+  3 => 'E:\\songweb\\kangyijia\\zb_users\\plugin\\YtUser\\include.php',
+  4 => 48,
+)
+[2017-03-15 13:58:38 .21339900 +08:00]
+array (
+  0 => 'Error',
+  1 => 2,
+  2 => 'preg_replace(): Compilation failed: missing terminating ] for character class at offset 28',
+  3 => 'E:\\songweb\\kangyijia\\zb_users\\plugin\\YtUser\\include.php',
+  4 => 48,
+)
+[2017-03-15 13:59:11 .09867700 +08:00]
+array (
+  0 => 'Error',
+  1 => 2,
+  2 => 'preg_replace(): No ending delimiter \'/\' found',
+  3 => 'E:\\songweb\\kangyijia\\zb_users\\plugin\\YtUser\\include.php',
+  4 => 48,
+)
+[2017-03-15 14:00:00 .65965300 +08:00]
+array (
+  0 => 'Error',
+  1 => 2,
+  2 => 'preg_replace(): Unknown modifier \']\'',
+  3 => 'E:\\songweb\\kangyijia\\zb_users\\plugin\\YtUser\\include.php',
+  4 => 48,
+)
+[2017-03-15 14:01:49 .10298200 +08:00]
+array (
+  0 => 'Error',
+  1 => 2,
+  2 => 'preg_replace(): Unknown modifier \']\'',
+  3 => 'E:\\songweb\\kangyijia\\zb_users\\plugin\\YtUser\\include.php',
+  4 => 47,
+)
+[2017-03-15 14:01:50 .15563800 +08:00]
+array (
+  0 => 'Error',
+  1 => 2,
+  2 => 'preg_replace(): Unknown modifier \']\'',
+  3 => 'E:\\songweb\\kangyijia\\zb_users\\plugin\\YtUser\\include.php',
+  4 => 47,
+)
+[2017-03-15 14:06:07 .08135100 +08:00]
+array (
+  0 => 'Error',
+  1 => 2,
+  2 => 'preg_replace(): Unknown modifier \'B\'',
+  3 => 'E:\\songweb\\kangyijia\\zb_users\\plugin\\YtUser\\include.php',
+  4 => 47,
+)
+[2017-03-15 14:07:29 .68249400 +08:00]
+array (
+  0 => 'Error',
+  1 => 2,
+  2 => 'preg_replace(): Unknown modifier \'B\'',
+  3 => 'E:\\songweb\\kangyijia\\zb_users\\plugin\\YtUser\\include.php',
+  4 => 47,
+)
+[2017-03-15 14:07:30 .57150500 +08:00]
+array (
+  0 => 'Error',
+  1 => 2,
+  2 => 'preg_replace(): Unknown modifier \'B\'',
+  3 => 'E:\\songweb\\kangyijia\\zb_users\\plugin\\YtUser\\include.php',
+  4 => 47,
+)
+[2017-03-15 14:08:18 .12508800 +08:00]
+array (
+  0 => 'Error',
+  1 => 2,
+  2 => 'preg_replace(): Unknown modifier \'B\'',
+  3 => 'E:\\songweb\\kangyijia\\zb_users\\plugin\\YtUser\\include.php',
+  4 => 47,
+)
+[2017-03-15 14:08:22 .63997500 +08:00]
+array (
+  0 => 'Error',
+  1 => 2,
+  2 => 'preg_replace(): No ending delimiter \'/\' found',
+  3 => 'E:\\songweb\\kangyijia\\zb_users\\plugin\\YtUser\\include.php',
+  4 => 47,
+)
+[2017-03-15 14:08:23 .37847000 +08:00]
+array (
+  0 => 'Error',
+  1 => 2,
+  2 => 'preg_replace(): No ending delimiter \'/\' found',
+  3 => 'E:\\songweb\\kangyijia\\zb_users\\plugin\\YtUser\\include.php',
+  4 => 47,
+)
+[2017-03-15 14:08:23 .83401000 +08:00]
+array (
+  0 => 'Error',
+  1 => 2,
+  2 => 'preg_replace(): No ending delimiter \'/\' found',
+  3 => 'E:\\songweb\\kangyijia\\zb_users\\plugin\\YtUser\\include.php',
+  4 => 47,
+)
+[2017-03-15 14:08:27 .61767900 +08:00]
+array (
+  0 => 'Error',
+  1 => 2,
+  2 => 'preg_replace(): No ending delimiter \'/\' found',
+  3 => 'E:\\songweb\\kangyijia\\zb_users\\plugin\\YtUser\\include.php',
+  4 => 47,
+)
+[2017-03-15 14:08:28 .09722300 +08:00]
+array (
+  0 => 'Error',
+  1 => 2,
+  2 => 'preg_replace(): No ending delimiter \'/\' found',
+  3 => 'E:\\songweb\\kangyijia\\zb_users\\plugin\\YtUser\\include.php',
+  4 => 47,
+)
+[2017-03-15 14:08:28 .27364300 +08:00]
+array (
+  0 => 'Error',
+  1 => 2,
+  2 => 'preg_replace(): No ending delimiter \'/\' found',
+  3 => 'E:\\songweb\\kangyijia\\zb_users\\plugin\\YtUser\\include.php',
+  4 => 47,
+)
+[2017-03-15 14:08:28 .49895800 +08:00]
+array (
+  0 => 'Error',
+  1 => 2,
+  2 => 'preg_replace(): No ending delimiter \'/\' found',
+  3 => 'E:\\songweb\\kangyijia\\zb_users\\plugin\\YtUser\\include.php',
+  4 => 47,
+)
+[2017-03-15 14:08:32 .72526400 +08:00]
+array (
+  0 => 'Error',
+  1 => 2,
+  2 => 'preg_replace(): Unknown modifier \'\\\'',
+  3 => 'E:\\songweb\\kangyijia\\zb_users\\plugin\\YtUser\\include.php',
+  4 => 47,
+)
+[2017-03-15 14:08:33 .30237300 +08:00]
+array (
+  0 => 'Error',
+  1 => 2,
+  2 => 'preg_replace(): Unknown modifier \'\\\'',
+  3 => 'E:\\songweb\\kangyijia\\zb_users\\plugin\\YtUser\\include.php',
+  4 => 47,
+)
+[2017-03-15 14:08:36 .84975500 +08:00]
+array (
+  0 => 'Error',
+  1 => 2,
+  2 => 'preg_replace(): No ending delimiter \'/\' found',
+  3 => 'E:\\songweb\\kangyijia\\zb_users\\plugin\\YtUser\\include.php',
+  4 => 47,
+)
+[2017-03-15 14:08:37 .55326500 +08:00]
+array (
+  0 => 'Error',
+  1 => 2,
+  2 => 'preg_replace(): No ending delimiter \'/\' found',
+  3 => 'E:\\songweb\\kangyijia\\zb_users\\plugin\\YtUser\\include.php',
+  4 => 47,
+)
+[2017-03-15 14:08:41 .74355500 +08:00]
+array (
+  0 => 'Error',
+  1 => 2,
+  2 => 'preg_replace(): No ending delimiter \'/\' found',
+  3 => 'E:\\songweb\\kangyijia\\zb_users\\plugin\\YtUser\\include.php',
+  4 => 47,
+)
+[2017-03-15 14:08:42 .33072200 +08:00]
+array (
+  0 => 'Error',
+  1 => 2,
+  2 => 'preg_replace(): No ending delimiter \'/\' found',
+  3 => 'E:\\songweb\\kangyijia\\zb_users\\plugin\\YtUser\\include.php',
+  4 => 47,
+)
+[2017-03-15 14:08:42 .77803600 +08:00]
+array (
+  0 => 'Error',
+  1 => 2,
+  2 => 'preg_replace(): No ending delimiter \'/\' found',
+  3 => 'E:\\songweb\\kangyijia\\zb_users\\plugin\\YtUser\\include.php',
+  4 => 47,
+)
+[2017-03-15 14:08:47 .53561000 +08:00]
+array (
+  0 => 'Error',
+  1 => 2,
+  2 => 'preg_replace(): No ending delimiter \'/\' found',
+  3 => 'E:\\songweb\\kangyijia\\zb_users\\plugin\\YtUser\\include.php',
+  4 => 47,
+)
+[2017-03-15 14:09:03 .08329200 +08:00]
+array (
+  0 => 'Error',
+  1 => 2,
+  2 => 'preg_replace(): Unknown modifier \'h\'',
+  3 => 'E:\\songweb\\kangyijia\\zb_users\\plugin\\YtUser\\include.php',
+  4 => 47,
+)
+[2017-03-15 14:09:03 .75663300 +08:00]
+array (
+  0 => 'Error',
+  1 => 2,
+  2 => 'preg_replace(): Unknown modifier \'h\'',
+  3 => 'E:\\songweb\\kangyijia\\zb_users\\plugin\\YtUser\\include.php',
+  4 => 47,
+)
+[2017-03-15 14:12:47 .83065100 +08:00]
+array (
+  0 => 'Error',
+  1 => 2,
+  2 => 'Missing argument 2 for shortcode_atts(), called in E:\\songweb\\kangyijia\\zb_users\\plugin\\YtUser\\include.php on line 46 and defined',
+  3 => 'E:\\songweb\\kangyijia\\zb_users\\plugin\\YtUser\\include.php',
+  4 => 72,
+)
+[2017-03-15 14:12:48 .73777400 +08:00]
+array (
+  0 => 'Error',
+  1 => 2,
+  2 => 'Missing argument 2 for shortcode_atts(), called in E:\\songweb\\kangyijia\\zb_users\\plugin\\YtUser\\include.php on line 46 and defined',
+  3 => 'E:\\songweb\\kangyijia\\zb_users\\plugin\\YtUser\\include.php',
+  4 => 72,
+)
+[2017-03-15 14:14:21 .35904600 +08:00]
+array (
+  0 => 'Error',
+  1 => 2,
+  2 => 'array_keys() expects parameter 1 to be array, null given',
+  3 => 'E:\\songweb\\kangyijia\\zb_users\\plugin\\YtUser\\include.php',
+  4 => 77,
+)
+[2017-03-15 14:14:31 .29325300 +08:00]
+array (
+  0 => 'Error',
+  1 => 8,
+  2 => 'Array to string conversion',
+  3 => 'E:\\songweb\\kangyijia\\zb_users\\cache\\compiled\\default\\post-single.php',
+  4 => 5,
+)
+[2017-03-15 14:14:32 .16182400 +08:00]
+array (
+  0 => 'Error',
+  1 => 8,
+  2 => 'Array to string conversion',
+  3 => 'E:\\songweb\\kangyijia\\zb_users\\cache\\compiled\\default\\post-single.php',
+  4 => 5,
+)
+[2017-03-15 14:14:43 .65977800 +08:00]
+array (
+  0 => 'Error',
+  1 => 8,
+  2 => 'Array to string conversion',
+  3 => 'E:\\songweb\\kangyijia\\zb_users\\cache\\compiled\\default\\post-single.php',
+  4 => 5,
+)
+[2017-03-15 14:19:28 .18632300 +08:00]
+array (
+  0 => 'Error',
+  1 => 2,
+  2 => 'preg_replace(): Compilation failed: nothing to repeat at offset 3',
+  3 => 'E:\\songweb\\kangyijia\\zb_users\\plugin\\YtUser\\include.php',
+  4 => 46,
+)
