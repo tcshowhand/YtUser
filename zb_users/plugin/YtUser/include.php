@@ -7,10 +7,10 @@ RegisterPlugin("YtUser","ActivePlugin_YtUser");
 function ActivePlugin_YtUser() {
 	Add_Filter_Plugin('Filter_Plugin_Zbp_MakeTemplatetags','YtUser_Main');
 	Add_Filter_Plugin('Filter_Plugin_Index_Begin','YtUser_page');
-    Add_Filter_Plugin('Filter_Plugin_Html_Js_Add', 'YtUser_SyntaxHighlighter_print');
-    Add_Filter_Plugin('Filter_Plugin_Admin_TopMenu', 'YtUser_AddMenu');
-    Add_Filter_Plugin('Filter_Plugin_ViewPost_Template','YtUser_Content');
-    Add_Filter_Plugin('Filter_Plugin_Edit_Response3','YtUser_Edit');
+	Add_Filter_Plugin('Filter_Plugin_Html_Js_Add', 'YtUser_SyntaxHighlighter_print');
+	Add_Filter_Plugin('Filter_Plugin_Admin_TopMenu', 'YtUser_AddMenu');
+	Add_Filter_Plugin('Filter_Plugin_ViewPost_Template','YtUser_Content');
+	Add_Filter_Plugin('Filter_Plugin_Edit_Response3','YtUser_Edit');
 }
 
 function YtUser_AddMenu(&$m) {
@@ -75,7 +75,6 @@ function YtUser_SyntaxHighlighter_print() {
     $zbp->Load();
     if($zbp->user->ID){echo '$(function() {var $cpLogin = $(".cp-login").find("a");var $cpVrs = $(".cp-vrs").find("a");$(".cp-hello").html("欢迎 '.$zbp->user->StaticName.'  <a href=\"'.$zbp->host.'?Articleedt\">投稿</a>");$cpLogin.html("会员中心");$cpLogin.attr("href", bloghost + "?User");$cpVrs.html("评论列表");$cpVrs.attr("href", bloghost + "?Commentlist");});';}else{echo'$(function () {$(".cp-login").html("<p><a href=\"'.$zbp->host.'?Login\">会员登录</a><a href=\"'.$zbp->host.'?Register\">会员注册</a><p>");$(".cp-vrs").html("<div class=\"ds-login\"></div>");$(".cp-hello").hide();$("#divContorPanel br").hide();$("#divContorPanel").each(function() { var text = $(this).html().replace(/&nbsp;/g, "");text = text;$(this).html(text);});});';}
 }
-
 
 function InstallPlugin_YtUser() {
 	global $zbp;
