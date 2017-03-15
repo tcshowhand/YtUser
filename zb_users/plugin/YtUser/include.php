@@ -7,10 +7,10 @@ RegisterPlugin("YtUser","ActivePlugin_YtUser");
 function ActivePlugin_YtUser() {
 	Add_Filter_Plugin('Filter_Plugin_Zbp_MakeTemplatetags','YtUser_Main');
 	Add_Filter_Plugin('Filter_Plugin_Index_Begin','YtUser_page');
-    Add_Filter_Plugin('Filter_Plugin_Html_Js_Add', 'YtUser_SyntaxHighlighter_print');
-    Add_Filter_Plugin('Filter_Plugin_Admin_TopMenu', 'YtUser_AddMenu');
-    Add_Filter_Plugin('Filter_Plugin_ViewPost_Template','YtUser_Content');
-    Add_Filter_Plugin('Filter_Plugin_Edit_Response3','YtUser_Edit');
+	Add_Filter_Plugin('Filter_Plugin_Html_Js_Add', 'YtUser_SyntaxHighlighter_print');
+	Add_Filter_Plugin('Filter_Plugin_Admin_TopMenu', 'YtUser_AddMenu');
+	Add_Filter_Plugin('Filter_Plugin_ViewPost_Template','YtUser_Content');
+	Add_Filter_Plugin('Filter_Plugin_Edit_Response3','YtUser_Edit');
 }
 
 function YtUser_AddMenu(&$m) {
@@ -28,9 +28,7 @@ function YtUser_Main(){
 function YtUser_Edit(){
 	global $article;
 	echo '<div id="price" class="editmod"><label for="edtIslock" class="editinputname">价格</label><input type="text" name="meta_price" id="price" value="'.(int)$article->Metas->price.'" style="width:180px;" class="hasDatepicker"></div>';
-    echo '<div id="price" class="editmod"><label for="edtIslock" class="editinputname">第<input type="text" name="meta_buysuccess" id="buysuccess" value="'.(int)$article->Metas->buysuccess.'" style="width:30px;" class="hasDatepicker">段内容付费？</label>
-
-    </div>';
+    echo '<div id="price" class="editmod">付费内容用[BuyView][/BuyView]包起来</div>';
 }
 function YtUser_Content(&$template){
 	global $zbp;
@@ -44,8 +42,9 @@ function YtUser_Content(&$template){
         $num=count($array);
             if($num){
                 $article->Buypay = 1;
+                $content = preg_replace("/\[(.*?)BuyView\]/sm",'',$content);
             }else{
-            	$content = YtUser_insert_after_paragraph($userid,$article->Metas->buysuccess,$content);
+                $content = preg_replace("/\[BuyView\](.*?)\[\/BuyView\]/sm",'<p>****此部分是付费内容***</p><p><input type="hidden" name="LogID" id="LogID" value="'.$userid.'" /><input type="submit" style="width:100px;font-size:1.0em;padding:0.2em" value="购买" onclick="return Ytbuy()" /></p>',$content);
 		    	$zbp->header .='<script src="'.$zbp->host.'zb_users/plugin/YtUser/Upgrade.js" type="text/javascript"></script>' . "\r\n";
 		    }
         $article->Content = $content;
@@ -68,21 +67,6 @@ function YtUser_Content(&$template){
 
 }
 
-
-function YtUser_insert_after_paragraph($userid,$paragraph_id, $content ) {
-    $closing_p = '</p>';
-    $paragraphs = explode( $closing_p, $content );
-    foreach ($paragraphs as $index => $paragraph) {
-        if ( trim( $paragraph ) ) {
-            $paragraphs[$index] .= $closing_p;
-        }
-        if ( $paragraph_id == $index + 1 ) {
-            $paragraphs[$index] = '<p>****本段是付费内容***</p><p><input type="hidden" name="LogID" id="LogID" value="'.$userid.'" /><input type="submit" style="width:100px;font-size:1.0em;padding:0.2em" value="购买" onclick="return Ytbuy()" /></p>';
-        }
-    }
-    return implode( '', $paragraphs );
-}
-
 function YtUser_SyntaxHighlighter_print() {
     global $zbp;
     if (!$zbp->option['ZC_SYNTAXHIGHLIGHTER_ENABLE']) {
@@ -91,7 +75,6 @@ function YtUser_SyntaxHighlighter_print() {
     $zbp->Load();
     if($zbp->user->ID){echo '$(function() {var $cpLogin = $(".cp-login").find("a");var $cpVrs = $(".cp-vrs").find("a");$(".cp-hello").html("欢迎 '.$zbp->user->StaticName.'  <a href=\"'.$zbp->host.'?Articleedt\">投稿</a>");$cpLogin.html("会员中心");$cpLogin.attr("href", bloghost + "?User");$cpVrs.html("评论列表");$cpVrs.attr("href", bloghost + "?Commentlist");});';}else{echo'$(function () {$(".cp-login").html("<p><a href=\"'.$zbp->host.'?Login\">会员登录</a><a href=\"'.$zbp->host.'?Register\">会员注册</a><p>");$(".cp-vrs").html("<div class=\"ds-login\"></div>");$(".cp-hello").hide();$("#divContorPanel br").hide();$("#divContorPanel").each(function() { var text = $(this).html().replace(/&nbsp;/g, "");text = text;$(this).html(text);});});';}
 }
-
 
 function InstallPlugin_YtUser() {
 	global $zbp;
