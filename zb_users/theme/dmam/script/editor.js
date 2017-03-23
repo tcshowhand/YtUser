@@ -8,15 +8,15 @@ UE.registerUI('文章隐藏',function(editor,uiName){
 		range.select();
 		var txt = editor.selection.getText();
 		if(txt==null || txt==""){
-			txt="请输入需要隐藏的内容<br/>";
+			txt="<br/>请输入"+hiddes[value]+"的内容<br/>";
 		}
-		editor.execCommand('insertHtml', '<div class="'+value+'">'+txt+'</div>');
+		editor.execCommand('insertHtml', '['+value+']'+txt+'[/'+value+']');
         }
     });
 
     //创建下拉菜单中的键值对
     var items = [];
-	var hiddes={ffkj:'付费可见'/* ,hfkj:'回复可见', fxkj:'分享可见' */};
+	var hiddes={BuyView:'付费可见', LoginView5:'LEVEL5可见', LoginView4:'LEVEL4可见', LoginView3:'LEVEL3可见', LoginView2:'LEVEL2可见', LoginView1:'LEVEL1可见'/* ,ComView:'回复可见', ShareView:'分享可见' */};
     for(key in hiddes){
         items.push({
             label:hiddes[key],

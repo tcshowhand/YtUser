@@ -24,12 +24,10 @@ $verifycode=trim($_POST['verifycode']);
 if(!$zbp->CheckValidCode($verifycode,'register')){
 	$zbp->ShowError('验证码错误，请重新输入.');die();
 }
-
 $guid=GetGuid();
 $member=new Member;
 $member->Guid=$guid;
 $member->Level=5;
-
 if(strlen($name)<$zbp->option['ZC_USERNAME_MIN']||strlen($name)>$zbp->option['ZC_USERNAME_MAX']){
 	$zbp->ShowError('用户名不能过长或过短.');die();
 }
@@ -88,5 +86,4 @@ $DataArr = array(
 $sql= $zbp->db->sql->Insert($YtdsSlide_Table,$DataArr);
 $zbp->db->Insert($sql);
 echo '恭喜您注册成功,请在登录页面登录.';
-
 ?>

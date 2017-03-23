@@ -1,0 +1,8 @@
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule static/(.*?)-(.*?)-(.*?)-(.*?)-a\.jpg zb_users/plugin/IMAGE/pic\.php?src=$1&width=$2&height=$3&cuttype=$4 
+RewriteRule . /index.php 
+</IfModule>

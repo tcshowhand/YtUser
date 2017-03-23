@@ -1,4 +1,4 @@
-{* Template Name:文章页面 *}
+{* Template Name:文章页面 *} 
 <?php echo'<meta charset="UTF-8"><div style="text-align:center;padding:60px 0;font-size:16px;"><h2 style="font-size:60px;margin-bottom:32px;">打开这个网页的是傻逼</h2>吼吼!</div>';die();?>
 	<div class="dm-container {$article->Metas->post_nosidebar?'am-u-lg-12':'am-u-lg-8'}">
 		<ol class="am-breadcrumb">
@@ -37,11 +37,10 @@
 				</p>
 		  </header>
 		  <section class="am-article-bd">
-		   {if $zbp->Config('dmam')->article_intro && trim(SubStrUTF8(TransferHTML($article->Intro,'[nohtml]'),80))}
+		   {if !GetVars('pagenum', 'GET') && $zbp->Config('dmam')->article_intro && trim(SubStrUTF8(TransferHTML($article->Intro,'[nohtml]'),80))}
 		   <p class="am-article-lead">{trim(SubStrUTF8(TransferHTML($article->Intro,'[nohtml]'),80))}</p>
 		   {/if}
-		  {$article.Content}
-
+		{$article.Content}
 		  </section>
 			{if count($article.Tags)}
 			<h4 class="dm-article-tags am-icon-tag"> 标签: {foreach $article.Tags as $tag}<a href="{$tag.Url}">{$tag.Name}</a>{/foreach}</h4>
@@ -50,18 +49,6 @@
 			<div class="dm-article-copyright"><span>{$article.Author.StaticName}</span><time>发布于：{$article.Time('Y年m月d日')}</time></div>
 			{else}
 			{/if}
-
-
-
-            <div class="sf-praise-sdk" sfa='click' data-postid='{$sf_praise_sdk.postid}' data-value="1" data-ok='zijiqugemingzi'>
-顶（<span class="sf-praise-sdk" sfa='num' data-value='1' data-postid='{$sf_praise_sdk.postid}'>{$sf_praise_sdk.value1}</span>）
-</div>
-<div class="sf-praise-sdk" sfa='click' data-postid='{$sf_praise_sdk.postid}' data-value="2">
-踩<span class="sf-praise-sdk" sfa='num' data-value='2' data-postid='{$sf_praise_sdk.postid}'>{$sf_praise_sdk.value2}</span>）
-</div>
-
-
-
 {php}
 $dm_social = array();
 $dm_social_n = '';

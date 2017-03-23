@@ -18,6 +18,7 @@ if ($type == 'article'){
 <meta http-equiv="Cache-Control" content="no-transform">
 <meta http-equiv="Cache-Control" content="no-siteapp">
 <meta name="generator" content="{$zblogphp}" />
+<meta name="site" content="{$host}" />
 {if $zbp->Config('dmam')->headmate}{$zbp->Config('dmam')->headmate}{/if}
 {if $zbp->Config('dmam')->theme_seo}
 {template:b_header_seo}

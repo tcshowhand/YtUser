@@ -28,11 +28,12 @@ function YtUser_ReplacePre(&$s) {
 
 function YtUser_SubMenu($id){
     $arySubMenu = array(
-        0 => array('网站设置', 'base', 'left', false),
-        1 => array('VIP月卡', 'upgrade', 'left', false),
-        2 => array('充值卡', 'recharge', 'left', false),
-        3 => array('购买记录', 'buy', 'left', false),
-        4 => array('修复插件', 'testing', 'left', false),
+        0 => array('插件说明', 'guide', 'left', false),
+        1 => array('网站设置', 'base', 'left', false),
+        2 => array('VIP月卡', 'upgrade', 'left', false),
+        3 => array('充值卡', 'recharge', 'left', false),
+        4 => array('购买记录', 'buy', 'left', false),
+        5 => array('修复插件', 'testing', 'left', false),
     );
     foreach($arySubMenu as $k => $v){
         echo '<a href="?act='.$v[1].'"><span class="m-'.$v[2].' '.($id==$v[1]?'m-now':'').'">'.$v[0].'</span></a>';
@@ -119,9 +120,6 @@ function YtUser_page(){
     } else {
         $zbp->template->SetTemplate('index');
     }
-    foreach ($GLOBALS['hooks']['Filter_Plugin_ViewList_Template'] as $fpname => &$fpsignal) {
-        $fpreturn = $fpname($zbp->template);
-    }
     $zbp->template->Display();
 	die();
 	}
@@ -176,9 +174,6 @@ function YtUser_page(){
     } else {
         $zbp->template->SetTemplate('index');
     }
-    foreach ($GLOBALS['hooks']['Filter_Plugin_ViewList_Template'] as $fpname => &$fpsignal) {
-        $fpreturn = $fpname($zbp->template);
-    }
     $zbp->template->Display();
 	die();
 	}
@@ -198,7 +193,12 @@ function YtUser_page(){
         $article->Content .='<tr style=""><th style="border:none;" colspan="2" scope="col"><p>到期时间:'.$zbp->user->Vipendtime.'</p></p></th></tr>';
         }
 	    $article->Content .='<tr style=""><th style="border:none;" colspan="2" scope="col"><p>用户积分:'.$Price.' <a href="'.$zbp->host.'?Integral" class="">购买积分</a></p></p></th></tr>';
-	    $article->Content .='<tr><td style="text-align:right;border:none;">(*)用户名：</td><td  style="border:none;" ><input required="required" type="text" id="edtAlias" name="Alias" value="'.$zbp->user->StaticName.'" style="width:250px;font-size:1.2em;" /></td></tr>';
+	    $article->Content .='<tr><td style="text-align:right;border:none;">(*)账户：</td><td  style="border:none;" >'.$zbp->user->Name;
+        if (substr($zbp->user->Name,0,3) == 'yt_'){
+        $article->Content .='<a href="'.$zbp->host.'?Nameedit">修改账户名（仅一次机会）</a>';
+        }
+        $article->Content .='</td></tr>';
+        $article->Content .='<tr><td style="text-align:right;border:none;">(*)昵称：</td><td  style="border:none;" ><input required="required" type="text" id="edtAlias" name="Alias" value="'.$zbp->user->StaticName.'" style="width:250px;font-size:1.2em;" /></td></tr>';
 	    $article->Content .='<tr><td style="text-align:right;border:none;">(*)电话：</td><td  style="border:none;" ><input required="required" type="text" id="meta_Tel" name="meta_Tel" value="'.$zbp->user->Metas->Tel.'" style="width:250px;font-size:1.2em;" /></td></tr>';
 	    $article->Content .='<tr><td style="text-align:right;border:none;">(*)会员地址：</td><td  style="border:none;" ><input required="required" type="text" id="meta_Add" name="meta_Add" value="'.$zbp->user->Metas->Add.'" style="width:250px;font-size:1.2em;" /></td></tr>';
 	    $article->Content .='<tr><td style="text-align:right;border:none;">(*)邮箱：</td><td  style="border:none;" ><input type="text" id="edtEmail" name="Email" value="'.$zbp->user->Email.'" style="width:250px;font-size:1.2em;" /></td></tr>';
@@ -256,9 +256,6 @@ js;
 	$zbp->template->SetTags('page',1);
 	$zbp->template->SetTags('pagebar',null);
 	$zbp->template->SetTags('comments',array());
-	foreach ($GLOBALS['Filter_Plugin_ViewPost_Template'] as $fpname => &$fpsignal) {
-		$fpreturn=$fpname($zbp->template);
-	}
 	$zbp->template->Display();
 	die();
 	}
@@ -363,9 +360,6 @@ js;
 	$zbp->template->SetTags('pagebar',null);
 	$zbp->template->SetTags('uid',$uid);
 	$zbp->template->SetTags('comments',array());
-	foreach ($GLOBALS['Filter_Plugin_ViewPost_Template'] as $fpname => &$fpsignal) {
-		$fpreturn=$fpname($zbp->template);
-	}
 	$zbp->template->Display();
 	die();
 	}
@@ -404,9 +398,6 @@ js;
 	$zbp->template->SetTags('page',1);
 	$zbp->template->SetTags('pagebar',null);
 	$zbp->template->SetTags('comments',array());
-	foreach ($GLOBALS['Filter_Plugin_ViewPost_Template'] as $fpname => &$fpsignal) {
-		$fpreturn=$fpname($zbp->template);
-	}
 	$zbp->template->Display();
 	die();
 	}
@@ -443,9 +434,6 @@ js;
 	$zbp->template->SetTags('page',1);
 	$zbp->template->SetTags('pagebar',null);
 	$zbp->template->SetTags('comments',array());
-	foreach ($GLOBALS['Filter_Plugin_ViewPost_Template'] as $fpname => &$fpsignal) {
-		$fpreturn=$fpname($zbp->template);
-	}
 	$zbp->template->Display();
 	die();
 	}
@@ -526,9 +514,6 @@ js;
 	$zbp->template->SetTags('page',1);
 	$zbp->template->SetTags('pagebar',null);
 	$zbp->template->SetTags('comments',array());
-	foreach ($GLOBALS['Filter_Plugin_ViewPost_Template'] as $fpname => &$fpsignal) {
-		$fpreturn=$fpname($zbp->template);
-	}
 	$zbp->template->Display();
 	die();
 	}
@@ -561,9 +546,110 @@ js;
 	$zbp->template->SetTags('page',1);
 	$zbp->template->SetTags('pagebar',null);
 	$zbp->template->SetTags('comments',array());
-	foreach ($GLOBALS['Filter_Plugin_ViewPost_Template'] as $fpname => &$fpsignal) {
-		$fpreturn=$fpname($zbp->template);
+	$zbp->template->Display();
+	die();
 	}
+
+    if(isset($_GET['Resetpwd'])){
+	$zbp->header .='<script src="'.$zbp->host.'zb_users/plugin/YtUser/Upgrade.js" type="text/javascript"></script>' . "\r\n";
+	$article = new Post;
+	$article->Title="密码找回";
+	$article->IsLock=true;
+	$article->Type=ZC_POST_TYPE_PAGE;
+    $article->verifycode ='<img id="reg_verfiycode" style="border:none;vertical-align:middle;width:'.$zbp->option['ZC_VERIFYCODE_WIDTH']. 'px;height:' . $zbp->option['ZC_VERIFYCODE_HEIGHT'] . 'px;cursor:pointer;" src="' .$zbp->validcodeurl . '?id=resetpwd" alt="" title="" onclick="javascript:this.src=\'' . $zbp->validcodeurl . '?id=resetpwd&amp;tm=\'+Math.random();"/>';
+    $article->Content .='<table style="width:90%;border:none;font-size:1.1em;line-height:2.5em;">';
+	$article->Content .='<tr><td style="text-align:right;border:none;">(*)用户名：</td><td  style="border:none;" ><input required="required" type="text" name="name" style="width:250px;font-size:1.2em;" /></td></tr>';
+	$article->Content .='<tr><td style="text-align:right;border:none;">(*)邮箱：</td><td  style="border:none;" ><input type="text" name="email" style="width:250px;font-size:1.2em;" /></td></tr>';
+	$article->Content .='<tr><td style="text-align:right;border:none;">(*)</td><td  style="border:none;" ><input required="required" type="text" name="verifycode" style="width:150px;font-size:1.2em;" />&nbsp;&nbsp;'.$article->verifycode.'</td></tr>';
+	$article->Content .='<tr><td  style="border:none;" ></td><td  style="border:none;" ><input type="submit" style="width:100px;font-size:1.0em;padding:0.2em" value="提交" onclick="return resetpwd()" /></td></tr>';
+	$article->Content .='</table>';
+	$mt=microtime();
+    if($zbp->template->hasTemplate('t_resetpwd')){
+        $article->Template = 't_resetpwd';
+	}
+	$zbp->template->SetTags('title',$article->Title);
+	$zbp->template->SetTags('article',$article);
+	$zbp->template->SetTags('type',$article->type=0?'article':'page');
+	$zbp->template->SetTemplate($article->Template);
+	$zbp->template->SetTags('page',1);
+	$zbp->template->SetTags('pagebar',null);
+	$zbp->template->SetTags('comments',array());
+	$zbp->template->Display();
+	die();
+	}
+    if(isset($_GET['Resetpassword'])){
+    $zbp->header .='<script src="'.$zbp->host.'zb_system/script/md5.js" type="text/javascript"></script>' . "\r\n";
+    $zbp->header .='<script src="'.$zbp->host.'zb_users/plugin/YtUser/Upgrade.js" type="text/javascript"></script>' . "\r\n";
+    if (isset($_GET["username"])) {
+        $username=TransferHTML($_GET['username'], '[noscript]');
+    }else{
+        echo "链接已失效！";die();
+    }
+    if (isset($_GET["hash"])) {
+        $hash=TransferHTML($_GET['hash'], '[noscript]');
+    }else{
+        echo "链接已失效！";die();
+    }
+
+    if(!YtUser_password_verify_emailhash($username,$hash)){
+        echo "链接已失效!！";die();
+    }
+	$article = new Post;
+	$article->Title="重置密码";
+	$article->IsLock=true;
+	$article->Type=ZC_POST_TYPE_PAGE;
+    $article->verifycode ='<img id="reg_verfiycode" style="border:none;vertical-align:middle;width:'.$zbp->option['ZC_VERIFYCODE_WIDTH']. 'px;height:' . $zbp->option['ZC_VERIFYCODE_HEIGHT'] . 'px;cursor:pointer;" src="' .$zbp->validcodeurl . '?id=Resetpassword" alt="" title="" onclick="javascript:this.src=\'' . $zbp->validcodeurl . '?id=Resetpassword&amp;tm=\'+Math.random();"/>';
+    $article->Content .='<table style="width:90%;border:none;font-size:1.1em;line-height:2.5em;">';
+	$article->Content .='<tr><td style="text-align:right;border:none;">(*)名称：</td><td  style="border:none;" >'.$username.'</td></tr>';
+    $article->Content .='<input type="hidden" name="username" id="inpId" value="'.$username.'" />';
+    $article->Content .='<input type="hidden" name="hash" id="inpId" value="'.$hash.'" />';
+	$article->Content .='<tr><td style="text-align:right;border:none;">(*)重置密码：</td><td  style="border:none;" ><input required="required" type="password" name="password" style="width:250px;font-size:1.2em;" /></td></tr>';
+	$article->Content .='<tr><td style="text-align:right;border:none;">(*)确认密码：</td><td  style="border:none;" ><input required="required" type="password" name="repassword" style="width:250px;font-size:1.2em;" /></td></tr>';
+	$article->Content .='<tr><td style="text-align:right;border:none;">(*)</td><td  style="border:none;" ><input required="required" type="text" name="verifycode" style="width:150px;font-size:1.2em;" />&nbsp;&nbsp;'.$article->verifycode.'</td></tr>';
+	$article->Content .='<tr><td  style="border:none;" ></td><td  style="border:none;" ><input type="submit" style="width:100px;font-size:1.0em;padding:0.2em" value="提交" onclick="return Resetpassword()" /></td></tr>';
+	$article->Content .='</table>';
+    if($zbp->template->hasTemplate('t_resetpassword')){
+        $article->Template = 't_resetpassword';
+	}
+	$zbp->template->SetTags('title',$article->Title);
+	$zbp->template->SetTags('article',$article);
+	$zbp->template->SetTags('type',$article->type=0?'article':'page');
+	$zbp->template->SetTemplate($article->Template);
+	$zbp->template->SetTags('page',1);
+	$zbp->template->SetTags('pagebar',null);
+	$zbp->template->SetTags('comments',array());
+	$zbp->template->Display();
+	die();
+	}
+
+    if(isset($_GET['Nameedit'])){
+    $zbp->header .='<script src="'.$zbp->host.'zb_users/plugin/YtUser/Upgrade.js" type="text/javascript"></script>' . "\r\n";
+    if (substr($zbp->user->Name,0,3) != 'yt_'){
+        echo "链接已失效！";die();
+    }
+	$article = new Post;
+	$article->Title="修改账户名（仅一次机会）";
+	$article->IsLock=true;
+	$article->Type=ZC_POST_TYPE_PAGE;
+    $article->verifycode ='<img id="reg_verfiycode" style="border:none;vertical-align:middle;width:'.$zbp->option['ZC_VERIFYCODE_WIDTH']. 'px;height:' . $zbp->option['ZC_VERIFYCODE_HEIGHT'] . 'px;cursor:pointer;" src="' .$zbp->validcodeurl . '?id=Nameedit" alt="" title="" onclick="javascript:this.src=\'' . $zbp->validcodeurl . '?id=Nameedit&amp;tm=\'+Math.random();"/>';
+    $article->Content .='<table style="width:90%;border:none;font-size:1.1em;line-height:2.5em;">';
+	$article->Content .='<tr><td style="text-align:right;border:none;">(*)原账户：</td><td  style="border:none;" >'.$zbp->user->Name.'</td></tr>';
+	$article->Content .='<input type="hidden" name="token" id="token" value="'.$zbp->GetToken().'" />';
+    $article->Content .='<tr><td style="text-align:right;border:none;">(*)修改账户：</td><td  style="border:none;" ><input required="required" type="text" name="name" style="width:250px;font-size:1.2em;" /></td></tr>';
+	$article->Content .='<tr><td style="text-align:right;border:none;">(*)确认账户：</td><td  style="border:none;" ><input required="required" type="text" name="rename" style="width:250px;font-size:1.2em;" /></td></tr>';
+	$article->Content .='<tr><td style="text-align:right;border:none;">(*)</td><td  style="border:none;" ><input required="required" type="text" name="verifycode" style="width:150px;font-size:1.2em;" />&nbsp;&nbsp;'.$article->verifycode.'</td></tr>';
+	$article->Content .='<tr><td  style="border:none;" ></td><td  style="border:none;" ><input type="submit" style="width:100px;font-size:1.0em;padding:0.2em" value="提交" onclick="return Nameedit()" /></td></tr>';
+	$article->Content .='</table>';
+    if($zbp->template->hasTemplate('t_nameedit')){
+        $article->Template = 't_nameedit';
+	}
+	$zbp->template->SetTags('title',$article->Title);
+	$zbp->template->SetTags('article',$article);
+	$zbp->template->SetTags('type',$article->type=0?'article':'page');
+	$zbp->template->SetTemplate($article->Template);
+	$zbp->template->SetTags('page',1);
+	$zbp->template->SetTags('pagebar',null);
+	$zbp->template->SetTags('comments',array());
 	$zbp->template->Display();
 	die();
 	}

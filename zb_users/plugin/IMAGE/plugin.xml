@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<plugin version="php">
+<id>IMAGE</id>
+<name>缩略图插件</name>
+<url>http://www.birdol.com/</url>
+<note>生成缩略图</note>
+<description></description>
+<path>main.php</path>
+<include>include.php</include>
+<level>1</level>
+<author>
+  <name>Nobird</name>
+  <email>admin@birdol.com</email>
+  <url>http://www.birdol.com</url>
+</author>
+<source>
+  <name>shellingford</name>
+  <email>shellingford@vip.qq.com</email>
+  <url>http://www.iasuna.com</url>
+</source>
+<adapted>140614</adapted>
+<version>1.6</version>
+<pubdate>2014-08-27</pubdate>
+<modified>2017-03-21</modified>
+<price>0</price>
+<phpver>5.2</phpver>
+<advanced>
+  <dependency></dependency>
+  <rewritefunctions></rewritefunctions>
+  <existsfunctions></existsfunctions>
+  <conflict></conflict>
+</advanced>
+<sidebars>
+  <sidebar1></sidebar1>
+  <sidebar2></sidebar2>
+  <sidebar3></sidebar3>
+  <sidebar4></sidebar4>
+  <sidebar5></sidebar5>
+</sidebars>
+</plugin>

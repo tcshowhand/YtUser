@@ -23,7 +23,7 @@ if ($zbp->CheckPlugin('dm_tools')) {
 		{if $article->Metas->post_author}<span class="am-icon-globe"> 来源：{$article->Metas->post_author}</span>{/if}
 		<span class="am-icon-eye"> 热度：{$article.ViewNums} ℃</span>
 		<span class="am-icon-comment-o"> 评论：{$article.CommNums} 次</span>
-		<time class="am-icon-clock-o"> {$article.Time('Y年m月d日')}</time>
+		<time class="am-icon-clock-o"> {dmam_NewTime($article.Time())}</time>
 		</p>
 		</div>
 </article>
@@ -48,7 +48,7 @@ foreach ($img_orders as $img_order){
 		{if $article->Metas->post_author}<span class="am-icon-globe"> 来源：{$article->Metas->post_author}</span>{/if}
 		<span class="am-icon-eye"> 热度：{$article.ViewNums} ℃</span>
 		<span class="am-icon-comment-o"> 评论：{$article.CommNums} 次</span>
-		<time class="am-icon-clock-o"> {$article.Time('Y年m月d日')}</time>
+		<time class="am-icon-clock-o"> {dmam_NewTime($article.Time())}</time>
 		</p>
 		</div>
 </article>
@@ -68,7 +68,7 @@ foreach ($img_orders as $img_order){
 		{if $article->Metas->post_author}<span class="am-icon-globe"> 来源：{$article->Metas->post_author}</span>{/if}
 		<span class="am-icon-eye"> 热度：{$article.ViewNums} ℃</span>
 		<span class="am-icon-comment-o"> 评论：{$article.CommNums} 次</span>
-		<time class="am-icon-clock-o"> {$article.Time('Y年m月d日')}</time>
+		<time class="am-icon-clock-o"> {dmam_NewTime($article.Time())}</time>
 		</p>
 		</div>
 </article>

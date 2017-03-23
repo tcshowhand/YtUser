@@ -1,8 +1,0 @@
-[2017-03-06 10:40:53 .46625200 +08:00]
-array (
-  0 => 'Error',
-  1 => 2,
-  2 => 'file_put_contents(E:/songweb/kangyijia/zb_users/theme/dmam/include/二维码.php): failed to open stream: Invalid argument',
-  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\module.php',
-  4 => 89,
-)

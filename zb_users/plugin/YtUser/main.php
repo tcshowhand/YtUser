@@ -57,6 +57,77 @@ require $blogpath . 'zb_system/admin/admin_top.php';
 </form>
   	<?php
 	}
+    if ($act == 'guide'){
+	?>
+<form enctype="multipart/form-data" method="post" action="save.php?type=base">  
+<input id="reset" name="reset" type="hidden" value="" />
+<table border="1" class="tableFull tableBorder">
+<tr>
+	<th class="td30"><p align='left'><b>页面</b><br><span class='note'></span></p></th>
+	<th>链接
+	</th>
+</tr>
+<tr>
+	<td class="td30"><p align='left'><b>登录页面</b></p></td>
+	<td><a href="<?php echo $zbp->host.'?Login' ?>" target="_blank"><?php echo $zbp->host.'?Login' ?></a></td>
+</tr>
+<tr>
+	<td class="td30"><p align='left'><b>注册页面</b></p></td>
+	<td><a href="<?php echo $zbp->host.'?Register' ?>" target="_blank"><?php echo $zbp->host.'?Register' ?></a></td>
+</tr>
+<tr>
+	<td class="td30"><p align='left'><b>投稿列表</b></p></td>
+	<td><a href="<?php echo $zbp->host.'?Articlelist' ?>" target="_blank"><?php echo $zbp->host.'?Articlelist' ?></a></td>
+</tr>
+<tr>
+	<td class="td30"><p align='left'><b>发布投稿</b></p></td>
+	<td><a href="<?php echo $zbp->host.'?Articleedt' ?>" target="_blank"><?php echo $zbp->host.'?Articleedt' ?></a></td>
+</tr>
+<tr>
+	<td class="td30"><p align='left'><b>积分充值</b></p></td>
+	<td><a href="<?php echo $zbp->host.'?Integral' ?>" target="_blank"><?php echo $zbp->host.'?Integral' ?></a></td>
+</tr>
+<tr>
+	<td class="td30"><p align='left'><b>支付状态</b></p></td>
+	<td><a href="<?php echo $zbp->host.'?buy' ?>" target="_blank"><?php echo $zbp->host.'?buy' ?></a></td>
+</tr>
+<tr>
+	<td class="td30"><p align='left'><b>VIP月充值</b></p></td>
+	<td><a href="<?php echo $zbp->host.'?Upgrade' ?>" target="_blank"><?php echo $zbp->host.'?Upgrade' ?></a></td>
+</tr>
+<tr>
+	<td class="td30"><p align='left'><b>购买列表</b></p></td>
+	<td><a href="<?php echo $zbp->host.'?Paylist' ?>" target="_blank"><?php echo $zbp->host.'?Paylist' ?></a></td>
+</tr>
+<tr>
+	<td class="td30"><p align='left'><b>用户中心</b></p></td>
+	<td><a href="<?php echo $zbp->host.'?User' ?>" target="_blank"><?php echo $zbp->host.'?User' ?></a></td>
+</tr>
+<tr>
+	<td class="td30"><p align='left'><b>评论列表</b></p></td>
+	<td><a href="<?php echo $zbp->host.'?Commentlist' ?>" target="_blank"><?php echo $zbp->host.'?Commentlist' ?></a></td>
+</tr>
+<tr>
+	<td class="td30"><p align='left'><b>密码找回页面</b></p></td>
+	<td><a href="<?php echo $zbp->host.'?Resetpwd' ?>" target="_blank"><?php echo $zbp->host.'?Resetpwd' ?></a></td>
+</tr>
+<tr>
+	<td class="td30"><p align='left'><b>密码重置页面</b></p></td>
+	<td><a href="<?php echo $zbp->host.'?Resetpassword' ?>" target="_blank"><?php echo $zbp->host.'?Resetpassword' ?></a></td>
+</tr>
+<tr>
+	<td class="td30"><p align='left'><b>修改账户名</b></p></td>
+	<td><a href="<?php echo $zbp->host.'?Nameedit' ?>" target="_blank"><?php echo $zbp->host.'?Nameedit' ?></a></td>
+</tr>
+
+</table>
+	  <hr/>
+	  <p>
+		<input type="submit" class="button" value="<?php echo $lang['msg']['submit']?>" />
+	  </p>
+</form>
+  	<?php
+	}
 	if ($act == 'upgrade'){
 	?>
 <form enctype="multipart/form-data" method="post" action="save.php?type=upgrade"> 
@@ -168,7 +239,7 @@ foreach ($array as $key => $reg) {
 	}
 	?>
 	<script type="text/javascript">ActiveLeftMenu("aPluginMng");</script>
-	<script type="text/javascript">AddHeaderIcon("<?php echo $bloghost . 'zb_users/plugin/RegPage/logo.png';?>");</script>	
+	<script type="text/javascript">AddHeaderIcon("<?php echo $bloghost . 'zb_users/plugin/YtUser/logo.png';?>");</script>	
   </div>
 </div>
 

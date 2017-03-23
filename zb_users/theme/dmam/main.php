@@ -50,13 +50,18 @@ if(count($_POST)>0){
 		 <tr><td>2，请详细阅读此页面的须知，千万莫做“问题儿童”</td></tr>
 		 <tr><td>3，版权可以选择不显示，但是不显示版权的不提供任何帮助</td></tr>
 		 <tr><td>4，主题首页、首页分页和分类页、文章页、独立页面侧栏分别是sidebar 1/2/3/4</td></tr>
-		 <tr><td>5，使用此主题必装dm_tools和ggavatar插件，其他插件会做兼容处理</td></tr>
+		 <tr><td>5，使用此主题必装dm_tools（启用缩略图）和ggavatar插件，其他插件会做兼容处理</td></tr>
+		 <tr><td>6，隐藏的LOGO宽度参数请在更换LOGO后 保存两次</td></tr>
 	</table>
 <?php }
 if ($act == 'updata'){
 ?>
 	<table class="themeset-form"  id="set-updata">
 		 <tr><th colspan="2" style="text-align:left;">【更新日志】</th></tr>
+<tr>
+<td style="text-align:right;">20170311:</td>
+<td>1，版本更新到正式版2.0 ；2，增加登录可见；3，分页状态不显示导读；4，调整了列表的list-style；5，调整隐藏的LOGO宽度参数到主题设置的图片设置页（更换LOGO后记得保存两次）；</td>
+</tr>
 <tr>
 <td style="text-align:right;">20170309:</td>
 <td>1，移动端头部修改；2，头部和底部html调整；</td>
@@ -108,8 +113,17 @@ if ($act == 'uploadpic'){
     <div class="title">LOGO 上传
       <small>(* 大小 推荐高度 85px)</small></div>
     <input type="hidden" id="url_updatapic1" class="pics_logo-val" name="pics_logo" <?php echo $zbp->Config('dmam')->pics_logo?'value="'.$zbp->Config('dmam')->pics_logo.'"':'';?>>
+<?php
+if ($zbp->Config('dmam')->pics_logo){
+$arr = array();
+$arr = getimagesize($zbp->Config('dmam')->pics_logo);
+echo '<input type="hidden" name="logo_width" value="'.$arr[0].'" />';
+}
+?>
     <img <?php echo $zbp->Config('dmam')->pics_logo?'src="'.$zbp->Config('dmam')->pics_logo.'"':'';?> id="pic_updatapic1">
-    <input type="button" id="updatapic1" class="button" value="更换图片"><a onclick="$('.pics_logo-val').val('');$('#pic_updatapic1').removeAttr('src')" href="javascript:;">删除</a></div>
+    <input type="button" id="updatapic1" class="button" value="更换图片">
+	<a onclick="$('.pics_logo-val').val('');$('#pic_updatapic1').removeAttr('src')" href="javascript:;">删除</a>
+	</div>
   <div id="pics_wx" class="imageshow">
     <div class="title">微信 上传
       <small>(* 推荐大小 200 × 200)</small></div>
@@ -161,13 +175,6 @@ if ($act == 'general'){
 ?>
 <form method="post">
 	<table class="themeset-form"  id="set-general">
-<?php
-if ($zbp->Config('dmam')->pics_logo){
-$arr = array();
-$arr = getimagesize($zbp->Config('dmam')->pics_logo);
-echo '<input type="hidden" name="logo_width" value="'.$arr[0].'" />';
-}
-?>
 	  <tr><th width="20%"><p align="right">配置项目</p></th><th width="50%"><p align="center">内容设定</p></th><th width="30%"><p align="left">设置说明</p></th></tr>
 	  <tr>
 		<td><p align="right">管理员ID</p></td>
@@ -321,7 +328,7 @@ echo '<input type="hidden" name="logo_width" value="'.$arr[0].'" />';
 		<td>
 		  <p align="left">-</p></td>
 	  </tr>
-	  <tr>
+<!-- 	  <tr>
 		<td>
 		  <p align="right">随机头像</p></td>
 		<td>
@@ -332,7 +339,7 @@ echo '<input type="hidden" name="logo_width" value="'.$arr[0].'" />';
 		</td>
 		<td>
 		  <p align="left">-</p></td>
-	  </tr>
+	  </tr> -->
 	  <tr>
 		<td>
 		  <p align="right">搜索增强</p></td>
@@ -370,7 +377,7 @@ echo '<input type="hidden" name="logo_width" value="'.$arr[0].'" />';
 			<label><input name="copyright" type="radio" value="2" <?php echo $zbp->Config('dmam')->copyright == 2?'checked="checked"':'';?>/>Powered By <a href="http://www.zblogcn.com/" title="RainbowSoft Z-BlogPHP" target="_blank">Z-BlogPHP</a> Theme By <a href="http://www.imlgm.com/" title="模板由大谋提供" target="_blank">大谋</a></label></p>
 			<p>
 			<label><input name="copyright" type="radio" value="3" <?php echo $zbp->Config('dmam')->copyright  == 3?'checked="checked"':'';?>/>Powered By Z-BlogPHP Theme By 大谋.</label></p>
-			<label><input name="copyright" type="radio" value="4" <?php echo $zbp->Config('dmam')->copyright  == 3?'checked="checked"':'';?>/>本站前端 Amaze UI , 后端 Zblog ，风格 by <a href="http://www.imlgm.com/" title="大谋博客" target="_blank">大谋</a>.</label></p>
+			<label><input name="copyright" type="radio" value="4" <?php echo $zbp->Config('dmam')->copyright  == 4?'checked="checked"':'';?>/>本站前端 Amaze UI , 后端 Zblog ，风格 by <a href="http://www.imlgm.com/" title="大谋博客" target="_blank">大谋</a>.</label></p>
 <!-- 			<p>
 			<label><input name="copyright" type="radio" value="4" <?php echo $zbp->Config('dmam')->copyright  == 4?'checked="checked"':'';?>/>copyright@<a href="<?php echo $zbp->host;?>" title="<?php echo $zbp->subname;?>" target="_blank"><?php echo $zbp->name;?></a></label>	  
 			</p>

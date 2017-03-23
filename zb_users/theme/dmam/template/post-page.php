@@ -18,8 +18,8 @@
 			<h1 class="am-article-title">{$article.Title}</h1>
 		  </header>
 		  <section class="am-article-bd">
-		  {$article.Content}
-			  {php} if (isset($pagefix))echo $pagefix;{/php}
+		  {if $article.Metas.post_loginview && !$user.ID}当前文章无内容{else}{$article.Content}{/if}
+		{php} if (isset($pagefix))echo $pagefix;{/php}
 		  </section>
 		</article>
 		{if !$article.IsLock}

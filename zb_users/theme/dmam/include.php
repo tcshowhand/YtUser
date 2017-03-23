@@ -7,7 +7,7 @@ require dirname(__FILE__) . DIRECTORY_SEPARATOR . 'plugin/searchplus.php';
 
 require dirname(__FILE__) . DIRECTORY_SEPARATOR . 'plugin/prise.php';
 RegisterPlugin("dmam","ActivePlugin_dmam");
-$dmam_ver = "20170309";
+$dmam_ver = "20170311";
 //函数接口
 function ActivePlugin_dmam(){
 	global $zbp;
@@ -22,6 +22,7 @@ function ActivePlugin_dmam(){
 	Add_Filter_Plugin('Filter_Plugin_Member_Edit_Response','dmam_Edit_user');
 	Add_Filter_Plugin('Filter_Plugin_Category_Edit_Response','dmam_Edit_cat');
 	Add_Filter_Plugin('Filter_Plugin_ViewPost_Template','dmam_Content');
+	Add_Filter_Plugin('Filter_Plugin_ViewList_Template','dmam_list');
 	Add_Filter_Plugin('Filter_Plugin_Zbp_BuildTemplate','dmam_create_module');
 	//Add_Filter_Plugin('Filter_Plugin_Edit_End','dmam_new_intro');
 	Add_Filter_Plugin('Filter_Plugin_Cmd_Ajax', 'dmam_prise_do');
@@ -107,34 +108,127 @@ function dmam_check_pluin(){
 //文章编辑页面 编辑器js css
 function dmam_editor_style(){
 	global $zbp;
-/* 	echo '<script src="' . $zbp->host . 'zb_users/theme/'.$zbp->theme.'/script/editor.js" type="text/javascript"></script>'; */
+	echo '<script src="' . $zbp->host . 'zb_users/theme/'.$zbp->theme.'/script/editor.js" type="text/javascript"></script>';
 	echo '<link rel="stylesheet" href="' . $zbp->host . 'zb_users/theme/'.$zbp->theme.'/source/editor.css" type="text/css" media="screen" />';
 }
 
 function dmam_Content(&$template){
 	global $zbp;
 	$article = $template->GetTags('article');
-	if($article->Type == ZC_POST_TYPE_ARTICLE){
-	$pattern = "/<img(.*?)src=('|\")([^>]*).(bmp|gif|jpeg|jpg|png|tiff?|icon?)('|\")(.*?)>/i";
-	if ($zbp->Config('dmam')->lasyload_imgs){
-	$replacement = '<img class="thumb-post" src="'.$zbp->host.'zb_users/theme/'.$zbp->theme.'/style/images/loader.gif" data-echo="$3.$4" $1 $6>';
-	}else{
-	$replacement = '<img class="thumb-post" src="$3.$4" $1 $6>';	
+	if($article->Type != ZC_POST_TYPE_ARTICLE)return;
+		$pattern = "/<img(.*?)src=('|\")([^>]*).(bmp|gif|jpeg|jpg|png|tiff?|icon?)('|\")(.*?)>/i";
+		if ($zbp->Config('dmam')->lasyload_imgs){
+		$replacement = '<img class="thumb-post" src="'.$zbp->host.'zb_users/theme/'.$zbp->theme.'/style/images/loader.gif" data-echo="$3.$4" $1 $6>';
+		}else{
+		$replacement = '<img class="thumb-post" src="$3.$4" $1 $6>';	
+		}
+		$article->Content = preg_replace($pattern, $replacement, $article->Content);
+		
+$loginurl = dmam_login_url("login");
+$regurl = dmam_login_url("regist");
+		
+
+	if ($zbp->user->Level < 6 || $zbp->CheckRights('root')) {
+		$article->Intro   = preg_replace("/\[LoginView5\](.*)\[\/LoginView5\]/Uims", '<div class="am-alert am-alert-success" data-am-alert>\1</div>', $article->Intro);
+		$article->Content = preg_replace("/\[LoginView5\](.*)\[\/LoginView5\]/Uims", '<div class="am-alert am-alert-success" data-am-alert>\1</div>', $article->Content);
+	} else {
+		$article->Intro = preg_replace("/\[BuyView\](.*)\[\/BuyView\]/Uims", '<div class="am-alert am-text-center am-alert-danger" data-am-alert>******登录后付费可见******</br><small><a href="'.$loginurl.'">登录</a> / <a href="'.$regurl.'">注册</a></small></div>', $article->Intro);
+		$article->Content = preg_replace("/\[BuyView\](.*)\[\/BuyView\]/Uims", '<div class="am-alert am-text-center am-alert-danger" data-am-alert>******登录后付费可见******</br><small><a href="'.$loginurl.'">登录</a> / <a href="'.$regurl.'">注册</a></small></div>', $article->Content);
+		$article->Intro   = preg_replace("/\[LoginView5\](.*)\[\/LoginView5\]/Uims", '<div class="am-alert am-text-center am-alert-danger" data-am-alert>******登录后Level6可见******</br><small><a href="'.$loginurl.'">登录</a> / <a href="'.$regurl.'">注册</a></small></div>', $article->Intro);
+		$article->Content = preg_replace("/\[LoginView5\](.*)\[\/LoginView5\]/Uims", '<div class="am-alert am-text-center am-alert-danger" data-am-alert>******登录后Level6可见******</br><small><a href="'.$loginurl.'">登录</a> / <a href="'.$regurl.'">注册</a></small></div>', $article->Content);
+	}	
+	if ($zbp->user->Level < 5 || $zbp->CheckRights('root')) {
+		$article->Intro   = preg_replace("/\[LoginView4\](.*)\[\/LoginView4\]/Uims", '<div class="am-alert am-alert-success" data-am-alert>\1</div>', $article->Intro);
+		$article->Content = preg_replace("/\[LoginView4\](.*)\[\/LoginView4\]/Uims", '<div class="am-alert am-alert-success" data-am-alert>\1</div>', $article->Content);
+	} else {
+		$article->Intro   = preg_replace("/\[LoginView4\](.*)\[\/LoginView4\]/Uims", '<div class="am-alert am-text-center am-alert-danger" data-am-alert>******登录后Level-4可见******</div>', $article->Intro);
+		$article->Content = preg_replace("/\[LoginView4\](.*)\[\/LoginView4\]/Uims", '<div class="am-alert am-text-center am-alert-danger" data-am-alert>******登录后Level-4可见******</div>', $article->Content);
 	}
-	$content = preg_replace($pattern, $replacement, $article->Content);
-	$article->Content = $content;
-/* 	
-	
-	$article->Intro = preg_replace("/\[hide_pay\](.*)\[\/hide_pay\]/Uims", '<p>****本段是付费内容***</p>',$article->Intro);
-	$article->Content = preg_replace("/\[hide_pay\](.*)\[\/hide_pay\]/Uims", '<p>****本段是付费内容***</p><p><input type="hidden" name="LogID" id="LogID" value="'.$userid.'" /><input type="submit" style="width:100px;font-size:1.0em;padding:0.2em" value="购买" onclick="return Ytbuy()" /></p>',$article->Content); */
-	
-if ($article->Metas->post_loginview && !$zbp->user->ID){
-	$article->Content = '当前状态不可见';	
+	if ($zbp->user->Level < 4 || $zbp->CheckRights('root')) {
+		$article->Intro   = preg_replace("/\[LoginView3\](.*)\[\/LoginView3\]/Uims", '<div class="am-alert am-alert-success" data-am-alert>\1</div>', $article->Intro);
+		$article->Content = preg_replace("/\[LoginView3\](.*)\[\/LoginView3\]/Uims", '<div class="am-alert am-alert-success" data-am-alert>\1</div>', $article->Content);
+	} else {
+		$article->Intro   = preg_replace("/\[LoginView3\](.*)\[\/LoginView3\]/Uims", '<div class="am-alert am-text-center am-alert-danger" data-am-alert>******登录后Level-3可见******</div>', $article->Intro);
+		$article->Content = preg_replace("/\[LoginView3\](.*)\[\/LoginView3\]/Uims", '<div class="am-alert am-text-center am-alert-danger" data-am-alert>******登录后Level-3可见******</div>', $article->Content);
+	}
+	if ($zbp->user->Level < 3 || $zbp->CheckRights('root')) {
+		$article->Intro   = preg_replace("/\[LoginView2\](.*)\[\/LoginView2\]/Uims", '<div class="am-alert am-alert-success" data-am-alert>\1</div>', $article->Intro);
+		$article->Content = preg_replace("/\[LoginView2\](.*)\[\/LoginView2\]/Uims", '<div class="am-alert am-alert-success" data-am-alert>\1</div>', $article->Content);
+	} else {
+		$article->Intro   = preg_replace("/\[LoginView2\](.*)\[\/LoginView2\]/Uims", '<div class="am-alert am-text-center am-alert-danger" data-am-alert>******登录后Level-2可见******</div>', $article->Intro);
+		$article->Content = preg_replace("/\[LoginView2\](.*)\[\/LoginView2\]/Uims", '<div class="am-alert am-text-center am-alert-danger" data-am-alert>******登录后Level-2可见******</div>', $article->Content);
+	}
+	if ($zbp->CheckRights('root')) {
+		$article->Intro   = preg_replace("/\[LoginView1\](.*)\[\/LoginView1\]/Uims", '<div class="am-alert am-alert-success" data-am-alert>\1</div>', $article->Intro);
+		$article->Content = preg_replace("/\[LoginView1\](.*)\[\/LoginView1\]/Uims", '<div class="am-alert am-alert-success" data-am-alert>\1</div>', $article->Content);
+	} else {
+		$article->Intro   = preg_replace("/\[LoginView1\](.*)\[\/LoginView1\]/Uims", '<div class="am-alert am-text-center am-alert-danger" data-am-alert>******仅管理员可见******</div>', $article->Intro);
+		$article->Content = preg_replace("/\[LoginView1\](.*)\[\/LoginView1\]/Uims", '<div class="am-alert am-text-center am-alert-danger" data-am-alert>******仅管理员可见******</div>', $article->Content);
+	}
+
+		$template->SetTags('article', $article);
+
 }
-	$template->SetTags('article', $article);
+function dmam_list(&$template){
+	global $zbp;
+	$articles = $template->GetTags('articles');
+	foreach ($articles as $key => $article) {
+if($zbp->user->ID>0){
+		$article->Intro   = preg_replace("/\[(BuyView|LoginView[12345])\](.*)\[\/(BuyView|LoginView[12345])\]/Uims", '<div class="am-alert am-alert-danger" data-am-alert>******隐藏内容请点击正文查看******</div>', $article->Intro);
+		$article->Content = preg_replace("/\[(BuyView|LoginView[12345])\](.*)\[\/(BuyView|LoginView[12345])\]/Uims", '<div class="am-alert am-alert-danger" data-am-alert>******隐藏内容请点击正文查看******</div>', $article->Content);
 	}
+	}
+	$template->SetTags('articles', $articles);
 }
 
+
+/* function dmam_login_level($a_t) {
+    global $zbp;
+    $s = '';
+    switch ($a_t) {
+        case 'login':
+			if ($zbp->CheckPlugin('YtUser')){
+				$s = $zbp->host.'?Login';
+			}else{
+				$s = $zbp->host.'zb_users/theme/dmam/login.php';	
+			}
+        break;
+        case 'regist':
+			if ($zbp->CheckPlugin('YtUser')){
+				$s = $zbp->host.'?Register';
+			}else{
+				$s = $zbp->CheckPlugin('RegPage')?$zbp->host.'?reg':$zbp->host.'zb_users/theme/dmam/login.php';	
+			}
+        break;
+        default:
+            $s = '';
+    }
+    echo $s;
+} */
+
+function dmam_login_url($a_t) {
+    global $zbp;
+    $s = '';
+    switch ($a_t) {
+        case 'login':
+			if ($zbp->CheckPlugin('YtUser')){
+				$s = $zbp->host.'?Login';
+			}else{
+				$s = $zbp->host.'zb_users/theme/dmam/login.php';	
+			}
+        break;
+        case 'regist':
+			if ($zbp->CheckPlugin('YtUser')){
+				$s = $zbp->host.'?Register';
+			}else{
+				$s = $zbp->CheckPlugin('RegPage')?$zbp->host.'?reg':$zbp->host.'zb_users/theme/dmam/login.php';	
+			}
+        break;
+        default:
+            $s = '';
+    }
+    return $s;
+}
 //纯文处理	
 function dmam_txt($a,$b,$c,$d) {
     global $zbp;
@@ -197,22 +291,19 @@ function dmam_theme_copy() {
     $str = '';
     switch ($zbp->Config('dmam')->copyright) {
         case '1':
-            $str .= '本站由 Zblog 强力驱动，<a href="http://www.imlgm.com/" title="大谋提供主题支持" target="_blank">大谋</a> 提供主题支持.';
+            $str= '本站由 Zblog 强力驱动，<a href="http://www.imlgm.com/" title="大谋提供主题支持" target="_blank">大谋</a> 提供主题支持.';
         break;
         case '2':
-            $str .= 'Powered By <a href="http://www.zblogcn.com/" title="RainbowSoft Z-BlogPHP" target="_blank">Z-BlogPHP</a> Theme By <a href="http://www.imlgm.com/" title="模板由大谋提供" target="_blank">大谋</a>';
+            $str= 'Powered By <a href="http://www.zblogcn.com/" title="RainbowSoft Z-BlogPHP" target="_blank">Z-BlogPHP</a> Theme By <a href="http://www.imlgm.com/" title="模板由大谋提供" target="_blank">大谋</a>';
         break;
         case '3':
-			$str .= 'Powered By Z-BlogPHP Theme By 大谋.';
+			$str= 'Powered By Z-BlogPHP Theme By 大谋.';
         break;
         case '4':
-            $str .= '本站前端 Amaze UI , 后端 Zblog , 风格 by <a href="http://www.imlgm.com/" title="大谋博客" target="_blank">大谋</a>.';
+            $str= '本站前端 Amaze UI , 后端 Zblog , 风格 by <a href="http://www.imlgm.com/" title="大谋博客" target="_blank">大谋</a>.';
 		break;
-/* 		case '4':
-			$str .= 'copyright@<a href="'.$zbp->host.'" title="'.$zbp->subname.'" target="_blank">'.$zbp->name.'</a>';
-        break; */
         default:
-            $str .= '';
+            $str= '';
     }
     echo $str;
 }
@@ -477,6 +568,7 @@ function dmam_load_source($a_loc,$b_page,$c_postjs) {
 function dmam_theme_sets($set_form_array){
 	global $zbp;
 	$uploadpic = array(
+		'logo_width' => '',
 		'pics_logo'	=>  $zbp->host.'zb_users/theme/dmam/style/images/logo.png',
 		'pics_wx'	=>  '',
 		'pics_zfb'	=>  '',
@@ -487,7 +579,6 @@ function dmam_theme_sets($set_form_array){
 		'pics_avatar'	=>  $zbp->host.'zb_users/theme/dmam/style/images/avatar.png'
 	);
 	$general = array(
-		'logo_width' => '',
 		'color'	=>  '',
 		'topbar_fix' => '1',
 		'admin_id'	=>  '1',
@@ -503,7 +594,7 @@ function dmam_theme_sets($set_form_array){
 		'headmate'	=>  '',
 		'footmate'	=>  '',
 		'top_nav'	=>  '',
-		'rand_avatar'	=>  '1',
+/* 		'rand_avatar'	=>  '1', */
 		'new_search'	=>  '1',
 		'copyright'	=>  '1',
 		'site_cdn'	=>  '1',

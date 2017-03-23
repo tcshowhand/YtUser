@@ -99,3 +99,22 @@ function YtUser_CreateTable(){
     $s=$zbp->db->sql->CreateTable($GLOBALS['YtUser_buy_Table'],$GLOBALS['YtUser_buy_DataInfo']);
     $zbp->db->QueryMulit($s);
 }
+
+function YtUser_password_verify_emailhash($name,$hash=''){
+    global $zbp;
+        if (isset($zbp->membersbyname[$name])){
+            $m=$zbp->membersbyname[$name];
+            if( $hash ===md5(md5($m->Password.$m->Email).date('Ymdh'))){
+                return true;
+            }
+            if($hash ===md5(md5($m->Password.$m->Email).date('Ymdh',strtotime("-1 Hour")))){
+                return true;
+            }
+            if($hash ==''){
+                return md5(md5($m->Password.$m->Email).date('Ymdh'));
+            }
+            return false;
+        }else{
+            return false;
+        }
+}

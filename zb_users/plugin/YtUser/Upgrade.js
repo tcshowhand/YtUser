@@ -143,3 +143,75 @@ function Ytuser_Login(){
 		}
 	);
 }
+
+function resetpwd(){
+	$.post(bloghost+'zb_users/plugin/YtUser/mailto.php',
+		{
+		"name":$("input[name='name']").val(),
+		"email":$("input[name='email']").val(),
+		"verifycode":$("input[name='verifycode']").val(),
+		},
+		function(data){
+			var s =data;
+			if((s.search("faultCode")>0)&&(s.search("faultString")>0))
+			{
+				alert(s.match("<string>.+?</string>")[0].replace("<string>","").replace("</string>",""));
+				$("#reg_verfiycode").attr("src",bloghost+"zb_system/script/c_validcode.php?id=resetpwd&amp;tm="+Math.random());
+			}
+			else{
+				var s =data;
+				alert(s);
+				window.location=bloghost;
+			}
+		}
+	);
+}
+
+function Resetpassword(){
+	$.post(bloghost+'zb_users/plugin/YtUser/resetpassword.php',
+		{
+		"username":$("input[name='username']").val(),
+        "hash":$("input[name='hash']").val(),
+        "password":$("input[name='password']").val(),
+		"verifycode":$("input[name='verifycode']").val(),
+		},
+		function(data){
+			var s =data;
+			if((s.search("faultCode")>0)&&(s.search("faultString")>0))
+			{
+				alert(s.match("<string>.+?</string>")[0].replace("<string>","").replace("</string>",""));
+				$("#reg_verfiycode").attr("src",bloghost+"zb_system/script/c_validcode.php?id=Resetpassword&amp;tm="+Math.random());
+			}
+			else{
+				var s =data;
+				alert(s);
+				window.location=bloghost+'?Login';
+			}
+		}
+	);
+}
+
+
+function Nameedit(){
+	$.post(bloghost+'zb_users/plugin/YtUser/nameedit.php',
+		{
+		"name":$("input[name='name']").val(),
+        "rename":$("input[name='rename']").val(),
+        "token":$("input[name='token']").val(),
+		"verifycode":$("input[name='verifycode']").val(),
+		},
+		function(data){
+			var s =data;
+			if((s.search("faultCode")>0)&&(s.search("faultString")>0))
+			{
+				alert(s.match("<string>.+?</string>")[0].replace("<string>","").replace("</string>",""));
+				$("#reg_verfiycode").attr("src",bloghost+"zb_system/script/c_validcode.php?id=Resetpassword&amp;tm="+Math.random());
+			}
+			else{
+				var s =data;
+				alert(s);
+				window.location=bloghost+'?User';
+			}
+		}
+	);
+}

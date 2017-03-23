@@ -49,7 +49,7 @@
       <br />
       <div class="am-cf">
         <input type="submit" id="loginbtnPost" name="loginbtnPost" onclick="return Ytuser_Login()" class="am-btn am-btn-primary am-btn-sm am-fl">
-       <small class="am-fr"><a href="{$host}zb_users/theme/dmam/login.php">管理员？</a></small>
+       <small class="am-fr"><a href="{$host}zb_users/theme/dmam/login.php">管理员？</a> / <a href="{$host}?Resetpwd">忘记密码？</a></small>
       </div>
       </div>
 

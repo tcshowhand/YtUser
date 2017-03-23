@@ -1,0 +1,11 @@
+           # 如果请求的文件已存在，直接返回
+           if (-f $request_filename) {
+               break;
+           }
+rewrite ^/static/(.*)-(.*)-(.*)-(.*)-a.jpg$ /zb_users/plugin/sf_img1/pic.php?src=$1&width=$2&height=$3&cuttype=$4;        
+
+ 
+           # 所有其他请求，转给 zblog 处理
+           if (!-e $request_filename) {
+               rewrite . /index.php last;
+           }

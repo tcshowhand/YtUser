@@ -19,10 +19,10 @@
   <url></url>
 </source>
 <adapted>151740</adapted>
-<version>5</version>
+<version>5.2</version>
 <pubdate>2016-10-30</pubdate>
-<modified>2017-03-15</modified>
-<price>10</price>
+<modified>2017-03-23</modified>
+<price>20</price>
 <phpver>5.2</phpver>
 <advanced>
   <dependency></dependency>

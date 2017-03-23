@@ -37,19 +37,19 @@ switch ($action) {
 		Redirect($zbp->host.'?Articlelist');
 		break;
 	case 'MemberPst':
-                    $verifycode=trim($_POST['verifycode']);
-                        if(!$zbp->CheckValidCode($verifycode,'User')){
-                        $zbp->ShowError('验证码错误，请重新输入.');die();
-                    }
+        $verifycode=trim($_POST['verifycode']);
+        if(!$zbp->CheckValidCode($verifycode,'User')){
+            $zbp->ShowError('验证码错误，请重新输入.');die();
+        }
 		if(!$zbp->ValidToken(GetVars('token','GET'))){$zbp->ShowError(5,__FILE__,__LINE__);die();}
 		$_POST['Password'] = null;
 		$_POST['PasswordRe'] = null;
-                    if (isset($_POST["meta_Tel"])) {
-                    $_POST['meta_Tel']=TransferHTML($_POST['meta_Tel'], '[noscript]');
-                    }
-                    if (isset($_POST["meta_Add"])) {
-                        $_POST['meta_Add']=TransferHTML($_POST['meta_Add'], '[noscript]');
-                    }
+        if (isset($_POST["meta_Tel"])) {
+            $_POST['meta_Tel']=TransferHTML($_POST['meta_Tel'], '[noscript]');
+        }
+        if (isset($_POST["meta_Add"])) {
+        $_POST['meta_Add']=TransferHTML($_POST['meta_Add'], '[noscript]');
+        }
 		PostMember();
 		$zbp->BuildModule();
 		$zbp->SaveCache();

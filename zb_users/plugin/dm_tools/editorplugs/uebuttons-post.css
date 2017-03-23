@@ -1,0 +1,57 @@
+@charset "utf-8";
+
+.lvse{
+	text-indent: 0em !important;
+	color: #7da33c;
+	background: #ecf2d6 url('images/wpgo_sc_notice.png') -1px -1px no-repeat;
+	border: 1px solid #aac66d;
+	overflow: hidden;
+	margin: 10px 0;
+	padding: 15px 15px 15px 35px;
+}
+.hongse{
+	text-indent: 0em !important;
+	color: #c66;
+	background: #ffecea url('images/wpgo_sc_error.png') -1px -1px no-repeat;
+	border: 1px solid #ebb1b1;
+	overflow: hidden;
+	margin: 10px 0;
+	padding: 15px 15px 15px 35px;
+}
+.huangse{
+	text-indent: 0em !important;
+	color: #ad9948;
+	background: #fff4b9 url('images/wpgo_sc_warn.png') -1px -1px no-repeat;
+	border: 1px solid #eac946;
+	overflow: hidden;
+	margin: 10px 0;
+	padding: 15px 15px 15px 35px;
+}
+.huise{
+	text-indent: 0em !important;
+	color: #777;
+	background: #eaeaea url('images/wpgo_sc_tips.png') -1px -1px no-repeat;
+	border: 1px solid #ccc;
+	overflow: hidden;
+	margin: 10px 0;
+	padding: 15px 15px 15px 35px;
+}
+.lanse{
+	text-indent: 0em !important;
+	font-size: 16px;
+	font-weight: normal;
+	color: #FFF;
+	margin: 10px 0;
+	padding: 5px 10px;
+	background-color: #169FE6;
+	display: inline-block;
+}
+
+.putong{
+	text-indent: 0em !important;
+	margin: 10px 0;
+	padding: 10px 15px;
+	background: #FFF;
+	border: 1px solid #E3E3E3;
+	border-left: 3px solid #3DABCE;
+}

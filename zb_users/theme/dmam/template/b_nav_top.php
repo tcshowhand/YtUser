@@ -5,6 +5,8 @@ $adminid = '';
 if ($zbp->Config('dmam')->admin_id){
 	$adminid = $zbp->Config('dmam')->admin_id; 
 }
+$loginurl = dmam_login_url("login");
+$regurl = dmam_login_url("regist");
 {/php}
 <header id="dm-topbar" class="am-topbar">
 <div class="topbar">
@@ -38,13 +40,8 @@ if ($zbp->Config('dmam')->admin_id){
 {else}
 <div class="top_user">
 	{if $zbp->Config('dmam')->top_login}
-		{if $zbp->CheckPlugin('YtUser')}
-		<a href="{$host}?Login">登录</a>
-		<a href="{$host}?Register">注册</a>
-		{else}
-		<a href="{$host}zb_system/cmd.php?act=login">登录</a>
-		{if $zbp->CheckPlugin('RegPage')}<a href="{$host}?reg">注册</a>{/if}
-		{/if}
+		<a href="{$loginurl}">登录</a>
+		<a href="{$regurl}">注册</a>
 	{/if}
  </div>
 {/if}

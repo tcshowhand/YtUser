@@ -12,10 +12,7 @@
 					<h6><i class="fa fa-clock-o"></i><?php  echo $article->Time('Y-m-d');  ?><i class="fa fa-folder-open"></i><a href="<?php  echo $article->Category->Url;  ?>" title="分类 <?php  echo $article->Category->Name;  ?> 的全部文章" rel="category tag"><?php  echo $article->Category->Name;  ?></a><i class="fa fa-user"></i><?php  echo $article->Author->StaticName;  ?><i class="fa fa-eye"></i><?php  echo $article->ViewNums;  ?>°c</h6>
 					<span class="lr" id="fontsize"><a href="javascript:wennrsize(18)">A<sup>+</sup></a>&nbsp;<a href="javascript:wennrsize(15)">A<sup>-</sup></a></span>
 				</header>
-
-     <?php  $sf_praise_sdk=SF_praise_sdk::findPostCount($uid);;  ?>
 				<div class="zhengwen" id="wennr-wen">
-                    <?php  echo $uid;  ?>
 					<?php  echo $article->Content;  ?>
 				</div>
 				<div class="clear"></div>

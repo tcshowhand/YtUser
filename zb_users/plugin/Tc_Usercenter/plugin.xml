@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<plugin version="php">
+<id>Tc_Usercenter</id>
+<name>前台用户登陆</name>
+<url>http://www.songzhenjiang.cn</url>
+<note>前台用户登陆</note>
+<description>前台用户中心</description>
+<path></path>
+<include>include.php</include>
+<level>1</level>
+<author>
+  <name>唐朝</name>
+  <email>79300975@qq.com</email>
+  <url>http://www.songzhenjiang.cn</url>
+</author>
+<source>
+  <name></name>
+  <email></email>
+  <url></url>
+</source>
+<adapted>150101</adapted>
+<version>1.0</version>
+<pubdate>2015-06-27</pubdate>
+<modified>2015-06-27</modified>
+<price>0</price>
+<advanced>
+  <dependency></dependency>
+  <rewritefunctions></rewritefunctions>
+  <conflict></conflict>
+</advanced>
+<sidebars>
+  <sidebar1></sidebar1>
+  <sidebar2></sidebar2>
+  <sidebar3></sidebar3>
+  <sidebar4></sidebar4>
+  <sidebar5></sidebar5>
+</sidebars>
+</plugin>
