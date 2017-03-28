@@ -13,6 +13,14 @@ $password=trim($_POST['password']);
 $repassword=trim($_POST['repassword']);
 if (isset($_POST["email"])) {
     $email=trim($_POST['email']);
+    if(strlen($email)<5||strlen($email)>$zbp->option['ZC_EMAIL_MAX']){
+	    $zbp->ShowError('邮箱不能过长或过短.');die();
+    }
+    if(CheckRegExp($email,'[email]')){
+	    $member->Email=$email;
+    }else{
+	    $zbp->ShowError('邮箱格式不正确.');die();
+    }
 }
 if (isset($_POST["homepage"])) {
     $homepage=trim($_POST['homepage']);
@@ -56,17 +64,6 @@ $member->Password=Member::GetPassWordByGuid($password,$guid);
 $member->PostTime=time();
 
 $member->IP=GetGuestIP();
-
-
-if(strlen($email)<5||strlen($email)>$zbp->option['ZC_EMAIL_MAX']){
-	$zbp->ShowError('邮箱不能过长或过短.');die();
-}
-
-if(CheckRegExp($email,'[email]')){
-	$member->Email=$email;
-}else{
-	$zbp->ShowError('邮箱格式不正确.');die();
-}
 
 if(strlen($homepage)>$zbp->option['ZC_HOMEPAGE_MAX']){
 	$zbp->ShowError('网址不能过长.');die();

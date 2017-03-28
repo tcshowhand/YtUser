@@ -3,7 +3,7 @@ require '../../../zb_system/function/c_system_base.php';
 $zbp->Load();
 Add_Filter_Plugin('Filter_Plugin_Zbp_ShowError','RespondError',PLUGIN_EXITSIGNAL_RETURN);
 if (!$zbp->CheckPlugin('YtUser')) {$zbp->ShowError(48);die();}
-if(!$zbp->CheckValidCode(GetVars('verifycode','POST'),'Resetpassword')){
+if(!$zbp->CheckValidCode(GetVars('verifycode','POST'),'Nameedit')){
 	$zbp->ShowError('验证码错误，请重新输入.');die();
 }
 if(GetVars('name','POST') != GetVars('rename','POST')){

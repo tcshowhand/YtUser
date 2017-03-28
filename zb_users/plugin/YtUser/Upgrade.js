@@ -39,7 +39,7 @@ function RegPage(){
 			}
 		}
 	);
-	
+
 }
 
 
@@ -67,7 +67,7 @@ function Ytbuypay(){
 			}
 		}
 	);
-	
+
 }
 
 function Integral(){
@@ -90,7 +90,7 @@ function Integral(){
 			}
 		}
 	);
-	
+
 }
 
 
@@ -196,8 +196,8 @@ function Nameedit(){
 	$.post(bloghost+'zb_users/plugin/YtUser/nameedit.php',
 		{
 		"name":$("input[name='name']").val(),
-        "rename":$("input[name='rename']").val(),
-        "token":$("input[name='token']").val(),
+		"rename":$("input[name='rename']").val(),
+		"token":$("input[name='token']").val(),
 		"verifycode":$("input[name='verifycode']").val(),
 		},
 		function(data){
@@ -205,7 +205,7 @@ function Nameedit(){
 			if((s.search("faultCode")>0)&&(s.search("faultString")>0))
 			{
 				alert(s.match("<string>.+?</string>")[0].replace("<string>","").replace("</string>",""));
-				$("#reg_verfiycode").attr("src",bloghost+"zb_system/script/c_validcode.php?id=Resetpassword&amp;tm="+Math.random());
+				$("#reg_verfiycode").attr("src",bloghost+"zb_system/script/c_validcode.php?id=Nameedit&amp;tm="+Math.random());
 			}
 			else{
 				var s =data;
@@ -215,3 +215,54 @@ function Nameedit(){
 		}
 	);
 }
+
+function checkArticleInfo(){
+	$.post(bloghost+'zb_users/plugin/YtUser/articleInfo.php',
+		{
+		"Title":$("input[name='Title']").val(),
+		"Content":getIntro(),
+		"token":$("input[name='token']").val(),
+		"verifycode":$("input[name='verifycode']").val(),
+		},
+		function(data){
+			var s =data;
+			if((s.search("faultCode")>0)&&(s.search("faultString")>0))
+			{
+				alert(s.match("<string>.+?</string>")[0].replace("<string>","").replace("</string>",""));
+				$("#reg_verfiycode").attr("src",bloghost+"zb_system/script/c_validcode.php?id=Articleedt&amp;tm="+Math.random());
+			}
+			else{
+				var s =data;
+				alert(s);
+				window.location=bloghost+'?Articlelist';
+			}
+		}
+	);
+}
+
+function Changepassword(){
+	$.post(bloghost+'zb_users/plugin/YtUser/changepassword.php',
+		{
+        "password":$("input[name='password']").val(),
+        "newpassword":$("input[name='newpassword']").val(),
+        "repassword":$("input[name='repassword']").val(),
+		"token":$("input[name='token']").val(),
+		"verifycode":$("input[name='verifycode']").val(),
+		},
+		function(data){
+			var s =data;
+			if((s.search("faultCode")>0)&&(s.search("faultString")>0))
+			{
+				alert(s.match("<string>.+?</string>")[0].replace("<string>","").replace("</string>",""));
+				$("#reg_verfiycode").attr("src",bloghost+"zb_system/script/c_validcode.php?id=Changepassword&amp;tm="+Math.random());
+			}
+			else{
+				var s =data;
+				alert(s);
+				window.location=bloghost+'?Login';
+			}
+		}
+	);
+}
+
+
