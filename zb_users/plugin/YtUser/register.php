@@ -21,6 +21,8 @@ if (isset($_POST["email"])) {
     }else{
 	    $zbp->ShowError('邮箱格式不正确.');die();
     }
+}else{
+    $member->Email='null@null.com';
 }
 if (isset($_POST["homepage"])) {
     $homepage=trim($_POST['homepage']);

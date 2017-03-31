@@ -11,6 +11,7 @@ function ActivePlugin_YtUser() {
 	Add_Filter_Plugin('Filter_Plugin_Admin_TopMenu', 'YtUser_AddMenu');
 	Add_Filter_Plugin('Filter_Plugin_ViewPost_Template','YtUser_Content');
 	Add_Filter_Plugin('Filter_Plugin_Edit_Response3','YtUser_Edit');
+            Add_Filter_Plugin('Filter_Plugin_Admin_MemberMng_SubMenu','YtUser_Batch_MemberMng_Main');
 }
 
 function YtUser_AddMenu(&$m) {
@@ -18,6 +19,12 @@ function YtUser_AddMenu(&$m) {
 	$m[] = MakeTopMenu("root", '用户中心', $zbp->host . "zb_users/plugin/YtUser/main.php?act=base", "", "topmenu_metro");
 }
 
+function YtUser_Batch_MemberMng_Main(){
+    global $zbp;
+    if ($zbp->CheckRights('root')) {
+        Redirect('../../zb_users/plugin/YtUser/membermng.php');
+    }
+}
 function YtUser_Main(){
 	global $zbp;
     if($zbp->user->ID){}else{$zbp->header .=  '<link rel="stylesheet" type="text/css" href="'.$zbp->host.'zb_users/plugin/YtUser/ytuser.css"/>' . "\r\n";}

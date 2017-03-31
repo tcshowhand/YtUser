@@ -127,7 +127,7 @@ function Ytuser_Login(){
 		{
 		"username":$("input[name='edtUserName']").val(),
 		"edtPassWord":MD5($("input[name='edtPassWord']").val()),
-        "strSaveDate":$("input[name='chkRemember']").val(),
+		"strSaveDate":$("input[name='chkRemember']").val(),
 		},
 		function(data){
 			var s =data;
@@ -139,6 +139,28 @@ function Ytuser_Login(){
 				var s =data;
 				alert(s);
 				window.location=bloghost+'?User';
+			}
+		}
+	);
+}
+
+function Ytuser_allLogin(){
+	$.post(bloghost+'zb_users/plugin/YtUser/cmd.php?act=verify',
+		{
+		"username":$("input[name='allUserName']").val(),
+		"edtPassWord":MD5($("input[name='allPassWord']").val()),
+		"strSaveDate":$("input[name='allRemember']").val(),
+		},
+		function(data){
+			var s =data;
+			if((s.search("faultCode")>0)&&(s.search("faultString")>0))
+			{
+				alert(s.match("<string>.+?</string>")[0].replace("<string>","").replace("</string>",""))
+			}
+			else{
+				var s =data;
+				alert(s);
+				window.location.reload();
 			}
 		}
 	);

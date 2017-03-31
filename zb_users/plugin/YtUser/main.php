@@ -49,6 +49,10 @@ require $blogpath . 'zb_system/admin/admin_top.php';
 	<td><textarea name="integral_text" style="width:90%;height:100px;" /><?php echo htmlspecialchars($zbp->Config('YtUser')->integral_text);?></textarea></td>
 </tr>
 
+<tr>
+	<td class="td30"><p align='left'><b>Vip折扣</b></p></td>
+	<td><input type="text" name="vipdis" style="width:50px;" value="<?php echo (int)htmlspecialchars($zbp->Config('YtUser')->vipdis);?>" style="width:89%;" />%</td>
+</tr>
 </table>
 	  <hr/>
 	  <p>
