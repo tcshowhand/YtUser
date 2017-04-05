@@ -70,50 +70,10 @@ if($user['user_id']>0){
     			Redirect($ytUrl);
                 die();
                 }else{
-            $guid=GetGuid();
-            $member=new Member;
-            $member->Guid=$guid;
-            $member->Name="yt_".$guid;
-            $member->Alias=$userinfo['response']['name'];
-            $member->Password="0e681aa506fc191c5f2fa9be6abddd01";
-            if($userinfo['response']['url']!="javascript:void(0)"){
-            $member->HomePage=$userinfo['response']['url'];
-            }
-            $member->Level=5;
-            $member->PostTime=time();
-            $member->IP=GetGuestIP();
-            $member->Metas->Img="";
-            $member->Save();
-            $get=$member->ID;
-            $get=(int)$get;
-            $YtdsSlide_Table='%pre%ytuser';
-            $DataArr = array(
-                'tc_uid'            => $member->ID,
-                'tc_oid'            => $user['user_id'],
-            );
-        	$sql= $zbp->db->sql->Insert($YtdsSlide_Table,$DataArr);
-        	$zbp->db->Insert($sql);
-                $un=$member->Name;
-                if($blogversion>131221){
-                    $ps=md5($member->Password . $zbp->guid);
-                }else{
-                    $ps=md5($member->Password . $zbp->path);
-                }
-                $addinfo=array();
-                $addinfo['dishtml5']=(int)GetVars('dishtml5', 'POST');
-                $addinfo['chkadmin']=(int)$zbp->CheckRights('admin');
-                $addinfo['chkarticle']=(int)$zbp->CheckRights('ArticleEdt');
-                $addinfo['levelname']=$member->LevelName;
-                $addinfo['userid']=$member->ID;
-                $addinfo['useralias']=$member->StaticName;
-                setcookie("username", $un,0,$zbp->cookiespath);
-                setcookie("password", $ps,0,$zbp->cookiespath);
-                setcookie("addinfo" . str_replace('/','',$zbp->cookiespath), json_encode($addinfo), 0, $zbp->cookiespath);
                 Redirect($ytUrl);
             die();
         }
 }else{
-    print_R($user);
     Redirect($zbp->host);
 }
 ?>

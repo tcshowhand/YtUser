@@ -11,7 +11,9 @@ function ActivePlugin_YtUser() {
 	Add_Filter_Plugin('Filter_Plugin_Admin_TopMenu', 'YtUser_AddMenu');
 	Add_Filter_Plugin('Filter_Plugin_ViewPost_Template','YtUser_Content');
 	Add_Filter_Plugin('Filter_Plugin_Edit_Response3','YtUser_Edit');
-            Add_Filter_Plugin('Filter_Plugin_Admin_MemberMng_SubMenu','YtUser_Batch_MemberMng_Main');
+    Add_Filter_Plugin('Filter_Plugin_Admin_MemberMng_SubMenu','YtUser_Batch_MemberMng_Main');
+	Add_Filter_Plugin('Filter_Plugin_AlipayPayNotice_Succeed','YtUser_Filter_Plugin_AlipayPayNotice_Succeed');
+	Add_Filter_Plugin('Filter_Plugin_AlipayPayReturn_Succeed','YtUser_Filter_Plugin_AlipayPayReturn_Succeed');
 }
 
 function YtUser_AddMenu(&$m) {
@@ -32,11 +34,27 @@ function YtUser_Main(){
 	$zbp->footer .= $data. "\r\n";
 }
 
+function YtUser_Filter_Plugin_AlipayPayReturn_Succeed(&$data){
+    global $zbp;
+    echo "支付成功！";
+    Redirect($zbp->host);
+}
+
+function YtUser_Filter_Plugin_AlipayPayNotice_Succeed(&$data){
+    global $zbp;
+    $LogID=$data['out_trade_no'];
+	$keyvalue=array();
+	$keyvalue['buy_State']=1;
+    $sql = $zbp->db->sql->Update($GLOBALS['YtUser_buy_Table'],$keyvalue,array(array('=','buy_OrderID',$LogID)));
+    $zbp->db->Update($sql);
+}
+
 function YtUser_Edit(){
 	global $article;
 	echo '<div id="price" class="editmod"><label for="edtIslock" class="editinputname">价格</label><input type="text" name="meta_price" id="price" value="'.(int)$article->Metas->price.'" style="width:180px;" class="hasDatepicker"></div>';
     echo '<div id="price" class="editmod">付费内容用[BuyView][/BuyView]包起来</div>';
 }
+
 function YtUser_Content(&$template){
 	global $zbp;
 	$article = $template->GetTags('article');
