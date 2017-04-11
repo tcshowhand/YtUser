@@ -1,0 +1,16 @@
+[2017-04-06 13:09:26 .96601100 +08:00]
+array (
+  0 => 'Exception',
+  1 => '启用该应用，需要先启用依赖应用<a href="http://localhost:60124/zb_users/plugin/AppCentre/main.php?alias=ggravatar">ggravatar</a>',
+  2 => 0,
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 2708,
+)
+[2017-04-06 13:09:36 .62012100 +08:00]
+array (
+  0 => 'Exception',
+  1 => '启用该应用，需要先停用冲突应用IMAGE',
+  2 => 0,
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 2708,
+)

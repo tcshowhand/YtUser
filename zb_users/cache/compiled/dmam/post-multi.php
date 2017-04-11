@@ -23,7 +23,7 @@ if ($zbp->CheckPlugin('dm_tools')) {
 		<?php if ($article->Metas->post_author) { ?><span class="am-icon-globe"> 来源：<?php  echo $article->Metas->post_author;  ?></span><?php } ?>
 		<span class="am-icon-eye"> 热度：<?php  echo $article->ViewNums;  ?> ℃</span>
 		<span class="am-icon-comment-o"> 评论：<?php  echo $article->CommNums;  ?> 次</span>
-		<time class="am-icon-clock-o"> <?php  echo $article->Time('Y年m月d日');  ?></time>
+		<time class="am-icon-clock-o"> <?php  echo dmam_NewTime($article->Time());  ?></time>
 		</p>
 		</div>
 </article>
@@ -43,7 +43,7 @@ if ($zbp->CheckPlugin('dm_tools')) {
 		<?php if ($article->Metas->post_author) { ?><span class="am-icon-globe"> 来源：<?php  echo $article->Metas->post_author;  ?></span><?php } ?>
 		<span class="am-icon-eye"> 热度：<?php  echo $article->ViewNums;  ?> ℃</span>
 		<span class="am-icon-comment-o"> 评论：<?php  echo $article->CommNums;  ?> 次</span>
-		<time class="am-icon-clock-o"> <?php  echo $article->Time('Y年m月d日');  ?></time>
+		<time class="am-icon-clock-o"> <?php  echo dmam_NewTime($article->Time());  ?></time>
 		</p>
 		</div>
 </article>
@@ -66,7 +66,7 @@ if ($zbp->CheckPlugin('dm_tools')) {
 	<?php if ($article->Metas->post_author) { ?><span class="am-icon-globe"> 来源：<?php  echo $article->Metas->post_author;  ?></span><?php } ?>
 	<span class="am-icon-eye"> 热度：<?php  echo $article->ViewNums;  ?> ℃</span>
 	<span class="am-icon-comment-o"> 评论：<?php  echo $article->CommNums;  ?> 次</span>
-	<time class="am-icon-clock-o"> <?php  echo $article->Time('Y年m月d日');  ?></time>
+	<time class="am-icon-clock-o"> <?php  echo dmam_NewTime($article->Time());  ?></time>
 	</p>
 	</div>
 </article>
@@ -88,7 +88,7 @@ if ($zbp->CheckPlugin('dm_tools')) {
 		<?php if ($article->Metas->post_author) { ?><span class="am-icon-globe"> 来源：<?php  echo $article->Metas->post_author;  ?></span><?php } ?>
 		<span class="am-icon-eye"> 热度：<?php  echo $article->ViewNums;  ?> ℃</span>
 		<span class="am-icon-comment-o"> 评论：<?php  echo $article->CommNums;  ?> 次</span>
-		<time class="am-icon-clock-o"> <?php  echo $article->Time('Y年m月d日');  ?></time>
+		<time class="am-icon-clock-o"> <?php  echo dmam_NewTime($article->Time());  ?></time>
 		</p>
 		</div>
 </article>
@@ -112,7 +112,7 @@ foreach ($img_orders as $img_order){
 		<?php if ($article->Metas->post_author) { ?><span class="am-icon-globe"> 来源：<?php  echo $article->Metas->post_author;  ?></span><?php } ?>
 		<span class="am-icon-eye"> 热度：<?php  echo $article->ViewNums;  ?> ℃</span>
 		<span class="am-icon-comment-o"> 评论：<?php  echo $article->CommNums;  ?> 次</span>
-		<time class="am-icon-clock-o"> <?php  echo $article->Time('Y年m月d日');  ?></time>
+		<time class="am-icon-clock-o"> <?php  echo dmam_NewTime($article->Time());  ?></time>
 		</p>
 		</div>
 </article>

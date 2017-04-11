@@ -18,8 +18,8 @@
 			<h1 class="am-article-title"><?php  echo $article->Title;  ?></h1>
 		  </header>
 		  <section class="am-article-bd">
-		  <?php  echo $article->Content;  ?>
-			  <?php  if (isset($pagefix))echo $pagefix; ?>
+		  <?php if ($article->Metas->post_loginview && !$user->ID) { ?>当前文章无内容<?php }else{  ?><?php  echo $article->Content;  ?><?php } ?>
+		<?php  if (isset($pagefix))echo $pagefix; ?>
 		  </section>
 		</article>
 		<?php if (!$article->IsLock) { ?>

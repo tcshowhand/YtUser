@@ -1,6 +1,7 @@
 <?php
 require '../../../zb_system/function/c_system_base.php';
-
+require_once '../../../zb_users/plugin/alipay/function.php';
+require_once '../../../zb_users/plugin/alipay/api.php';
 $zbp->Load();
 
 Add_Filter_Plugin('Filter_Plugin_Zbp_ShowError','RespondError',PLUGIN_EXITSIGNAL_RETURN);
@@ -55,6 +56,28 @@ switch ($action) {
 		$zbp->SaveCache();
 		$zbp->SetHint('good');
 		echo '修改成功！';
+		break;
+case 'UploadPst':
+        $LogID=(int)$_POST['LogID'];
+        $articles = $zbp->GetPostByID($LogID);
+            if($zbp->user->Level < 5){
+                $Price=(int)$articles->Metas->price * ($zbp->Config('YtUser')->vipdis/100);
+            }else{
+                $Price=$articles->Metas->price;
+            }
+        $sql=$zbp->db->sql->Select($YtUser_buy_Table,'*',array(array('=','buy_LogID',$LogID),array('=','buy_AuthorID',$zbp->user->ID)),null,null,null);
+	    $array=$zbp->GetListCustom($YtUser_buy_Table,$YtUser_buy_DataInfo,$sql);
+	    $num=count($array);
+        $reg=$array[0];
+		$parameter = array(
+			"out_trade_no" => $reg->OrderID, //订单号
+			"subject" => $reg->Title,
+			"total_fee" => $Price, //金额
+			"body" => $reg->Title,
+			"show_url" => $zbp->host."?Upgrade&vip=1",
+		);
+		//print_r($parameter);
+		AlipayAPI_Start($parameter);
 		break;
 	default:
 		# code...

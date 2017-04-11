@@ -106,6 +106,7 @@ function InstallPlugin_YtUser() {
     YtUser_CreateTable();
 	$zbp->Config('YtUser')->dsurl = 'zbloguser';
     $zbp->Config('YtUser')->default_level=4;
+    $zbp->Config('YtUser')->vipdis = '100';
 	$zbp->SaveConfig('YtUser');
 }
 
@@ -142,4 +143,14 @@ function YtUser_password_verify_emailhash($name,$hash=''){
         }else{
             return false;
         }
+}
+
+function YtUser_payment_radio($int) {
+    $array=array("积分","支付宝","并存");
+    foreach ($array as $key=>$article) {
+    echo '<input name="payment" type="radio" value="'.$key.'"';
+    if($key==$int){echo 'checked="checked"';}
+    echo '/>'.$article.'</label>';
+    }
+    
 }

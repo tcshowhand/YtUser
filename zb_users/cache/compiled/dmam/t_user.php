@@ -19,6 +19,7 @@
     <div class="admin-content-body">
       <div class="am-cf am-padding am-padding-bottom-0">
         <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">个人资料</strong> / <small>Personal information</small></div>
+		<small class="am-fr"><a href="<?php  echo $host;  ?>zb_system/admin/?act=admin">后台切换</a> / <a href="<?php  echo $host;  ?>?Resetpassword">重置密码</a></small>
       </div>
       <hr/>
 	  

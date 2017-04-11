@@ -11,6 +11,8 @@ if($_GET['type'] == 'base' ){
     $zbp->Config('YtUser')->dsurl = $_POST['dsurl'];
     $zbp->Config('YtUser')->readme_text=$_POST['readme_text'];
     $zbp->Config('YtUser')->integral_text=$_POST['integral_text'];
+    $zbp->Config('YtUser')->vipdis=$_POST['vipdis'];
+    $zbp->Config('YtUser')->payment=$_POST['payment'];
     $zbp->SaveConfig('YtUser');
 	$zbp->SetHint('good','修改成功');
 	Redirect('./main.php?act=base');

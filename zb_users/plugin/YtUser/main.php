@@ -53,6 +53,14 @@ require $blogpath . 'zb_system/admin/admin_top.php';
 	<td class="td30"><p align='left'><b>Vip折扣</b></p></td>
 	<td><input type="text" name="vipdis" style="width:50px;" value="<?php echo (int)htmlspecialchars($zbp->Config('YtUser')->vipdis);?>" style="width:89%;" />%</td>
 </tr>
+
+<tr>
+	<td class="td30"><p align='left'><b>支付方式</b></p></td>
+	<td>
+	    <?php echo YtUser_payment_radio((int)htmlspecialchars($zbp->Config('YtUser')->payment))?>
+	</td>
+</tr>
+
 </table>
 	  <hr/>
 	  <p>

@@ -18,6 +18,7 @@ if ($type == 'article'){
 <meta http-equiv="Cache-Control" content="no-transform">
 <meta http-equiv="Cache-Control" content="no-siteapp">
 <meta name="generator" content="<?php  echo $zblogphp;  ?>" />
+<meta name="site" content="<?php  echo $host;  ?>" />
 <?php if ($zbp->Config('dmam')->headmate) { ?><?php  echo $zbp->Config('dmam')->headmate;  ?><?php } ?>
 <?php if ($zbp->Config('dmam')->theme_seo) { ?>
 <?php  include $this->GetTemplate('b_header_seo');  ?>

@@ -18,4 +18,6 @@
 <?php  echo dmam_load_source('footer',$type,null);  ?>
 <?php if ($zbp->Config('dmam')->footmate) { ?><?php  echo $zbp->Config('dmam')->footmate;  ?><?php } ?>
 <?php  echo $footer;  ?>
+
+
 </html>

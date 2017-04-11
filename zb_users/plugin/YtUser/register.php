@@ -11,19 +11,7 @@ if (!$zbp->CheckPlugin('YtUser')) {$zbp->ShowError(48);die();}
 $name=trim($_POST['name']);
 $password=trim($_POST['password']);
 $repassword=trim($_POST['repassword']);
-if (isset($_POST["email"])) {
-    $email=trim($_POST['email']);
-    if(strlen($email)<5||strlen($email)>$zbp->option['ZC_EMAIL_MAX']){
-	    $zbp->ShowError('邮箱不能过长或过短.');die();
-    }
-    if(CheckRegExp($email,'[email]')){
-	    $member->Email=$email;
-    }else{
-	    $zbp->ShowError('邮箱格式不正确.');die();
-    }
-}else{
-    $member->Email='null@null.com';
-}
+$member->Email='null@null.com';
 if (isset($_POST["homepage"])) {
     $homepage=trim($_POST['homepage']);
 }else{
