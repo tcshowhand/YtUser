@@ -14,6 +14,13 @@ function ActivePlugin_YtUser() {
     Add_Filter_Plugin('Filter_Plugin_Admin_MemberMng_SubMenu','YtUser_Batch_MemberMng_Main');
 	Add_Filter_Plugin('Filter_Plugin_AlipayPayNotice_Succeed','YtUser_Filter_Plugin_AlipayPayNotice_Succeed');
 	Add_Filter_Plugin('Filter_Plugin_AlipayPayReturn_Succeed','YtUser_Filter_Plugin_AlipayPayReturn_Succeed');
+    Add_Filter_Plugin('Filter_Plugin_DelArticle_Succeed','YtUser_DelArticle');
+}
+
+function YtUser_DelArticle(&$data){
+    global $zbp;
+    $sql = $zbp->db->sql->Delete($GLOBALS['YtUser_buy_Table'],array(array('=','buy_LogID',$data->ID)));
+    $zbp->db->Delete($sql);
 }
 
 function YtUser_AddMenu(&$m) {
@@ -30,8 +37,6 @@ function YtUser_Batch_MemberMng_Main(){
 function YtUser_Main(){
 	global $zbp;
     if($zbp->user->ID){}else{$zbp->header .=  '<link rel="stylesheet" type="text/css" href="'.$zbp->host.'zb_users/plugin/YtUser/ytuser.css"/>' . "\r\n";}
-    $data='<script type="text/javascript">var duoshuoQuery = {short_name:"'.$zbp->Config('YtUser')->dsurl.'",sso: { login: "'.$zbp->host.'zb_users/plugin/YtUser/login.php",logout: "'.$zbp->host.'zb_users/plugin/YtUser/logout.php/"}};(function() {var ds = document.createElement(\'script\');ds.type = \'text/javascript\';ds.async = true;ds.src = (document.location.protocol == \'https:\' ? \'https:\' : \'http:\') + \'//static.duoshuo.com/embed.js\';ds.charset = \'UTF-8\';(document.getElementsByTagName(\'head\')[0] || document.getElementsByTagName(\'body\')[0]).appendChild(ds);})();</script>';
-	$zbp->footer .= $data. "\r\n";
 }
 
 function YtUser_Filter_Plugin_AlipayPayReturn_Succeed(&$data){

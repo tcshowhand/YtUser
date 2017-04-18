@@ -1,7 +1,9 @@
 <?php
 require '../../../zb_system/function/c_system_base.php';
+if ($zbp->CheckPlugin('alipay')) {
 require_once '../../../zb_users/plugin/alipay/function.php';
 require_once '../../../zb_users/plugin/alipay/api.php';
+}
 $zbp->Load();
 
 Add_Filter_Plugin('Filter_Plugin_Zbp_ShowError','RespondError',PLUGIN_EXITSIGNAL_RETURN);

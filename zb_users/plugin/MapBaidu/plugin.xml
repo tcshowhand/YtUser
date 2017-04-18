@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <plugin version="php">
-<id>YtUser</id>
-<name>用户中心（百搭）</name>
-<url>http://www.ytecn.com/2016/11/548.html</url>
-<note>用户中心,会员中心,支持投稿.</note>
-<description>用户中心</description>
+<id>MapBaidu</id>
+<name>百度地图</name>
+<url>http://www.ytecn.com/</url>
+<note>超级大气，调用方便</note>
+<description>超级大气，调用方便</description>
 <path>main.php</path>
 <include>include.php</include>
 <level>1</level>
 <author>
-  <name>豫唐网络</name>
+  <name>唐朝</name>
   <email>79300975@qq.com</email>
   <url>http://www.ytecn.com</url>
 </author>
@@ -19,10 +19,10 @@
   <url></url>
 </source>
 <adapted>151740</adapted>
-<version>6.4</version>
-<pubdate>2016-10-30</pubdate>
-<modified>2017-04-18</modified>
-<price>98</price>
+<version>1.0</version>
+<pubdate>2017-02-19</pubdate>
+<modified>2017-02-19</modified>
+<price>0</price>
 <phpver>5.2</phpver>
 <advanced>
   <dependency></dependency>

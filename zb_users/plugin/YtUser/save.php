@@ -8,7 +8,8 @@ if (!$zbp->CheckRights($action)) {$zbp->ShowError(6);die();}
 if (!$zbp->CheckPlugin('YtUser')) {$zbp->ShowError(48);die();}
 
 if($_GET['type'] == 'base' ){
-    $zbp->Config('YtUser')->dsurl = $_POST['dsurl'];
+    $zbp->Config('YtUser')->appid = $_POST['appid'];
+    $zbp->Config('YtUser')->appkey = $_POST['appkey'];
     $zbp->Config('YtUser')->readme_text=$_POST['readme_text'];
     $zbp->Config('YtUser')->integral_text=$_POST['integral_text'];
     $zbp->Config('YtUser')->vipdis=$_POST['vipdis'];

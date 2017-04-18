@@ -73,12 +73,6 @@ function YtUser_page(){
         }
     }
 
-    if(!isset($_GET['Nameedit'])){
-        if (substr($zbp->user->Name,0,3) == 'yt_'){
-            Redirect($zbp->host."?Nameedit");die();
-        }
-    }
-
     if(!isset($_GET['Changepassword'])){
         if (substr($zbp->user->Name,0,3) != 'yt_' && $zbp->user->Password=='0e681aa506fc191c5f2fa9be6abddd01'){
             Redirect($zbp->host."?Changepassword");die();
@@ -130,6 +124,7 @@ function YtUser_page(){
     $zbp->template->SetTags('article', $article);
     $zbp->template->SetTags('articles', $array);
     $zbp->template->SetTags('type', $article->TypeName);
+    $zbp->template->SetTags('Nobird_Seo_KeyAndDes',null);
     $zbp->template->SetTags('page', $page);
     $zbp->template->SetTags('pagebar', $p);
     $zbp->template->SetTags('comments', array());
@@ -184,6 +179,7 @@ function YtUser_page(){
     $zbp->template->SetTags('article', $article);
     $zbp->template->SetTags('articles', $array);
     $zbp->template->SetTags('type', $article->TypeName);
+    $zbp->template->SetTags('Nobird_Seo_KeyAndDes',null);
     $zbp->template->SetTags('page', $page);
     $zbp->template->SetTags('pagebar', $p);
     $zbp->template->SetTags('comments', array());
@@ -270,7 +266,8 @@ js;
 	}
 	$zbp->template->SetTags('title',$article->Title);
 	$zbp->template->SetTags('article',$article);
-	$zbp->template->SetTags('type',$article->type=0?'article':'page');
+	$zbp->template->SetTags('type','page');
+    $zbp->template->SetTags('Nobird_Seo_KeyAndDes',null);
 	$zbp->template->SetTemplate($article->Template);
 	$zbp->template->SetTags('page',1);
 	$zbp->template->SetTags('pagebar',null);
@@ -312,7 +309,8 @@ js;
 	}
 	$zbp->template->SetTags('title',$article->Title);
 	$zbp->template->SetTags('article',$article);
-	$zbp->template->SetTags('type',$article->type=0?'article':'page');
+	$zbp->template->SetTags('type','page');
+    $zbp->template->SetTags('Nobird_Seo_KeyAndDes',null);
 	$zbp->template->SetTemplate($article->Template);
 	$zbp->template->SetTags('page',1);
 	$zbp->template->SetTags('pagebar',null);
@@ -382,7 +380,8 @@ js;
 	}
 	$zbp->template->SetTags('title',$article->Title);
 	$zbp->template->SetTags('article',$article);
-	$zbp->template->SetTags('type',$article->type=0?'article':'page');
+	$zbp->template->SetTags('type','page');
+    $zbp->template->SetTags('Nobird_Seo_KeyAndDes',null);
 	$zbp->template->SetTemplate($article->Template);
 	$zbp->template->SetTags('page',1);
 	$zbp->template->SetTags('pagebar',null);
@@ -421,7 +420,8 @@ js;
 	}
 	$zbp->template->SetTags('title',$article->Title);
 	$zbp->template->SetTags('article',$article);
-	$zbp->template->SetTags('type',$article->type=0?'article':'page');
+	$zbp->template->SetTags('type','page');
+    $zbp->template->SetTags('Nobird_Seo_KeyAndDes',null);
 	$zbp->template->SetTemplate($article->Template);
 	$zbp->template->SetTags('page',1);
 	$zbp->template->SetTags('pagebar',null);
@@ -443,7 +443,7 @@ js;
         $article->Content .='<input id="edtType" name="Type" type="hidden" value="0" />';    
         $article->Content .='<input type="hidden" name="token" id="token" value="'.$zbp->GetToken().'" />';
         $article->Content .='<p><span class="title">标题:</span><br><input id="edtTitle" class="edit" size="40" name="Title" type="text"></p>';
-        $article->Content .= '<span class="title">内容:</span><br>'.$article->UEditor.'</div>';
+        $article->Content .= '<span class="title">内容:</span><br>'.$article->UEditor;
         $article->Content .='<p><span class="title">验证码:</span><br><input required="required" name="verifycode" class="edit" size="40" type="text">'.$article->verifycode.'</p>';
         $article->Content .='<p><button onclick="return checkArticleInfo();">确定</button></p>';
     }else{
@@ -457,7 +457,8 @@ js;
 	}
 	$zbp->template->SetTags('title',$article->Title);
 	$zbp->template->SetTags('article',$article);
-	$zbp->template->SetTags('type',$article->type=0?'article':'page');
+	$zbp->template->SetTags('type','page');
+    $zbp->template->SetTags('Nobird_Seo_KeyAndDes',null);
 	$zbp->template->SetTemplate($article->Template);
 	$zbp->template->SetTags('page',1);
 	$zbp->template->SetTags('pagebar',null);
@@ -498,6 +499,7 @@ js;
     $zbp->template->SetTags('article', $article);
     $zbp->template->SetTags('articles', $array);
     $zbp->template->SetTags('type', $article->TypeName);
+    $zbp->template->SetTags('Nobird_Seo_KeyAndDes',null);
     $zbp->template->SetTags('page', $page);
     $zbp->template->SetTags('pagebar', $p);
     $zbp->template->SetTags('comments', array());
@@ -528,13 +530,17 @@ js;
 	$article->Content .='<tr><td style="text-align:right;border:none;">(*)</td><td  style="border:none;" ><input required="required" type="text" name="verifycode" style="width:150px;font-size:1.2em;" />&nbsp;&nbsp;'.$article->verifycode.'</td></tr>';
 	$article->Content .='<tr><td  style="border:none;" ></td><td  style="border:none;" ><input type="submit" style="width:100px;font-size:1.0em;padding:0.2em" value="提交" onclick="return register()" /></td></tr>';
 	$article->Content .='</table>';
+    if($zbp->Config('YtUser')->appkey !=""){
+    $article->Content .='使用其它帐号登录：<a href="'.$zbp->host.'zb_users/plugin/YtUser/login.php" class="">QQ登录</a>';
+    }
 	$mt=microtime();
     if($zbp->template->hasTemplate('t_register')){
         $article->Template = 't_register';
 	}
 	$zbp->template->SetTags('title',$article->Title);
 	$zbp->template->SetTags('article',$article);
-	$zbp->template->SetTags('type',$article->type=0?'article':'page');
+	$zbp->template->SetTags('type','page');
+    $zbp->template->SetTags('Nobird_Seo_KeyAndDes',null);
 	$zbp->template->SetTemplate($article->Template);
 	$zbp->template->SetTags('page',1);
 	$zbp->template->SetTags('pagebar',null);
@@ -560,13 +566,16 @@ js;
 	$article->Content .='<tr><td style="text-align:right;border:none;"><input type="checkbox" name="chkRemember" id="chkRemember"  tabindex="3" /></td><td  style="border:none;" >下次自动登录</td></tr>';
     $article->Content .='<tr><td  style="border:none;" ></td><td  style="border:none;" ><input id="loginbtnPost" onclick="return Ytuser_Login()" name="loginbtnPost" type="submit" value="登录" class="button" tabindex="4"/></td></tr>';
 	$article->Content .='</table>';
-    $article->Content .='使用其它帐号登录：<div class="ds-login"></div>';
+    if($zbp->Config('YtUser')->appkey !=""){
+    $article->Content .='使用其它帐号登录：<a href="'.$zbp->host.'zb_users/plugin/YtUser/login.php" class="">QQ登录</a>';
+    }
     if($zbp->template->hasTemplate('t_login')){
         $article->Template = 't_login';
 	}
 	$zbp->template->SetTags('title',$article->Title);
 	$zbp->template->SetTags('article',$article);
-	$zbp->template->SetTags('type',$article->type=0?'article':'page');
+	$zbp->template->SetTags('type','page');
+    $zbp->template->SetTags('Nobird_Seo_KeyAndDes',null);
 	$zbp->template->SetTemplate($article->Template);
 	$zbp->template->SetTags('page',1);
 	$zbp->template->SetTags('pagebar',null);
@@ -594,7 +603,8 @@ js;
 	}
 	$zbp->template->SetTags('title',$article->Title);
 	$zbp->template->SetTags('article',$article);
-	$zbp->template->SetTags('type',$article->type=0?'article':'page');
+	$zbp->template->SetTags('type','page');
+    $zbp->template->SetTags('Nobird_Seo_KeyAndDes',null);
 	$zbp->template->SetTemplate($article->Template);
 	$zbp->template->SetTags('page',1);
 	$zbp->template->SetTags('pagebar',null);
@@ -640,7 +650,8 @@ js;
 	}
 	$zbp->template->SetTags('title',$article->Title);
 	$zbp->template->SetTags('article',$article);
-	$zbp->template->SetTags('type',$article->type=0?'article':'page');
+	$zbp->template->SetTags('type','page');
+    $zbp->template->SetTags('Nobird_Seo_KeyAndDes',null);
 	$zbp->template->SetTemplate($article->Template);
 	$zbp->template->SetTags('page',1);
 	$zbp->template->SetTags('pagebar',null);
@@ -672,7 +683,8 @@ js;
 	}
 	$zbp->template->SetTags('title',$article->Title);
 	$zbp->template->SetTags('article',$article);
-	$zbp->template->SetTags('type',$article->type=0?'article':'page');
+	$zbp->template->SetTags('type','page');
+    $zbp->template->SetTags('Nobird_Seo_KeyAndDes',null);
 	$zbp->template->SetTemplate($article->Template);
 	$zbp->template->SetTags('page',1);
 	$zbp->template->SetTags('pagebar',null);
@@ -708,7 +720,8 @@ js;
 	}
 	$zbp->template->SetTags('title',$article->Title);
 	$zbp->template->SetTags('article',$article);
-	$zbp->template->SetTags('type',$article->type=0?'article':'page');
+	$zbp->template->SetTags('type','page');
+    $zbp->template->SetTags('Nobird_Seo_KeyAndDes',null);
 	$zbp->template->SetTemplate($article->Template);
 	$zbp->template->SetTags('page',1);
 	$zbp->template->SetTags('pagebar',null);

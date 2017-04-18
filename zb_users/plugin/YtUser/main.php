@@ -35,10 +35,17 @@ require $blogpath . 'zb_system/admin/admin_top.php';
 	</th>
 </tr>
 <tr>
-	<td class="td30"><p align='left'><b>多说二级域名</b></p></td>
-	<td><input type="text" name="dsurl" style="width:200px;" value="<?php echo htmlspecialchars($zbp->Config('YtUser')->dsurl);?>" style="width:89%;" /> 例如"ytecn.duoshuo.com"，只需要输入“ytecn”</td>
+	<td class="td30"><p align='left'><b>QQ互联APPID</b></p></td>
+	<td><input type="text" name="appid" style="width:200px;" value="<?php echo htmlspecialchars($zbp->Config('YtUser')->appid);?>" style="width:89%;" /></td>
 </tr>
-
+<tr>
+	<td class="td30"><p align='left'><b>QQ互联APPKey</b></p></td>
+	<td><input type="text" name="appkey" style="width:200px;" value="<?php echo htmlspecialchars($zbp->Config('YtUser')->appkey);?>" style="width:89%;" /></td>
+</tr>
+<tr>
+	<td class="td30"><p align='left'><b>QQ互联回调地址</b></p></td>
+	<td><?php echo $zbp->host?>zb_users/plugin/YtUser/login.php</td>
+</tr>
 <tr>
 	<td class="td30"><p align='left'><b>会员升级相关说明文字</b></p></td>
 	<td><textarea name="readme_text" style="width:90%;height:100px;" /><?php echo htmlspecialchars($zbp->Config('YtUser')->readme_text);?></textarea></td>
