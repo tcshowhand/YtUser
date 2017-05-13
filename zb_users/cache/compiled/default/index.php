@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>烟台科瑞尔化学科技有限公司</title>
+    <title>化学科技有限公司</title>
     <link href="http://www.krechem.com/switch/css/style.css" rel="stylesheet" type="text/css" />
     <link href="http://www.krechem.com/switch/css/index.css" rel="stylesheet" type="text/css" />
 	<link rel="shortcut icon" href="#" type="image/vnd.microsoft.icon" />
@@ -896,43 +896,14 @@ C9H10BNO6</div>
     
 <div style="clear: both">
 </div>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-<div id="link" align="center">
-<div class="company">
-<a href="https://online.unionpay.com/" target="_blank" rel="nofollow">
-<img src="http://d6.yihaodianimg.com/N00/M01/1A/30/CgMBmVDzwyaAaIMBAAAJZgSEr6I65200.jpg" alt=""  >
-</a>
-<a href="#" rel="nofollow">
-<img src="http://d9.yihaodianimg.com/N01/M06/19/98/CgQCr1Dzwj2AVUL0AAA-ic2BxNw39500.jpg" alt=""  >
-</a>
-<a href="http://www.zx110.org/" target="_blank" rel="nofollow">
-<img src="http://d6.yihaodianimg.com/N02/M05/19/94/CgQCsVDzw0GABUElAADHlvRfNUk94600.jpg" alt=""  >
-</a>
-</div>
-</div>
 <br>
 <div id="bottom">
     <div class="company">
-        版权所有 烟台科瑞尔化学科技有限公司 <a href="http://www.miitbeian.gov.cn/" target="_blank"><font color="white"> 鲁ICP备17019891号</font></a></div>
-    <!--<div class="contact">
-        地址：上海浦东区金豫路100号2期2号楼1102室 
-    </div>-->
+        版权所有 化学科技有限公司 <a href="<?php  echo $host;  ?>" target="_blank"><font color="white"> ICP备号</font></a></div>
 </div>
 
 
-
-
-
-
-
-
-
-
-
-
-
-    
 
 
 <script type="text/javascript" src="http://www.krechem.com/switch/js/jquery.js"></script>
@@ -980,42 +951,6 @@ function __doPostBack(eventTarget, eventArgument) {
 }
 //]]>
 </script>
-<!--代码部分begin-->
-<div id="floatTools" class="rides-cs" style="height:210px;">
-  <div class="floatL">
-  	<a id="aFloatTools_Show" class="btnOpen" title="查看在线客服" style="top:20px;display:block" href="javascript:void(0);">展开</a>
-  	<a id="aFloatTools_Hide" class="btnCtn" title="关闭在线客服" style="top:20px;display:none" href="javascript:void(0);">收缩</a>
-  </div>
-  <div id="divFloatToolsView" class="floatR" style="top:20px;display: none;height:200px;width: 140px;">
-    <div class="cn" style="top:20px;">
-      <ul>
-        <li><span>客服1QQ</span> <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=28698871&site=qq&menu=yes"><img border="0" src="http://demo.lanrenzhijia.com/2014/service1031/images/online.png" alt="点击这里给我发消息" title="点击这里给我发消息"/></a> </li>
-        <li><span>客服2QQ</span> <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=2961438586&site=qq&menu=yes"><img border="0" src="http://demo.lanrenzhijia.com/2014/service1031/images/online.png" alt="点击这里给我发消息" title="点击这里给我发消息"/></a> </li>
-        <li style=""><span>电话：0535-6350522</span> </li>        
-        <li style=""><span>手机：15966506688</span> </li>
-        <li style=""><span><a href="mailto:calmstar@163.com" >calmstar@163.com</a></span> </li>
-      </ul>
-    </div>
-  </div>
-</div>
-<!--<script src="http://www.lanrenzhijia.com/ajaxjs/jquery.min.js"></script>-->
-<script>
-	$(function(){
-		$("#aFloatTools_Show").click(function(){
-			$('#divFloatToolsView').animate({width:'show',opacity:'show'},100,function(){$('#divFloatToolsView').show();});
-			$('#aFloatTools_Show').hide();
-			$('#aFloatTools_Hide').show();				
-		});
-		$("#aFloatTools_Hide").click(function(){
-			$('#divFloatToolsView').animate({width:'hide', opacity:'hide'},100,function(){$('#divFloatToolsView').hide();});
-			$('#aFloatTools_Show').show();
-			$('#aFloatTools_Hide').hide();	
-		});
-			$('#divFloatToolsView').animate({width:'show',opacity:'show'},100,function(){$('#divFloatToolsView').show();});
-			$('#aFloatTools_Show').hide();
-			$('#aFloatTools_Hide').show();				
-	});
-</script>
-<!--代码部分end-->
+
 </body>
 </html>
