@@ -7,6 +7,7 @@
 	<meta name="generator" content="<?php  echo $zblogphp;  ?>" />
 	<meta name="renderer" content="webkit">
 	<title><?php  echo $name;  ?>-<?php  echo $title;  ?></title>
+	<?php if ($type) { ?><?php  echo $Nobird_Seo_KeyAndDes;  ?><?php } ?>
 	<link rel="stylesheet" rev="stylesheet" href="<?php  echo $host;  ?>zb_users/theme/<?php  echo $theme;  ?>/style/<?php  echo $style;  ?>.css" type="text/css" media="all"/>
 	<script src="<?php  echo $host;  ?>zb_system/script/jquery-2.2.4.min.js" type="text/javascript"></script>
 	<script src="<?php  echo $host;  ?>zb_system/script/zblogphp.js" type="text/javascript"></script>

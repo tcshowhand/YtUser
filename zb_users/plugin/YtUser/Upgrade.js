@@ -242,7 +242,7 @@ function checkArticleInfo(){
 	$.post(bloghost+'zb_users/plugin/YtUser/articleInfo.php',
 		{
 		"Title":$("input[name='Title']").val(),
-		"Content":getIntro(),
+		"Content":editor.getContent(),
 		"token":$("input[name='token']").val(),
 		"verifycode":$("input[name='verifycode']").val(),
 		},

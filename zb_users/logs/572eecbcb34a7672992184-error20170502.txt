@@ -1,0 +1,360 @@
+[2017-05-02 13:39:21 .70659600 +08:00]
+array (
+  0 => 'Exception',
+  1 => '没有权限',
+  2 => 0,
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 2708,
+)
+[2017-05-02 13:40:31 .34513000 +08:00]
+array (
+  0 => 'Shutdown',
+  1 => 1,
+  2 => 'Call to undefined function CreateOptoinsOfCategorys()',
+  3 => 'E:\\songweb\\kangyijia\\zb_users\\theme\\YT_alove\\main.php',
+  4 => 75,
+)
+[2017-05-02 13:41:49 .23982500 +08:00]
+array (
+  0 => 'Shutdown',
+  1 => 1,
+  2 => 'Call to undefined function CreateOptoinsOfCategorys()',
+  3 => 'E:\\songweb\\kangyijia\\zb_users\\theme\\YT_alove\\main.php',
+  4 => 75,
+)
+[2017-05-02 14:08:38 .08732200 +08:00]
+array (
+  0 => 'Error',
+  1 => 8192,
+  2 => 'mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead',
+  3 => 'E:\\songweb\\kangyijia\\zb_users\\plugin\\tt_sql\\DbManage.class.php',
+  4 => 60,
+)
+[2017-05-02 14:10:19 .89289100 +08:00]
+array (
+  0 => 'Shutdown',
+  1 => 1,
+  2 => 'Using $this when not in object context',
+  3 => 'E:\\songweb\\kangyijia\\zzz.php',
+  4 => 5,
+)
+[2017-05-02 14:11:09 .77353100 +08:00]
+array (
+  0 => 'Shutdown',
+  1 => 1,
+  2 => 'Using $this when not in object context',
+  3 => 'E:\\songweb\\kangyijia\\zzz.php',
+  4 => 5,
+)
+[2017-05-02 14:11:10 .45278300 +08:00]
+array (
+  0 => 'Shutdown',
+  1 => 1,
+  2 => 'Using $this when not in object context',
+  3 => 'E:\\songweb\\kangyijia\\zzz.php',
+  4 => 5,
+)
+[2017-05-02 14:11:10 .90868100 +08:00]
+array (
+  0 => 'Shutdown',
+  1 => 1,
+  2 => 'Using $this when not in object context',
+  3 => 'E:\\songweb\\kangyijia\\zzz.php',
+  4 => 5,
+)
+[2017-05-02 14:11:11 .11142300 +08:00]
+array (
+  0 => 'Shutdown',
+  1 => 1,
+  2 => 'Using $this when not in object context',
+  3 => 'E:\\songweb\\kangyijia\\zzz.php',
+  4 => 5,
+)
+[2017-05-02 14:24:38 .65630300 +08:00]
+array (
+  0 => 'Shutdown',
+  1 => 1,
+  2 => 'Maximum execution time of 10 seconds exceeded',
+  3 => 'E:\\songweb\\kangyijia\\zzz.php',
+  4 => 16,
+)
+[2017-05-02 14:38:53 .70934300 +08:00]
+array (
+  0 => 'Error',
+  1 => 8,
+  2 => 'Undefined variable: data',
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\template.php',
+  4 => 519,
+)
+[2017-05-02 14:47:00 .04788700 +08:00]
+array (
+  0 => 'Shutdown',
+  1 => 1,
+  2 => 'Using $this when not in object context',
+  3 => 'E:\\songweb\\kangyijia\\zzz.php',
+  4 => 25,
+)
+[2017-05-02 14:48:24 .00162300 +08:00]
+array (
+  0 => 'Shutdown',
+  1 => 1,
+  2 => 'Using $this when not in object context',
+  3 => 'E:\\songweb\\kangyijia\\zzz.php',
+  4 => 6,
+)
+[2017-05-02 14:48:24 .73417100 +08:00]
+array (
+  0 => 'Shutdown',
+  1 => 1,
+  2 => 'Using $this when not in object context',
+  3 => 'E:\\songweb\\kangyijia\\zzz.php',
+  4 => 6,
+)
+[2017-05-02 14:48:24 .99884600 +08:00]
+array (
+  0 => 'Shutdown',
+  1 => 1,
+  2 => 'Using $this when not in object context',
+  3 => 'E:\\songweb\\kangyijia\\zzz.php',
+  4 => 6,
+)
+[2017-05-02 14:48:25 .23166100 +08:00]
+array (
+  0 => 'Shutdown',
+  1 => 1,
+  2 => 'Using $this when not in object context',
+  3 => 'E:\\songweb\\kangyijia\\zzz.php',
+  4 => 6,
+)
+[2017-05-02 14:48:25 .47544800 +08:00]
+array (
+  0 => 'Shutdown',
+  1 => 1,
+  2 => 'Using $this when not in object context',
+  3 => 'E:\\songweb\\kangyijia\\zzz.php',
+  4 => 6,
+)
+[2017-05-02 14:48:40 .64387400 +08:00]
+array (
+  0 => 'Error',
+  1 => 512,
+  2 => '未知方法或属性',
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 366,
+)
+[2017-05-02 14:48:42 .09488200 +08:00]
+array (
+  0 => 'Error',
+  1 => 512,
+  2 => '未知方法或属性',
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 366,
+)
+[2017-05-02 14:48:48 .43699500 +08:00]
+array (
+  0 => 'Error',
+  1 => 512,
+  2 => '未知方法或属性',
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 366,
+)
+[2017-05-02 14:50:17 .88236900 +08:00]
+array (
+  0 => 'Error',
+  1 => 8,
+  2 => 'Undefined variable: this',
+  3 => 'E:\\songweb\\kangyijia\\zzz.php',
+  4 => 6,
+)
+[2017-05-02 14:50:18 .53520900 +08:00]
+array (
+  0 => 'Error',
+  1 => 8,
+  2 => 'Undefined variable: this',
+  3 => 'E:\\songweb\\kangyijia\\zzz.php',
+  4 => 6,
+)
+[2017-05-02 14:50:18 .73470300 +08:00]
+array (
+  0 => 'Error',
+  1 => 8,
+  2 => 'Undefined variable: this',
+  3 => 'E:\\songweb\\kangyijia\\zzz.php',
+  4 => 6,
+)
+[2017-05-02 14:50:18 .92469300 +08:00]
+array (
+  0 => 'Error',
+  1 => 8,
+  2 => 'Undefined variable: this',
+  3 => 'E:\\songweb\\kangyijia\\zzz.php',
+  4 => 6,
+)
+[2017-05-02 14:50:31 .57492200 +08:00]
+array (
+  0 => 'Error',
+  1 => 8,
+  2 => 'Undefined variable: this',
+  3 => 'E:\\songweb\\kangyijia\\zzz.php',
+  4 => 6,
+)
+[2017-05-02 14:50:32 .16284500 +08:00]
+array (
+  0 => 'Error',
+  1 => 8,
+  2 => 'Undefined variable: this',
+  3 => 'E:\\songweb\\kangyijia\\zzz.php',
+  4 => 6,
+)
+[2017-05-02 14:50:32 .34724000 +08:00]
+array (
+  0 => 'Error',
+  1 => 8,
+  2 => 'Undefined variable: this',
+  3 => 'E:\\songweb\\kangyijia\\zzz.php',
+  4 => 6,
+)
+[2017-05-02 14:50:32 .50674900 +08:00]
+array (
+  0 => 'Error',
+  1 => 8,
+  2 => 'Undefined variable: this',
+  3 => 'E:\\songweb\\kangyijia\\zzz.php',
+  4 => 6,
+)
+[2017-05-02 14:50:32 .70102500 +08:00]
+array (
+  0 => 'Error',
+  1 => 8,
+  2 => 'Undefined variable: this',
+  3 => 'E:\\songweb\\kangyijia\\zzz.php',
+  4 => 6,
+)
+[2017-05-02 14:50:32 .86276100 +08:00]
+array (
+  0 => 'Error',
+  1 => 8,
+  2 => 'Undefined variable: this',
+  3 => 'E:\\songweb\\kangyijia\\zzz.php',
+  4 => 6,
+)
+[2017-05-02 14:50:33 .03128800 +08:00]
+array (
+  0 => 'Error',
+  1 => 8,
+  2 => 'Undefined variable: this',
+  3 => 'E:\\songweb\\kangyijia\\zzz.php',
+  4 => 6,
+)
+[2017-05-02 14:50:33 .19835700 +08:00]
+array (
+  0 => 'Error',
+  1 => 8,
+  2 => 'Undefined variable: this',
+  3 => 'E:\\songweb\\kangyijia\\zzz.php',
+  4 => 6,
+)
+[2017-05-02 14:51:12 .27275600 +08:00]
+array (
+  0 => 'Shutdown',
+  1 => 1,
+  2 => 'Call to undefined function getStateInfo()',
+  3 => 'E:\\songweb\\kangyijia\\zzz.php',
+  4 => 6,
+)
+[2017-05-02 14:51:24 .69211000 +08:00]
+array (
+  0 => 'Shutdown',
+  1 => 1,
+  2 => 'Call to undefined function getStateInfo()',
+  3 => 'E:\\songweb\\kangyijia\\zzz.php',
+  4 => 6,
+)
+[2017-05-02 14:51:28 .85412400 +08:00]
+array (
+  0 => 'Shutdown',
+  1 => 1,
+  2 => 'Call to undefined function getStateInfo()',
+  3 => 'E:\\songweb\\kangyijia\\zzz.php',
+  4 => 6,
+)
+[2017-05-02 16:43:08 .83368600 +08:00]
+array (
+  0 => 'Exception',
+  1 => '没有权限',
+  2 => 0,
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 2708,
+)
+[2017-05-02 16:48:48 .74895600 +08:00]
+array (
+  0 => 'Error',
+  1 => 8,
+  2 => 'Undefined offset: 1',
+  3 => 'E:\\songweb\\kangyijia\\zb_users\\plugin\\database\\main.php',
+  4 => 92,
+)
+[2017-05-02 16:54:26 .94200300 +08:00]
+array (
+  0 => 'Error',
+  1 => 2,
+  2 => 'file_get_contents(E:/songweb/kangyijia/robots.txt): failed to open stream: No such file or directory',
+  3 => 'E:\\songweb\\kangyijia\\zb_users\\plugin\\Nobird_Seo_Tools\\Robots\\robots.php',
+  4 => 35,
+)
+[2017-05-02 17:02:26 .07012900 +08:00]
+array (
+  0 => 'Error',
+  1 => 8,
+  2 => 'Undefined index: ID',
+  3 => 'E:\\songweb\\kangyijia\\c.php',
+  4 => 7,
+)
+[2017-05-02 17:02:33 .66311400 +08:00]
+array (
+  0 => 'Error',
+  1 => 8,
+  2 => 'Undefined index: id',
+  3 => 'E:\\songweb\\kangyijia\\c.php',
+  4 => 7,
+)
+[2017-05-02 17:02:42 .31820700 +08:00]
+array (
+  0 => 'Error',
+  1 => 8,
+  2 => 'Undefined variable: father',
+  3 => 'E:\\songweb\\kangyijia\\c.php',
+  4 => 28,
+)
+[2017-05-02 17:02:43 .30162600 +08:00]
+array (
+  0 => 'Error',
+  1 => 8,
+  2 => 'Undefined variable: father',
+  3 => 'E:\\songweb\\kangyijia\\c.php',
+  4 => 28,
+)
+[2017-05-02 17:24:04 .44938400 +08:00]
+array (
+  0 => 'Shutdown',
+  1 => 64,
+  2 => 'Cannot redeclare ActivePlugin_YT_alove() (previously declared in E:\\songweb\\kangyijia\\zb_users\\theme\\YT_alove\\include.php:6)',
+  3 => 'E:\\songweb\\kangyijia\\zb_users\\plugin\\WebGroup\\include.php',
+  4 => 11,
+)
+[2017-05-02 17:24:32 .61288200 +08:00]
+array (
+  0 => 'Error',
+  1 => 8,
+  2 => 'Undefined index: act',
+  3 => 'E:\\songweb\\kangyijia\\zb_users\\plugin\\WebGroup\\main.php',
+  4 => 12,
+)
+[2017-05-02 17:25:09 .63113800 +08:00]
+array (
+  0 => 'Error',
+  1 => 8,
+  2 => 'Undefined index: act',
+  3 => 'E:\\songweb\\kangyijia\\zb_users\\plugin\\WebGroup\\main.php',
+  4 => 12,
+)

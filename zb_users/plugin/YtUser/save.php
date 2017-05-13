@@ -22,7 +22,9 @@ if($_GET['type'] == 'base' ){
 if($_GET['type'] == 'upgrade' ){
 
 	if(GetVars('reset','POST')=='add'){
-		YtUser_CreateCode(10);
+        $Number = $_POST['Number'];
+        $Price = $_POST['Price'];
+        YtUser_CreateCode($Number,$Price);
 	}
 	
 	if(GetVars('reset','POST')=='del'){
@@ -38,11 +40,7 @@ if($_GET['type'] == 'upgrade' ){
 
 if($_GET['type'] == 'recharge' ){
 	global $zbp;
-	
-    if(GetVars('reset','POST')=='Priceadd'){
-		YtUser_Price_CreateCode(10);
-	}
-	
+
 	if(GetVars('reset','POST')=='Pricedel'){
 		YtUser_Price_DelUsedCode();
 	}
@@ -51,7 +49,12 @@ if($_GET['type'] == 'recharge' ){
 		YtUser_Price_EmptyCode();
 	}
 
-	$zbp->SetHint('good','幻灯保存成功');
+    if(GetVars('reset','POST')=='generate'){
+        $Number = $_POST['Number'];
+        $Price = $_POST['Price'];
+        YtUser_Price_CreateCode($Number,$Price);
+	}
+	$zbp->SetHint('good','设置成功');
 	Redirect('./main.php?act=recharge');
 }
 
@@ -64,13 +67,14 @@ if($_GET['type'] == 'testing' ){
 	Redirect('./main.php?act=testing');
 }
 
-
-function YtUser_CreateCode($n){
+function YtUser_CreateCode($n,$p=30){
 	global $zbp;
-	for ($i=0; $i < 10; $i++) { 
+    $p=(int)$p;
+    if($p<1){$p=7;}
+	for ($i=0; $i < $n; $i++) { 
 		$r = new Base($GLOBALS['tyactivate_Table'],$GLOBALS['tyactivate_DataInfo']);
 		$r->InviteCode=GetGuid();
-		$r->Level=4;
+		$r->Level=$p;
 		$r->Save();
 	}
 }
@@ -89,12 +93,14 @@ function YtUser_EmptyCode(){
 }
 
 
-function YtUser_Price_CreateCode($n){
+function YtUser_Price_CreateCode($n,$p=100){
 	global $zbp;
-	for ($i=0; $i < 10; $i++) { 
+    $p=(int)$p;
+    if($p<1){$p=100;}
+	for ($i=0; $i < $n; $i++) { 
 		$r = new Base($GLOBALS['typrepaid_Table'],$GLOBALS['typrepaid_DataInfo']);
 		$r->InviteCode=GetGuid();
-		$r->Price=100;
+		$r->Price=$p;
 		$r->Save();
 	}
 }

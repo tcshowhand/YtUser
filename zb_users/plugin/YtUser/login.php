@@ -34,6 +34,19 @@ if (!isset($_GET['code'])) {
                 $where = array(array('=','tc_oid',$openid));
                 $sql = $zbp->db->sql->Select($YtdsSlide_Table,'*',$where,null,null,null);
                 $array = $zbp->GetListCustom($YtdsSlide_Table,$YtdsSlide_DataInfo,$sql);
+                
+                if($zbp->user->ID){
+                    if (count($array)>0) {
+                        Redirect($zbp->host."?Binding");die();
+                    }else{
+                        $keyvalue=array();
+                        $keyvalue['tc_oid']=$openid;
+                        $sql = $zbp->db->sql->Update($tysuer_Table,$keyvalue,array(array('=','tc_uid',$zbp->user->ID)));
+                        Redirect($zbp->host."?Binding");
+                    }
+                    
+                }
+                die();
                 if (count($array)>0) {
                     $zbpuid = '';
                     foreach ($array as $key => $reg) {

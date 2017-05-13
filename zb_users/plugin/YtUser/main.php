@@ -19,7 +19,7 @@ require $blogpath . 'zb_system/admin/admin_top.php';
   <div class="divHeader"><?php echo $blogtitle;?></div>
 	<div class="SubMenu">
 		<?php YtUser_SubMenu($act);?>
-		<a href="http://www.ytecn.com/" target="_blank"><span class="m-left" style="color:#F00">帮助</span></a>
+		<a href="http://www.kancloud.cn/showhand/zbloguser" target="_blank"><span class="m-left" style="color:#F00">二次开发教程</span></a>
     </div>
   <div id="divMain2">
 
@@ -111,7 +111,7 @@ require $blogpath . 'zb_system/admin/admin_top.php';
 	<td><a href="<?php echo $zbp->host.'?buy' ?>" target="_blank"><?php echo $zbp->host.'?buy' ?></a></td>
 </tr>
 <tr>
-	<td class="td30"><p align='left'><b>VIP月充值</b></p></td>
+	<td class="td30"><p align='left'><b>VIP卡充值</b></p></td>
 	<td><a href="<?php echo $zbp->host.'?Upgrade' ?>" target="_blank"><?php echo $zbp->host.'?Upgrade' ?></a></td>
 </tr>
 <tr>
@@ -138,23 +138,39 @@ require $blogpath . 'zb_system/admin/admin_top.php';
 	<td class="td30"><p align='left'><b>修改账户名</b></p></td>
 	<td><a href="<?php echo $zbp->host.'?Nameedit' ?>" target="_blank"><?php echo $zbp->host.'?Nameedit' ?></a></td>
 </tr>
-
+<tr>
+	<td class="td30"><p align='left'><b>绑定QQ</b></p></td>
+	<td><a href="<?php echo $zbp->host.'?Binding' ?>" target="_blank"><?php echo $zbp->host.'?Binding' ?></a></td>
+</tr>
 </table>
-	  <hr/>
-	  <p>
-		<input type="submit" class="button" value="<?php echo $lang['msg']['submit']?>" />
-	  </p>
 </form>
   	<?php
 	}
 	if ($act == 'upgrade'){
 	?>
-<form enctype="multipart/form-data" method="post" action="save.php?type=upgrade"> 
-<input id="reset" name="reset" type="hidden" value="" />
+
+<form enctype="multipart/form-data" method="post" action="save.php?type=upgrade">  
+<input id="reset" name="reset" type="hidden" value="add" />
+<table border="1" class="tableFull tableBorder">
+    <tr>
+	    <th class="td30"><p align='left'><b>生成VIP卡</b><br><span class='note'></span></p></th>
+	    <th>
+	    </th>
+    </tr>
+    <tr>
+	    <td class="td30"><p align='left'><b>生成</b><input type="text" name="Number" style="width:50px;" value="10" />张<input type="text" name="Price" style="width:50px;" value="30" />天vip卡</p></td>
+	    <td>
+            <input type="submit" class="button" value="<?php echo $lang['msg']['submit']?>" />
+            <input type="submit" class="button" onclick="$('#reset').val('del');" value="删除已使用过的VIP卡" />
+		    <input type="submit" class="button" onclick="$('#reset').val('ept');" value="清空所有VIP卡" />
+        </td>
+    </tr>
+</table>
+</form>
 <table border="1" class="tableFull tableBorder">
 <tr>
 	<th class="td10"></th>
-	<th >VIP月卡</th>
+	<th >VIP卡</th>
 	<th >增长天数</th>
 	<th >使用用户</th>
 </tr>
@@ -165,25 +181,34 @@ foreach ($array as $key => $reg) {
 	echo '<tr>';
 	echo '<td class="td15">'.$reg->ID.'</td>';
 	echo '<td>'.$reg->InviteCode.'</td>';
-	echo '<td class="td20">30天</td>';
+	echo '<td class="td20">'.$reg->Level.'</td>';
 	echo '<td class="td20">'.($reg->AuthorID==0?'':$zbp->GetMemberByID($reg->AuthorID)->Name).'</td>';
 	echo '</tr>';
 }
 ?>
 </table>
-	  <hr/>
-	  <p>
-		<input type="submit" class="button" onclick="$('#reset').val('add');" value="生成10个VIP月卡" />
-		<input type="submit" class="button" onclick="$('#reset').val('del');" value="删除已使用过的VIP月卡" />
-		<input type="submit" class="button" onclick="$('#reset').val('ept');" value="清空所有VIP月卡" />
-	  </p>
-</form>
   	<?php
 	}
 	if ($act == 'recharge'){
 	?>
-<form enctype="multipart/form-data" method="post" action="save.php?type=recharge"> 
-<input id="reset" name="reset" type="hidden" value="" />
+<form enctype="multipart/form-data" method="post" action="save.php?type=recharge">  
+<input id="reset" name="reset" type="hidden" value="generate" />
+<table border="1" class="tableFull tableBorder">
+    <tr>
+	    <th class="td30"><p align='left'><b>生成积分卡</b><br><span class='note'></span></p></th>
+	    <th>
+	    </th>
+    </tr>
+    <tr>
+	    <td class="td30"><p align='left'><b>生成</b><input type="text" name="Number" style="width:50px;" value="10" />张<input type="text" name="Price" style="width:50px;" value="100" />积分充值卡</p></td>
+	    <td>
+            <input type="submit" class="button" value="<?php echo $lang['msg']['submit']?>" />
+            <input type="submit" class="button" onclick="$('#reset').val('Pricedel');" value="删除已使用过的充值卡" />
+            <input type="submit" class="button" onclick="$('#reset').val('Priceept');" value="清空所有充值卡" />
+        </td>
+    </tr>
+</table>
+</form>
 <table border="1" class="tableFull tableBorder">
 <tr>
 	<th class="td10"></th>
@@ -205,16 +230,6 @@ foreach ($array as $key => $reg) {
 ?>
 </table>
 
-	  <hr/>
-	  <p>
-		<input type="submit" class="button" onclick="$('#reset').val('Priceadd');" value="生成10张100元充值卡" />
-
-		<input type="submit" class="button" onclick="$('#reset').val('Pricedel');" value="删除已使用过的充值卡" />
-		
-		<input type="submit" class="button" onclick="$('#reset').val('Priceept');" value="清空所有充值卡" />
-	  </p>
-
-	</form>
   	<?php
 	}
 	if ($act == 'buy'){
