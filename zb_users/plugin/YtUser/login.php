@@ -3,6 +3,8 @@ require_once('global.php');
 $appid = $zbp->Config('YtUser')->appid; 
 $appkey = $zbp->Config('YtUser')->appkey; 
 $redirect_uri = $zbp->host."zb_users/plugin/YtUser/login.php";
+
+
 if (!isset($_GET['code'])) {
 	$state = md5(uniqid(rand(), true));
 	$scope = 'get_user_info';
@@ -17,13 +19,14 @@ if (!isset($_GET['code'])) {
 	$urldata = get_url_contents("https://graph.qq.com/oauth2.0/me?access_token={$access_token}");
 	$urldata = str_replace("callback(", "", $urldata);
 	$urldata = str_replace(');', '', $urldata);
-	$urldata = json_decode($urldata, ture);
+	$urldata = json_decode($urldata, true);
 	$openid = $urldata['openid'];
 	if (empty($openid)) {echo 'Error Get Open ID';exit();} 
 	$urldata = get_url_contents("https://graph.qq.com/user/get_user_info?access_token={$access_token}&oauth_consumer_key={$appid}&openid={$openid}&format=json");
 	if (empty($urldata)) {echo 'Error Get User Info';exit();} 
 	$userinfo = json_decode($urldata, true);
-
+    
+    
     if($openid!=""){
                 $YtdsSlide_Table='%pre%ytuser';
                 $YtdsSlide_DataInfo=array(
@@ -46,7 +49,7 @@ if (!isset($_GET['code'])) {
                     }
                     
                 }
-                die();
+
                 if (count($array)>0) {
                     $zbpuid = '';
                     foreach ($array as $key => $reg) {

@@ -65,6 +65,7 @@ function YtUser_Content(&$template){
 	$article = $template->GetTags('article');
     $content = $article->Content;
     $userid = $article->ID;
+    $article->Buypay = 0;
 	if($article->Type==ZC_POST_TYPE_ARTICLE){
 		if((int)$article->Metas->price > 0){
         $sql=$zbp->db->sql->Select($GLOBALS['YtUser_buy_Table'],'*',array(array('=','buy_LogID',$article->ID),array('=','buy_AuthorID',$zbp->user->ID),array('=','buy_State',1)),null,1,null);
