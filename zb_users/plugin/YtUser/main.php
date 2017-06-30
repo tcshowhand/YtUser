@@ -47,6 +47,10 @@ require $blogpath . 'zb_system/admin/admin_top.php';
 	<td><?php echo $zbp->host?>zb_users/plugin/YtUser/login.php</td>
 </tr>
 <tr>
+	<td class="td30"><p align='left'><b>是否关闭插件自带注册</b></p></td>
+    <td><input type="text" class="checkbox" name="open_reg" value="<?php echo $zbp->Config('YtUser')->open_reg;?>" /></td>
+</tr>
+<tr>
 	<td class="td30"><p align='left'><b>会员升级相关说明文字</b></p></td>
 	<td><textarea name="readme_text" style="width:90%;height:100px;" /><?php echo htmlspecialchars($zbp->Config('YtUser')->readme_text);?></textarea></td>
 </tr>

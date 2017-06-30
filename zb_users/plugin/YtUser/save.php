@@ -14,6 +14,7 @@ if($_GET['type'] == 'base' ){
     $zbp->Config('YtUser')->integral_text=$_POST['integral_text'];
     $zbp->Config('YtUser')->vipdis=$_POST['vipdis'];
     $zbp->Config('YtUser')->payment=$_POST['payment'];
+    $zbp->Config('YtUser')->open_reg=$_POST['open_reg'];
     $zbp->SaveConfig('YtUser');
 	$zbp->SetHint('good','修改成功');
 	Redirect('./main.php?act=base');

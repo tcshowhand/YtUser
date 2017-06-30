@@ -1,56 +1,4 @@
 <?php
-    if($zbp->user->ID){
-        $sql=$zbp->db->sql->Select($GLOBALS['tysuer_Table'],'*',array(array('=','tc_uid',$zbp->user->ID)),null,array(1),null);
-        $array=$zbp->GetListCustom($GLOBALS['tysuer_Table'],$GLOBALS['tysuer_DataInfo'],$sql);
-        $num=count($array);
-        if($num==0){
-        $DataArr = array(
-            'tc_uid'    => $zbp->user->ID,
-            'tc_oid'    => 0,
-        );
-        $sql= $zbp->db->sql->Insert($tysuer_Table,$DataArr);
-        $zbp->db->Insert($sql);
-	    $Price=0;
-	    $Vipendtime=0;
-	    $Oid='';
-        }else{
-        $reg=$array[0];
-        $Price=$reg->Price;
-        $Vipendtime=$reg->Vipendtime;
-        $Vipendtime=$reg->Oid;
-        if($reg->Vipendtime<time() && $zbp->user->Level==4){
-                $keyvalue=array();
-                $keyvalue['mem_Level']=5;
-                $sql = $zbp->db->sql->Update($zbp->table['Member'],$keyvalue,array(array('=','mem_ID',$zbp->user->ID)));
-                $zbp->db->Update($sql);
-        }
-        }
-        $zbp->user->Vipendtime=$Vipendtime;
-        $zbp->user->Price=$Price;
-        $zbp->user->Price=$Oid;
-        
-    }
-function YtUser_ReplacePre(&$s) {
-        global $zbp;
-        $s = str_replace('%pre%', $zbp->db->dbpre, $s);
-        return $s;
-}
-
-function YtUser_SubMenu($id){
-    $arySubMenu = array(
-        0 => array('插件说明', 'guide', 'left', false),
-        1 => array('网站设置', 'base', 'left', false),
-        2 => array('VIP卡', 'upgrade', 'left', false),
-        3 => array('充值卡', 'recharge', 'left', false),
-        4 => array('购买记录', 'buy', 'left', false),
-        5 => array('修复插件', 'testing', 'left', false),
-    );
-    foreach($arySubMenu as $k => $v){
-        echo '<a href="?act='.$v[1].'"><span class="m-'.$v[2].' '.($id==$v[1]?'m-now':'').'">'.$v[0].'</span></a>';
-    }
-}
-
-
 function YtUser_page(){
 	global $zbp;
     if($zbp->user->ID){
@@ -67,7 +15,11 @@ function YtUser_page(){
         $Vipendtime=$reg->Vipendtime;
         $Oid=$reg->Oid;
         }
-        if($Vipendtime<time()){
+        if($Vipendtime<time() && $zbp->user->Level==4){
+            $keyvalue=array();
+            $keyvalue['mem_Level']=5;
+            $sql = $zbp->db->sql->Update($zbp->table['Member'],$keyvalue,array(array('=','mem_ID',$zbp->user->ID)));
+            $zbp->db->Update($sql);
             $zbp->user->Vip=0;
         }else{
             $zbp->user->Vip=1;
@@ -282,49 +234,8 @@ js;
 	}
 
 	if(isset($_GET['Upgrade'])){
-	$zbp->header .='<script src="'.$zbp->host.'zb_users/plugin/YtUser/Upgrade.js" type="text/javascript"></script>' . "\r\n";
-	$article = new Post;
-	$article->Title="使用VIP卡";
-	$article->IsLock=true;
-	$article->Type=ZC_POST_TYPE_PAGE;
-	$article->verifycode ='<img id="reg_verfiycode" style="border:none;vertical-align:middle;width:'.$zbp->option['ZC_VERIFYCODE_WIDTH']. 'px;height:' . $zbp->option['ZC_VERIFYCODE_HEIGHT'] . 'px;cursor:pointer;" src="' .$zbp->validcodeurl . '?id=RegPage" alt="" title="" onclick="javascript:this.src=\'' . $zbp->validcodeurl . '?id=RegPage&amp;tm=\'+Math.random();"/>';
-    if($zbp->user->ID){
-    	$article->Content .='<table style="width:90%;border:none;font-size:1.1em;line-height:2.5em;">';
-        if($zbp->user->Vip){$temp="VIP会员";}else{$temp="普通会员";}
-	    $article->Content .='<tr style=""><th style="border:none;" colspan="2" scope="col"><p>用户级别:'.$temp.' </p></th></tr>';
-        if($zbp->user->Vip){
-        $article->Content .='<tr style=""><th style="border:none;" colspan="2" scope="col"><p>到期时间:'.$zbp->user->Vipendtime.'</p></p></th></tr>';
-        }
-		$article->Content .='<tr style=""><th style="border:none;" colspan="2" scope="col"><p>'.$zbp->Config('YtUser')->readme_text.'</p></th></tr>';
-		$article->Content .='<tr><td style="text-align:right;border:none;">(*)VIP卡</td><td  style="border:none;" ><input required="required" type="text" name="invitecode" style="width:250px;font-size:1.2em;" />';
-		$article->Content .='</td></tr>';
-		$article->Content .='<tr><td style="text-align:right;border:none;">(*)</td><td  style="border:none;" ><input required="required" type="text" name="verifycode" style="width:150px;font-size:1.2em;" />&nbsp;&nbsp;';
-        $article->Content .= $article->verifycode;
-        $article->Content .='</td></tr>';
-		$article->Content .='<tr><td  style="border:none;" ></td><td  style="border:none;" ><input type="submit" style="width:100px;font-size:1.0em;padding:0.2em" value="提交" onclick="return RegPage()" /></td></tr>';
-		$article->Content .='</table>';
-    }else{
-        Redirect($zbp->host."?Login");die();
-    }
-	$mt=microtime();
-	$s=	'';
-	$article->Content .=$s;	
-    if($zbp->template->hasTemplate('t_upgrade')){
-        $article->Template = 't_upgrade';
-	}
-	$zbp->template->SetTags('title',$article->Title);
-	$zbp->template->SetTags('article',$article);
-	$zbp->template->SetTags('type','page');
-    $zbp->template->SetTags('Nobird_Seo_KeyAndDes',null);
-	$zbp->template->SetTemplate($article->Template);
-	$zbp->template->SetTags('page',1);
-	$zbp->template->SetTags('pagebar',null);
-	$zbp->template->SetTags('comments',array());
-	foreach ($GLOBALS['Filter_Plugin_ViewPost_Template'] as $fpname => &$fpsignal) {
-		$fpreturn=$fpname($zbp->template);
-	}
-	$zbp->template->Display();
-	die();
+        YtUser_Upgrade();
+	    die();
 	}
 
     if(isset($_GET['buy'])){
@@ -349,13 +260,16 @@ js;
     $article->BuyTitle=$articles->Title;
     $article->BuyTUrl=$articles->Url;
     $article->BuyPrice=$articles->Metas->price;
+    if($Price<$articles->Metas->price){
+        $Price='<a href="'.$zbp->host.'?Integral">账户积分不足请充值！</a>';
+    }
     if($zbp->user->ID){
     	$article->Content .='<input type="hidden" name="LogID" id="LogID" value="'.$uid.'" />';
         $article->Content .='<input type="hidden" name="LogUrl" id="LogUrl" value="'.$article->Url.'" />';
         $article->Content .='<table style="width:90%;border:none;font-size:1.1em;line-height:2.5em;">';
         $article->Content .='<tr><td style="text-align:right;border:none;">产品：</td><td  style="border:none;" >'.$articles->Title.'</td></tr>';
         $article->Content .='<tr><td style="text-align:right;border:none;">价格：</td><td  style="border:none;" >'.$articles->Metas->price.'</td></tr>';
-        $article->Content .='<tr><td style="text-align:right;border:none;">账户余额：</td><td  style="border:none;" >'.$Price.'</td></tr>';
+        $article->Content .='<tr><td style="text-align:right;border:none;">积分余额：</td><td  style="border:none;" >'.$Price.'</td></tr>';
         if($num){
         $article->Content .='<tr><td style="text-align:right;border:none;">状态：</td><td  style="border:none;" >已购买</td></tr>';
         }else{
@@ -518,39 +432,7 @@ js;
 	}
 
     if(isset($_GET['Register'])){
-    if($zbp->user->ID){
-        Redirect($zbp->host."?User");die();
-    }
-	$zbp->header .='<script src="'.$zbp->host.'zb_users/plugin/YtUser/Upgrade.js" type="text/javascript"></script>' . "\r\n";
-	$article = new Post;
-	$article->Title="会员注册";
-	$article->IsLock=true;
-	$article->Type=ZC_POST_TYPE_PAGE;
-    $article->verifycode ='<img id="reg_verfiycode" style="border:none;vertical-align:middle;width:'.$zbp->option['ZC_VERIFYCODE_WIDTH']. 'px;height:' . $zbp->option['ZC_VERIFYCODE_HEIGHT'] . 'px;cursor:pointer;" src="' .$zbp->validcodeurl . '?id=RegPage" alt="" title="" onclick="javascript:this.src=\'' . $zbp->validcodeurl . '?id=register&amp;tm=\'+Math.random();"/>';
-    $article->Content .='<table style="width:90%;border:none;font-size:1.1em;line-height:2.5em;">';
-	$article->Content .='<tr><td style="text-align:right;border:none;">(*)名称：</td><td  style="border:none;" ><input required="required" type="text" name="name" style="width:250px;font-size:1.2em;" /></td></tr>';
-	$article->Content .='<tr><td style="text-align:right;border:none;">(*)密码：</td><td  style="border:none;" ><input required="required" type="password" name="password" style="width:250px;font-size:1.2em;" /></td></tr>';
-	$article->Content .='<tr><td style="text-align:right;border:none;">(*)确认密码：</td><td  style="border:none;" ><input required="required" type="password" name="repassword" style="width:250px;font-size:1.2em;" /></td></tr>';
-	$article->Content .='</td></tr>';
-	$article->Content .='<tr><td style="text-align:right;border:none;">(*)</td><td  style="border:none;" ><input required="required" type="text" name="verifycode" style="width:150px;font-size:1.2em;" />&nbsp;&nbsp;'.$article->verifycode.'</td></tr>';
-	$article->Content .='<tr><td  style="border:none;" ></td><td  style="border:none;" ><input type="submit" style="width:100px;font-size:1.0em;padding:0.2em" value="提交" onclick="return register()" /></td></tr>';
-	$article->Content .='</table>';
-    if($zbp->Config('YtUser')->appkey !=""){
-    $article->Content .='使用其它帐号登录：<a href="'.$zbp->host.'zb_users/plugin/YtUser/login.php" class="">QQ登录</a>';
-    }
-	$mt=microtime();
-    if($zbp->template->hasTemplate('t_register')){
-        $article->Template = 't_register';
-	}
-	$zbp->template->SetTags('title',$article->Title);
-	$zbp->template->SetTags('article',$article);
-	$zbp->template->SetTags('type','page');
-    $zbp->template->SetTags('Nobird_Seo_KeyAndDes',null);
-	$zbp->template->SetTemplate($article->Template);
-	$zbp->template->SetTags('page',1);
-	$zbp->template->SetTags('pagebar',null);
-	$zbp->template->SetTags('comments',array());
-	$zbp->template->Display();
+    YtUser_Register();
 	die();
 	}
 
@@ -769,4 +651,89 @@ js;
 	$zbp->template->Display();
 	die();
 	}
+}
+
+//注册页面
+function YtUser_Register() {
+    global $zbp;
+    if($zbp->user->ID) Redirect($zbp->host."?User");
+    if($zbp->Config('YtUser')->open_reg) Redirect($zbp->host."?reg");
+	$zbp->header .='<script src="'.$zbp->host.'zb_users/plugin/YtUser/Upgrade.js" type="text/javascript"></script>' . "\r\n";
+	$article = new Post;
+	$article->Title="会员注册";
+	$article->IsLock=true;
+	$article->Type=ZC_POST_TYPE_PAGE;
+    $article->verifycode ='<img id="reg_verfiycode" style="border:none;vertical-align:middle;width:'.$zbp->option['ZC_VERIFYCODE_WIDTH']. 'px;height:' . $zbp->option['ZC_VERIFYCODE_HEIGHT'] . 'px;cursor:pointer;" src="' .$zbp->validcodeurl . '?id=RegPage" alt="" title="" onclick="javascript:this.src=\'' . $zbp->validcodeurl . '?id=register&amp;tm=\'+Math.random();"/>';
+    $article->Content .='<table style="width:90%;border:none;font-size:1.1em;line-height:2.5em;">';
+	$article->Content .='<tr><td style="text-align:right;border:none;">(*)名称：</td><td  style="border:none;" ><input required="required" type="text" name="name" style="width:250px;font-size:1.2em;" /></td></tr>';
+	$article->Content .='<tr><td style="text-align:right;border:none;">(*)密码：</td><td  style="border:none;" ><input required="required" type="password" name="password" style="width:250px;font-size:1.2em;" /></td></tr>';
+	$article->Content .='<tr><td style="text-align:right;border:none;">(*)确认密码：</td><td  style="border:none;" ><input required="required" type="password" name="repassword" style="width:250px;font-size:1.2em;" /></td></tr>';
+	$article->Content .='</td></tr>';
+	$article->Content .='<tr><td style="text-align:right;border:none;">(*)</td><td  style="border:none;" ><input required="required" type="text" name="verifycode" style="width:150px;font-size:1.2em;" />&nbsp;&nbsp;'.$article->verifycode.'</td></tr>';
+	$article->Content .='<tr><td  style="border:none;" ></td><td  style="border:none;" ><input type="submit" style="width:100px;font-size:1.0em;padding:0.2em" value="提交" onclick="return register()" /></td></tr>';
+	$article->Content .='</table>';
+    if($zbp->Config('YtUser')->appkey !=""){
+    $article->Content .='使用其它帐号登录：<a href="'.$zbp->host.'zb_users/plugin/YtUser/login.php" class="">QQ登录</a>';
+    }
+	$mt=microtime();
+    if($zbp->template->hasTemplate('t_register')){
+        $article->Template = 't_register';
+	}
+	$zbp->template->SetTags('title',$article->Title);
+	$zbp->template->SetTags('article',$article);
+	$zbp->template->SetTags('type','page');
+    $zbp->template->SetTags('Nobird_Seo_KeyAndDes',null);
+	$zbp->template->SetTemplate($article->Template);
+	$zbp->template->SetTags('page',1);
+	$zbp->template->SetTags('pagebar',null);
+	$zbp->template->SetTags('comments',array());
+	$zbp->template->Display();
+	die();
+}
+
+//使用VIP充值卡
+function YtUser_Upgrade(){
+    global $zbp;
+    $zbp->header .='<script src="'.$zbp->host.'zb_users/plugin/YtUser/Upgrade.js" type="text/javascript"></script>' . "\r\n";
+	$article = new Post;
+	$article->Title="使用VIP卡";
+	$article->IsLock=true;
+	$article->Type=ZC_POST_TYPE_PAGE;
+	$article->verifycode ='<img id="reg_verfiycode" style="border:none;vertical-align:middle;width:'.$zbp->option['ZC_VERIFYCODE_WIDTH']. 'px;height:' . $zbp->option['ZC_VERIFYCODE_HEIGHT'] . 'px;cursor:pointer;" src="' .$zbp->validcodeurl . '?id=RegPage" alt="" title="" onclick="javascript:this.src=\'' . $zbp->validcodeurl . '?id=RegPage&amp;tm=\'+Math.random();"/>';
+    if($zbp->user->ID){
+    	$article->Content .='<table style="width:90%;border:none;font-size:1.1em;line-height:2.5em;">';
+        if($zbp->user->Vip){$temp="VIP会员";}else{$temp="普通会员";}
+	    $article->Content .='<tr style=""><th style="border:none;" colspan="2" scope="col"><p>用户级别:'.$temp.' </p></th></tr>';
+        if($zbp->user->Vip){
+        $article->Content .='<tr style=""><th style="border:none;" colspan="2" scope="col"><p>到期时间:'.$zbp->user->Vipendtime.'</p></p></th></tr>';
+        }
+		$article->Content .='<tr style=""><th style="border:none;" colspan="2" scope="col"><p>'.$zbp->Config('YtUser')->readme_text.'</p></th></tr>';
+		$article->Content .='<tr><td style="text-align:right;border:none;">(*)VIP卡</td><td  style="border:none;" ><input required="required" type="text" name="invitecode" style="width:250px;font-size:1.2em;" />';
+		$article->Content .='</td></tr>';
+		$article->Content .='<tr><td style="text-align:right;border:none;">(*)</td><td  style="border:none;" ><input required="required" type="text" name="verifycode" style="width:150px;font-size:1.2em;" />&nbsp;&nbsp;';
+        $article->Content .= $article->verifycode;
+        $article->Content .='</td></tr>';
+		$article->Content .='<tr><td  style="border:none;" ></td><td  style="border:none;" ><input type="submit" style="width:100px;font-size:1.0em;padding:0.2em" value="提交" onclick="return RegPage()" /></td></tr>';
+		$article->Content .='</table>';
+    }else{
+        Redirect($zbp->host."?Login");die();
+    }
+	$mt=microtime();
+	$s=	'';
+	$article->Content .=$s;	
+    if($zbp->template->hasTemplate('t_upgrade')){
+        $article->Template = 't_upgrade';
+	}
+	$zbp->template->SetTags('title',$article->Title);
+	$zbp->template->SetTags('article',$article);
+	$zbp->template->SetTags('type','page');
+    $zbp->template->SetTags('Nobird_Seo_KeyAndDes',null);
+	$zbp->template->SetTemplate($article->Template);
+	$zbp->template->SetTags('page',1);
+	$zbp->template->SetTags('pagebar',null);
+	$zbp->template->SetTags('comments',array());
+	foreach ($GLOBALS['Filter_Plugin_ViewPost_Template'] as $fpname => &$fpsignal) {
+		$fpreturn=$fpname($zbp->template);
+	}
+	$zbp->template->Display();
 }

@@ -65,12 +65,9 @@ if(CheckRegExp($homepage,'[homepage]')){
 
 $member->Save();
 
-$YtdsSlide_Table='%pre%ytuser';
-$DataArr = array(
-    'tc_uid' => $member->ID,
-    'tc_oid' => "000000",
-);
-$sql= $zbp->db->sql->Insert($YtdsSlide_Table,$DataArr);
-$zbp->db->Insert($sql);
+foreach ($GLOBALS['hooks']['Filter_Plugin_RegPage_RegSucceed'] as $fpname => &$fpsignal) {
+    $fpname($member);
+}
+
 echo '恭喜您注册成功,请在登录页面登录.';
 ?>

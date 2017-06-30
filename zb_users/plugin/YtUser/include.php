@@ -1,6 +1,7 @@
 <?php
 #注册插件
 include 'usertable.php';
+include 'yt_is_login.php';
 include 'yt_event.php';
 RegisterPlugin("YtUser","ActivePlugin_YtUser");
 
@@ -15,6 +16,32 @@ function ActivePlugin_YtUser() {
 	Add_Filter_Plugin('Filter_Plugin_AlipayPayNotice_Succeed','YtUser_Filter_Plugin_AlipayPayNotice_Succeed');
 	Add_Filter_Plugin('Filter_Plugin_AlipayPayReturn_Succeed','YtUser_Filter_Plugin_AlipayPayReturn_Succeed');
     Add_Filter_Plugin('Filter_Plugin_DelArticle_Succeed','YtUser_DelArticle');
+    Add_Filter_Plugin('Filter_Plugin_RegPage_RegSucceed','YtUser_RegSucceed');
+    Add_Filter_Plugin('Filter_Plugin_Admin_Begin','YtUser_Admin_Begin');
+    Add_Filter_Plugin('Filter_Plugin_Login_Header','YtUser_Login_Header');
+}
+
+function YtUser_Login_Header(){
+    global $zbp;
+    Redirect($zbp->host."?User");
+}
+
+function YtUser_Admin_Begin(){
+    global $zbp;
+    if($zbp->user->Level>3){
+        Redirect($zbp->host."?User");
+    }
+}
+
+function YtUser_RegSucceed(&$member){
+    global $zbp;
+    $YtdsSlide_Table='%pre%ytuser';
+    $DataArr = array(
+        'tc_uid' => $member->ID,
+        'tc_oid' => "000000",
+    );
+    $sql= $zbp->db->sql->Insert($YtdsSlide_Table,$DataArr);
+    $zbp->db->Insert($sql);
 }
 
 function YtUser_DelArticle(&$data){
@@ -68,6 +95,8 @@ function YtUser_Content(&$template){
     $article->Buypay = 0;
 	if($article->Type==ZC_POST_TYPE_ARTICLE){
 		if((int)$article->Metas->price > 0){
+
+
         $sql=$zbp->db->sql->Select($GLOBALS['YtUser_buy_Table'],'*',array(array('=','buy_LogID',$article->ID),array('=','buy_AuthorID',$zbp->user->ID),array('=','buy_State',1)),null,1,null);
         $array=$zbp->GetListCustom($GLOBALS['YtUser_buy_Table'],$GLOBALS['tyactivate_DataInfo'],$sql);
         $num=count($array);
@@ -142,9 +171,6 @@ function YtUser_password_verify_emailhash($name,$hash=''){
             if($hash ===md5(md5($m->Password.$m->Email).date('Ymdh',strtotime("-1 Hour")))){
                 return true;
             }
-            if($hash ==''){
-                return md5(md5($m->Password.$m->Email).date('Ymdh'));
-            }
             return false;
         }else{
             return false;
@@ -152,7 +178,7 @@ function YtUser_password_verify_emailhash($name,$hash=''){
 }
 
 function YtUser_payment_radio($int) {
-    $array=array("积分","支付宝","并存");
+    $array=array("积分","支付宝");
     foreach ($array as $key=>$article) {
     echo '<input name="payment" type="radio" value="'.$key.'"';
     if($key==$int){echo 'checked="checked"';}

@@ -8,12 +8,16 @@ Add_Filter_Plugin('Filter_Plugin_Zbp_ShowError','RespondError',PLUGIN_EXITSIGNAL
 
 if (!$zbp->CheckPlugin('YtUser')) {$zbp->ShowError(48);die();}
 
-$invitecode=trim($_POST['invitecode']);
-$verifycode=trim($_POST['verifycode']);
+    if($zbp->user->Level<4){
+        $zbp->ShowError('特殊会员不能使用此功能');die();
+    }
 
-if(!$zbp->CheckValidCode($verifycode,'RegPage')){
-	$zbp->ShowError('验证码错误，请重新输入.');die();
-}
+    $invitecode=trim($_POST['invitecode']);
+    $verifycode=trim($_POST['verifycode']);
+
+    if(!$zbp->CheckValidCode($verifycode,'RegPage')){
+	    $zbp->ShowError('验证码错误，请重新输入.');die();
+    }
 
 	$sql=$zbp->db->sql->Select($tyactivate_Table,'*',array(array('=','reg_InviteCode',$invitecode),array('=','reg_AuthorID',0)),null,null,null);
 	$array=$zbp->GetListCustom($tyactivate_Table,$tyactivate_DataInfo,$sql);
@@ -44,7 +48,10 @@ if(!$zbp->CheckValidCode($verifycode,'RegPage')){
 	$keyvalue['tc_Vipendtime']=$Vipendtime+$addtiem;
     $sql = $zbp->db->sql->Update($GLOBALS['tysuer_Table'],$keyvalue,array(array('=','tc_uid',$zbp->user->ID)));
     $zbp->db->Update($sql);
-
+    $keyvalue=array();
+    $keyvalue['mem_Level']=4;
+    $sql = $zbp->db->sql->Update($zbp->table['Member'],$keyvalue,array(array('=','mem_ID',$zbp->user->ID)));
+    $zbp->db->Update($sql);
     echo '恭喜您充值成功！';
 
 ?>
