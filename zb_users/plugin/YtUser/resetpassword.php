@@ -12,7 +12,8 @@ if(!$zbp->CheckValidCode($verifycode,'Resetpassword')){
 $username=trim($_POST['username']);
 $hash=trim($_POST['hash']);
 $password=trim($_POST['password']);
-if(YtUser_password_verify_emailhash($username,$hash)){
+
+if(YtUser_password_verify_emailhash($username,$hash)  === true){
         $m=$zbp->membersbyname[$username];
         $m->Password = md5(md5($password) .$m->Guid);
         $m->Save();

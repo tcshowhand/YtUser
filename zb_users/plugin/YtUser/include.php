@@ -171,6 +171,9 @@ function YtUser_password_verify_emailhash($name,$hash=''){
             if($hash ===md5(md5($m->Password.$m->Email).date('Ymdh',strtotime("-1 Hour")))){
                 return true;
             }
+            if($hash ==''){
+                return md5(md5($m->Password.$m->Email).date('Ymdh'));
+            }
             return false;
         }else{
             return false;
