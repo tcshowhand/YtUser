@@ -1,5 +1,6 @@
 <?php
-#注册插件
+DefinePluginFilter('Filter_Plugin_RegPage_RegSucceed');
+#用户中心插件
 include 'usertable.php';
 include 'yt_is_login.php';
 include 'yt_event.php';
