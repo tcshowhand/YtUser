@@ -47,7 +47,6 @@ function Ytbuypay(){
 	$.post(bloghost+'zb_users/plugin/YtUser/Ytbuypay.php',
 		{
 		"LogID":$("input[name='LogID']").val(),
-        "verifycode":$("input[name='verifycode']").val(),
 		},
 		function(data){
 			var s =data;
@@ -55,7 +54,6 @@ function Ytbuypay(){
 			{
                 var yt=s.match("<string>.+?</string>")[0].replace("<string>","").replace("</string>","");
 				alert(yt);
-				$("#reg_verfiycode").attr("src",bloghost+"zb_system/script/c_validcode.php?id=Ytbuypay&amp;tm="+Math.random());
                 if(yt =="积分不够，请充值."){
                     window.location=bloghost+'?Integral';
                 }

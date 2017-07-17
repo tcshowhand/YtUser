@@ -273,11 +273,7 @@ js;
         if($num){
         $article->Content .='<tr><td style="text-align:right;border:none;">状态：</td><td  style="border:none;" >已购买</td></tr>';
         }else{
-            
         if($zbp->Config('YtUser')->payment==0){
-		$article->Content .='<tr><td style="text-align:right;border:none;">验证码(*)：</td><td  style="border:none;" ><input required="required" type="text" name="verifycode" style="width:150px;font-size:1.2em;" />&nbsp;&nbsp;';
-        $article->Content .= $article->verifycode;
-        $article->Content .='</td></tr>';
 		$article->Content .='<tr><td  style="border:none;" ></td><td  style="border:none;" ><input type="submit" style="width:100px;font-size:1.0em;padding:0.2em" value="付款" onclick="return Ytbuypay()" /></td></tr>';
         }else{
         $article->Content .='<form class="ytarticleedt" id="edit" name="edit" method="post" action="#">';
