@@ -20,8 +20,13 @@ function ActivePlugin_YtUser() {
     Add_Filter_Plugin('Filter_Plugin_RegPage_RegSucceed','YtUser_RegSucceed');
     Add_Filter_Plugin('Filter_Plugin_Admin_Begin','YtUser_Admin_Begin');
     Add_Filter_Plugin('Filter_Plugin_Login_Header','YtUser_Login_Header');
+	//Add_Filter_Plugin('Filter_Plugin_DelMember_Succeed','YtUser_DelMember_Succeed');
+	
 }
+/* function YtUser_DelMember_Succeed(){
+    global $zbp;
 
+} */
 function YtUser_Login_Header(){
     global $zbp;
     Redirect($zbp->host."?User");
@@ -189,4 +194,23 @@ function YtUser_payment_radio($int) {
     echo '/>'.$article.'</label>';
     }
     
+}
+//TEXT NOT NULL
+function YtUser_DB_ADD($table,$add,$dbtype,$Hint){
+	global $zbp;
+	if (!$table || !$add)return;
+	$table = YtUser_ReplacePre($table);
+	$s = "ALTER TABLE $table ADD COLUMN $add $dbtype;";
+	$zbp->db->QueryMulit($s);
+	if ($Hint){
+		$zbp->SetHint('good',$s.'已执行');
+	}
+}
+
+function YtUser_DB_DEL($table,$add){
+	global $zbp;
+	if (!$table || !$add)return;
+	$table = YtUser_ReplacePre($table);
+	$s = "ALTER TABLE $table DROP COLUMN $add;";
+	$zbp->db->QueryMulit($s);
 }
