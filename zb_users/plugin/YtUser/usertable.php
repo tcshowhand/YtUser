@@ -59,5 +59,6 @@ $YtUser_buy_DataInfo=array(
         'Title' => array('buy_Title', 'string', 20, ''),
         'State' => array('buy_State', 'integer', '', 0),
         'PostTime' => array('buy_PostTime', 'integer', '', 0),
+		'Pay' => array('buy_Pay', 'integer', '', 0),
         'IP' => array('buy_IP', 'string', 15, ''),
 );

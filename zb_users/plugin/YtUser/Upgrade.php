@@ -36,7 +36,6 @@ if (!$zbp->CheckPlugin('YtUser')) {$zbp->ShowError(48);die();}
     if($num==0){
             $DataArr = array('tc_uid'=> $zbp->user->ID,'tc_oid'=> 0,);
         	$sql= $zbp->db->sql->Insert($tysuer_Table,$DataArr);
-        	$zbp->db->Insert($sql);
             $Vipendtime=0;
     }else{
     $rega=$array[0];

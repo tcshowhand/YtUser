@@ -13,6 +13,14 @@ $username=trim($_POST['username']);
 $hash=trim($_POST['hash']);
 $password=trim($_POST['password']);
 
+
+if (strlen($password) < $zbp->option['ZC_PASSWORD_MIN'] || strlen($password) > $zbp->option['ZC_PASSWORD_MAX']) {
+    $zbp->ShowError(54, __FILE__, __LINE__);
+}
+if (!CheckRegExp($password, '[password]')) {
+    $zbp->ShowError(54, __FILE__, __LINE__);
+}
+
 if(YtUser_password_verify_emailhash($username,$hash)  === true){
         $m=$zbp->membersbyname[$username];
         $m->Password = md5(md5($password) .$m->Guid);

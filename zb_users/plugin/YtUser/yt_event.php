@@ -273,11 +273,7 @@ js;
         if($num){
         $article->Content .='<tr><td style="text-align:right;border:none;">状态：</td><td  style="border:none;" >已购买</td></tr>';
         }else{
-            
         if($zbp->Config('YtUser')->payment==0){
-		$article->Content .='<tr><td style="text-align:right;border:none;">验证码(*)：</td><td  style="border:none;" ><input required="required" type="text" name="verifycode" style="width:150px;font-size:1.2em;" />&nbsp;&nbsp;';
-        $article->Content .= $article->verifycode;
-        $article->Content .='</td></tr>';
 		$article->Content .='<tr><td  style="border:none;" ></td><td  style="border:none;" ><input type="submit" style="width:100px;font-size:1.0em;padding:0.2em" value="付款" onclick="return Ytbuypay()" /></td></tr>';
         }else{
         $article->Content .='<form class="ytarticleedt" id="edit" name="edit" method="post" action="#">';
@@ -500,51 +496,7 @@ js;
 	die();
 	}
     if(isset($_GET['Resetpassword'])){
-    $zbp->header .='<script src="'.$zbp->host.'zb_system/script/md5.js" type="text/javascript"></script>' . "\r\n";
-    $zbp->header .='<script src="'.$zbp->host.'zb_users/plugin/YtUser/Upgrade.js" type="text/javascript"></script>' . "\r\n";
-    if (isset($_GET["username"])) {
-        $username=TransferHTML($_GET['username'], '[noscript]');
-    }else{
-        echo "链接已失效！";die();
-    }
-    if (isset($_GET["hash"])) {
-        $hash=TransferHTML($_GET['hash'], '[noscript]');
-    }else{
-        echo "链接已失效！";die();
-    }
-
-    if(!YtUser_password_verify_emailhash($username,$hash)){
-        echo "链接已失效!！";die();
-    }
-	$article = new Post;
-	$article->Title="重置密码";
-	$article->IsLock=true;
-	$article->Type=ZC_POST_TYPE_PAGE;
-            $article->username=$username;
-            $article->hash=$hash;
-            $article->verifycode ='<img id="reg_verfiycode" style="border:none;vertical-align:middle;width:'.$zbp->option['ZC_VERIFYCODE_WIDTH']. 'px;height:' . $zbp->option['ZC_VERIFYCODE_HEIGHT'] . 'px;cursor:pointer;" src="' .$zbp->validcodeurl . '?id=Resetpassword" alt="" title="" onclick="javascript:this.src=\'' . $zbp->validcodeurl . '?id=Resetpassword&amp;tm=\'+Math.random();"/>';
-    $article->Content .='<table style="width:90%;border:none;font-size:1.1em;line-height:2.5em;">';
-	$article->Content .='<tr><td style="text-align:right;border:none;">(*)名称：</td><td  style="border:none;" >'.$username.'</td></tr>';
-    $article->Content .='<input type="hidden" name="username" id="inpId" value="'.$username.'" />';
-    $article->Content .='<input type="hidden" name="hash" id="inpId" value="'.$hash.'" />';
-	$article->Content .='<tr><td style="text-align:right;border:none;">(*)重置密码：</td><td  style="border:none;" ><input required="required" type="password" name="password" style="width:250px;font-size:1.2em;" /></td></tr>';
-	$article->Content .='<tr><td style="text-align:right;border:none;">(*)确认密码：</td><td  style="border:none;" ><input required="required" type="password" name="repassword" style="width:250px;font-size:1.2em;" /></td></tr>';
-	$article->Content .='<tr><td style="text-align:right;border:none;">(*)</td><td  style="border:none;" ><input required="required" type="text" name="verifycode" style="width:150px;font-size:1.2em;" />&nbsp;&nbsp;'.$article->verifycode.'</td></tr>';
-	$article->Content .='<tr><td  style="border:none;" ></td><td  style="border:none;" ><input type="submit" style="width:100px;font-size:1.0em;padding:0.2em" value="提交" onclick="return Resetpassword()" /></td></tr>';
-	$article->Content .='</table>';
-    if($zbp->template->hasTemplate('t_resetpassword')){
-        $article->Template = 't_resetpassword';
-	}
-	$zbp->template->SetTags('title',$article->Title);
-	$zbp->template->SetTags('article',$article);
-	$zbp->template->SetTags('type','page');
-    $zbp->template->SetTags('Nobird_Seo_KeyAndDes',null);
-	$zbp->template->SetTemplate($article->Template);
-	$zbp->template->SetTags('page',1);
-	$zbp->template->SetTags('pagebar',null);
-	$zbp->template->SetTags('comments',array());
-	$zbp->template->Display();
-	die();
+    YtUser_Resetpassword();
 	}
 
     if(isset($_GET['Nameedit'])){
@@ -653,6 +605,56 @@ js;
 	}
 }
 
+
+//重置密码
+function YtUser_Resetpassword() {
+    global $zbp;
+    $zbp->header .='<script src="'.$zbp->host.'zb_system/script/md5.js" type="text/javascript"></script>' . "\r\n";
+    $zbp->header .='<script src="'.$zbp->host.'zb_users/plugin/YtUser/Upgrade.js" type="text/javascript"></script>' . "\r\n";
+    if (isset($_GET["username"])) {
+        $username=TransferHTML($_GET['username'], '[noscript]');
+    }else{
+        echo "链接已失效！";die();
+    }
+    if (isset($_GET["hash"])) {
+        $hash=TransferHTML($_GET['hash'], '[noscript]');
+    }else{
+        echo "链接已失效！";die();
+    }
+
+    if(!YtUser_password_verify_emailhash($username,$hash)){
+        echo "链接已失效!！";die();
+    }
+	$article = new Post;
+	$article->Title="重置密码";
+	$article->IsLock=true;
+	$article->Type=ZC_POST_TYPE_PAGE;
+            $article->username=$username;
+            $article->hash=$hash;
+            $article->verifycode ='<img id="reg_verfiycode" style="border:none;vertical-align:middle;width:'.$zbp->option['ZC_VERIFYCODE_WIDTH']. 'px;height:' . $zbp->option['ZC_VERIFYCODE_HEIGHT'] . 'px;cursor:pointer;" src="' .$zbp->validcodeurl . '?id=Resetpassword" alt="" title="" onclick="javascript:this.src=\'' . $zbp->validcodeurl . '?id=Resetpassword&amp;tm=\'+Math.random();"/>';
+    $article->Content .='<table style="width:90%;border:none;font-size:1.1em;line-height:2.5em;">';
+	$article->Content .='<tr><td style="text-align:right;border:none;">(*)名称：</td><td  style="border:none;" >'.$username.'</td></tr>';
+    $article->Content .='<input type="hidden" name="username" id="inpId" value="'.$username.'" />';
+    $article->Content .='<input type="hidden" name="hash" id="inpId" value="'.$hash.'" />';
+	$article->Content .='<tr><td style="text-align:right;border:none;">(*)重置密码：</td><td  style="border:none;" ><input required="required" type="password" name="password" style="width:250px;font-size:1.2em;" /></td></tr>';
+	$article->Content .='<tr><td style="text-align:right;border:none;">(*)确认密码：</td><td  style="border:none;" ><input required="required" type="password" name="repassword" style="width:250px;font-size:1.2em;" /></td></tr>';
+	$article->Content .='<tr><td style="text-align:right;border:none;">(*)</td><td  style="border:none;" ><input required="required" type="text" name="verifycode" style="width:150px;font-size:1.2em;" />&nbsp;&nbsp;'.$article->verifycode.'</td></tr>';
+	$article->Content .='<tr><td  style="border:none;" ></td><td  style="border:none;" ><input type="submit" style="width:100px;font-size:1.0em;padding:0.2em" value="提交" onclick="return Resetpassword()" /></td></tr>';
+	$article->Content .='</table>';
+    if($zbp->template->hasTemplate('t_resetpassword')){
+        $article->Template = 't_resetpassword';
+	}
+	$zbp->template->SetTags('title',$article->Title);
+	$zbp->template->SetTags('article',$article);
+	$zbp->template->SetTags('type','page');
+    $zbp->template->SetTags('Nobird_Seo_KeyAndDes',null);
+	$zbp->template->SetTemplate($article->Template);
+	$zbp->template->SetTags('page',1);
+	$zbp->template->SetTags('pagebar',null);
+	$zbp->template->SetTags('comments',array());
+	$zbp->template->Display();
+	die();
+}
 //注册页面
 function YtUser_Register() {
     global $zbp;

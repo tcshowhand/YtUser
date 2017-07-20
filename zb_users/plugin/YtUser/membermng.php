@@ -68,24 +68,39 @@ require $blogpath . 'zb_system/admin/admin_top.php';
     $tableths[] = '<th>' . $zbp->lang['msg']['alias'] . '</th>';
     $tableths[] = '<th>' . $zbp->lang['msg']['all_artiles'] . '</th>';
     $tableths[] = '<th>' . $zbp->lang['msg']['all_comments'] . '</th>';
+	$tableths[] = '<th>积分</th>';
+	$tableths[] = '<th>VIP</th>';
     $tableths[] = '<th>注册时间</th>';
     $tableths[] = '<th>注册ip</th>';
     $tableths[] = '<th></th>';
     $tableths[] = '</tr>';
 
     foreach ($array as $member) {
+		$YTtable = YtUser_ReplacePre($tysuer_Table);
+		$YTsql = $zbp->db->sql->Select($YTtable,'*',array(array('=','tc_uid',$member->ID)),null,null,null);
+		$ytmember = $zbp->GetListCustom($YTtable,$tysuer_DataInfo,$YTsql);
+		if (!isset($ytmember[0])){
+			$DataArr = array(
+				'tc_uid'    => $member->ID,
+				'tc_oid'    => 0,
+			);
+			$YTsql= $zbp->db->sql->Insert($YTtable,$DataArr);
+			$ytmember = $zbp->GetListCustom($YTtable,$tysuer_DataInfo,$YTsql);
+		}
         $tabletds = array();//table string
         $tabletds[] = '<tr>';
         $tabletds[] = '<td class="td5">' . $member->ID . '</td>';
-        $tabletds[] = '<td class="td10">' . $member->LevelName . ($member->Status > 0 ? '(' . $zbp->lang['user_status_name'][$member->Status] . ')' : '') . '</td>';
-        $tabletds[] = '<td><img src="'.$member->Avatar.'" width="40" /></td>';
+        $tabletds[] = '<td class="td8">' . $member->LevelName . ($member->Status > 0 ? '(' . $zbp->lang['user_status_name'][$member->Status] . ')' : '') . '</td>';
+        $tabletds[] = '<td class="td5"><img src="'.$member->Avatar.'" width="40" /></td>';
         $tabletds[] = '<td><a href="' . $member->Url . '" target="_blank"><img src="'.$zbp->host.'zb_system/image/admin/link.png" alt="" title="" width="16" /></a> ' . $member->Name . '</td>';
-        $tabletds[] = '<td class="td15">' . $member->Alias . '</td>';
-        $tabletds[] = '<td class="td10">' . $member->Articles . '</td>';
-        $tabletds[] = '<td class="td10">' . $member->Comments . '</td>';
-        $tabletds[] = '<td class="td18">' . date("Y-m-d H:i:s",$member->PostTime) . '</td>';
+        $tabletds[] = '<td>' . $member->Alias . '</td>';
+        $tabletds[] = '<td class="td8">' . $member->Articles . '</td>';
+        $tabletds[] = '<td class="td8">' . $member->Comments . '</td>';
+		$tabletds[] = '<td class="td8">' . $ytmember[0]->Price . '</td>';
+		$tabletds[] = '<td'.($ytmember[0]->Vipendtime<time()?' style="color:red"':'').'>' . ($ytmember[0]->Vipendtime > time()?date("Y-m-d H:i:s",$ytmember[0]->Vipendtime):'已过期') . '</td>';
+        $tabletds[] = '<td>' . ($member->PostTime?date("Y-m-d H:i:s",$member->PostTime):'-') . '</td>';
         $tabletds[] = '<td class="td10">' . $member->IP . '</td>';
-        $tabletds[] = '<td class="td10 tdCenter">' . 
+        $tabletds[] = '<td class="td8 tdCenter">' . 
             '<a href="'.$zbp->host.'zb_system/cmd.php?act=MemberEdt&amp;id=' . $member->ID . '"><img src="'.$zbp->host.'zb_system/image/admin/user_edit.png" alt="' . $zbp->lang['msg']['edit'] . '" title="' . $zbp->lang['msg']['edit'] . '" width="16" /></a>' . 
         ( ($zbp->CheckRights('MemberDel') && ($member->IsGod !== true) )?
             '&nbsp;&nbsp;&nbsp;&nbsp;' . 

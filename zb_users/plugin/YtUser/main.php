@@ -19,7 +19,11 @@ require $blogpath . 'zb_system/admin/admin_top.php';
   <div class="divHeader"><?php echo $blogtitle;?></div>
 	<div class="SubMenu">
 		<?php YtUser_SubMenu($act);?>
-		<a href="http://www.kancloud.cn/showhand/zbloguser" target="_blank"><span class="m-left" style="color:#F00">二次开发教程</span></a>
+		<a href="http://www.kancloud.cn/showhand/zbloguser" target="_blank"><span class="m-left" style="color:#F00">适配教程</span></a>
+		<?php if ($act == 'buy'){?>
+		<a href="?act=buy&buystate=nopay"><span class="m-right" style="color:red">未付款</span></a>
+		<a href="?act=buy&buystate=paid"><span class="m-right" style="color:green">已付款</span></a>
+		<?php }?>
     </div>
   <div id="divMain2">
 
@@ -49,6 +53,14 @@ require $blogpath . 'zb_system/admin/admin_top.php';
 <tr>
 	<td class="td30"><p align='left'><b>是否关闭插件自带注册</b></p></td>
     <td><input type="text" class="checkbox" name="open_reg" value="<?php echo $zbp->Config('YtUser')->open_reg;?>" /></td>
+</tr>
+<tr>
+	<td class="td30"><p align='left'><b>开启插件自带注册 邮件是否必须</b></p></td>
+    <td><input type="text" class="checkbox" name="regneedemail" value="<?php echo $zbp->Config('YtUser')->regneedemail;?>" /></td>
+</tr>
+<tr>
+	<td class="td30"><p align='left'><b>开启插件自带注册 同IP同天 是否只能注册一个ID</b></p></td>
+    <td><input type="text" class="checkbox" name="regipdate" value="<?php echo $zbp->Config('YtUser')->regipdate;?>" /></td>
 </tr>
 <tr>
 	<td class="td30"><p align='left'><b>会员升级相关说明文字</b></p></td>
@@ -152,20 +164,42 @@ require $blogpath . 'zb_system/admin/admin_top.php';
 	}
 	if ($act == 'upgrade'){
 	?>
-
+<form id="cbyid" enctype="multipart/form-data" method="post" action="save.php?type=setidvip">  
+<input id="reset" name="reset" type="hidden" value="" />
+<table border="1" class="tableFull tableBorder">
+    <tr>
+	 <th><p align='center'><b>操作信息</b></p></th>
+	    <th><p align='center'><b>VIP充值</b></p></th>
+		<th><p align='center'><b>获取天数</b></p></th>
+		<th><p align='center'><b>删除VIP</b></p></th>
+	</tr>
+    <tr>
+	<td class="td30"><p align='center'>给用户ID为 
+		<input type="text" name="UID" style="width:50px;" value="1" /> 的用户充值 
+		<input type="text" name="Price" style="width:50px;" value="100" /> 天的VIP
+        </td>
+	    <td>
+            <p align='center'><input type="submit" class="button" value="确认充值" /></p>
+			</td> <td>
+			<p align='center'><input type="submit" onclick="$('#reset').val('getvip');" class="button" value="获取信息" /></p>
+			</td> <td>
+			<p align='center'><input type="submit" onclick="$('#reset').val('delidvip');" class="button" value="删除该ID的VIP" /><input type="submit" onclick="$('#reset').val('delallvip');" class="button" value="删除所有用户VIP" /></p>
+        </td>
+    </tr>
+</table>
+</form>
 <form enctype="multipart/form-data" method="post" action="save.php?type=upgrade">  
 <input id="reset" name="reset" type="hidden" value="add" />
 <table border="1" class="tableFull tableBorder">
     <tr>
-	    <th class="td30"><p align='left'><b>生成VIP卡</b><br><span class='note'></span></p></th>
-	    <th>
-	    </th>
+	    <th  colspan="2" class="td30"><p align='center'><b>生成VIP卡</b><br><span class='note'></span></p></th>
     </tr>
     <tr>
-	    <td class="td30"><p align='left'><b>生成</b><input type="text" name="Number" style="width:50px;" value="10" />张<input type="text" name="Price" style="width:50px;" value="30" />天vip卡</p></td>
+	    <td class="td30"><p align='center'><b>生成</b><input type="text" name="Number" style="width:50px;" value="10" />张<input type="text" name="Price" style="width:50px;" value="30" />天vip卡</p></td>
 	    <td>
             <input type="submit" class="button" value="<?php echo $lang['msg']['submit']?>" />
             <input type="submit" class="button" onclick="$('#reset').val('del');" value="删除已使用过的VIP卡" />
+			<input type="submit" class="button" onclick="$('#reset').val('deln');" value="删除未使用过的VIP卡" />
 		    <input type="submit" class="button" onclick="$('#reset').val('ept');" value="清空所有VIP卡" />
         </td>
     </tr>
@@ -195,24 +229,51 @@ foreach ($array as $key => $reg) {
 	}
 	if ($act == 'recharge'){
 	?>
+
+<form id="cbyid" enctype="multipart/form-data" method="post" action="save.php?type=setidjf">  
+<input id="reset" name="reset" type="hidden" value="" />
+<table border="1" class="tableFull tableBorder">
+    <tr>
+	 <th><p align='center'><b>操作信息</b></p></th>
+	    <th><p align='center'><b>积分充值</b></p></th>
+		<th><p align='center'><b>获取积分</b></p></th>
+		<th><p align='center'><b>清空积分</b></p></th>
+	</tr>
+    <tr>
+	<td class="td30"><p align='center'>给用户ID为 
+		<input type="text" name="UID" style="width:50px;" value="1" /> 的用户充值 
+		<input type="text" name="Price" style="width:50px;" value="100" /> 积分
+        </td>
+	    <td>
+            <p align='center'><input type="submit" class="button" value="确认充值" /></p>
+			</td> <td>
+			<p align='center'><input type="submit" onclick="$('#reset').val('getjf');" class="button" value="获取信息" /></p>
+			</td> <td>
+			<p align='center'><input type="submit" onclick="$('#reset').val('delidjf');" class="button" value="清空该ID积分" /><input type="submit" onclick="$('#reset').val('delalljf');" class="button" value="清空所有用户积分" /></p>
+        </td>
+    </tr>
+</table>
+</form>
 <form enctype="multipart/form-data" method="post" action="save.php?type=recharge">  
 <input id="reset" name="reset" type="hidden" value="generate" />
 <table border="1" class="tableFull tableBorder">
     <tr>
-	    <th class="td30"><p align='left'><b>生成积分卡</b><br><span class='note'></span></p></th>
-	    <th>
-	    </th>
-    </tr>
+	    <th colspan="2" class="td30"><p align='center'><b>生成积分卡</b></p></th>
+	</tr>
     <tr>
-	    <td class="td30"><p align='left'><b>生成</b><input type="text" name="Number" style="width:50px;" value="10" />张<input type="text" name="Price" style="width:50px;" value="100" />积分充值卡</p></td>
+	    <td class="td30"><p align='center'><b>生成 </b>
+		<input type="text" name="Number" style="width:50px;" value="10" /> 张 
+		<input type="text" name="Price" style="width:50px;" value="100" /> 积分充值卡</p></td>
 	    <td>
             <input type="submit" class="button" value="<?php echo $lang['msg']['submit']?>" />
-            <input type="submit" class="button" onclick="$('#reset').val('Pricedel');" value="删除已使用过的充值卡" />
+            <input type="submit" class="button" onclick="$('#reset').val('Pricedel');" value="删除已使用的充值卡" />
+			<input type="submit" class="button" onclick="$('#reset').val('Pricedeln');" value="删除未使用的充值卡" />
             <input type="submit" class="button" onclick="$('#reset').val('Priceept');" value="清空所有充值卡" />
         </td>
     </tr>
 </table>
 </form>
+
 <table border="1" class="tableFull tableBorder">
 <tr>
 	<th class="td10"></th>
@@ -240,30 +301,45 @@ foreach ($array as $key => $reg) {
 	?>
 	<table border="1" class="tableFull tableBorder">
 <tr>
-	<th class="td10"></th>
-    <th >订单号</th>
-	<th >用户</th>
-	<th >产品</th>
-	<th >价格</th>
-    <th >时间</th>
+	<th style="text-align:center" class="td10">ID</th>
+    <th style="text-align:center">订单号</th>
+	<th style="text-align:center">用户</th>
+	<th>订单名称</th>
+	<th style="text-align:center">支付价格</th>
+    <th style="text-align:center">时间</th>
+	<th style="text-align:center">状态</th>
 </tr>
 <?php
-$sql= $zbp->db->sql->Select($YtUser_buy_Table,'*',array(array('=', 'buy_State', 1)),null,null,null);
+$buystate = '';
+if (isset($_GET['buystate']))$buystate = $_GET['buystate'];
+if ($buystate == 'paid'){
+	$sql= $zbp->db->sql->Select($YtUser_buy_Table,'*',array(array('>', 'buy_State', 0)),array('buy_ID'=>'desc'),null,null);
+}elseif($buystate == 'nopay'){
+	$sql= $zbp->db->sql->Select($YtUser_buy_Table,'*',array(array('=', 'buy_State', 0)),array('buy_ID'=>'desc'),null,null);	
+}else{
+	$sql= $zbp->db->sql->Select($YtUser_buy_Table,'*',null,array('buy_ID'=>'desc'),null,null);	
+}
 $array=$zbp->GetListCustom($YtUser_buy_Table,$YtUser_buy_DataInfo,$sql);
 foreach ($array as $key => $reg) {
+	$regname = '';
+	if (isset($zbp->members[$reg->AuthorID])){
+		$regname = $zbp->members[$reg->AuthorID]->StaticName;
+	}else{
+		$regname = '-YTID-'.$reg->AuthorID.'-未注册-';	
+	}
 	echo '<tr>';
-    echo '<td class="td15">'.$reg->ID.'</td>';
-	echo '<td class="td15">'.$reg->OrderID.'</td>';
+    echo '<td  align="center" class="td5">'.$reg->ID.'</td>';
+	echo '<td  align="center" class="td15">'.$reg->OrderID.'</td>';
 	$post=GetPost((int)$reg->LogID);
-	echo '<td>'.$zbp->members[$reg->AuthorID]->StaticName.'</td>';
+	echo '<td align="center">'.$regname.' (ID = '.$reg->AuthorID.')</td>';
 	echo '<td class="td20">'.$reg->Title.'</td>';
-	echo '<td>'.$post->Metas->price.'</td>';
-    echo '<td class="td20">'.date("Y-m-d H:i:s",$reg->PostTime).'</td>';
+	echo '<td align="center">'.$reg->Pay.'</td>';
+    echo '<td  align="center" class="td20">'.date("Y-m-d H:i:s",$reg->PostTime).'</td>';
+	echo $reg->State>0?'<td  align="center" class="ispaid" style="color:green;">已付款</td>':'<td class="ispaid" style="color:red;">未付款</td>';
 	echo '</tr>';
 }
 ?>
 </table>
-
 	<?php
 	}
 	if ($act == 'testing'){

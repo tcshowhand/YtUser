@@ -85,6 +85,8 @@ editor_api.editor.content.obj.ready(function(){sContent=editor_api.editor.conten
 editor_api.editor.intro.obj.ready(function(){sIntro=editor_api.editor.intro.get();});
 
 $(document).ready(function(){
+
+
 	$('#edit').submit(function(){if(editor_api.editor.content.obj.queryCommandState('source')==1) editor_api.editor.content.obj.execCommand('source');
 	if(editor_api.editor.intro.obj.queryCommandState('source')==1) editor_api.editor.intro.obj.execCommand('source');})
 	/*源码模式下保存时必须切换*/

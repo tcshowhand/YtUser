@@ -22,7 +22,6 @@ if($num==0){
                 'tc_oid'    => 0,
             );
         	$sql= $zbp->db->sql->Insert($tysuer_Table,$DataArr);
-        	$zbp->db->Insert($sql);
             $Price=0;
 }else{
 $reg=$array[0];
