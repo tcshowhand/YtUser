@@ -93,15 +93,15 @@ require $blogpath . 'zb_system/admin/admin_top.php';
         $tabletds[] = '<td class="td5">' . $member->ID . '</td>';
         $tabletds[] = '<td class="td8">' . $member->LevelName . ($member->Status > 0 ? '(' . $zbp->lang['user_status_name'][$member->Status] . ')' : '') . '</td>';
         $tabletds[] = '<td class="td5"><img src="'.$member->Avatar.'" width="40" /></td>';
-        $tabletds[] = '<td class="td15"><a href="' . $member->Url . '" target="_blank"><img src="'.$zbp->host.'zb_system/image/admin/link.png" alt="" title="" width="16" /></a> ' . $member->Name . '</td>';
-        $tabletds[] = '<td class="td15">' . $member->Alias . '</td>';
+        $tabletds[] = '<td><a href="' . $member->Url . '" target="_blank"><img src="'.$zbp->host.'zb_system/image/admin/link.png" alt="" title="" width="16" /></a> ' . $member->Name . '</td>';
+        $tabletds[] = '<td>' . $member->Alias . '</td>';
         $tabletds[] = '<td class="td8">' . $member->Articles . '</td>';
         $tabletds[] = '<td class="td8">' . $member->Comments . '</td>';
 		$tabletds[] = '<td class="td8">' . $ytmember[0]->Price . '</td>';
-		$tabletds[] = '<td class="td8">' . $ytmember[0]->Vipendtime . '</td>';
-        $tabletds[] = '<td>' . date("Y-m-d H:i:s",$member->PostTime) . '</td>';
+		$tabletds[] = '<td'.($ytmember[0]->Vipendtime<time()?' style="color:red"':'').'>' . ($ytmember[0]->Vipendtime > time()?date("Y-m-d H:i:s",$ytmember[0]->Vipendtime):'已过期') . '</td>';
+        $tabletds[] = '<td>' . ($member->PostTime?date("Y-m-d H:i:s",$member->PostTime):'-') . '</td>';
         $tabletds[] = '<td class="td10">' . $member->IP . '</td>';
-        $tabletds[] = '<td class="td10 tdCenter">' . 
+        $tabletds[] = '<td class="td8 tdCenter">' . 
             '<a href="'.$zbp->host.'zb_system/cmd.php?act=MemberEdt&amp;id=' . $member->ID . '"><img src="'.$zbp->host.'zb_system/image/admin/user_edit.png" alt="' . $zbp->lang['msg']['edit'] . '" title="' . $zbp->lang['msg']['edit'] . '" width="16" /></a>' . 
         ( ($zbp->CheckRights('MemberDel') && ($member->IsGod !== true) )?
             '&nbsp;&nbsp;&nbsp;&nbsp;' . 
