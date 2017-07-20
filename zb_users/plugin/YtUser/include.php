@@ -146,8 +146,13 @@ function InstallPlugin_YtUser() {
 	global $zbp;
     YtUser_CreateTable();
 	$zbp->Config('YtUser')->dsurl = 'zbloguser';
+	$zbp->Config('YtUser')->readme_text = '充满吧？';
+	$zbp->Config('YtUser')->integral_text = '';
     $zbp->Config('YtUser')->default_level=4;
     $zbp->Config('YtUser')->vipdis = '100';
+	$zbp->Config('YtUser')->payment = 0;
+	$zbp->Config('YtUser')->regneedemail = true;
+	$zbp->Config('YtUser')->regipdate = true;
 	$zbp->SaveConfig('YtUser');
 }
 
