@@ -605,7 +605,6 @@ js;
 	}
 }
 
-
 //重置密码
 function YtUser_Resetpassword() {
     global $zbp;
@@ -655,6 +654,7 @@ function YtUser_Resetpassword() {
 	$zbp->template->Display();
 	die();
 }
+
 //注册页面
 function YtUser_Register() {
     global $zbp;

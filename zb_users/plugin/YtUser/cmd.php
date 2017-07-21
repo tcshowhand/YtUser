@@ -22,10 +22,8 @@ switch ($action) {
     case 'verify':
     $_POST['username']=$_POST['username'];
     $_POST['password']=$_POST['edtPassWord'];
-    $_POST['savedate']=$_POST['strSaveDate'];
-    if (VerifyLogin()) {
-        echo '登录成功！';
-    }
+    if(isset($_POST['strSaveDate'])) $_POST['savedate']=$_POST['strSaveDate'];
+    if (VerifyLogin()) echo '登录成功！';
     break;
     case 'ArticlePst':
     	if(empty($_POST['Title']) || empty($_POST['Content'])){
