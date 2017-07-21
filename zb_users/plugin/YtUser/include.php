@@ -110,7 +110,7 @@ function YtUser_Content(&$template){
                 $article->Buypay = 1;
                 $content = preg_replace("/\[(.*?)BuyView\]/sm",'',$content);
             }else{
-                $content = preg_replace("/\[BuyView\](.*?)\[\/BuyView\]/sm",'<p>****此部分是付费内容***</p><p><input type="hidden" name="LogID" id="LogID" value="'.$userid.'" /><input type="submit" style="width:100px;font-size:1.0em;padding:0.2em" value="购买" onclick="return Ytbuy()" /></p>',$content);
+                $content = preg_replace("/\[BuyView\](.*?)\[\/BuyView\]/sm",'<div class="ytuser-buy-box"><p>****此部分是付费内容***</p><p><input type="hidden" name="LogID" id="LogID" value="'.$userid.'" /><input type="submit" style="width:100px;font-size:1.0em;padding:0.2em" value="购买" onclick="return Ytbuy()" /></p></div>',$content);
 		    	$zbp->header .='<script src="'.$zbp->host.'zb_users/plugin/YtUser/Upgrade.js" type="text/javascript"></script>' . "\r\n";
 		    }
         $article->Content = $content;
