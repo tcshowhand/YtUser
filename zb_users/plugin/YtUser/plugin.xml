@@ -2,8 +2,8 @@
 <plugin version="php">
 <id>YtUser</id>
 <name>用户中心（百搭）</name>
-<url>http://www.ytecn.com/2016/11/548.html</url>
-<note>用户中心,会员中心,支持投稿.</note>
+<url>https://www.ytecn.com/2017/07/742.html</url>
+<note>会员中心,支持订单、投稿、积分、快捷登录.</note>
 <description>用户中心</description>
 <path>main.php</path>
 <include>include.php</include>
@@ -19,10 +19,10 @@
   <url></url>
 </source>
 <adapted>151740</adapted>
-<version>7.5</version>
+<version>7.7</version>
 <pubdate>2016-10-30</pubdate>
-<modified>2017-07-14</modified>
-<price>128</price>
+<modified>2017-08-10</modified>
+<price>138</price>
 <phpver>5.2</phpver>
 <advanced>
   <dependency></dependency>

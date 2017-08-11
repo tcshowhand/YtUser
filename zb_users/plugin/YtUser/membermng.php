@@ -60,20 +60,24 @@ require $blogpath . 'zb_system/admin/admin_top.php';
     echo '<table border="1" class="tableFull tableBorder tableBorder-thcenter table_hover table_striped">';
     $tables = '';
     $tableths = array();
-    $tableths[] = '<tr>';
-    $tableths[] = '<th>' . $zbp->lang['msg']['id'] . '</th>';
-    $tableths[] = '<th>' . $zbp->lang['msg']['member_level'] . '</th>';
-    $tableths[] = '<th>头像</th>';
-    $tableths[] = '<th>' . $zbp->lang['msg']['name'] . '</th>';
-    $tableths[] = '<th>' . $zbp->lang['msg']['alias'] . '</th>';
-    $tableths[] = '<th>' . $zbp->lang['msg']['all_artiles'] . '</th>';
-    $tableths[] = '<th>' . $zbp->lang['msg']['all_comments'] . '</th>';
-	$tableths[] = '<th>积分</th>';
-	$tableths[] = '<th>VIP</th>';
-    $tableths[] = '<th>注册时间</th>';
-    $tableths[] = '<th>注册ip</th>';
-    $tableths[] = '<th></th>';
-    $tableths[] = '</tr>';
+ $tableths[] = '<tr>';
+ $tableths[] = '    <th valign="middle" colspan="1" rowspan="1" align="center">';
+ $tableths[] = '        <b>ID</b>';
+ $tableths[] = '    </th>';
+ $tableths[] = '    <th valign="middle" align="center">';
+ $tableths[] = '        <b>头像</b>';
+ $tableths[] = '    </th>';
+ $tableths[] = '    <th valign="middle" rowspan="1" colspan="4" align="center">';
+ $tableths[] = '        <b>账户信息</b>';
+ $tableths[] = '    </th>';
+ $tableths[] = '    <th valign="middle" rowspan="1" colspan="2" align="center">';
+ $tableths[] = '        <b>注册信息<br/></b>';
+ $tableths[] = '    </th>';
+ $tableths[] = '    <th valign="middle" align="center">';
+ $tableths[] = '        <b>操作</b>';
+ $tableths[] = '    </th>';
+ $tableths[] = '</tr>';
+
 
     foreach ($array as $member) {
 		$YTtable = YtUser_ReplacePre($tysuer_Table);
@@ -88,27 +92,56 @@ require $blogpath . 'zb_system/admin/admin_top.php';
 			$ytmember = $zbp->GetListCustom($YTtable,$tysuer_DataInfo,$YTsql);
 		}
         $tabletds = array();//table string
-        $tabletds[] = '<tr>';
-        $tabletds[] = '<td class="td5">' . $member->ID . '</td>';
-        $tabletds[] = '<td class="td8">' . $member->LevelName . ($member->Status > 0 ? '(' . $zbp->lang['user_status_name'][$member->Status] . ')' : '') . '</td>';
-        $tabletds[] = '<td class="td5"><img src="'.$member->Avatar.'" width="40" /></td>';
-        $tabletds[] = '<td><a href="' . $member->Url . '" target="_blank"><img src="'.$zbp->host.'zb_system/image/admin/link.png" alt="" title="" width="16" /></a> ' . $member->Name . '</td>';
-        $tabletds[] = '<td>' . $member->Alias . '</td>';
-        $tabletds[] = '<td class="td8">' . $member->Articles . '</td>';
-        $tabletds[] = '<td class="td8">' . $member->Comments . '</td>';
-		$tabletds[] = '<td class="td8">' . $ytmember[0]->Price . '</td>';
-		$tabletds[] = '<td'.($ytmember[0]->Vipendtime<time()?' style="color:red"':'').'>' . ($ytmember[0]->Vipendtime > time()?date("Y-m-d H:i:s",$ytmember[0]->Vipendtime):'已过期') . '</td>';
-        $tabletds[] = '<td>' . ($member->PostTime?date("Y-m-d H:i:s",$member->PostTime):'-') . '</td>';
-        $tabletds[] = '<td class="td10">' . $member->IP . '</td>';
-        $tabletds[] = '<td class="td8 tdCenter">' . 
-            '<a href="'.$zbp->host.'zb_system/cmd.php?act=MemberEdt&amp;id=' . $member->ID . '"><img src="'.$zbp->host.'zb_system/image/admin/user_edit.png" alt="' . $zbp->lang['msg']['edit'] . '" title="' . $zbp->lang['msg']['edit'] . '" width="16" /></a>' . 
-        ( ($zbp->CheckRights('MemberDel') && ($member->IsGod !== true) )?
-            '&nbsp;&nbsp;&nbsp;&nbsp;' . 
-            '<a onclick="return window.confirm(\'' . $zbp->lang['msg']['confirm_operating'] . '\');" href="'.$zbp->host.'zb_system/cmd.php?act=MemberDel&amp;id=' . $member->ID . '&amp;token=' . $zbp->GetToken() . '"><img src="'.$zbp->host.'zb_system/image/admin/delete.png" alt="' . $zbp->lang['msg']['del'] . '" title="' . $zbp->lang['msg']['del'] . '" width="16" /></a>'
-        :'') . 
-            '</td>';
+$tabletds[] = ' <tr>';
+$tabletds[] = '     <td class="td5" valign="middle" colspan="1" rowspan="3" align="center">' . $member->ID . '</td>';
+$tabletds[] = '     <td class="td10" valign="middle" rowspan="3" colspan="1" align="center"><img src="'.$member->Avatar.'" width="64" /></td>';
+$tabletds[] = '     <td class="td10" valign="middle" align="right">';
+$tabletds[] = '         账户名：';
+$tabletds[] = '     </td>';
+$tabletds[] = '     <td valign="middle" align="left"><a href="' . $member->Url . '" target="_blank"><img src="'.$zbp->host.'zb_system/image/admin/link.png" alt="" title="" width="16" /></a> ' . $member->Name . '</td>';
+$tabletds[] = '     <td class="td10" valign="middle" align="right">';
+$tabletds[] = '         文章数：';
+$tabletds[] = '     </td>';
+$tabletds[] = '     <td class="td5" valign="middle" align="left">' . $member->Articles . '</td>';
+$tabletds[] = '     <td class="td10" valign="middle" align="right">';
+$tabletds[] = '         注册时间：';
+$tabletds[] = '     </td>';
+$tabletds[] = '     <td class="td20" valign="middle" align="left">' . ($member->PostTime?date("Y年m月d日 H:i:s",$member->PostTime):'-') . '</td>';
+$tabletds[] = '     <td  class="td5" colspan="1" rowspan="3" valign="middle" align="center"><a href="'.$zbp->host.'zb_system/cmd.php?act=MemberEdt&amp;id=' . $member->ID . '"><img src="'.$zbp->host.'zb_system/image/admin/user_edit.png" alt="' . $zbp->lang['msg']['edit'] . '" title="' . $zbp->lang['msg']['edit'] . '" width="16" /></a>' .( ($zbp->CheckRights('MemberDel') && ($member->IsGod !== true) )?'<br>' .'<a onclick="return window.confirm(\'' . $zbp->lang['msg']['confirm_operating'] . '\');" href="'.$zbp->host.'zb_system/cmd.php?act=MemberDel&amp;id=' . $member->ID . '&amp;token=' . $zbp->GetToken() . '"><img src="'.$zbp->host.'zb_system/image/admin/delete.png" alt="' . $zbp->lang['msg']['del'] . '" title="' . $zbp->lang['msg']['del'] . '" width="16" /></a>':'') .'</td>';
+$tabletds[] = ' </tr>';
+$tabletds[] = ' <tr>';
+$tabletds[] = '     <td valign="middle" align="right">';
+$tabletds[] = '         别名：';
+$tabletds[] = '     </td>';
+$tabletds[] = '     <td valign="middle" align="left">' . $member->Alias . '</td>';
+$tabletds[] = '     <td valign="middle" align="right">';
+$tabletds[] = '         评论数：';
+$tabletds[] = '     </td>';
+$tabletds[] = '     <td valign="middle" align="left">' . $member->Comments . '</td>';
+$tabletds[] = '     <td valign="middle" align="right">';
+$tabletds[] = '         注册IP：';
+$tabletds[] = '     </td>';
+$tabletds[] = '     <td valign="middle" align="left">' . $member->IP . '</td>';
+$tabletds[] = ' </tr>';
+$tabletds[] = ' <tr>';
+$tabletds[] = '     <td valign="middle" align="right">';
+$tabletds[] = '         用户等级：';
+$tabletds[] = '     </td>';
+$tabletds[] = '     <td valign="middle" align="left">' . $member->LevelName . ($member->Status > 0 ? '(' . $zbp->lang['user_status_name'][$member->Status] . ')' : '') . '</td>';
+$tabletds[] = '     <td valign="middle" align="right">';
+$tabletds[] = '         积分余额：';
+$tabletds[] = '     </td>';
+$tabletds[] = '     <td valign="middle" align="left">' . $ytmember[0]->Price . '</td>';
+$tabletds[] = '     <td valign="middle" align="right">';
+$tabletds[] = '         VIP：';
+$tabletds[] = '     </td>';
+$tabletds[] = '     <td valign="middle" align="left"'.($ytmember[0]->Vipendtime<time()?' style="color:red"':'').'>' . ($ytmember[0]->Vipendtime > time()?date("Y-m-d H:i:s",$ytmember[0]->Vipendtime):'已过期') . '</td>';
 
-        $tabletds[] = '</tr>';
+$tabletds[] = ' </tr>';
+$tabletds[] = ' <tr>';
+$tabletds[] = '     <td valign="middle" colspan="9" rowspan="1" align="center"><br></td>';
+$tabletds[] = ' </tr>';
+
         $tables .= implode($tabletds);
     }
 

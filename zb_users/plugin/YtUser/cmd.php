@@ -20,6 +20,12 @@ if(!$zbp->CheckRights($action)){$zbp->ShowError(6,__FILE__,__LINE__);die();}
 
 switch ($action) {
     case 'verify':
+	if ($zbp->Config('YtUser')->login_verifycode){
+		$verifycode=trim($_POST['verifycode']);
+		if(!$zbp->CheckValidCode($verifycode,'User')){
+			$zbp->ShowError('验证码错误，请重新输入.');die();
+		}
+	}
     $_POST['username']=$_POST['username'];
     $_POST['password']=$_POST['edtPassWord'];
     if(isset($_POST['strSaveDate'])) $_POST['savedate']=$_POST['strSaveDate'];

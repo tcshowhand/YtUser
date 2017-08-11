@@ -123,6 +123,7 @@ function register(){
 function Ytuser_Login(){
 	$.post(bloghost+'zb_users/plugin/YtUser/cmd.php?act=verify',
 		{
+		"verifycode":$("input[name='verifycode']").val(),
 		"username":$("input[name='edtUserName']").val(),
 		"edtPassWord":MD5($("input[name='edtPassWord']").val()),
 		"strSaveDate":$("input[name='chkRemember']").val(),

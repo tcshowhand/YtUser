@@ -89,8 +89,10 @@ function YtUser_Filter_Plugin_AlipayPayNotice_Succeed(&$data){
 
 function YtUser_Edit(){
 	global $article;
-	echo '<div id="price" class="editmod"><label for="edtIslock" class="editinputname">价格</label><input type="text" name="meta_price" id="price" value="'.(int)$article->Metas->price.'" style="width:180px;" class="hasDatepicker"></div>';
-    echo '<div id="price" class="editmod">付费内容用[BuyView][/BuyView]包起来</div>';
+	echo '<div id="price" class="editmod"><label for="edtIslock" class="editinputname">价格</label><input type="text" name="meta_price" id="price" value="'.(int)$article->Metas->price.'" style="width:180px;"></div>';
+	echo '<div id="isphysical" class="editmod"><label for="edtIslock" class="editinputname">实物商品</label><input id="isphysical" name="meta_isphysical" type="text" class="checkbox" value="'.(int)$article->Metas->isphysical.'"></div>';
+	$buybutton = '<button type=&quot;button&quot; onclick=&quot;return Ytbuy()&quot; class=&quot;button_buy&quot;>购买</button>';
+    echo '<div id="price" class="editmod"><label for="edtIslock" class="editinputname">YtUser快捷操作:</label><a style="cursor: pointer;" onclick="editor_api.editor.content.obj.execCommand(\'insertHtml\',\''.$buybutton.'\');">购买按钮</a><br><a style="cursor: pointer;" onclick="editor_api.editor.content.obj.execCommand(\'insertHtml\', \'[BuyView]\');">[BuyView]</a>付费内容<a style="cursor: pointer;" onclick="editor_api.editor.content.obj.execCommand(\'insertHtml\', \'[/BuyView]\');">[/BuyView]</a></div>';
 }
 
 function YtUser_Content(&$template){
@@ -110,7 +112,7 @@ function YtUser_Content(&$template){
                 $article->Buypay = 1;
                 $content = preg_replace("/\[(.*?)BuyView\]/sm",'',$content);
             }else{
-                $content = preg_replace("/\[BuyView\](.*?)\[\/BuyView\]/sm",'<p>****此部分是付费内容***</p><p><input type="hidden" name="LogID" id="LogID" value="'.$userid.'" /><input type="submit" style="width:100px;font-size:1.0em;padding:0.2em" value="购买" onclick="return Ytbuy()" /></p>',$content);
+                $content = preg_replace("/\[BuyView\](.*?)\[\/BuyView\]/sm",'<div class="ytuser-buy-box"><p>****此部分是付费内容***</p><p><input type="hidden" name="LogID" id="LogID" value="'.$userid.'" /><input type="submit" style="width:100px;font-size:1.0em;padding:0.2em" value="购买" onclick="return Ytbuy()" /></p></div>',$content);
 		    	$zbp->header .='<script src="'.$zbp->host.'zb_users/plugin/YtUser/Upgrade.js" type="text/javascript"></script>' . "\r\n";
 		    }
         $article->Content = $content;
@@ -153,6 +155,7 @@ function InstallPlugin_YtUser() {
 	$zbp->Config('YtUser')->payment = 0;
 	$zbp->Config('YtUser')->regneedemail = true;
 	$zbp->Config('YtUser')->regipdate = true;
+	$zbp->Config('YtUser')->login_verifycode = '';
 	$zbp->SaveConfig('YtUser');
 }
 
@@ -201,21 +204,31 @@ function YtUser_payment_radio($int) {
     
 }
 //TEXT NOT NULL
-function YtUser_DB_ADD($table,$add,$dbtype,$Hint){
+function YtUser_DB_ADD($a_table,$add,$dbtype,$d_Hint=null){
 	global $zbp;
-	if (!$table || !$add)return;
-	$table = YtUser_ReplacePre($table);
-	$s = "ALTER TABLE $table ADD COLUMN $add $dbtype;";
+	if (!$a_table || !$add)return;
+	$s = "ALTER TABLE $a_table ADD COLUMN $add $dbtype;";
 	$zbp->db->QueryMulit($s);
-	if ($Hint){
+	if ($d_Hint){
 		$zbp->SetHint('good',$s.'已执行');
 	}
 }
-
-function YtUser_DB_DEL($table,$add){
+function YtUser_DB_UP($a_table,$b_updata=array(),$c_where=array(),$d_Hint=null){
 	global $zbp;
-	if (!$table || !$add)return;
-	$table = YtUser_ReplacePre($table);
-	$s = "ALTER TABLE $table DROP COLUMN $add;";
+	if (!$a_table || !$add)return;
+	$sql = $zbp->db->sql->Update($a_table,$b_updata,$c_where);
+	$zbp->db->Update($sql);
+	if ($d_Hint){
+		$zbp->SetHint('good',$d_Hint);
+	}
+}
+
+function YtUser_DB_DROP($a_table,$add,$d_Hint=null){
+	global $zbp;
+	if (!$a_table || !$add)return;
+	$s = "ALTER TABLE $a_table DROP COLUMN $add;";
 	$zbp->db->QueryMulit($s);
+	if ($d_Hint){
+		$zbp->SetHint('bad',$s.'已执行');
+	}
 }
