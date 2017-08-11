@@ -11,7 +11,7 @@ echo implode(" ",$arr);
 
 $aaaa='
 {
-"name":"gxny",
+"name":"gxny2",
   "version": "1.0.0",
   "demo_url": "http://www.abc.com",
   "author": "ThinkCMF",
