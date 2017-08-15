@@ -91,7 +91,7 @@ function YtUser_Edit(){
 	global $article;
 	echo '<div id="price" class="editmod"><label for="edtIslock" class="editinputname">价格</label><input type="text" name="meta_price" id="price" value="'.(int)$article->Metas->price.'" style="width:180px;"></div>';
 	echo '<div id="isphysical" class="editmod"><label for="edtIslock" class="editinputname">实物商品</label><input id="isphysical" name="meta_isphysical" type="text" class="checkbox" value="'.(int)$article->Metas->isphysical.'"></div>';
-	$buybutton = '<button type=&quot;button&quot; onclick=&quot;return Ytbuy()&quot; class=&quot;button_buy&quot;>购买</button>';
+	$buybutton = '[BuyView]付费内容[/BuyView]';
     echo '<div id="price" class="editmod"><label for="edtIslock" class="editinputname">YtUser快捷操作:</label><a style="cursor: pointer;" onclick="editor_api.editor.content.obj.execCommand(\'insertHtml\',\''.$buybutton.'\');">购买按钮</a><br><a style="cursor: pointer;" onclick="editor_api.editor.content.obj.execCommand(\'insertHtml\', \'[BuyView]\');">[BuyView]</a>付费内容<a style="cursor: pointer;" onclick="editor_api.editor.content.obj.execCommand(\'insertHtml\', \'[/BuyView]\');">[/BuyView]</a></div>';
 }
 
@@ -103,8 +103,6 @@ function YtUser_Content(&$template){
     $article->Buypay = 0;
 	if($article->Type==ZC_POST_TYPE_ARTICLE){
 		if((int)$article->Metas->price > 0){
-
-
         $sql=$zbp->db->sql->Select($GLOBALS['YtUser_buy_Table'],'*',array(array('=','buy_LogID',$article->ID),array('=','buy_AuthorID',$zbp->user->ID),array('=','buy_State',1)),null,1,null);
         $array=$zbp->GetListCustom($GLOBALS['YtUser_buy_Table'],$GLOBALS['tyactivate_DataInfo'],$sql);
         $num=count($array);
@@ -112,8 +110,9 @@ function YtUser_Content(&$template){
                 $article->Buypay = 1;
                 $content = preg_replace("/\[(.*?)BuyView\]/sm",'',$content);
             }else{
-                $content = preg_replace("/\[BuyView\](.*?)\[\/BuyView\]/sm",'<div class="ytuser-buy-box"><p>****此部分是付费内容***</p><p><input type="hidden" name="LogID" id="LogID" value="'.$userid.'" /><input type="submit" style="width:100px;font-size:1.0em;padding:0.2em" value="购买" onclick="return Ytbuy()" /></p></div>',$content);
-		    	$zbp->header .='<script src="'.$zbp->host.'zb_users/plugin/YtUser/Upgrade.js" type="text/javascript"></script>' . "\r\n";
+                $content = preg_replace("/\[BuyView\](.*?)\[\/BuyView\]/sm",'<div class="ytuser-buy-box"><p>****此部分是付费内容***</p><p><input type="submit" style="width:100px;font-size:1.0em;padding:0.2em" value="购买" onclick="return Ytbuy()" /></p></div>',$content);
+		    	$content.= '<input type="hidden" name="LogID" id="LogID" value="'.$userid.'" />';
+                $zbp->header .='<script src="'.$zbp->host.'zb_users/plugin/YtUser/Upgrade.js" type="text/javascript"></script>' . "\r\n";
 		    }
         $article->Content = $content;
         $sql=$zbp->db->sql->Select($GLOBALS['tysuer_Table'],'*',array(array('=','tc_uid',$zbp->user->ID)),null,array(1),null);

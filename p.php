@@ -4,22 +4,39 @@ require 'zb_system/function/c_system_admin.php';
 $zbp->Load();
 
 
+        $sql=$zbp->db->sql->Select($GLOBALS['tysuer_Table'],'*',array(array('=','tc_uid',$zbp->user->ID)),null,array(1),null);
+        $array=$zbp->GetListCustom($GLOBALS['tysuer_Table'],$GLOBALS['tysuer_DataInfo'],$sql);
+        $num=count($array);
+        if($num==0){
+            $zbp->user->Price=0;
+            $zbp->user->Vipendtime=0;
+            $zbp->user->Oid="";
+        }else{
+            $reg=$array[0];
+            $zbp->user->Price=$reg->Price;
+            $zbp->user->Vipendtime=$reg->Vipendtime;
+            $zbp->user->Oid=$reg->Oid;
+        }
+        if($Vipendtime<time() && $zbp->user->Level==4){
+            $keyvalue=array();
+            $keyvalue['mem_Level']=5;
+            $sql = $zbp->db->sql->Update($zbp->table['Member'],$keyvalue,array(array('=','mem_ID',$zbp->user->ID)));
+            $zbp->db->Update($sql);
+            $zbp->user->Vip=0;
+        }else{
+            $zbp->user->Vip=1;
+        }
 
-$arr = array( 0=>'Hello');
-echo implode(" ",$arr);
 
 
-$aaaa='
-{
-"name":"gxny2",
-  "version": "1.0.0",
-  "demo_url": "http://www.abc.com",
-  "author": "ThinkCMF",
-  "lang": "zh-cn",
-  "author_url": "http://www.abc.com ",
-  "keywords": "广西模板",
-  "description": "广西模板"
-}';
-$theme   = json_decode($aaaa, true); 
-print_r($theme);
+    $sql = $zbp->db->sql->Select($zbp->table['Member'],array('mem_Name,mem_PostTime'),array('=','mem_IP',GetGuestIP()),null,null,null);
+    $array = $zbp->GetListType('Member', $sql);
+    foreach ($array as $arr){
+		if ( date('Y-m-d',$arr->PostTime) == date('Y-m-d',time()) ){
+			$zbp->ShowError('当前IP地址：'.GetGuestIP().' 今天已经注册过啦!已注册的用户名：'.$arr->Name);die();
+		}
+	}
+
+
+
 ?>

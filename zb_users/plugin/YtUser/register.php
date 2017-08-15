@@ -11,10 +11,10 @@ if(!$zbp->CheckValidCode($verifycode,'register')){
 //再验证IP今天是否已经注册
 if ($zbp->Config('YtUser')->regipdate){
 	$sql = $zbp->db->sql->Select($zbp->table['Member'],array('mem_Name,mem_PostTime'),array('=','mem_IP',GetGuestIP()),null,null,null);
-	$array = $zbp->db->Query($sql);
-	foreach ($array as $arr){
-		if ( date('Y-m-d',$arr['mem_PostTime']) == date('Y-m-d',time()) ){
-			$zbp->ShowError('当前IP地址：'.GetGuestIP().' 今天已经注册过啦!已注册的用户名：'.$arr["mem_Name"]);die();
+	$array = $zbp->GetListType('Member', $sql);
+    foreach ($array as $arr){
+		if ( date('Y-m-d',$arr->PostTime) == date('Y-m-d',time()) ){
+			$zbp->ShowError('当前IP地址：'.GetGuestIP().' 今天已经注册过啦!已注册的用户名：'.$arr->Name);die();
 		}
 	}
 }
