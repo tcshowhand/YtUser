@@ -1,0 +1,16 @@
+[2017-05-11 15:39:15 .09980300 +08:00]
+array (
+  0 => 'Error',
+  1 => 8,
+  2 => 'Undefined variable: article',
+  3 => 'E:\\songweb\\kangyijia\\PHPPage.php',
+  4 => 77,
+)
+[2017-05-11 15:46:49 .04561000 +08:00]
+array (
+  0 => 'Error',
+  1 => 8,
+  2 => 'Undefined variable: theme',
+  3 => 'E:\\songweb\\kangyijia\\PHPPage.php',
+  4 => 26,
+)

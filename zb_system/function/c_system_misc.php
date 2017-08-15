@@ -45,7 +45,11 @@ case 'phpinfo':
         echo $zbp->ShowError(6, __FILE__, __LINE__);
         die();
     }
+<<<<<<< HEAD
     misc_phpif();
+=======
+    misc_phpinfo();
+>>>>>>> 37e8180d570715b5e4a53c38df53482c36fdad82
     break;
 default:
     break;
@@ -200,13 +204,21 @@ foreach ($GLOBALS['actions'] as $key => $value) {
 RunTime();
 }
 
+<<<<<<< HEAD
 function misc_phpif() {
+=======
+function misc_phpinfo() {
+>>>>>>> 37e8180d570715b5e4a53c38df53482c36fdad82
     global $zbp, $blogtitle;
     $match = array();
     $blogtitle = $zbp->name . '-phpinfo';
     ob_start();
+<<<<<<< HEAD
     $pi='php'.'info';
     $pi();
+=======
+    phpinfo();
+>>>>>>> 37e8180d570715b5e4a53c38df53482c36fdad82
     $s = ob_get_clean();
 
     if (PHP_ENGINE !== ENGINE_HHVM) {

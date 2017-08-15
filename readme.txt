@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿Z-BlogPHP是由Z-Blog社区提供的博客程序，一直致力于给国内用户提供优秀的博客写作体验。从2006年起发布第一版，至今已有11年的历史，是目前国内为数不多的持续提供更新的开源CMS系统之一。我们的目标是使用户沉浸于写作、记录生活，不需要关注繁琐的设置等，让用户专注于创作。对于用户而言，它简单易用，体积小，速度快，支持数据量大。对开发者而言，它又有着强大的可定制性、丰富的插件接口和独立的主题模板。期待Z-BlogPHP能成为您写博客的第一选择。
 
 GitHub: https://github.com/zblogcn/zblogphp
@@ -35,3 +36,31 @@ GitHub: https://github.com/zblogcn/zblogphp
 对于非虚拟主机用户，推荐使用宝塔面板搭建PHP环境并部署Z-BlogPHP。2分钟装好面板，一键管理服务器。
 安装宝塔面板：https://www.bt.cn/download/linux.html?z-blog
 一键部署：https://www.bt.cn/bbs/thread-5443-1-1.html?z-blog
+=======
+﻿Z-Blog PHP 插件：YtUser
+Z-Blog PHP plug：YtUser
+
+插件特点：百搭
+plug-in features: all-match
+
+说明：
+本插件会通过“拓源米折主题”和“泡沫主题”为案例来充分教会大家怎么去更好的使用本插件。
+
+插件存放位置：zb_users/plugin/YtUser
+Plugin storage location: zb_users/plugin/YtUser
+
+本插件从1.9版本开始更新在github
+This plugin is updated from 1.9 to GitHub
+
+Z-Blog PHP QQ交流群：4243058
+Z-Blog PHP QQ exchange group: 4243058 
+
+我们期待更多的人加入
+We expect more people to join us.
+
+Z-Blog PHP应用中心：app.zblogcn.com
+
+Z-Blog PHP: https://github.com/zblogcn/zblogphp
+
+[我的博客](http://www.songzhenjiang.cn)  
+>>>>>>> 37e8180d570715b5e4a53c38df53482c36fdad82

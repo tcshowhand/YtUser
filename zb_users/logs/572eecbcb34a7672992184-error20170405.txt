@@ -1,0 +1,32 @@
+[2017-04-05 09:03:20 .99034600 +08:00]
+array (
+  0 => 'Error',
+  1 => 2,
+  2 => 'require(E:\\songweb\\kangyijia\\zb_users\\plugin\\room\\function/function.php): failed to open stream: No such file or directory',
+  3 => 'E:\\songweb\\kangyijia\\zb_users\\plugin\\room\\include.php',
+  4 => 2,
+)
+[2017-04-05 09:04:54 .84206700 +08:00]
+array (
+  0 => 'Error',
+  1 => 8,
+  2 => 'Undefined variable: tt_Liuyan_Table',
+  3 => 'E:\\songweb\\kangyijia\\zb_users\\plugin\\room\\list.php',
+  4 => 38,
+)
+[2017-04-05 09:05:27 .43747800 +08:00]
+array (
+  0 => 'Error',
+  1 => 1024,
+  2 => 'Table \'zblog.zbp_yt_room\' doesn\'t exist',
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\dbmysqli.php',
+  4 => 167,
+)
+[2017-04-05 09:05:43 .33958500 +08:00]
+array (
+  0 => 'Error',
+  1 => 8,
+  2 => 'Undefined index: tt_Liuyan_Table',
+  3 => 'E:\\songweb\\kangyijia\\zb_users\\plugin\\room\\include.php',
+  4 => 21,
+)

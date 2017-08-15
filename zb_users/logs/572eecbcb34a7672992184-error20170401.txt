@@ -1,0 +1,24 @@
+[2017-04-01 13:50:32 .93380000 +08:00]
+array (
+  0 => 'Shutdown',
+  1 => 1,
+  2 => 'Cannot use object of type Post as array',
+  3 => 'E:\\songweb\\kangyijia\\zb_users\\plugin\\CustomMeta\\include.php',
+  4 => 32,
+)
+[2017-04-01 14:04:25 .09722800 +08:00]
+array (
+  0 => 'Exception',
+  1 => '没有权限',
+  2 => 0,
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 2713,
+)
+[2017-04-01 14:11:13 .12423900 +08:00]
+array (
+  0 => 'Error',
+  1 => 8,
+  2 => 'Undefined variable: single_meta_cat',
+  3 => 'E:\\songweb\\kangyijia\\zb_users\\plugin\\CustomMeta\\include.php',
+  4 => 76,
+)

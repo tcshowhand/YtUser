@@ -71,12 +71,20 @@ require $blogpath . 'zb_system/admin/admin_top.php';
 <tr><td><p><b>· 最后更新日期</b></p></td><td><p>&nbsp;<input id="zblog_app_date" name="zblog_app_date" style="width:550px;"  type="text" value="" readonly /></p></td></tr>
 </table>
 <script type="text/javascript">
+<<<<<<< HEAD
 var jsoninfo=JSON.parse(<?php echo $t;?>);
+=======
+var jsoninfo=eval(<?php echo $t;?>);
+>>>>>>> 37e8180d570715b5e4a53c38df53482c36fdad82
 $("#local_app_id").val(jsoninfo.id);
 $("#local_app_user").val(jsoninfo.author);
 $("#local_app_date").val(jsoninfo.modified);
 
+<<<<<<< HEAD
 var jsoninfo=JSON.parse(<?php echo $s;?>);
+=======
+var jsoninfo=eval(<?php echo $s;?>);
+>>>>>>> 37e8180d570715b5e4a53c38df53482c36fdad82
 $("#zblog_app_id").val(jsoninfo.id);
 $("#zblog_app_user").val(jsoninfo.author);
 $("#zblog_app_date").val(jsoninfo.modified);

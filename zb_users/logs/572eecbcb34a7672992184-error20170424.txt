@@ -1,0 +1,72 @@
+[2017-04-24 13:26:25 .88748400 +08:00]
+array (
+  0 => 'Error',
+  1 => 8,
+  2 => 'Undefined index: appid',
+  3 => 'E:\\songweb\\kangyijia\\zb_users\\plugin\\YtUser\\save.php',
+  4 => 11,
+)
+[2017-04-24 13:28:58 .56432700 +08:00]
+array (
+  0 => 'Error',
+  1 => 8,
+  2 => 'Undefined index: appid',
+  3 => 'E:\\songweb\\kangyijia\\zb_users\\plugin\\YtUser\\save.php',
+  4 => 11,
+)
+[2017-04-24 14:06:48 .97901900 +08:00]
+array (
+  0 => 'Error',
+  1 => 8,
+  2 => 'Undefined index: Level',
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\base.php',
+  4 => 78,
+)
+[2017-04-24 14:08:12 .92610600 +08:00]
+array (
+  0 => 'Error',
+  1 => 8,
+  2 => 'Undefined index: Level',
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\base.php',
+  4 => 78,
+)
+[2017-04-24 14:08:59 .33737700 +08:00]
+array (
+  0 => 'Error',
+  1 => 8,
+  2 => 'Undefined index: Level',
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\base.php',
+  4 => 78,
+)
+[2017-04-24 14:15:18 .70411800 +08:00]
+array (
+  0 => 'Shutdown',
+  1 => 1,
+  2 => 'Call to undefined function tiem()',
+  3 => 'E:\\songweb\\kangyijia\\zb_users\\plugin\\YtUser\\yt_event.php',
+  4 => 64,
+)
+[2017-04-24 14:16:25 .60042600 +08:00]
+array (
+  0 => 'Error',
+  1 => 8,
+  2 => 'Undefined index: Viptime',
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\base.php',
+  4 => 78,
+)
+[2017-04-24 14:20:51 .05993400 +08:00]
+array (
+  0 => 'Exception',
+  1 => '没有权限',
+  2 => 0,
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 2708,
+)
+[2017-04-24 14:44:46 .58441700 +08:00]
+array (
+  0 => 'Exception',
+  1 => '没有权限',
+  2 => 0,
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 2708,
+)

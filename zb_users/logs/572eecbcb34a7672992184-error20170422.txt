@@ -1,0 +1,144 @@
+[2017-04-22 13:34:08 .47838500 +08:00]
+array (
+  0 => 'Exception',
+  1 => '没有权限',
+  2 => 0,
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 2708,
+)
+[2017-04-22 13:37:15 .41866100 +08:00]
+array (
+  0 => 'Error',
+  1 => 8,
+  2 => 'Undefined variable: tmallurl',
+  3 => 'E:\\songweb\\kangyijia\\zb_users\\plugin\\taobaoshow\\include.php',
+  4 => 19,
+)
+[2017-04-22 13:37:16 .68377000 +08:00]
+array (
+  0 => 'Error',
+  1 => 8,
+  2 => 'Undefined variable: tmallurl',
+  3 => 'E:\\songweb\\kangyijia\\zb_users\\plugin\\taobaoshow\\include.php',
+  4 => 19,
+)
+[2017-04-22 13:37:40 .41316700 +08:00]
+array (
+  0 => 'Shutdown',
+  1 => 1,
+  2 => 'Call to undefined function curl_get()',
+  3 => 'E:\\songweb\\kangyijia\\zb_users\\plugin\\taobaoshow\\include.php',
+  4 => 64,
+)
+[2017-04-22 13:37:41 .20797000 +08:00]
+array (
+  0 => 'Shutdown',
+  1 => 1,
+  2 => 'Call to undefined function curl_get()',
+  3 => 'E:\\songweb\\kangyijia\\zb_users\\plugin\\taobaoshow\\include.php',
+  4 => 64,
+)
+[2017-04-22 13:37:52 .35635200 +08:00]
+array (
+  0 => 'Error',
+  1 => 8,
+  2 => 'Undefined offset: 1',
+  3 => 'E:\\songweb\\kangyijia\\zb_users\\plugin\\taobaoshow\\include.php',
+  4 => 67,
+)
+[2017-04-22 13:37:53 .08669000 +08:00]
+array (
+  0 => 'Error',
+  1 => 8,
+  2 => 'Undefined offset: 1',
+  3 => 'E:\\songweb\\kangyijia\\zb_users\\plugin\\taobaoshow\\include.php',
+  4 => 67,
+)
+[2017-04-22 13:38:21 .56361000 +08:00]
+array (
+  0 => 'Error',
+  1 => 8,
+  2 => 'Undefined offset: 1',
+  3 => 'E:\\songweb\\kangyijia\\zb_users\\plugin\\taobaoshow\\include.php',
+  4 => 67,
+)
+[2017-04-22 13:38:23 .32418600 +08:00]
+array (
+  0 => 'Error',
+  1 => 8,
+  2 => 'Undefined offset: 1',
+  3 => 'E:\\songweb\\kangyijia\\zb_users\\plugin\\taobaoshow\\include.php',
+  4 => 67,
+)
+[2017-04-22 15:14:25 .85875300 +08:00]
+array (
+  0 => 'Error',
+  1 => 8,
+  2 => 'Undefined variable: ff',
+  3 => 'E:\\songweb\\kangyijia\\zzz.php',
+  4 => 11,
+)
+[2017-04-22 15:23:57 .99330300 +08:00]
+array (
+  0 => 'Error',
+  1 => 8,
+  2 => 'Undefined offset: 1',
+  3 => 'E:\\songweb\\kangyijia\\zzz.php',
+  4 => 17,
+)
+[2017-04-22 15:24:12 .27968200 +08:00]
+array (
+  0 => 'Error',
+  1 => 8,
+  2 => 'Array to string conversion',
+  3 => 'E:\\songweb\\kangyijia\\zzz.php',
+  4 => 19,
+)
+[2017-04-22 15:24:22 .59785900 +08:00]
+array (
+  0 => 'Error',
+  1 => 8,
+  2 => 'Array to string conversion',
+  3 => 'E:\\songweb\\kangyijia\\zzz.php',
+  4 => 19,
+)
+[2017-04-22 15:24:35 .58888900 +08:00]
+array (
+  0 => 'Error',
+  1 => 8,
+  2 => 'Array to string conversion',
+  3 => 'E:\\songweb\\kangyijia\\zzz.php',
+  4 => 19,
+)
+[2017-04-22 15:24:42 .59629900 +08:00]
+array (
+  0 => 'Error',
+  1 => 8,
+  2 => 'Array to string conversion',
+  3 => 'E:\\songweb\\kangyijia\\zzz.php',
+  4 => 19,
+)
+[2017-04-22 15:24:43 .32128300 +08:00]
+array (
+  0 => 'Error',
+  1 => 8,
+  2 => 'Array to string conversion',
+  3 => 'E:\\songweb\\kangyijia\\zzz.php',
+  4 => 19,
+)
+[2017-04-22 15:25:33 .23900400 +08:00]
+array (
+  0 => 'Error',
+  1 => 8,
+  2 => 'Undefined offset: 1',
+  3 => 'E:\\songweb\\kangyijia\\zzz.php',
+  4 => 19,
+)
+[2017-04-22 16:10:31 .77576900 +08:00]
+array (
+  0 => 'Shutdown',
+  1 => 4,
+  2 => 'syntax error, unexpected \'Source\' (T_STRING)',
+  3 => 'E:\\songweb\\kangyijia\\zb_users\\plugin\\YtUser\\yt_event.php',
+  4 => 451,
+)

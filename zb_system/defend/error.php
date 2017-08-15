@@ -118,9 +118,15 @@ unset($post_data['password']);
               </div>
               <div>
                 <p><?php echo $GLOBALS['lang']['msg']['request_data']; ?></p>
+<<<<<<< HEAD
                 <pre><?php echo '$#_GET = ' . print_r(htmlspecialchars_array($_GET), 1) ?></pre>
                 <pre><?php echo '$#_POST = ' . print_r(htmlspecialchars_array($_POST), 1) ?></pre>
                 <pre><?php echo '$#_COOKIE = ' . print_r(htmlspecialchars_array($post_data), 1) ?></pre>
+=======
+                <pre><?php echo '$_GET = ' . print_r(htmlspecialchars_array($_GET), 1) ?></pre>
+                <pre><?php echo '$_POST = ' . print_r(htmlspecialchars_array($_POST), 1) ?></pre>
+                <pre><?php echo '$_COOKIE = ' . print_r(htmlspecialchars_array($post_data), 1) ?></pre>
+>>>>>>> 37e8180d570715b5e4a53c38df53482c36fdad82
               </div>
               <div>
                 <p><?php echo $GLOBALS['lang']['msg']['include_file']; ?></p>

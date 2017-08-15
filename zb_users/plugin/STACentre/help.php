@@ -6,9 +6,21 @@ require '../../../zb_system/function/c_system_admin.php';
 $zbp->Load();
 
 $action = 'root';
+<<<<<<< HEAD
 if (!$zbp->CheckRights($action)) {$zbp->ShowError(6);die();}
 
 if (!$zbp->CheckPlugin('STACentre')) {$zbp->ShowError(68);die();}
+=======
+if (!$zbp->CheckRights($action)) {
+    $zbp->ShowError(6);
+    die();
+}
+
+if (!$zbp->CheckPlugin('STACentre')) {
+    $zbp->ShowError(68);
+    die();
+}
+>>>>>>> 37e8180d570715b5e4a53c38df53482c36fdad82
 
 $blogtitle = '静态管理中心';
 
@@ -83,4 +95,8 @@ require $blogpath . 'zb_system/admin/admin_top.php';
 require $blogpath . 'zb_system/admin/admin_footer.php';
 
 RunTime();
+<<<<<<< HEAD
 ?>
+=======
+?>
+>>>>>>> 37e8180d570715b5e4a53c38df53482c36fdad82

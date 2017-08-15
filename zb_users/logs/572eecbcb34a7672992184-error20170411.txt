@@ -1,0 +1,112 @@
+[2017-04-11 09:42:26 .25642600 +08:00]
+array (
+  0 => 'Exception',
+  1 => '相关页面不存在',
+  2 => 0,
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 2708,
+)
+[2017-04-11 12:54:01 .16402800 +08:00]
+array (
+  0 => 'Exception',
+  1 => '没有权限',
+  2 => 0,
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 2708,
+)
+[2017-04-11 12:54:01 .32443900 +08:00]
+array (
+  0 => 'Exception',
+  1 => '相关页面不存在',
+  2 => 0,
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 2708,
+)
+[2017-04-11 12:54:06 .53063100 +08:00]
+array (
+  0 => 'Exception',
+  1 => '登录失败',
+  2 => 0,
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 2708,
+)
+[2017-04-11 12:54:11 .39629900 +08:00]
+array (
+  0 => 'Exception',
+  1 => '登录失败',
+  2 => 0,
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 2708,
+)
+[2017-04-11 12:54:16 .12353200 +08:00]
+array (
+  0 => 'Exception',
+  1 => '登录失败',
+  2 => 0,
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 2708,
+)
+[2017-04-11 12:54:26 .80187900 +08:00]
+array (
+  0 => 'Exception',
+  1 => '相关页面不存在',
+  2 => 0,
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 2708,
+)
+[2017-04-11 12:57:26 .00236000 +08:00]
+array (
+  0 => 'Error',
+  1 => 1024,
+  2 => 'Unknown column \'reg_IP\' in \'where clause\'',
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\dbmysqli.php',
+  4 => 167,
+)
+[2017-04-11 12:57:35 .71492800 +08:00]
+array (
+  0 => 'Error',
+  1 => 1024,
+  2 => 'Unknown column \'reg_IP\' in \'where clause\'',
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\dbmysqli.php',
+  4 => 167,
+)
+[2017-04-11 12:58:02 .96496300 +08:00]
+array (
+  0 => 'Error',
+  1 => 1024,
+  2 => 'Unknown column \'reg_IP\' in \'where clause\'',
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\dbmysqli.php',
+  4 => 167,
+)
+[2017-04-11 12:58:17 .19111400 +08:00]
+array (
+  0 => 'Error',
+  1 => 1024,
+  2 => 'Unknown column \'reg_IP\' in \'where clause\'',
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\dbmysqli.php',
+  4 => 167,
+)
+[2017-04-11 12:59:54 .45606600 +08:00]
+array (
+  0 => 'Exception',
+  1 => '相关页面不存在',
+  2 => 0,
+  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
+  4 => 2708,
+)
+[2017-04-11 14:35:50 .84645200 +08:00]
+array (
+  0 => 'Error',
+  1 => 8,
+  2 => 'Undefined variable: page',
+  3 => 'E:\\songweb\\kangyijia\\zb_users\\theme\\default\\include.php',
+  4 => 12,
+)
+[2017-04-11 14:37:25 .05177100 +08:00]
+array (
+  0 => 'Error',
+  1 => 8,
+  2 => 'Undefined variable: page',
+  3 => 'E:\\songweb\\kangyijia\\zb_users\\theme\\default\\include.php',
+  4 => 12,
+)
