@@ -7,11 +7,6 @@ $zbp->
 Load();
 
 $action = 'root';
-<<<<<<< HEAD
-if (!$zbp->CheckRights($action)) {$zbp->ShowError(6);die();}
-
-if (!$zbp->CheckPlugin('STACentre')) {$zbp->ShowError(68);die();}
-=======
 if (!$zbp->CheckRights($action)) {
     $zbp->ShowError(6);
     die();
@@ -21,15 +16,10 @@ if (!$zbp->CheckPlugin('STACentre')) {
     $zbp->ShowError(68);
     die();
 }
->>>>>>> 37e8180d570715b5e4a53c38df53482c36fdad82
 
 $blogtitle = '静态管理中心';
 
 if (count($_GET) > 0) {
-<<<<<<< HEAD
-
-=======
->>>>>>> 37e8180d570715b5e4a53c38df53482c36fdad82
     if (GetVars('mak', 'GET') == '1') {
         @file_put_contents($zbp->path . '.htaccess', show_htaccess());
     } elseif (GetVars('mak', 'GET') == '2') {
@@ -51,27 +41,6 @@ if (count($_GET) > 0) {
     Redirect('./list.php');
 }
 
-<<<<<<< HEAD
-function show_htaccess() {
-    $ur = new UrlRule("");
-
-    return $ur->Make_htaccess();
-}
-
-function show_httpini() {
-    $ur = new UrlRule("");
-
-    return $ur->Make_httpdini();
-}
-
-function show_webconfig() {
-    $ur = new UrlRule("");
-
-    return $ur->Make_webconfig();
-}
-
-function show_nginx() {
-=======
 function show_htaccess()
 {
     $ur = new UrlRule("");
@@ -92,30 +61,18 @@ function show_webconfig()
 
 function show_nginx()
 {
->>>>>>> 37e8180d570715b5e4a53c38df53482c36fdad82
     $ur = new UrlRule("");
     if (method_exists('UrlRule', 'Make_nginx')) {
         return $ur->Make_nginx();
     }
-<<<<<<< HEAD
-
-}
-
-function show_lighttpd() {
-=======
 }
 
 function show_lighttpd()
 {
->>>>>>> 37e8180d570715b5e4a53c38df53482c36fdad82
     $ur = new UrlRule("");
     if (method_exists('UrlRule', 'Make_lighttpd')) {
         return $ur->Make_lighttpd();
     }
-<<<<<<< HEAD
-
-=======
->>>>>>> 37e8180d570715b5e4a53c38df53482c36fdad82
 }
 
 require $blogpath . 'zb_system/admin/admin_header.php';
@@ -309,11 +266,7 @@ if (strpos($default_tab, 'apache') !== false) {
 
     <hr/>
   </form>
-<<<<<<< HEAD
-  <?php }?>
-=======
     <?php }?>
->>>>>>> 37e8180d570715b5e4a53c38df53482c36fdad82
   <script type="text/javascript">ActiveLeftMenu("aPluginMng");</script>
   <script type="text/javascript">AddHeaderIcon("<?php echo $bloghost . 'zb_users/plugin/STACentre/logo.png';?>");</script>
 </div>
@@ -322,8 +275,4 @@ if (strpos($default_tab, 'apache') !== false) {
 require $blogpath . 'zb_system/admin/admin_footer.php';
 
 RunTime();
-<<<<<<< HEAD
 ?>
-=======
-?>
->>>>>>> 37e8180d570715b5e4a53c38df53482c36fdad82

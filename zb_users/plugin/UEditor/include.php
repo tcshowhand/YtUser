@@ -85,11 +85,6 @@ editor_api.editor.content.obj.ready(function(){sContent=editor_api.editor.conten
 editor_api.editor.intro.obj.ready(function(){sIntro=editor_api.editor.intro.get();});
 
 $(document).ready(function(){
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 37e8180d570715b5e4a53c38df53482c36fdad82
 	$('#edit').submit(function(){if(editor_api.editor.content.obj.queryCommandState('source')==1) editor_api.editor.content.obj.execCommand('source');
 	if(editor_api.editor.intro.obj.queryCommandState('source')==1) editor_api.editor.intro.obj.execCommand('source');})
 	/*源码模式下保存时必须切换*/

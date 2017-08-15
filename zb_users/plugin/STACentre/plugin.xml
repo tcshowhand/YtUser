@@ -19,16 +19,6 @@
   <email></email>
   <url></url>
 </source>
-<<<<<<< HEAD
-<adapted>130707</adapted>
-<version>1.2</version>
-<pubdate>2013-07-07</pubdate>
-<modified>2016-11-02</modified>
-<price>0</price>
-<advanced>
-  <dependency></dependency>
-  <rewritefunctions></rewritefunctions>
-=======
 <adapted>131221</adapted>
 <version>1.3</version>
 <pubdate>2013-07-07</pubdate>
@@ -39,7 +29,6 @@
   <dependency></dependency>
   <rewritefunctions></rewritefunctions>
   <existsfunctions></existsfunctions>
->>>>>>> 37e8180d570715b5e4a53c38df53482c36fdad82
   <conflict></conflict>
 </advanced>
 <sidebars>
