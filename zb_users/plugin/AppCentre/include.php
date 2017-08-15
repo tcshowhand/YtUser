@@ -7,15 +7,9 @@ if(stripos($GLOBALS['bloghost'],'https://')!==false){
 	define('APPCENTRE_SYSTEM_UPDATE', 'https://update.zblogcn.com/zblogphp/');
 	define('APPCENTRE_API_URL', 'https://app.zblogcn.com/api/index.php?api=');	
 }else{
-<<<<<<< HEAD
 	define('APPCENTRE_URL', 'http://app.zblogcn.com/client/');
 	define('APPCENTRE_SYSTEM_UPDATE', 'http://update.zblogcn.com/zblogphp/');
 	define('APPCENTRE_API_URL', 'http://app.zblogcn.com/api/index.php?api=');
-=======
-	define('APPCENTRE_URL', 'https://app.zblogcn.com/client/');
-	define('APPCENTRE_SYSTEM_UPDATE', 'https://update.zblogcn.com/zblogphp/');
-	define('APPCENTRE_API_URL', 'https://app.zblogcn.com/api/index.php?api=');
->>>>>>> 37e8180d570715b5e4a53c38df53482c36fdad82
 }
 define('APPCENTRE_API_APP_ISBUY', 'isbuy');
 define('APPCENTRE_API_USER_INFO', 'userinfo');
