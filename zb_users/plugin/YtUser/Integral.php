@@ -39,10 +39,11 @@ $keyvalue['tc_AuthorID']=$zbp->user->ID;
 $sql = $zbp->db->sql->Update($typrepaid_Table,$keyvalue,array(array('=','tc_ID',$reg->ID)));
 $zbp->db->Update($sql);
 
-$keyvalue=array();
-$keyvalue['tc_Price']=$Price+$reg->Price;
-$sql = $zbp->db->sql->Update('%pre%ytuser',$keyvalue,array(array('=','tc_uid',$zbp->user->ID)));
-$zbp->db->Update($sql);
+$ytuser = new Ytuser();
+$ytuser->YtInfoByField('Uid',$zbp->user->ID);
+$ytuser->Price=$Price+$reg->Price;
+$ytuser->Save();
+
 echo '充值成功！';
 
 ?>

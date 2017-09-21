@@ -2,6 +2,9 @@
 require '../../../zb_system/function/c_system_base.php';
 require '../../../zb_system/function/c_system_admin.php';
 $zbp->Load();
+if($zbp->user->Level !=1){
+    Redirect($zbp->host."?Login");die();
+}
 $action='MemberMng';
 if (!$zbp->CheckRights($action)) {$zbp->ShowError(6);die();}
 if (!$zbp->CheckPlugin('YtUser')) {$zbp->ShowError(48);die();}

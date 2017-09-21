@@ -7,26 +7,70 @@ include 'yt_event.php';
 RegisterPlugin("YtUser","ActivePlugin_YtUser");
 
 function ActivePlugin_YtUser() {
-	Add_Filter_Plugin('Filter_Plugin_Zbp_MakeTemplatetags','YtUser_Main');
-	Add_Filter_Plugin('Filter_Plugin_Index_Begin','YtUser_page');
-	Add_Filter_Plugin('Filter_Plugin_Html_Js_Add', 'YtUser_SyntaxHighlighter_print');
-	Add_Filter_Plugin('Filter_Plugin_Admin_TopMenu', 'YtUser_AddMenu');
-	Add_Filter_Plugin('Filter_Plugin_ViewPost_Template','YtUser_Content');
-	Add_Filter_Plugin('Filter_Plugin_Edit_Response3','YtUser_Edit');
+    Add_Filter_Plugin('Filter_Plugin_Zbp_MakeTemplatetags','YtUser_Main');
+    Add_Filter_Plugin('Filter_Plugin_Index_Begin','YtUser_page');
+    Add_Filter_Plugin('Filter_Plugin_Html_Js_Add', 'YtUser_SyntaxHighlighter_print');
+    Add_Filter_Plugin('Filter_Plugin_Admin_TopMenu', 'YtUser_AddMenu');
+    Add_Filter_Plugin('Filter_Plugin_ViewPost_Template','YtUser_Content');
+    Add_Filter_Plugin('Filter_Plugin_ViewList_Template','YtUser_ViewList');
+    Add_Filter_Plugin('Filter_Plugin_Edit_Response3','YtUser_Edit');
     Add_Filter_Plugin('Filter_Plugin_Admin_MemberMng_SubMenu','YtUser_Batch_MemberMng_Main');
-	Add_Filter_Plugin('Filter_Plugin_AlipayPayNotice_Succeed','YtUser_Filter_Plugin_AlipayPayNotice_Succeed');
-	Add_Filter_Plugin('Filter_Plugin_AlipayPayReturn_Succeed','YtUser_Filter_Plugin_AlipayPayReturn_Succeed');
+    Add_Filter_Plugin('Filter_Plugin_AlipayPayNotice_Succeed','YtUser_Filter_Plugin_AlipayPayNotice_Succeed');
+    Add_Filter_Plugin('Filter_Plugin_AlipayPayReturn_Succeed','YtUser_Filter_Plugin_AlipayPayReturn_Succeed');
     Add_Filter_Plugin('Filter_Plugin_DelArticle_Succeed','YtUser_DelArticle');
     Add_Filter_Plugin('Filter_Plugin_RegPage_RegSucceed','YtUser_RegSucceed');
     Add_Filter_Plugin('Filter_Plugin_Admin_Begin','YtUser_Admin_Begin');
     Add_Filter_Plugin('Filter_Plugin_Login_Header','YtUser_Login_Header');
-	//Add_Filter_Plugin('Filter_Plugin_DelMember_Succeed','YtUser_DelMember_Succeed');
-	
+    Add_Filter_Plugin('Filter_Plugin_Autoload','YtUser_Autoload');
+    AutoloadClass('ytuser');
+    AutoloadClass('ytuserbuy');
+    AutoloadClass('yt_favorite');
+    AutoloadClass('ytconsume');
 }
-/* function YtUser_DelMember_Succeed(){
-    global $zbp;
 
-} */
+function YtUser_ViewList(&$template){
+    $articles=$template->GetTags('articles')?$template->GetTags('articles'):$template->GetTags('article');
+    if(!$articles) return;
+    if(is_array($articles)&&count($articles)>0){
+        foreach($articles as $article){
+            YtUser_ViewList_Tags($article,$template);
+        }
+    }else{
+        YtUser_ViewList_Tags($articles,$template);
+    }
+}
+
+function YtUser_ViewList_Tags(&$article,&$template){
+    global $zbp;    
+    ZBlogException::ClearErrorHook();
+    $intro = preg_replace("/\[BuyView\](.*?)\[\/BuyView\]/sm",'',$article->Intro);
+    $article->Intro=$intro;
+}
+
+function YtUser_Autoload(&$classname){
+    global $zbp;
+    if($classname == 'ytuser'){
+        if (is_readable($f = ZBP_PATH . 'zb_users/plugin/YtUser/lib/' . strtolower($classname) . '.php')) {
+            require $f;
+        }
+    }
+    if($classname == 'ytuserbuy'){
+        if (is_readable($f = ZBP_PATH . 'zb_users/plugin/YtUser/lib/' . strtolower($classname) . '.php')) {
+            require $f;
+        }
+    }
+    if($classname == 'yt_favorite'){
+        if (is_readable($f = ZBP_PATH . 'zb_users/plugin/YtUser/lib/' . strtolower($classname) . '.php')) {
+            require $f;
+        }
+    }
+    if($classname == 'ytconsume'){
+        if (is_readable($f = ZBP_PATH . 'zb_users/plugin/YtUser/lib/' . strtolower($classname) . '.php')) {
+            require $f;
+        }
+    }
+}
+
 function YtUser_Login_Header(){
     global $zbp;
     Redirect($zbp->host."?User");
@@ -40,14 +84,10 @@ function YtUser_Admin_Begin(){
 }
 
 function YtUser_RegSucceed(&$member){
-    global $zbp;
-    $YtdsSlide_Table='%pre%ytuser';
-    $DataArr = array(
-        'tc_uid' => $member->ID,
-        'tc_oid' => "000000",
-    );
-    $sql= $zbp->db->sql->Insert($YtdsSlide_Table,$DataArr);
-    $zbp->db->Insert($sql);
+    $ytuser = new Ytuser();
+    $ytuser->Uid=$member->ID;
+    $ytuser->Oid=0;
+    $ytuser->Save();
 }
 
 function YtUser_DelArticle(&$data){
@@ -96,42 +136,54 @@ function YtUser_Edit(){
 }
 
 function YtUser_Content(&$template){
-	global $zbp;
-	$article = $template->GetTags('article');
+    global $zbp;
+    $zbp->header .='<script src="'.$zbp->host.'zb_users/plugin/YtUser/Upgrade.js" type="text/javascript"></script>' . "\r\n";
+    $article = $template->GetTags('article');
     $content = $article->Content;
     $userid = $article->ID;
     $article->Buypay = 0;
-	if($article->Type==ZC_POST_TYPE_ARTICLE){
-		if((int)$article->Metas->price > 0){
-        $sql=$zbp->db->sql->Select($GLOBALS['YtUser_buy_Table'],'*',array(array('=','buy_LogID',$article->ID),array('=','buy_AuthorID',$zbp->user->ID),array('=','buy_State',1)),null,1,null);
-        $array=$zbp->GetListCustom($GLOBALS['YtUser_buy_Table'],$GLOBALS['tyactivate_DataInfo'],$sql);
-        $num=count($array);
-            if($num){
+    if($article->Type==ZC_POST_TYPE_ARTICLE){
+        if((int)$article->Metas->price > 0){
+        $userbuy=new YtuserBuy();
+        $array = $userbuy->YtBuyByField('LogID',$article->ID);
+            if($array){
                 $article->Buypay = 1;
                 $content = preg_replace("/\[(.*?)BuyView\]/sm",'',$content);
             }else{
-                $content = preg_replace("/\[BuyView\](.*?)\[\/BuyView\]/sm",'<div class="ytuser-buy-box"><p>****此部分是付费内容***</p><p><input type="submit" style="width:100px;font-size:1.0em;padding:0.2em" value="购买" onclick="return Ytbuy()" /></p></div>',$content);
-		    	$content.= '<input type="hidden" name="LogID" id="LogID" value="'.$userid.'" />';
-                $zbp->header .='<script src="'.$zbp->host.'zb_users/plugin/YtUser/Upgrade.js" type="text/javascript"></script>' . "\r\n";
-		    }
+                $content.= '<input type="hidden" name="LogID" id="LogID" value="'.$userid.'" />';
+                if($zbp->Config('YtUser')->payment==0){
+                $content = preg_replace("/\[BuyView\](.*?)\[\/BuyView\]/sm",'<div class="ytuser-buy-box"><p>****此部分是付费内容***</p><p><input type="submit" style="width:130px;font-size:1.0em;padding:0.2em" value="购买（'.$article->Metas->price.'积分）" onclick="return YtSbuy()" /></p></div>',$content);
+                }else{
+                $alipay ='<form class="ytarticleedt" id="edit" name="edit" method="post" action="#">';
+                $alipay .='<tr><td  style="border:none;" ></td><td  style="border:none;" ><input type="submit" style="width:150px;font-size:1.0em;padding:0.2em" value="支付宝付款（'.$article->Metas->price.'积分）" onclick="return VipRegPage()" /></td></tr>';
+                $alipay .='</form>';
+                $alipay .='<script type="text/javascript">function VipRegPage(){document.getElementById("edit").action="'.$zbp->host.'zb_users/plugin/YtUser/cmd.php?act=UploadPst&token='.$zbp->GetToken().'";}</script>';
+                $content = preg_replace("/\[BuyView\](.*?)\[\/BuyView\]/sm",$alipay,$content);
+                }
+            }
         $article->Content = $content;
-        $sql=$zbp->db->sql->Select($GLOBALS['tysuer_Table'],'*',array(array('=','tc_uid',$zbp->user->ID)),null,array(1),null);
-        $array=$zbp->GetListCustom($GLOBALS['tysuer_Table'],$GLOBALS['tysuer_DataInfo'],$sql);
-        $num=count($array);
-        if($num==0){
-            $article->Vipendtime =0;
-        }else{
-            $reg=$array[0];
-            $article->Vipendtime = $reg->Vipendtime;
+        $ytuser = new Ytuser();
+        $array = $ytuser->YtInfoByField('Uid',$zbp->user->ID);
+            if($array){
+                $article->Vipendtime = $ytuser->Vipendtime;
+            }else{
+                $article->Vipendtime =0;
+            }
+        $num = $userbuy->YtSumByField('LogID',$article->ID);
+        $article->paysum = $num;
+        $template->SetTags('article', $article);
+        $articlebuys = $userbuy->YtArticleByField('LogID',$article->ID);
+        $template->SetTags('articlebuys', $articlebuys);
         }
-        $sql=$zbp->db->sql->Select($GLOBALS['YtUser_buy_Table'],'*',array(array('=','buy_LogID',$article->ID),array('=','buy_State',1)),null,1,null);
-        $array=$zbp->GetListCustom($GLOBALS['YtUser_buy_Table'],$GLOBALS['tyactivate_DataInfo'],$sql);
-        $num=count($array);
-        $article->paysum = $num+$article->Metas->paysum;
-		$template->SetTags('article', $article);
-		}
-	}
+    }
 
+    $favorite = new YtFavorite;
+    $array = $favorite->YtInfoByField('Pid',$article->ID);
+    if ($array) {
+        $article->Favorite = 1;
+    }else{
+        $article->Favorite = 0;
+    }
 }
 
 function YtUser_SyntaxHighlighter_print() {
@@ -171,6 +223,10 @@ function YtUser_CreateTable(){
     $s=$zbp->db->sql->CreateTable($GLOBALS['typrepaid_Table'],$GLOBALS['typrepaid_DataInfo']);
     $zbp->db->QueryMulit($s);
     $s=$zbp->db->sql->CreateTable($GLOBALS['YtUser_buy_Table'],$GLOBALS['YtUser_buy_DataInfo']);
+    $zbp->db->QueryMulit($s);
+    $s=$zbp->db->sql->CreateTable($GLOBALS['YtFavorite_Table'],$GLOBALS['YtFavorite_DataInfo']);
+    $zbp->db->QueryMulit($s);
+    $s=$zbp->db->sql->CreateTable($GLOBALS['YtConsume_Table'],$GLOBALS['YtConsume_DataInfo']);
     $zbp->db->QueryMulit($s);
 }
 
@@ -212,6 +268,7 @@ function YtUser_DB_ADD($a_table,$add,$dbtype,$d_Hint=null){
 		$zbp->SetHint('good',$s.'已执行');
 	}
 }
+
 function YtUser_DB_UP($a_table,$b_updata=array(),$c_where=array(),$d_Hint=null){
 	global $zbp;
 	if (!$a_table || !$add)return;
@@ -231,3 +288,4 @@ function YtUser_DB_DROP($a_table,$add,$d_Hint=null){
 		$zbp->SetHint('bad',$s.'已执行');
 	}
 }
+

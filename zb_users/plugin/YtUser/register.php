@@ -3,12 +3,12 @@ require '../../../zb_system/function/c_system_base.php';
 $zbp->Load();
 Add_Filter_Plugin('Filter_Plugin_Zbp_ShowError','RespondError',PLUGIN_EXITSIGNAL_RETURN);
 if (!$zbp->CheckPlugin('YtUser')) {$zbp->ShowError(48);die();}
-//先验证验证码
+
 $verifycode=trim($_POST['verifycode']);
 if(!$zbp->CheckValidCode($verifycode,'register')){
 	$zbp->ShowError('验证码错误，请重新输入.');die();
 }
-//再验证IP今天是否已经注册
+
 if ($zbp->Config('YtUser')->regipdate){
 	$sql = $zbp->db->sql->Select($zbp->table['Member'],array('mem_Name,mem_PostTime'),array('=','mem_IP',GetGuestIP()),null,null,null);
 	$array = $zbp->GetListType('Member', $sql);
@@ -18,12 +18,12 @@ if ($zbp->Config('YtUser')->regipdate){
 		}
 	}
 }
-//开始记录新用户
+
 $guid=GetGuid();
 $member=new Member;
 $member->Guid=$guid;
 $member->Level=5;
-//GetVars('reset','POST')
+
 $name=trim(GetVars('name','POST'));
 if(strlen($name)<$zbp->option['ZC_USERNAME_MIN']||strlen($name)>$zbp->option['ZC_USERNAME_MAX']){
 	$zbp->ShowError('用户名不能过长或过短.');die();
@@ -66,7 +66,6 @@ if ($zbp->Config('YtUser')->regneedemail){
 
 $homepage = trim(GetVars('homepage','POST'));
 if ($homepage){
-	//$homepage = $zbp->host;
 	if(strlen($homepage) > $zbp->option['ZC_HOMEPAGE_MAX']){
 		$zbp->ShowError('网址不能过长.');die();
 	}

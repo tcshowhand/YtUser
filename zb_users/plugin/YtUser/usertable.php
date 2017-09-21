@@ -59,7 +59,26 @@ $YtUser_buy_DataInfo=array(
         'Title' => array('buy_Title', 'string', 20, ''),
         'State' => array('buy_State', 'integer', '', 0),
         'PostTime' => array('buy_PostTime', 'integer', '', 0),
-		'Pay' => array('buy_Pay', 'integer', '', 0),
-		'Express' => array('buy_Express', 'string', '', ''),
+        'Pay' => array('buy_Pay', 'integer', '', 0),
+        'Express' => array('buy_Express', 'string', '', ''),
         'IP' => array('buy_IP', 'string', 15, ''),
 );
+
+$YtFavorite_Table='%pre%favorite';
+$YtFavorite_DataInfo=array(
+        'ID'=>array('fa_id','integer','',0),
+        'Uid'=>array('fa_uid','integer','',0),
+        'Pid'=>array('fa_pid','string',255,''),
+        'Time'=>array('fa_time','integer','',0),
+);
+
+$YtConsume_Table='%pre%consume';
+$YtConsume_DataInfo=array(
+        'ID'=>array('cs_id','integer','',0),
+        'Uid'=>array('cs_uid','integer','',0),
+        'Pid'=>array('cs_pid','string',255,''),
+        'Time'=>array('cs_time','integer','',0),
+        'Money'=>array('cs_money','integer','',0),
+        'Type'=>array('cs_type','integer','',0),
+);
+

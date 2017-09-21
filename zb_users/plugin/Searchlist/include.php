@@ -15,6 +15,7 @@ function Searchlist_Main() {
 			$fpsignal=PLUGIN_EXITSIGNAL_NONE;return $fpreturn;
 		}
 	}
+
 	if(!$zbp->CheckRights($GLOBALS['action'])){Redirect('./');}
 	$q = trim(htmlspecialchars(GetVars('q','GET')));
 	$qc = '<span class=\'schwords\'>' . $q . '</span>';
@@ -26,7 +27,7 @@ function Searchlist_Main() {
     $article->IsLock = true;
     $article->Type = ZC_POST_TYPE_PAGE;
 	$p=new Pagebar('{%host%}search.php?q='.$q.'{&page=%page%}',false);
-	$p->PageCount=5;
+	$p->PageCount=$zbp->managecount;
 	$p->PageNow=(int)GetVars('page','GET')==0?1:(int)GetVars('page','GET');
 	$p->PageBarCount=$zbp->pagebarcount;
 	$p->UrlRule->Rules['{%search%}']=urlencode(GetVars('search'));
@@ -37,8 +38,14 @@ function Searchlist_Main() {
     if($cid){
 		$w[]=array('search','log_CateID',$cid);
 	}
+
+
+    
+
 	if($q){
-		$w[]=array('search','log_Content','log_Intro','log_Title',$q);
+        foreach (explode(' ', $q) as $id) {
+		    $w[]=array('search','log_Content','log_Intro','log_Title',$id);
+	    }
 	}else{
 		Redirect('./');
 	}

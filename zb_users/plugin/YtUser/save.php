@@ -131,28 +131,26 @@ if(GetVars('type','GET') == 'setidvip' ){
 	$uid = GetVars('UID','POST');
 	if (isset($zbp->members[$uid])){
 		$add = GetVars('Price','POST');
-		$sql = $zbp->db->sql->Select($tysuer_Table,'*',array(array('=','tc_uid',$uid)),null,null,null);
-		$array = $zbp->GetListCustom($tysuer_Table,$tysuer_DataInfo,$sql);
-		if (!isset($array[0])){
-			$DataArr = array(
-				'tc_uid'    => $uid,
-				'tc_oid'    => 0,
-			);
-			$sql= $zbp->db->sql->Insert($tysuer_Table,$DataArr);
-			$array = $zbp->GetListCustom($tysuer_Table,$tysuer_DataInfo,$sql);
-		}
+        $ytuser = new Ytuser();
+        $array=$ytuser->YtInfoByField('Uid',$uid);
+        if(!$array){
+            $ytuser = new Ytuser();
+            $ytuser->Uid=$uid;
+            $ytuser->Oid=0;
+            $ytuser->Save();
+        }
 		if(GetVars('reseta','POST')=='getvip'){
-			if ($array[0]->Vipendtime){
-			$price = $array[0]->Vipendtime;
-			$price = date("Y-m-d H:i:s",$price);
-			$zbp->SetHint('good',"用户ID: $uid 当前VIP到期时间 $price");
+			if ($ytuser->Vipendtime){
+			$time = $ytuser->Vipendtime;
+			$time = date("Y-m-d H:i:s",$time);
+			$zbp->SetHint('good',"用户ID: $uid 当前VIP到期时间 $time");
 			}else{
 			$zbp->SetHint('good',"用户ID: $uid 当前VIP已过期");
 			}
 			Redirect('./main.php?act=upgrade');
 		}elseif(GetVars('reseta','POST')=='delidvip'){
-			$sql = $zbp->db->sql->Update($tysuer_Table,array('tc_Vipendtime'=>time()),array(array('=','tc_uid',$uid)));
-			$zbp->db->Update($sql);
+            $ytuser->Vipendtime=time();
+            $ytuser->Save();
 			$zbp->SetHint('good',"用户ID: $uid 当前VIP已设置为过期");
 			Redirect('./main.php?act=upgrade');
 		}elseif(GetVars('reseta','POST')=='delallvip'){
@@ -165,9 +163,10 @@ if(GetVars('type','GET') == 'setidvip' ){
 				$sql = $zbp->db->sql->Update($zbp->table['Member'],array('mem_Level'=>5),array(array('=','mem_ID',$uid),array('=','mem_Level',4)));
 				$zbp->db->Update($sql);
 				}
-				$sql = $zbp->db->sql->Update($tysuer_Table,array('tc_Vipendtime'=>time()),array('=','tc_uid',$uid));
-				$zbp->db->Update($sql);
-				
+                $ytuser = new Ytuser();
+                $ytuser->YtInfoByField('Uid',$uid);
+                $ytuser->Vipendtime=time();
+                $ytuser->Save();
 				$zbp->SetHint('good',$key."，用户ID:$uid 当前VIP已设置为过期");
 			}
 			$zbp->SetHint('good',count($array)+1 .'，所有用户VIP都已设置为过期');
@@ -177,9 +176,9 @@ if(GetVars('type','GET') == 'setidvip' ){
 			$zbp->db->Update($sql);
 			$zbp->SetHint('good',"用户ID: $uid 用户 Level 升级成功");
 			
-			$add = ($array[0]->Vipendtime?$array[0]->Vipendtime:time()) + 86400*(int)$add;
-			$sql = $zbp->db->sql->Update($tysuer_Table,array('tc_Vipendtime'=>$add),array(array('=','tc_uid',$uid)));
-			$zbp->db->Update($sql);
+			$add = ($ytuser->Vipendtime?$ytuser->Vipendtime:time()) + 86400*(int)$add;
+            $ytuser->Vipendtime=$add;
+            $ytuser->Save();
 			$add = date("Y-m-d H:i:s",$add);
 			$zbp->SetHint('good',"用户ID: $uid 当前VIP 到期时间 $add");
 			Redirect('./main.php?act=upgrade');
@@ -212,23 +211,21 @@ if(GetVars('type','GET') == 'setidjf' ){
 	$uid = GetVars('UID','POST');
 	if (isset($zbp->members[$uid])){
 		$add = GetVars('Price','POST');
-		$sql = $zbp->db->sql->Select($tysuer_Table,'*',array(array('=','tc_uid',$uid)),null,null,null);
-		$array = $zbp->GetListCustom($tysuer_Table,$tysuer_DataInfo,$sql);
-		if (!isset($array[0])){
-			$DataArr = array(
-				'tc_uid'    => $uid,
-				'tc_oid'    => 0,
-			);
-			$sql= $zbp->db->sql->Insert($tysuer_Table,$DataArr);
-			$array = $zbp->GetListCustom($tysuer_Table,$tysuer_DataInfo,$sql);
-		}
+        $ytuser = new Ytuser();
+        $array=$ytuser->YtInfoByField('Uid',$uid);
+        if(!$array){
+            $ytuser = new Ytuser();
+            $ytuser->Uid=$uid;
+            $ytuser->Oid=0;
+            $ytuser->Save();
+        }
 		if(GetVars('resetc','POST')=='getjf'){
 			$Price = $array[0]->Price;
 			$zbp->SetHint('good',"用户ID: $uid 积分 $Price");
 			Redirect('./main.php?act=recharge');
 		}elseif(GetVars('resetc','POST')=='delidjf'){
-			$sql = $zbp->db->sql->Update($tysuer_Table,array('tc_Price'=>0),array(array('=','tc_uid',$uid)));
-			$zbp->db->Update($sql);
+            $ytuser->Price=0;
+            $ytuser->Save();
 			$zbp->SetHint('good',"用户ID: $uid 当前积分已清零");
 			Redirect('./main.php?act=recharge');
 		}elseif(GetVars('resetc','POST')=='delalljf'){
@@ -237,9 +234,8 @@ if(GetVars('type','GET') == 'setidjf' ){
 			$zbp->SetHint('good','所有用户积分都已清零');
 			Redirect('./main.php?act=recharge');
 		}else{
-			$add = $array[0]->Price + $add;
-			$sql = $zbp->db->sql->Update($tysuer_Table,array('tc_Price'=>$add),array(array('=','tc_uid',$uid)));
-			$zbp->db->Update($sql);
+			$ytuser->Price=$ytuser->Price+$add;
+			$ytuser->Save();
 			$zbp->SetHint('good',"用户ID: $uid 充值 $add 积分成功");
 			$zbp->SetHint('good',"用户ID: $uid 当前积分 $add");
 			Redirect('./main.php?act=recharge');
@@ -249,13 +245,9 @@ if(GetVars('type','GET') == 'setidjf' ){
 
 if(GetVars('type','GET') == 'testing' ){
 	global $zbp;
-   
 	YtUser_DB_ADD(YtUser_ReplacePre($tysuer_Table),"tc_Vipendtime","int(11) NOT NULL DEFAULT 0",true);
-
 	YtUser_DB_ADD(YtUser_ReplacePre($YtUser_buy_Table),"buy_Pay","int(11) NOT NULL",true);
-	
 	YtUser_DB_ADD(YtUser_ReplacePre($YtUser_buy_Table),"buy_Express","TEXT NOT NULL",true);
-	
 	Redirect('./main.php?act=testing');
 }
 if(GetVars('type','GET') == 'ccccc' ){
@@ -266,7 +258,6 @@ if(GetVars('type','GET') == 'ccccc' ){
 	foreach ($array as $arr){
 		$cat .= $arr['cate_ID'].' | ';
 	}
-	//var_dump($array);
 	file_put_contents($zbp->usersdir . 'cache/ids.txt', $cat);
 }
 function YtUser_CreateCode($n,$p=30){

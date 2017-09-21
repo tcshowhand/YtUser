@@ -44,6 +44,10 @@ function Server_Open($method) {
 		header('Content-type: application/x-javascript; Charset=utf-8');
 		ob_clean();
 		$s = Server_SendRequest(APPCENTRE_URL . '?down=' . GetVars('id', 'GET'));
+
+
+        print($s);
+        die();
 		if (App::UnPack($s)) {
 			$zbp->SetHint('good', '下载APP并解压安装成功!');
 		}
@@ -55,7 +59,7 @@ function Server_Open($method) {
 			continue;
 		}
 
-		$s = Server_SendRequest(APPCENTRE_URL . '?search=' . urlencode(GetVars('q', 'GET')));
+		$s = Server_SendRequest(APPCENTRE_URL . '?search=' . urlencode(GetVars('q', 'GET'))  .'&'. GetVars('QUERY_STRING', 'SERVER') );
 		echo str_replace('%bloghost%', $zbp->host . 'zb_users/plugin/AppCentre/main.php', $s);
 		break;
 	case 'view':

@@ -30,23 +30,21 @@ if (!$zbp->CheckPlugin('YtUser')) {$zbp->ShowError(48);die();}
 	$keyvalue['reg_AuthorID']=$zbp->user->ID;
 	$sql = $zbp->db->sql->Update($tyactivate_Table,$keyvalue,array(array('=','reg_ID',$reg->ID)));
 	$zbp->db->Update($sql);
-    $sql=$zbp->db->sql->Select($GLOBALS['tysuer_Table'],'*',array(array('=','tc_uid',$zbp->user->ID)),null,array(1),null);
-    $array=$zbp->GetListCustom($GLOBALS['tysuer_Table'],$GLOBALS['tysuer_DataInfo'],$sql);
-    $num=count($array);
-    if($num==0){
-            $DataArr = array('tc_uid'=> $zbp->user->ID,'tc_oid'=> 0,);
-        	$sql= $zbp->db->sql->Insert($tysuer_Table,$DataArr);
-            $Vipendtime=0;
-    }else{
-    $rega=$array[0];
-    $Vipendtime=$rega->Vipendtime;
-    }
+	$ytuser = new Ytuser();
+	$array = $ytuser->YtInfoByField('Uid',$zbp->user->ID);
+	if($array){
+	    $Vipendtime=$ytuser->Vipendtime;
+	}else{
+	    $ytuser = new Ytuser();
+	    $ytuser->Uid=$zbp->user->ID;
+        $ytuser->Oid="0";
+        $ytuser->Save();
+        $Vipendtime=0;
+	}
     if($Vipendtime==0){$Vipendtime=time();}
     $addtiem=86400*(int)$reg->Level;
-    $keyvalue=array();
-	$keyvalue['tc_Vipendtime']=$Vipendtime+$addtiem;
-    $sql = $zbp->db->sql->Update($GLOBALS['tysuer_Table'],$keyvalue,array(array('=','tc_uid',$zbp->user->ID)));
-    $zbp->db->Update($sql);
+    $ytuser->Vipendtime=$Vipendtime+$addtiem;
+    $ytuser->Save();
     $keyvalue=array();
     $keyvalue['mem_Level']=4;
     $sql = $zbp->db->sql->Update($zbp->table['Member'],$keyvalue,array(array('=','mem_ID',$zbp->user->ID)));

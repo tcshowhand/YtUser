@@ -22,8 +22,8 @@ function Rookie_set(&$template){
 function Rookie_Tags(&$article,&$template){
     global $zbp;    
     ZBlogException::ClearErrorHook();
-    $intro=preg_replace('/[\r\n\s]+/', '', trim(SubStrUTF8(TransferHTML($article->Content,'[nohtml]'),100)).'');
-    $article->Intro=$intro;
+    $intro = preg_replace("/\[BuyView\](.*?)\[\/BuyView\]/sm",'',$article->Intro);
+    $article->Intro=11;
 }
 
 function InstallPlugin_Rookie() {

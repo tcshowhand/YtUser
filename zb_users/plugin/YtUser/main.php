@@ -162,6 +162,14 @@ require $blogpath . 'zb_system/admin/admin_top.php';
 	<td class="td30"><p align='left'><b>绑定QQ</b></p></td>
 	<td><a href="<?php echo $zbp->host.'?Binding' ?>" target="_blank"><?php echo $zbp->host.'?Binding' ?></a></td>
 </tr>
+<tr>
+    <td class="td30"><p align='left'><b>收藏文章</b></p></td>
+    <td><a href="<?php echo $zbp->host.'?Favorite' ?>" target="_blank"><?php echo $zbp->host.'?Favorite' ?></a></td>
+</tr>
+<tr>
+    <td class="td30"><p align='left'><b>消费记录</b></p></td>
+    <td><a href="<?php echo $zbp->host.'?Consume' ?>" target="_blank"><?php echo $zbp->host.'?Consume' ?></a></td>
+</tr>
 </table>
 </form>
   	<?php

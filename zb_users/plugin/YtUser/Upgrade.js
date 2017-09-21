@@ -1,3 +1,71 @@
+function YtFavorite_custom(yt_type,yt_mms,yt_obj,yt_isok) {
+	if (yt_isok == 'success'){
+		alert(yt_mms);
+		if (yt_type == 'add'){
+			$(yt_obj).removeClass('am-icon-star-o');
+			$(yt_obj).addClass('am-icon-star');
+			$(yt_obj).text('已收藏');
+			$(yt_obj).removeAttr('onclick');
+		}else if (yt_type == 'del'){
+			$(yt_obj).closest('tr').remove();
+		}else{
+			alert('no zuo no die');
+		}
+	}else if (yt_isok == 'failed'){
+		alert(yt_mms.match("<string>.+?</string>")[0].replace("<string>","").replace("</string>",""));
+	}else{
+		alert('no zuo no die');
+	}
+}
+
+function YtFavorite(fvtype, pid, obj){
+	if (fvtype == 'add'){
+		var posturl=bloghost+'zb_users/plugin/YtUser/favorite/add.php';
+	}else if (fvtype == 'del'){
+		var posturl=bloghost+'zb_users/plugin/YtUser/favorite/del.php';
+	}else{
+		alert('no zuo no die');
+	}
+	if (fvtype == 'add' || fvtype == 'del'){
+	$.post(posturl,
+		{
+		"LogID":pid,
+		},
+		function(data){
+			var s = data;
+			if((s.search("faultCode")>0)&&(s.search("faultString")>0)){
+				//alert(s.match("<string>.+?</string>")[0].replace("<string>","").replace("</string>",""));
+				YtFavorite_custom(fvtype,s,obj,'failed');
+			}else{
+				//alert(s);
+				YtFavorite_custom(fvtype,s,obj,'success');
+			}
+		}
+	);
+	}
+}
+
+function YtSbuy(){
+	$.post(bloghost+'zb_users/plugin/YtUser/YtSbuy.php',
+		{
+		"LogID":$("input[name='LogID']").val(),
+		"verifycode":$("input[name='verifycode']").val(),
+		},
+		function(data){
+			var s =data;
+			if((s.search("faultCode")>0)&&(s.search("faultString")>0))
+			{
+				alert(s.match("<string>.+?</string>")[0].replace("<string>","").replace("</string>",""))
+			}
+			else{
+				var s =data;
+				alert(s);
+				window.location.reload();
+			}
+		}
+	);
+}
+
 function Ytbuy(){
 	$.post(bloghost+'zb_users/plugin/YtUser/Ytbuy.php',
 		{
