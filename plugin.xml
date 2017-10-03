@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<plugin version="php">
+<id>YtUser</id>
+<name>用户中心（百搭）</name>
+<url>https://www.ytecn.com/2017/07/742.html</url>
+<note>会员中心,支持订单、投稿、积分、快捷登录.</note>
+<description>用户中心</description>
+<path>main.php</path>
+<include>include.php</include>
+<level>1</level>
+<author>
+  <name>豫唐网络</name>
+  <email>79300975@qq.com</email>
+  <url>http://www.ytecn.com</url>
+</author>
+<source>
+  <name></name>
+  <email></email>
+  <url></url>
+</source>
+<adapted>151740</adapted>
+<version>8.7</version>
+<pubdate>2016-10-30</pubdate>
+<modified>2017-09-12</modified>
+<price>262</price>
+<phpver>5.2</phpver>
+<advanced>
+  <dependency></dependency>
+  <rewritefunctions></rewritefunctions>
+  <existsfunctions></existsfunctions>
+  <conflict></conflict>
+</advanced>
+<sidebars>
+  <sidebar1></sidebar1>
+  <sidebar2></sidebar2>
+  <sidebar3></sidebar3>
+  <sidebar4></sidebar4>
+  <sidebar5></sidebar5>
+</sidebars>
+</plugin>
