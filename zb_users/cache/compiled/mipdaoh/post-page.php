@@ -1,1 +1,0 @@
-<h2><?php  echo $article->Title;  ?></h2>

@@ -1,8 +1,0 @@
-[2017-04-26 16:42:10 .83364000 +08:00]
-array (
-  0 => 'Exception',
-  1 => '没有权限',
-  2 => 0,
-  3 => 'E:\\songweb\\kangyijia\\zb_system\\function\\lib\\zblogphp.php',
-  4 => 2708,
-)

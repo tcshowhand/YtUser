@@ -1,1 +1,0 @@
-<li><a href="<?php  echo $article->Metas->jiang_url;  ?>" title="<?php  echo $article->Title;  ?>" target="_blank"><?php  echo $article->Title;  ?></a><br><?php  echo $article->Metas->itbulu_info;  ?></li>
