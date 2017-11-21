@@ -1,9 +1,11 @@
 <?php
 DefinePluginFilter('Filter_Plugin_RegPage_RegSucceed');
+DefinePluginFilter('Filter_Plugin_YtUser_Dmuc');
 #用户中心插件
-include 'usertable.php';
-include 'yt_is_login.php';
-include 'yt_event.php';
+include 'function/usertable.php';
+include 'function/yt_is_login.php';
+include 'function/yt_event.php';
+include 'function/yt_page.php';
 RegisterPlugin("YtUser","ActivePlugin_YtUser");
 
 function ActivePlugin_YtUser() {
@@ -22,10 +24,42 @@ function ActivePlugin_YtUser() {
     Add_Filter_Plugin('Filter_Plugin_Admin_Begin','YtUser_Admin_Begin');
     Add_Filter_Plugin('Filter_Plugin_Login_Header','YtUser_Login_Header');
     Add_Filter_Plugin('Filter_Plugin_Autoload','YtUser_Autoload');
+    Add_Filter_Plugin('Filter_Plugin_Zbp_BuildTemplate','YtUser_Temp');
     AutoloadClass('ytuser');
     AutoloadClass('ytuserbuy');
     AutoloadClass('yt_favorite');
     AutoloadClass('ytconsume');
+}
+
+function Yt_Categories($default) {
+    global $zbp;
+
+    foreach ($GLOBALS['hooks']['Filter_Plugin_OutputOptionItemsOfCategories'] as $fpname => &$fpsignal) {
+        $fpreturn = $fpname($default);
+        if ($fpsignal == PLUGIN_EXITSIGNAL_RETURN) {$fpsignal = PLUGIN_EXITSIGNAL_NONE;return $fpreturn;}
+    }
+
+    $s = null;
+    foreach ($zbp->categoriesbyorder as $id => $cate) {
+        $s .= '<option ' . ($default == $cate->ID ? 'selected="selected"' : '') . ' value="' . $cate->ID . '">' . $cate->SymbolName . '</option>';
+    }
+
+    return $s;
+}
+
+function YtUser_Temp(&$templates) {
+  global $zbp;
+  $ytuser_templates = array("t_articleedt", "t_articlelist", "t_binding", "t_breadcrumb", "t_buy", "t_changepassword", "t_commentlist", "t_consume", "t_favorite", "t_footer", "t_header", "t_integral", "t_login", "t_nameedit", "t_pagebar", "t_paylist", "t_register", "t_resetpassword", "t_resetpwd", "t_sider", "t_top", "t_upgrade", "t_user");
+  $ytuser_theme = 0;
+  foreach ($GLOBALS['hooks']['Filter_Plugin_YtUser_Dmuc'] as $fpname => &$fpsignal) {
+    $fpname($ytuser_templates,$ytuser_theme);
+  }
+  if( is_array($ytuser_templates) && count($ytuser_templates) && $ytuser_theme ){
+    foreach($ytuser_templates as $vo){
+        $fullname=$zbp->usersdir .'plugin/'.$ytuser_theme.'/template/'.$vo.'.php';
+        $templates[$vo] = file_get_contents($fullname);
+    }
+  }
 }
 
 function YtUser_ViewList(&$template){
@@ -50,22 +84,22 @@ function YtUser_ViewList_Tags(&$article,&$template){
 function YtUser_Autoload(&$classname){
     global $zbp;
     if($classname == 'ytuser'){
-        if (is_readable($f = ZBP_PATH . 'zb_users/plugin/YtUser/lib/' . strtolower($classname) . '.php')) {
+        if (is_readable($f = ZBP_PATH . 'zb_users/plugin/YtUser/function/lib/' . strtolower($classname) . '.php')) {
             require $f;
         }
     }
     if($classname == 'ytuserbuy'){
-        if (is_readable($f = ZBP_PATH . 'zb_users/plugin/YtUser/lib/' . strtolower($classname) . '.php')) {
+        if (is_readable($f = ZBP_PATH . 'zb_users/plugin/YtUser/function/lib/' . strtolower($classname) . '.php')) {
             require $f;
         }
     }
     if($classname == 'yt_favorite'){
-        if (is_readable($f = ZBP_PATH . 'zb_users/plugin/YtUser/lib/' . strtolower($classname) . '.php')) {
+        if (is_readable($f = ZBP_PATH . 'zb_users/plugin/YtUser/function/lib/' . strtolower($classname) . '.php')) {
             require $f;
         }
     }
     if($classname == 'ytconsume'){
-        if (is_readable($f = ZBP_PATH . 'zb_users/plugin/YtUser/lib/' . strtolower($classname) . '.php')) {
+        if (is_readable($f = ZBP_PATH . 'zb_users/plugin/YtUser/function/lib/' . strtolower($classname) . '.php')) {
             require $f;
         }
     }
@@ -73,7 +107,9 @@ function YtUser_Autoload(&$classname){
 
 function YtUser_Login_Header(){
     global $zbp;
-    Redirect($zbp->host."?User");
+    if($zbp->Config('YtUser')->login_user){
+        Redirect($zbp->host."?User");
+    }
 }
 
 function YtUser_Admin_Begin(){
@@ -98,7 +134,7 @@ function YtUser_DelArticle(&$data){
 
 function YtUser_AddMenu(&$m) {
 	global $zbp;
-	$m[] = MakeTopMenu("root", '用户中心', $zbp->host . "zb_users/plugin/YtUser/main.php?act=base", "", "topmenu_metro");
+	$m[] = MakeTopMenu("root", '用户中心', $zbp->host . "zb_users/plugin/YtUser/menu/base.php", "", "topmenu_metro");
 }
 
 function YtUser_Batch_MemberMng_Main(){
@@ -137,7 +173,8 @@ function YtUser_Edit(){
 
 function YtUser_Content(&$template){
     global $zbp;
-    $zbp->header .='<script src="'.$zbp->host.'zb_users/plugin/YtUser/Upgrade.js" type="text/javascript"></script>' . "\r\n";
+    $zbp->header .='<script src="'.$zbp->host.'zb_users/plugin/YtUser/js/ytjs.php" type="text/javascript"></script>' . "\r\n";
+	$zbp->header .='<script src="'.$zbp->host.'zb_users/plugin/YtUser/js/layui/layui.all.js" type="text/javascript"></script>' . "\r\n";
     $article = $template->GetTags('article');
     $content = $article->Content;
     $userid = $article->ID;
@@ -152,6 +189,7 @@ function YtUser_Content(&$template){
             }else{
                 $content.= '<input type="hidden" name="LogID" id="LogID" value="'.$userid.'" />';
                 if($zbp->Config('YtUser')->payment==0){
+                if($zbp->user->Level<5) $article->Metas->price=$article->Metas->price*(int)$zbp->Config('YtUser')->vipdis/100;
                 $content = preg_replace("/\[BuyView\](.*?)\[\/BuyView\]/sm",'<div class="ytuser-buy-box"><p>****此部分是付费内容***</p><p><input type="submit" style="width:130px;font-size:1.0em;padding:0.2em" value="购买（'.$article->Metas->price.'积分）" onclick="return YtSbuy()" /></p></div>',$content);
                 }else{
                 $alipay ='<form class="ytarticleedt" id="edit" name="edit" method="post" action="#">';
@@ -192,7 +230,7 @@ function YtUser_SyntaxHighlighter_print() {
         return;
     }
     $zbp->Load();
-    if($zbp->user->ID){echo '$(function() {var $cpLogin = $(".cp-login").find("a");var $cpVrs = $(".cp-vrs").find("a");$(".cp-hello").html("欢迎 '.$zbp->user->StaticName.'  <a href=\"'.$zbp->host.'?Articleedt\">投稿</a> <a href=\"'.$zbp->host.'zb_users/plugin/YtUser/loginout.php\">退出</a><br>");$cpLogin.html("会员中心");$cpLogin.attr("href", bloghost + "?User");$cpVrs.html("评论列表");$cpVrs.attr("href", bloghost + "?Commentlist");});';}else{echo'$(function () {$(".cp-login").html("<p><a href=\"'.$zbp->host.'?Login\">会员登录</a><a href=\"'.$zbp->host.'?Register\">会员注册</a><p>");$(".cp-vrs").html("<div class=\"ds-login\"></div>");$(".cp-hello").hide();$("#divContorPanel br").hide();$("#divContorPanel").each(function() { var text = $(this).html().replace(/&nbsp;/g, "");text = text;$(this).html(text);});});';}
+    if($zbp->user->ID){echo '$(function() {var $cpLogin = $(".cp-login").find("a");var $cpVrs = $(".cp-vrs").find("a");$(".cp-hello").html("欢迎 '.$zbp->user->StaticName.'  <a href=\"'.$zbp->host.$zbp->Config('YtUser')->YtUser_Articleedt.'\">投稿</a> <a href=\"'.$zbp->host.'zb_users/plugin/YtUser/loginout.php\">退出</a><br>");$cpLogin.html("会员中心");$cpLogin.attr("href", bloghost + "'.$zbp->Config('YtUser')->YtUser_User.'");$cpVrs.html("评论列表");$cpVrs.attr("href", bloghost + "'.$zbp->Config('YtUser')->YtUser_Commentlist.'");});';}else{echo'$(function () {$(".cp-login").html("<p><a href=\"'.$zbp->host.$zbp->Config('YtUser')->YtUser_Login.'\">会员登录</a><a href=\"'.$zbp->host.$zbp->Config('YtUser')->YtUser_Register.'\">会员注册</a><p>");$(".cp-vrs").html("<div class=\"ds-login\"></div>");$(".cp-hello").hide();$("#divContorPanel br").hide();$("#divContorPanel").each(function() { var text = $(this).html().replace(/&nbsp;/g, "");text = text;$(this).html(text);});});';}
 }
 
 function InstallPlugin_YtUser() {
@@ -206,7 +244,36 @@ function InstallPlugin_YtUser() {
 	$zbp->Config('YtUser')->payment = 0;
 	$zbp->Config('YtUser')->regneedemail = true;
 	$zbp->Config('YtUser')->regipdate = true;
-	$zbp->Config('YtUser')->login_verifycode = '';
+    $zbp->Config('YtUser')->login_verifycode = '';
+    $zbp->Config('YtUser')->OnRW = 0;
+	$zbp->Config('YtUser')->RWURL = 'iPanel';
+	$zbp->Config('YtUser')->YtUser_UCenter = '?UCenter';
+    $zbp->Config('YtUser')->YtUser_Login = '?Login';
+	$zbp->Config('YtUser')->YtUser_Register = '?Register';
+	$zbp->Config('YtUser')->YtUser_Articlelist = '?Articlelist';
+	$zbp->Config('YtUser')->YtUser_Articlelist_page = '?Articlelist&page=';
+	$zbp->Config('YtUser')->YtUser_Articleedt = '?Articleedt';
+	$zbp->Config('YtUser')->YtUser_Integral = '?Integral';
+	$zbp->Config('YtUser')->YtUser_buy = '?buy';
+	$zbp->Config('YtUser')->YtUser_buy_ID = '?buy&uid=';
+	$zbp->Config('YtUser')->YtUser_Upgrade = '?Upgrade';
+	$zbp->Config('YtUser')->YtUser_Upgrade_vip = '?Upgrade&vip=';
+	$zbp->Config('YtUser')->YtUser_Paylist = '?Paylist';
+	$zbp->Config('YtUser')->YtUser_Paylist_page = '?Paylist&page=';
+	$zbp->Config('YtUser')->YtUser_User = '?User';
+	$zbp->Config('YtUser')->YtUser_Commentlist = '?Commentlist';
+	$zbp->Config('YtUser')->YtUser_Commentlist_page = '?Commentlist&page=';
+	$zbp->Config('YtUser')->YtUser_Resetpwd = '?Resetpwd';
+	$zbp->Config('YtUser')->YtUser_Resetpassword = '?Resetpassword';
+	$zbp->Config('YtUser')->YtUser_Nameedit = '?Nameedit';
+	$zbp->Config('YtUser')->YtUser_Binding = '?Binding';
+	$zbp->Config('YtUser')->YtUser_Favorite = '?Favorite';
+	$zbp->Config('YtUser')->YtUser_Favorite_page = '?Favorite&page=';
+	$zbp->Config('YtUser')->YtUser_Consume = '?Consume';
+	$zbp->Config('YtUser')->YtUser_Consume_page = '?Consume&page=';
+	$zbp->Config('YtUser')->YtUser_Changepassword = '?Changepassword';
+    $zbp->Config('YtUser')->Oncertif = 1;
+    $zbp->Config('YtUser')->certifititle = '0';
 	$zbp->SaveConfig('YtUser');
 }
 

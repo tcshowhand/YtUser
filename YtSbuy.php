@@ -1,5 +1,4 @@
 <?php
-
 require '../../../zb_system/function/c_system_base.php';
 
 $zbp->Load();
@@ -74,6 +73,7 @@ Add_Filter_Plugin('Filter_Plugin_Zbp_ShowError','RespondError',PLUGIN_EXITSIGNAL
         $YtConsume->Time=time();
         $YtConsume->Money=$article->Metas->price;
         $YtConsume->Type=1;
+        $YtConsume->Title="购买".$article->Title."消费".$article->Metas->price."金币";
         $YtConsume->Save();
         //更新作者信息
         $ytuser->YtInfoByField('Uid',$article->Author->ID);
@@ -85,6 +85,7 @@ Add_Filter_Plugin('Filter_Plugin_Zbp_ShowError','RespondError',PLUGIN_EXITSIGNAL
         $YtConsume->Time=time();
         $YtConsume->Money=$article->Metas->price;
         $YtConsume->Type=0;
+        $YtConsume->Title="出售".$article->Title."获得".$article->Metas->price."金币";
         $YtConsume->Save();
     }
 

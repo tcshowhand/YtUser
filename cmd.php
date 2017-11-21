@@ -66,11 +66,28 @@ switch ($action) {
 case 'UploadPst':
         $LogID=(int)$_POST['LogID'];
         $articles = $zbp->GetPostByID($LogID);
-            if($zbp->user->Level < 5){
-                $Price=(int)$articles->Metas->price * ($zbp->Config('YtUser')->vipdis/100);
-            }else{
-                $Price=$articles->Metas->price;
-            }
+        $userbuy=new YtuserBuy();
+		$array = $userbuy->YtInfoByField('LogID',$LogID);
+		if($array){
+			if($userbuy->State){
+				echo '已付款！';
+				die();
+			}
+		}else{
+			$userbuy->OrderID=GetGuid();
+			$userbuy->LogID=$post->ID;
+			$userbuy->AuthorID=$zbp->user->ID;
+			$userbuy->Title=$post->Title;
+			$userbuy->State=0;
+			$userbuy->PostTime=time();
+			$userbuy->IP=GetGuestIP();
+			$userbuy->Save();
+		}
+        if($zbp->user->Level < 5){
+            $Price=(int)$articles->Metas->price * ($zbp->Config('YtUser')->vipdis/100);
+        }else{
+            $Price=$articles->Metas->price;
+        }
         $sql=$zbp->db->sql->Select($YtUser_buy_Table,'*',array(array('=','buy_LogID',$LogID),array('=','buy_AuthorID',$zbp->user->ID)),null,null,null);
 	    $array=$zbp->GetListCustom($YtUser_buy_Table,$YtUser_buy_DataInfo,$sql);
 	    $num=count($array);
@@ -82,7 +99,6 @@ case 'UploadPst':
 			"body" => $reg->Title,
 			"show_url" => $zbp->host."?Upgrade&vip=1",
 		);
-		//print_r($parameter);
 		AlipayAPI_Start($parameter);
 		break;
 	default:

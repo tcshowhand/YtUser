@@ -76,9 +76,9 @@ class YtuserBuy extends Base {
         $array = $this->db->Query($sql);
         if (count($array) > 0) {
             $this->LoadInfoByAssoc($array[0]);
-            return true;
+            return 1;
         } else {
-            return false;
+            return 0;
         }
     }
 
@@ -95,6 +95,7 @@ class YtuserBuy extends Base {
             return false;
         }
     }
+    
     public function GetYtuserBuyList($l,$op) {
         global $zbp;
         $field_table = $GLOBALS['YtUser_buy_Table'];

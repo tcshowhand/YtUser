@@ -1,6 +1,6 @@
 <?php
-require '../../../zb_system/function/c_system_base.php';
-require '../../../zb_system/function/c_system_admin.php';
+require '../../../../zb_system/function/c_system_base.php';
+require '../../../../zb_system/function/c_system_admin.php';
 $zbp->Load();
 $action='root';
 if (!$zbp->CheckRights($action)) {$zbp->ShowError(6);die();}
@@ -18,6 +18,7 @@ require $blogpath . 'zb_system/admin/admin_top.php';
 
   <div class="divHeader"><?php echo $blogtitle;?></div>
 	<div class="SubMenu">
+		<?php echo YtUser_SubMenu('testing'); ?>
 		<a href="http://www.kancloud.cn/showhand/zbloguser" target="_blank"><span class="m-left" style="color:#F00">适配教程</span></a>
 		<?php if ($act == 'buy'){?>
 		<a href="?act=buy&buystate=nopay"><span class="m-right" style="color:red">未付款</span></a>
@@ -25,7 +26,12 @@ require $blogpath . 'zb_system/admin/admin_top.php';
 		<?php }?>
     </div>
   <div id="divMain2">
-	用户中心
+  <form enctype="multipart/form-data" method="post" action="save.php?type=testing"> 
+	  <p>
+		<input type="submit" class="button" value="一键修复插件表" />
+	  </p>
+	</form>
+
 	<script type="text/javascript">ActiveLeftMenu("aPluginMng");</script>
 	<script type="text/javascript">AddHeaderIcon("<?php echo $bloghost . 'zb_users/plugin/YtUser/logo.png';?>");</script>	
   </div>

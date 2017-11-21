@@ -1,11 +1,42 @@
 <?php
-require '../../../zb_system/function/c_system_base.php';
-require '../../../zb_system/function/c_system_admin.php';
+require '../../../../zb_system/function/c_system_base.php';
+require '../../../../zb_system/function/c_system_admin.php';
 
 $zbp->Load();
 $action='root';
 if (!$zbp->CheckRights($action)) {$zbp->ShowError(6);die();}
 if (!$zbp->CheckPlugin('YtUser')) {$zbp->ShowError(48);die();}
+
+if(GetVars('type','GET') == 'certifi' ){
+
+	if(GetVars('id','GET')<1){
+		$zbp->SetHint('good','参数错误');
+		Redirect('./certifi.php');
+	}else{
+		$ytuser = new Ytuser();
+		$ytuser->YtInfoByField('Uid',(int)GetVars('id','GET'));
+	}
+
+    if(GetVars('act','GET') == 'edit' ){
+		$ytuser->Isidcard=2;
+	}
+	if(GetVars('act','GET') == 'del' ){
+		$ytuser->Isidcard=3;
+		$ytuser->Name='';
+		$ytuser->Idcard='';
+	}
+	$ytuser->Save();
+	$zbp->SetHint('good','修改成功');
+	Redirect('./certifi.php');
+}
+
+if(GetVars('type','GET') == 'setcertifi' ){
+    $zbp->Config('YtUser')->Oncertif = GetVars('Oncertif','POST');
+    $zbp->Config('YtUser')->certifititle = GetVars('certifititle','POST');
+    $zbp->SaveConfig('YtUser');
+	$zbp->SetHint('good','修改成功');
+	Redirect('./certifi.php');
+}
 
 if(GetVars('type','GET') == 'base' ){
     $zbp->Config('YtUser')->appid = GetVars('appid','POST');
@@ -21,7 +52,7 @@ if(GetVars('type','GET') == 'base' ){
     $zbp->Config('YtUser')->login_user = GetVars('login_user','POST');
     $zbp->SaveConfig('YtUser');
 	$zbp->SetHint('good','修改成功');
-	Redirect('./main.php?act=base');
+	Redirect('./base.php');
 }
 
 if(GetVars('type','GET') == 'upgrade' ){
@@ -42,7 +73,7 @@ if(GetVars('type','GET') == 'upgrade' ){
 		YtUser_EmptyCode();
 	}
 	$zbp->SetHint('good','修改成功');
-	Redirect('./main.php?act=upgrade');
+	Redirect('./viplist.php');
 }
 
 if(GetVars('type','GET') == 'setorder' ){
@@ -73,7 +104,7 @@ if(GetVars('type','GET') == 'setorder' ){
 			$sql= $zbp->db->sql->Delete($YtUser_buy_Table,$where);
 			$zbp->db->Delete($sql);
 			$zbp->SetHint('good',"已删除");
-            Redirect('./main.php?act=buy');
+            Redirect('./buy.php');
 		}else{
 			$keyvalue=array(
 			'buy_State' => $state,
@@ -88,7 +119,7 @@ if(GetVars('type','GET') == 'setorder' ){
 			$sql = $zbp->db->sql->Update($YtUser_buy_Table,$keyvalue,$where);
 			$zbp->db->Update($sql);
 			$zbp->SetHint('good',"订单状态已更新");
-            Redirect('./main.php?act=buy');
+            Redirect('./buy.php');
 		}
 	}else{
 		$dataa = array( 
@@ -107,22 +138,22 @@ if(GetVars('type','GET') == 'setorder' ){
 		//var_dump($sql_in);
 		$zbp->db->Insert($sql_in);
 		$zbp->SetHint('good',"订单已添加");
-        Redirect('./main.php?act=buy');
+        Redirect('./buy.php');
 	}
 	}else{
 		if($reset == 'delall'){
 			$sql = $zbp->db->sql->Delete($YtUser_buy_Table,array('>','buy_ID',0));
 			$zbp->db->Delete($sql);
 			$zbp->SetHint('good',"全部订单已清除");
-            Redirect('./main.php?act=buy');
+            Redirect('./buy.php');
 		}elseif($reset == 'delnopay'){
 			$sql = $zbp->db->sql->Delete($YtUser_buy_Table,array(array('>','buy_ID',0),array('<','buy_State',1)));
 			$zbp->db->Delete($sql);
 			$zbp->SetHint('good',"未付款订单已清除");
-            Redirect('./main.php?act=buy');
+            Redirect('./buy.php');
 		}else{
 	    $zbp->SetHint('good',"用户ID不存在");
-        Redirect('./main.php?act=buy');
+        Redirect('./buy.php');
 		}
 
 	}
@@ -148,12 +179,12 @@ if(GetVars('type','GET') == 'setidvip' ){
 			}else{
 			$zbp->SetHint('good',"用户ID: $uid 当前VIP已过期");
 			}
-			Redirect('./main.php?act=upgrade');
+			Redirect('./viplist.php');
 		}elseif(GetVars('reseta','POST')=='delidvip'){
             $ytuser->Vipendtime=time();
             $ytuser->Save();
 			$zbp->SetHint('good',"用户ID: $uid 当前VIP已设置为过期");
-			Redirect('./main.php?act=upgrade');
+			Redirect('./viplist.php');
 		}elseif(GetVars('reseta','POST')=='delallvip'){
 			$sql = $zbp->db->sql->Select($tysuer_Table,'*',array('>','tc_Vipendtime',0),null,null,null);
 			$array = $zbp->db->Query($sql);
@@ -171,7 +202,7 @@ if(GetVars('type','GET') == 'setidvip' ){
 				$zbp->SetHint('good',$key."，用户ID:$uid 当前VIP已设置为过期");
 			}
 			$zbp->SetHint('good',count($array)+1 .'，所有用户VIP都已设置为过期');
-			Redirect('./main.php?act=upgrade');
+			Redirect('./viplist.php');
 		}else{
 			$sql = $zbp->db->sql->Update($zbp->table['Member'],array('mem_Level'=>4),array(array('=','mem_ID',$uid),array('>','mem_Level',4)));
 			$zbp->db->Update($sql);
@@ -190,7 +221,7 @@ if(GetVars('type','GET') == 'setidvip' ){
 			$add = date("Y-m-d H:i:s",$add);
 			$zbp->SetHint('good',"用户ID: $uid 当前VIP 到期时间 $add");
 			$YtConsume = new YtConsume();
-			Redirect('./main.php?act=upgrade');
+			Redirect('./viplist.php');
 		}
 	}
 }
@@ -213,7 +244,7 @@ if(GetVars('type','GET') == 'recharge' ){
         YtUser_Price_CreateCode($Number,$Price);
 	}
 	$zbp->SetHint('good','设置成功');
-	Redirect('./main.php?act=recharge');
+	Redirect('./recharge.php');
 }
 if(GetVars('type','GET') == 'setidjf' ){
 	global $zbp;
@@ -221,7 +252,7 @@ if(GetVars('type','GET') == 'setidjf' ){
 	if (isset($zbp->members[$uid])){
 		$add = GetVars('Price','POST');
         $ytuser = new Ytuser();
-        $array=$ytuser->YtInfoByField('Uid',$uid);
+        $array=$ytuser->YtInfoByField('Uid',$zbp->user->ID);
         if(!$array){
             $ytuser = new Ytuser();
             $ytuser->Uid=$uid;
@@ -229,19 +260,19 @@ if(GetVars('type','GET') == 'setidjf' ){
             $ytuser->Save();
         }
 		if(GetVars('resetc','POST')=='getjf'){
-			$Price = $array[0]->Price;
+			$Price = $ytuser->Price;
 			$zbp->SetHint('good',"用户ID: $uid 积分 $Price");
-			Redirect('./main.php?act=recharge');
+			Redirect('./recharge.php');
 		}elseif(GetVars('resetc','POST')=='delidjf'){
             $ytuser->Price=0;
             $ytuser->Save();
 			$zbp->SetHint('good',"用户ID: $uid 当前积分已清零");
-			Redirect('./main.php?act=recharge');
+			Redirect('./recharge.php');
 		}elseif(GetVars('resetc','POST')=='delalljf'){
 			$sql = $zbp->db->sql->Update($tysuer_Table,array('tc_Price'=>0),array(array('>','tc_uid',0)));
 			$zbp->db->Update($sql);
 			$zbp->SetHint('good','所有用户积分都已清零');
-			Redirect('./main.php?act=recharge');
+			Redirect('./recharge.php');
 		}else{
 			$ytuser->Price=$ytuser->Price+$add;
 			$ytuser->Save();
@@ -255,7 +286,7 @@ if(GetVars('type','GET') == 'setidjf' ){
 			$YtConsume->Title="管理员赠送".(int)$add."积分";
 			$YtConsume->Save();
 			$zbp->SetHint('good',"用户ID: $uid 当前积分 $add");
-			Redirect('./main.php?act=recharge');
+			Redirect('./recharge.php');
 		}
 	}
 }
@@ -264,14 +295,14 @@ if(GetVars('type','GET') == 'testing' ){
 	global $zbp;
 	YtUser_DB_ADD(YtUser_ReplacePre($tysuer_Table),"tc_Vipendtime","int(11) NOT NULL DEFAULT 0",true);
     YtUser_DB_ADD(YtUser_ReplacePre($tysuer_Table),"tc_isidcard","int(1) NOT NULL DEFAULT 0",true);
-    YtUser_DB_ADD(YtUser_ReplacePre($tysuer_Table),"tc_idcard","varchar(255) NOT NULL",true);
-    YtUser_DB_ADD(YtUser_ReplacePre($tysuer_Table),"tc_name","varchar(255) NOT NULL",true);
-    YtUser_DB_ADD(YtUser_ReplacePre($tysuer_Table),"tc_tel","varchar(255) NOT NULL",true);
+    YtUser_DB_ADD(YtUser_ReplacePre($tysuer_Table),"tc_idcard","varchar(255)",true);
+    YtUser_DB_ADD(YtUser_ReplacePre($tysuer_Table),"tc_name","varchar(255)",true);
+    YtUser_DB_ADD(YtUser_ReplacePre($tysuer_Table),"tc_tel","varchar(255)",true);
     YtUser_DB_ADD(YtUser_ReplacePre($tysuer_Table),"tc_Vipendtime","int(11) NOT NULL DEFAULT 0",true);
 	YtUser_DB_ADD(YtUser_ReplacePre($YtUser_buy_Table),"buy_Pay","int(11) NOT NULL",true);
 	YtUser_DB_ADD(YtUser_ReplacePre($YtUser_buy_Table),"buy_Express","TEXT NOT NULL",true);
 	YtUser_DB_ADD(YtUser_ReplacePre($YtConsume_Table),"cs_title","varchar(255) NOT NULL",true);
-	Redirect('./main.php?act=testing');
+	Redirect('./testing.php');
 }
 
 if(GetVars('type','GET') == 'rewrite' ){
@@ -303,9 +334,10 @@ if(GetVars('type','GET') == 'rewrite' ){
 	$zbp->Config('YtUser')->YtUser_Favorite_page = GetVars('YtUser_RWURL','POST').'/Favorite/page/';
 	$zbp->Config('YtUser')->YtUser_Consume = GetVars('YtUser_RWURL','POST').'/Consume';
 	$zbp->Config('YtUser')->YtUser_Consume_page = GetVars('YtUser_RWURL','POST').'/Consume/page/';
+	$zbp->Config('YtUser')->YtUser_Certifi = GetVars('YtUser_RWURL','POST').'/Certifi.html';
 	}else{
 	$zbp->Config('YtUser')->YtUser_UCenter = '?UCenter';
-    $zbp->Config('YtUser')->YtUser_Login = '?Login';
+	$zbp->Config('YtUser')->YtUser_Login = '?Login';
 	$zbp->Config('YtUser')->YtUser_Register = '?Register';
 	$zbp->Config('YtUser')->YtUser_Articlelist = '?Articlelist';
 	$zbp->Config('YtUser')->YtUser_Articlelist_page = '?Articlelist&page=';
@@ -329,10 +361,11 @@ if(GetVars('type','GET') == 'rewrite' ){
 	$zbp->Config('YtUser')->YtUser_Favorite_page = '?Favorite&page=';
 	$zbp->Config('YtUser')->YtUser_Consume = '?Consume';
 	$zbp->Config('YtUser')->YtUser_Consume_page = '?Consume&page=';
+	$zbp->Config('YtUser')->YtUser_Certifi = '?Certifi';
 	}
     $zbp->SaveConfig('YtUser');
 	$zbp->SetHint('good','修改成功');
-	Redirect('./main.php?act=rewrite');
+	Redirect('./rewrite.php');
 }
 
 function YtUser_CreateCode($n,$p=30){

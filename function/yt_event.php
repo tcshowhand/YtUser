@@ -1,56 +1,216 @@
 <?php
-function YtUser_page(){
-	global $zbp;
-    if($zbp->user->ID){
-        $ytuser = new Ytuser();
-        $array = $ytuser->YtInfoByField('Uid',$zbp->user->ID);
-        if($array){
-            $zbp->user->Price=$ytuser->Price;
-            $zbp->user->Vipendtime=$ytuser->Vipendtime;
-            $zbp->user->Oid=$ytuser->Oid;
-        }else{
-            $zbp->user->Price=0;
-            $zbp->user->Vipendtime=0;
-            $zbp->user->Oid="0";
-        }
-        if($zbp->user->Vipendtime < time() && $zbp->user->Level==4){
-            $member = new Member;
-            $member->LoadInfoByID($zbp->user->ID);
-            $member->Level=5;
-            $member->Save();
-        }
-        $zbp->user->Vipendtime=date('Y-m-d H:i:s', (int) $zbp->user->Vipendtime);
-    }
 
-    if(!isset($_GET['Changepassword'])){
-        if (substr($zbp->user->Name,0,3) != 'yt_' && $zbp->user->Password=='0e681aa506fc191c5f2fa9be6abddd01'){
-            Redirect($zbp->host."?Changepassword");die();
-        }
+//实名认证
+function YtUser_Certifi() {
+    global $zbp;
+    $zbp->header .='<script src="'.$zbp->host.'zb_users/plugin/YtUser/js/ytjs.php" type="text/javascript"></script>' . "\r\n";
+    $zbp->header .='<script src="'.$zbp->host.'zb_users/plugin/YtUser/js/layui/layui.all.js" type="text/javascript"></script>' . "\r\n";
+	$article = new Post;
+	$article->Title="实名认证";
+	$article->IsLock=true;
+    $article->Type=ZC_POST_TYPE_PAGE;
+    $ytuser = new Ytuser();
+    $ytuser->YtInfoByField('Uid',$zbp->user->ID);
+    if($ytuser->Isidcard==1){
+        $article->Content .='待审核';
+    }elseif($ytuser->Isidcard==2){
+        $article->Content .='已实名';
+    }else{
+    $article->verifycode ='<img id="reg_verfiycode" style="border:none;vertical-align:middle;width:'.$zbp->option['ZC_VERIFYCODE_WIDTH']. 'px;height:' . $zbp->option['ZC_VERIFYCODE_HEIGHT'] . 'px;cursor:pointer;" src="' .$zbp->validcodeurl . '?id=Certifi" alt="" title="" onclick="javascript:this.src=\'' . $zbp->validcodeurl . '?id=Certifi&amp;tm=\'+Math.random();"/>';
+    $article->Content .='<table style="width:90%;border:none;font-size:1.1em;line-height:2.5em;">';
+    if($ytuser->Isidcard==3){
+        $article->Content .='<tr><td style="text-align:right;border:none;">状态：</td><td  style="border:none;" >未通过</td></tr>';
     }
-	
-	if(isset($_GET['Commentlist'])){
-            $template = 'index';
-            if($zbp->template->hasTemplate('t_commentlist')){
-        		$template = 't_commentlist';
-        	}
-            $page = GetVars('page', 'GET');
-            $page = (int) $page == 0 ? 1 : (int) $page;
-            $article = new Post;
-            $article->ID = 0;
-            $article->Title = "评论列表";
-            $article->IsLock = true;
-            $article->Type = ZC_POST_TYPE_PAGE;
-            if (!$zbp->user->ID){
-            Redirect($zbp->host."?Login");
-            die();
-            }
-	$p=new Pagebar('{%host%}?Commentlist{&page=%page%}{&ischecking=%ischecking%}{&search=%search%}',false);
+    $article->Content .='<tr><td style="text-align:right;border:none;">(*)姓名：</td><td  style="border:none;" ><input required="required" type="text" name="name" style="width:250px;font-size:1.2em;" /></td></tr>';
+	$article->Content .='<tr><td style="text-align:right;border:none;">(*)身份证号：</td><td  style="border:none;" ><input required="required" type="text" name="idcard" style="width:250px;font-size:1.2em;" /></td></tr>';
+	$article->Content .='<tr><td style="text-align:right;border:none;">(*)</td><td  style="border:none;" ><input required="required" type="text" name="verifycode" style="width:150px;font-size:1.2em;" />&nbsp;&nbsp;'.$article->verifycode.'</td></tr>';
+	$article->Content .='<tr><td  style="border:none;" ></td><td  style="border:none;" ><input type="submit" style="width:100px;font-size:1.0em;padding:0.2em" value="提交" onclick="return Certifi()" /></td></tr>';
+    $article->Content .='</table>';
+    }
+    if($zbp->template->hasTemplate('t_certifi')){
+        $article->Template = 't_certifi';
+	}
+	$zbp->template->SetTags('title',$article->Title);
+	$zbp->template->SetTags('article',$article);
+	$zbp->template->SetTags('type','page');
+    $zbp->template->SetTags('isidcard',$ytuser->Isidcard);
+	$zbp->template->SetTemplate($article->Template);
+	$zbp->template->SetTags('page',1);
+	$zbp->template->SetTags('pagebar',null);
+	$zbp->template->SetTags('comments',array());
+	$zbp->template->Display();
+	die();
+}
+
+//修改密码
+function YtUser_Changepassword() {
+    global $zbp;
+    if($zbp->user->ID){
+    $zbp->header .='<script src="'.$zbp->host.'zb_users/plugin/YtUser/js/ytjs.php" type="text/javascript"></script>' . "\r\n";
+    $zbp->header .='<script src="'.$zbp->host.'zb_users/plugin/YtUser/js/layui/layui.all.js" type="text/javascript"></script>' . "\r\n";
+    $zbp->header .='<script src="'.$zbp->host.'zb_system/script/md5.js" type="text/javascript"></script>' . "\r\n";
+	$article = new Post;
+	$article->Title="修改密码";
+	$article->IsLock=true;
+	$article->Type=ZC_POST_TYPE_PAGE;
+    $article->verifycode ='<img id="reg_verfiycode" style="border:none;vertical-align:middle;width:'.$zbp->option['ZC_VERIFYCODE_WIDTH']. 'px;height:' . $zbp->option['ZC_VERIFYCODE_HEIGHT'] . 'px;cursor:pointer;" src="' .$zbp->validcodeurl . '?id=Changepassword" alt="" title="" onclick="javascript:this.src=\'' . $zbp->validcodeurl . '?id=Changepassword&amp;tm=\'+Math.random();"/>';
+    $article->Content .='<table style="width:90%;border:none;font-size:1.1em;line-height:2.5em;">';
+	$article->Content .='<tr><td style="text-align:right;border:none;">(*)账户：</td><td  style="border:none;" >'.$zbp->user->Name.'</td></tr>';
+	$article->Content .='<input type="hidden" name="token" id="token" value="'.$zbp->GetToken().'" />';
+    if($zbp->user->Password!='0e681aa506fc191c5f2fa9be6abddd01'){
+    $article->Content .='<tr><td style="text-align:right;border:none;">(*)原密码：</td><td  style="border:none;" ><input required="required" type="password" name="password" style="width:250px;font-size:1.2em;" /></td></tr>';
+    }
+	$article->Content .='<tr><td style="text-align:right;border:none;">(*)重置密码：</td><td  style="border:none;" ><input required="required" type="password" name="newpassword" style="width:250px;font-size:1.2em;" /></td></tr>';
+	$article->Content .='<tr><td style="text-align:right;border:none;">(*)确认密码：</td><td  style="border:none;" ><input required="required" type="password" name="repassword" style="width:250px;font-size:1.2em;" /></td></tr>';
+	$article->Content .='<tr><td style="text-align:right;border:none;">(*)</td><td  style="border:none;" ><input required="required" type="text" name="verifycode" style="width:150px;font-size:1.2em;" />&nbsp;&nbsp;'.$article->verifycode.'</td></tr>';
+	$article->Content .='<tr><td  style="border:none;" ></td><td  style="border:none;" ><input id="YtUserbnt" type="submit" style="width:100px;font-size:1.0em;padding:0.2em" value="提交" onclick="return Changepassword()" /></td></tr>';
+	$article->Content .='</table>';
+    }else{
+        Redirect($zbp->host."?Login");die();
+    }
+    if($zbp->template->hasTemplate('t_changepassword')){
+        $article->Template = 't_changepassword';
+	}
+	$zbp->template->SetTags('title',$article->Title);
+	$zbp->template->SetTags('article',$article);
+	$zbp->template->SetTags('type','page');
+	$zbp->template->SetTemplate($article->Template);
+	$zbp->template->SetTags('page',1);
+	$zbp->template->SetTags('pagebar',null);
+	$zbp->template->SetTags('comments',array());
+	$zbp->template->Display();
+	die();
+}
+
+//绑定QQ
+function YtUser_Binding() {
+    global $zbp;
+    if($zbp->user->ID){
+    $article = new Post;
+	$article->Title="绑定第三方";
+	$article->IsLock=true;
+	$article->Type=ZC_POST_TYPE_PAGE;
+    $article->Content .='<table style="width:90%;border:none;font-size:1.1em;line-height:2.5em;">';
+	if($zbp->user->Oid!='0'){
+	$article->BindingQQ = 1;
+	$article->Content .='<tr><td style="text-align:right;border:none;">绑定QQ：</td><td style="border:none;" >已绑定QQ</td></tr>';
+	}else{
+	$article->BindingQQ = 0;
+	$article->Content .='<tr><td style="text-align:right;border:none;">绑定QQ：</td><td style="border:none;" ><a href="'.$zbp->host.'zb_users/plugin/YtUser/login.php" target="_blank">绑定QQ</a></td></tr>';
+	}
+	$article->Content .='</table>';
+    }else{
+        Redirect($zbp->host."?Login");die();
+    }
+    if($zbp->template->hasTemplate('t_binding')){
+        $article->Template = 't_binding';
+	}
+	$zbp->template->SetTags('title',$article->Title);
+	$zbp->template->SetTags('article',$article);
+	$zbp->template->SetTags('type','page');
+	$zbp->template->SetTemplate($article->Template);
+	$zbp->template->SetTags('page',1);
+	$zbp->template->SetTags('pagebar',null);
+	$zbp->template->SetTags('comments',array());
+	$zbp->template->Display();
+	die();
+}
+
+//修改账户名
+function YtUser_Nameedit() {
+    global $zbp;
+    $zbp->header .='<script src="'.$zbp->host.'zb_users/plugin/YtUser/js/ytjs.php" type="text/javascript"></script>' . "\r\n";
+    $zbp->header .='<script src="'.$zbp->host.'zb_users/plugin/YtUser/js/layui/layui.all.js" type="text/javascript"></script>' . "\r\n";
+    if (substr($zbp->user->Name,0,3) != 'yt_'){
+        echo "链接已失效！";die();
+    }
+	$article = new Post;
+	$article->Title="修改账户名（仅一次机会）";
+	$article->IsLock=true;
+	$article->Type=ZC_POST_TYPE_PAGE;
+    $article->verifycode ='<img id="reg_verfiycode" style="border:none;vertical-align:middle;width:'.$zbp->option['ZC_VERIFYCODE_WIDTH']. 'px;height:' . $zbp->option['ZC_VERIFYCODE_HEIGHT'] . 'px;cursor:pointer;" src="' .$zbp->validcodeurl . '?id=Nameedit" alt="" title="" onclick="javascript:this.src=\'' . $zbp->validcodeurl . '?id=Nameedit&amp;tm=\'+Math.random();"/>';
+    $article->Content .='<table style="width:90%;border:none;font-size:1.1em;line-height:2.5em;">';
+	$article->Content .='<tr><td style="text-align:right;border:none;">(*)原账户：</td><td  style="border:none;" >'.$zbp->user->Name.'</td></tr>';
+	$article->Content .='<input type="hidden" name="token" id="token" value="'.$zbp->GetToken().'" />';
+    $article->Content .='<tr><td style="text-align:right;border:none;">(*)修改账户：</td><td  style="border:none;" ><input required="required" type="text" name="name" style="width:250px;font-size:1.2em;" /></td></tr>';
+	$article->Content .='<tr><td style="text-align:right;border:none;">(*)确认账户：</td><td  style="border:none;" ><input required="required" type="text" name="rename" style="width:250px;font-size:1.2em;" /></td></tr>';
+	$article->Content .='<tr><td style="text-align:right;border:none;">(*)</td><td  style="border:none;" ><input required="required" type="text" name="verifycode" style="width:150px;font-size:1.2em;" />&nbsp;&nbsp;'.$article->verifycode.'</td></tr>';
+	$article->Content .='<tr><td  style="border:none;" ></td><td  style="border:none;" ><input type="submit" style="width:100px;font-size:1.0em;padding:0.2em" value="提交" onclick="return Nameedit()" /></td></tr>';
+	$article->Content .='</table>';
+    if($zbp->template->hasTemplate('t_nameedit')){
+        $article->Template = 't_nameedit';
+	}
+	$zbp->template->SetTags('title',$article->Title);
+	$zbp->template->SetTags('article',$article);
+	$zbp->template->SetTags('type','page');
+    
+	$zbp->template->SetTemplate($article->Template);
+	$zbp->template->SetTags('page',1);
+	$zbp->template->SetTags('pagebar',null);
+	$zbp->template->SetTags('comments',array());
+	$zbp->template->Display();
+	die();
+}
+
+//密码找回
+function YtUser_Resetpwd() {
+    global $zbp;
+    $zbp->header .='<script src="'.$zbp->host.'zb_users/plugin/YtUser/js/ytjs.php" type="text/javascript"></script>' . "\r\n";
+    $zbp->header .='<script src="'.$zbp->host.'zb_users/plugin/YtUser/js/layui/layui.all.js" type="text/javascript"></script>' . "\r\n";
+	$article = new Post;
+	$article->Title="密码找回";
+	$article->IsLock=true;
+	$article->Type=ZC_POST_TYPE_PAGE;
+    $article->verifycode ='<img id="reg_verfiycode" style="border:none;vertical-align:middle;width:'.$zbp->option['ZC_VERIFYCODE_WIDTH']. 'px;height:' . $zbp->option['ZC_VERIFYCODE_HEIGHT'] . 'px;cursor:pointer;" src="' .$zbp->validcodeurl . '?id=resetpwd" alt="" title="" onclick="javascript:this.src=\'' . $zbp->validcodeurl . '?id=resetpwd&amp;tm=\'+Math.random();"/>';
+    $article->Content .='<table style="width:90%;border:none;font-size:1.1em;line-height:2.5em;">';
+	$article->Content .='<tr><td style="text-align:right;border:none;">(*)用户名：</td><td  style="border:none;" ><input required="required" type="text" name="name" style="width:250px;font-size:1.2em;" /></td></tr>';
+	$article->Content .='<tr><td style="text-align:right;border:none;">(*)邮箱：</td><td  style="border:none;" ><input type="text" name="email" style="width:250px;font-size:1.2em;" /></td></tr>';
+	$article->Content .='<tr><td style="text-align:right;border:none;">(*)</td><td  style="border:none;" ><input required="required" type="text" name="verifycode" style="width:150px;font-size:1.2em;" />&nbsp;&nbsp;'.$article->verifycode.'</td></tr>';
+	$article->Content .='<tr><td  style="border:none;" ></td><td  style="border:none;" ><input id="YtUserbnt" type="submit" style="width:100px;font-size:1.0em;padding:0.2em" value="提交" onclick="return resetpwd()" /></td></tr>';
+	$article->Content .='</table>';
+	$mt=microtime();
+    if($zbp->template->hasTemplate('t_resetpwd')){
+        $article->Template = 't_resetpwd';
+	}
+	$zbp->template->SetTags('title',$article->Title);
+	$zbp->template->SetTags('article',$article);
+	$zbp->template->SetTags('type','page');
+    
+	$zbp->template->SetTemplate($article->Template);
+	$zbp->template->SetTags('page',1);
+	$zbp->template->SetTags('pagebar',null);
+	$zbp->template->SetTags('comments',array());
+	$zbp->template->Display();
+	die();
+}
+
+//评论列表
+function YtUser_Commentlist($page=1){
+    global $zbp;
+    $template = 'index';
+    if($zbp->template->hasTemplate('t_commentlist')){
+        $template = 't_commentlist';
+    }
+    if($zbp->option['ZC_STATIC_MODE'] != 'REWRITE') $page = GetVars('page', 'GET');
+    $page = (int) $page == 0 ? 1 : (int) $page;
+    $article = new Post;
+    $article->ID = 0;
+    $article->Title = "评论列表";
+    $article->IsLock = true;
+    $article->Type = ZC_POST_TYPE_PAGE;
+    if (!$zbp->user->ID){
+        Redirect($zbp->host."?Login");
+        die();
+    }
+    if ($zbp->option['ZC_STATIC_MODE'] == 'REWRITE'){
+        $p=new Pagebar('{%host%}'.$zbp->Config('YtUser')->YtUser_RWURL.'/Commentlist{/page/%page%}',false);
+    }else{
+        $p=new Pagebar('{%host%}?Commentlist{&page=%page%}',false);
+    }
 	$p->PageCount=$zbp->option['ZC_DISPLAY_COUNT'];
-	$p->PageNow=(int)GetVars('page','GET')==0?1:(int)GetVars('page','GET');
+	$p->PageNow=$page;
 	$p->PageBarCount=$zbp->pagebarcount;
-	$p->UrlRule->Rules['{%search%}']=urlencode(GetVars('search'));
-	$p->UrlRule->Rules['{%ischecking%}']=(boolean)GetVars('ischecking');
-            $w=array();
+    $w=array();
 	$w[]=array('=','comm_AuthorID',$zbp->user->ID);
 	$w[]=array('=','comm_Ischecking',(int)GetVars('ischecking'));
 	$s='';
@@ -88,14 +248,16 @@ function YtUser_page(){
     }
     $zbp->template->Display();
 	die();
-	}
+}
 
-	if(isset($_GET['Paylist'])){
+//购买列表
+function YtUser_Paylist($page=1){
+    global $zbp;
     $template = 'index';
     if($zbp->template->hasTemplate('t_paylist')){
 		$template = 't_paylist';
-	}
-        $page = GetVars('page', 'GET');
+    }
+    if($zbp->option['ZC_STATIC_MODE'] != 'REWRITE') $page = GetVars('page', 'GET');
         $page = (int) $page == 0 ? 1 : (int) $page;
         $article = new Post;
         $article->ID = 0;
@@ -106,16 +268,18 @@ function YtUser_page(){
         	Redirect($zbp->host."?Login");
         	die();
         }
-	$p=new Pagebar('{%host%}?Paylist{&page=%page%}',false);
+    if ($zbp->option['ZC_STATIC_MODE'] == 'REWRITE'){
+        $p=new Pagebar('{%host%}'.$zbp->Config('YtUser')->YtUser_RWURL.'/Paylist{/page/%page%}',false);
+    }else{
+        $p=new Pagebar('{%host%}?Paylist{&page=%page%}',false);
+    }
 	$p->PageCount = $zbp->option['ZC_DISPLAY_COUNT'];
-	$p->PageNow=(int)GetVars('page','GET')==0?1:(int)GetVars('page','GET');
+	$p->PageNow=$page;
 	$p->PageBarCount=$zbp->pagebarcount;
-	$p->UrlRule->Rules['{%search%}']=urlencode(GetVars('search'));
-	$p->UrlRule->Rules['{%ischecking%}']=(boolean)GetVars('ischecking');
-        $l = array(($p->PageNow - 1) * $p->PageCount, $p->PageCount);
-        $op = array('pagebar' => $p);
-        $favorite = new YtuserBuy;
-        $array = $favorite->GetYtuserBuyList($l,$op);
+    $l = array(($p->PageNow - 1) * $p->PageCount, $p->PageCount);
+    $op = array('pagebar' => $p);
+    $favorite = new YtuserBuy;
+    $array = $favorite->GetYtuserBuyList($l,$op);
     foreach ($array as $a) {
         $articles = $zbp->GetPostByID($a->LogID);
             if (!$articles->ID){
@@ -150,25 +314,19 @@ function YtUser_page(){
     }
     $zbp->template->Display();
 	die();
-	}
+}
 
-    if(isset($_GET['User'])){
-        YtUser_User();
-        die();
-	}
-
-	if(isset($_GET['Upgrade'])){
-        YtUser_Upgrade();
-	    die();
-	}
-
-    if(isset($_GET['buy'])){
-    $uid = (int)GetVars('uid', 'GET');
-	$zbp->header .='<script src="'.$zbp->host.'zb_users/plugin/YtUser/Upgrade.js" type="text/javascript"></script>' . "\r\n";
+//支付状态(推荐直接抛弃这个用快捷支付方式)
+function YtUser_buy($uid=0) {
+    global $zbp;
+    if($zbp->option['ZC_STATIC_MODE'] != 'REWRITE') $uid = (int)GetVars('uid', 'GET');
+	$zbp->header .='<script src="'.$zbp->host.'zb_users/plugin/YtUser/js/ytjs.php" type="text/javascript"></script>' . "\r\n";
+	$zbp->header .='<script src="'.$zbp->host.'zb_users/plugin/YtUser/js/layui/layui.all.js" type="text/javascript"></script>' . "\r\n";
 	$article = new Post;
 	$article->Title="支付状态";
 	$article->IsLock=true;
-	$article->Type=ZC_POST_TYPE_PAGE;
+    $article->Type=ZC_POST_TYPE_PAGE;
+    
     if($uid<1){
         print_r('<h2 style="font-size:60px;margin-bottom:32px;color:f00;">骚年，你在做什么</h2></div>');
         die();
@@ -176,10 +334,8 @@ function YtUser_page(){
     if($zbp->user->Level<5) $article->Metas->price=$article->Metas->price*$zbp->Config('YtUser')->vipdis*0.01;
     $article->verifycode ='<img id="reg_verfiycode" style="border:none;vertical-align:middle;width:'.$zbp->option['ZC_VERIFYCODE_WIDTH']. 'px;height:' . $zbp->option['ZC_VERIFYCODE_HEIGHT'] . 'px;cursor:pointer;" src="' .$zbp->validcodeurl . '?id=Ytbuypay" alt="" title="" onclick="javascript:this.src=\'' . $zbp->validcodeurl . '?id=Ytbuypay&amp;tm=\'+Math.random();"/>';
     $articles = $zbp->GetPostByID($uid);
-
-    $sql=$zbp->db->sql->Select($GLOBALS['YtUser_buy_Table'],'*',array(array('=','buy_LogID',$uid),array('=','buy_AuthorID',$zbp->user->ID),array('=','buy_State',1)),null,1,null);
-    $array=$zbp->GetListCustom($GLOBALS['YtUser_buy_Table'],$GLOBALS['YtUser_buy_DataInfo'],$sql);
-    $num=count($array);
+    $userbuy=new YtuserBuy();
+    $num = $userbuy->YtBuyByField('LogID',$article->ID);
     $article->buynum=$num;
     $article->ID=$articles->ID;
     $article->BuyID=$articles->ID;
@@ -222,7 +378,6 @@ function YtUser_page(){
 	$zbp->template->SetTags('title',$article->Title);
 	$zbp->template->SetTags('article',$article);
 	$zbp->template->SetTags('type','page');
-    
 	$zbp->template->SetTemplate($article->Template);
 	$zbp->template->SetTags('page',1);
 	$zbp->template->SetTags('pagebar',null);
@@ -230,10 +385,13 @@ function YtUser_page(){
 	$zbp->template->SetTags('comments',array());
 	$zbp->template->Display();
 	die();
-	}
+}
 
-    if(isset($_GET['Integral'])){
-	$zbp->header .='<script src="'.$zbp->host.'zb_users/plugin/YtUser/Upgrade.js" type="text/javascript"></script>' . "\r\n";
+//积分充值
+function YtUser_Integral() {
+    global $zbp;
+    $zbp->header .='<script src="'.$zbp->host.'zb_users/plugin/YtUser/js/ytjs.php" type="text/javascript"></script>' . "\r\n";
+	$zbp->header .='<script src="'.$zbp->host.'zb_users/plugin/YtUser/js/layui/layui.all.js" type="text/javascript"></script>' . "\r\n";
 	$article = new Post;
 	$article->Title="用户积分充值";
 	$article->IsLock=true;
@@ -248,7 +406,7 @@ function YtUser_page(){
 		$article->Content .='<tr><td style="text-align:right;border:none;">(*)</td><td  style="border:none;" ><input required="required" type="text" name="verifycode" style="width:150px;font-size:1.2em;" />&nbsp;&nbsp;';
         $article->Content .= $article->verifycode;
         $article->Content .='</td></tr>';
-		$article->Content .='<tr><td  style="border:none;" ></td><td  style="border:none;" ><input type="submit" style="width:100px;font-size:1.0em;padding:0.2em" value="提交" onclick="return Integral()" /></td></tr>';
+		$article->Content .='<tr><td  style="border:none;" ></td><td  style="border:none;" ><input id="YtUserbnt" type="submit" style="width:100px;font-size:1.0em;padding:0.2em" value="提交" onclick="return Integral()" /></td></tr>';
 		$article->Content .='</table>';
     }else{
         Redirect($zbp->host."?Login");die();
@@ -269,67 +427,34 @@ function YtUser_page(){
 	$zbp->template->SetTags('comments',array());
 	$zbp->template->Display();
 	die();
-	}
+}
 
-    if(isset($_GET['Articleedt'])){
-        $zbp->header .='<script src="'.$zbp->host.'zb_users/plugin/YtUser/Upgrade.js" type="text/javascript"></script>' . "\r\n";
-	$article = new Post;
-	$article->Title="投稿";
-	$article->IsLock=true;
-	$article->Type=ZC_POST_TYPE_PAGE;
-    $article->verifycode ='<img id="reg_verfiycode" style="border:none;vertical-align:middle;width:'.$zbp->option['ZC_VERIFYCODE_WIDTH']. 'px;height:' . $zbp->option['ZC_VERIFYCODE_HEIGHT'] . 'px;cursor:pointer;" src="' .$zbp->validcodeurl . '?id=Articleedt" alt="" title="" onclick="javascript:this.src=\'' . $zbp->validcodeurl . '?id=Articleedt&amp;tm=\'+Math.random();"/>';
-    if($zbp->user->ID){
-        $article->UEditor ='<script type="text/javascript" src="'.$zbp->host.'zb_users/plugin/UEditor/ueditor.config.php"></script><script type="text/javascript" src="'.$zbp->host.'zb_users/plugin/UEditor/ueditor.all.min.js"></script><textarea name="Content" id="editor_Content" datatype="*"></textarea><script type="text/javascript">var editor = new baidu.editor.ui.Editor({toolbars: [["Source", "bold", "italic", "Undo","Redo"]],initialFrameHeight: 200,});editor.render("editor_Content");editor.sync("Content"); </script>';
-        $article->Content .='<input id="edtID" name="ID" type="hidden" value="0" />';
-        $article->Content .='<input id="edtType" name="Type" type="hidden" value="0" />';    
-        $article->Content .='<input type="hidden" name="token" id="token" value="'.$zbp->GetToken().'" />';
-        $article->Content .='<p><span class="title">标题:</span><br><input id="edtTitle" class="edit" size="40" name="Title" type="text"></p>';
-        $article->Content .= '<span class="title">内容:</span><br>'.$article->UEditor;
-        $article->Content .='<p><span class="title">验证码:</span><br><input required="required" name="verifycode" class="edit" size="40" type="text">'.$article->verifycode.'</p>';
-        $article->Content .='<p><button onclick="return checkArticleInfo();">确定</button></p>';
-    }else{
-        Redirect($zbp->host."?Login");die();
+//投稿列表
+function YtUser_Articlelist($page=1) {
+    global $zbp;
+    if (!$zbp->user->ID){
+	    Redirect($zbp->host."?Login");
+	    die();
     }
-	$mt=microtime();
-	$s=	'';
-	$article->Content .=$s;	
-    if($zbp->template->hasTemplate('t_articleedt')){
-        $article->Template = 't_articleedt';
-	}
-	$zbp->template->SetTags('title',$article->Title);
-	$zbp->template->SetTags('article',$article);
-	$zbp->template->SetTags('type','page');
-    
-	$zbp->template->SetTemplate($article->Template);
-	$zbp->template->SetTags('page',1);
-	$zbp->template->SetTags('pagebar',null);
-	$zbp->template->SetTags('comments',array());
-	$zbp->template->Display();
-	die();
-	}
-
-    if(isset($_GET['Articlelist'])){
     $template = 'index';
     if($zbp->template->hasTemplate('t_articlelist')){
 		$template = 't_articlelist';
-	}
-    $page = GetVars('page', 'GET');
+    }
+    if($zbp->option['ZC_STATIC_MODE'] != 'REWRITE') $page = GetVars('page', 'GET');
     $page = (int) $page == 0 ? 1 : (int) $page;
     $article = new Post;
     $article->ID = 0;
     $article->Title = "投稿列表";
     $article->IsLock = true;
     $article->Type = ZC_POST_TYPE_PAGE;
-if (!$zbp->user->ID){
-	Redirect($zbp->host."?Login");
-	die();
-}
-	$p=new Pagebar('{%host%}?Articlelist{&page=%page%}{&ischecking=%ischecking%}{&search=%search%}',false);
+    if ($zbp->option['ZC_STATIC_MODE'] == 'REWRITE'){
+    $p=new Pagebar('{%host%}'.$zbp->Config('YtUser')->YtUser_RWURL.'/Articlelist{/page/%page%}',false);
+    }else{
+    $p=new Pagebar('{%host%}?Articlelist{&page=%page%}',false);
+    }
 	$p->PageCount=$zbp->option['ZC_DISPLAY_COUNT'];
-	$p->PageNow=(int)GetVars('page','GET')==0?1:(int)GetVars('page','GET');
+	$p->PageNow=$page;
 	$p->PageBarCount=$zbp->pagebarcount;
-	$p->UrlRule->Rules['{%search%}']=urlencode(GetVars('search'));
-	$p->UrlRule->Rules['{%ischecking%}']=(boolean)GetVars('ischecking');
     $w=array();
 	$w[]=array('=','log_AuthorID',$zbp->user->ID);
 	$s='';
@@ -356,174 +481,65 @@ if (!$zbp->user->ID){
     }
 	$zbp->template->Display();
 	die();
-	}
+}
 
-    if(isset($_GET['Register'])){
-    YtUser_Register();
-	die();
-	}
-
-    if(isset($_GET['Login'])){
-    YtUser_Login();
-    die();
+//发布投稿
+function YtUser_Articleedt() {
+    global $zbp;
+    if($zbp->CheckRights('ArticlePst')==0){
+        Redirect($zbp->host."?Upgrade");die();
     }
-
-    if(isset($_GET['Resetpwd'])){
-	$zbp->header .='<script src="'.$zbp->host.'zb_users/plugin/YtUser/Upgrade.js" type="text/javascript"></script>' . "\r\n";
+    if($zbp->Config('YtUser')->Oncertif){
+        $ytuser = new Ytuser();
+        $ytuser->YtInfoByField('Uid',$zbp->user->ID);
+        if($ytuser->Isidcard!=2){
+            Redirect($zbp->host."?Certifi");die();
+        }
+    }
+    $zbp->header .='<script src="'.$zbp->host.'zb_users/plugin/YtUser/js/ytjs.php" type="text/javascript"></script>' . "\r\n";
+	$zbp->header .='<script src="'.$zbp->host.'zb_users/plugin/YtUser/js/layui/layui.all.js" type="text/javascript"></script>' . "\r\n";
 	$article = new Post;
-	$article->Title="密码找回";
+	$article->Title="投稿";
 	$article->IsLock=true;
 	$article->Type=ZC_POST_TYPE_PAGE;
-    $article->verifycode ='<img id="reg_verfiycode" style="border:none;vertical-align:middle;width:'.$zbp->option['ZC_VERIFYCODE_WIDTH']. 'px;height:' . $zbp->option['ZC_VERIFYCODE_HEIGHT'] . 'px;cursor:pointer;" src="' .$zbp->validcodeurl . '?id=resetpwd" alt="" title="" onclick="javascript:this.src=\'' . $zbp->validcodeurl . '?id=resetpwd&amp;tm=\'+Math.random();"/>';
-    $article->Content .='<table style="width:90%;border:none;font-size:1.1em;line-height:2.5em;">';
-	$article->Content .='<tr><td style="text-align:right;border:none;">(*)用户名：</td><td  style="border:none;" ><input required="required" type="text" name="name" style="width:250px;font-size:1.2em;" /></td></tr>';
-	$article->Content .='<tr><td style="text-align:right;border:none;">(*)邮箱：</td><td  style="border:none;" ><input type="text" name="email" style="width:250px;font-size:1.2em;" /></td></tr>';
-	$article->Content .='<tr><td style="text-align:right;border:none;">(*)</td><td  style="border:none;" ><input required="required" type="text" name="verifycode" style="width:150px;font-size:1.2em;" />&nbsp;&nbsp;'.$article->verifycode.'</td></tr>';
-	$article->Content .='<tr><td  style="border:none;" ></td><td  style="border:none;" ><input type="submit" style="width:100px;font-size:1.0em;padding:0.2em" value="提交" onclick="return resetpwd()" /></td></tr>';
-	$article->Content .='</table>';
+    $article->verifycode ='<img id="reg_verfiycode" style="border:none;vertical-align:middle;width:'.$zbp->option['ZC_VERIFYCODE_WIDTH']. 'px;height:' . $zbp->option['ZC_VERIFYCODE_HEIGHT'] . 'px;cursor:pointer;" src="' .$zbp->validcodeurl . '?id=Articleedt" alt="" title="" onclick="javascript:this.src=\'' . $zbp->validcodeurl . '?id=Articleedt&amp;tm=\'+Math.random();"/>';
+    if($zbp->user->ID){
+        $article->UEditor ='<script type="text/javascript" src="'.$zbp->host.'zb_users/plugin/UEditor/ueditor.config.php"></script><script type="text/javascript" src="'.$zbp->host.'zb_users/plugin/UEditor/ueditor.all.min.js"></script><textarea name="Content" id="editor_Content" datatype="*"></textarea><script type="text/javascript">var editor = new baidu.editor.ui.Editor({toolbars: [["Source", "bold", "italic", "Undo","Redo"]],initialFrameHeight: 200,});editor.render("editor_Content");editor.sync("Content"); </script>';
+        $article->Content .='<input id="edtID" name="ID" type="hidden" value="0" />';
+        $article->Content .='<input id="edtType" name="Type" type="hidden" value="0" />';    
+        $article->Content .='<input type="hidden" name="token" id="token" value="'.$zbp->GetToken().'" />';
+        $article->Content .= '<p><span class="title">标题:</span><br><input id="edtTitle" class="edit" size="40" name="Title" type="text"></p>';
+        $article->Content .='<p><span class="title">分类:</span><select name="CateID" size="1" class="form-control user_input">'.Yt_Categories(0).'</select></p>';
+        $article->Content .= '<span class="title">内容:</span><br>'.$article->UEditor;
+        $article->Content .='<p><span class="title">验证码:</span><br><input required="required" name="verifycode" class="edit" size="40" type="text">'.$article->verifycode.'</p>';
+        $article->Content .='<p><button onclick="return checkArticleInfo();">确定</button></p>';
+    }else{
+        Redirect($zbp->host."?Login");die();
+    }
 	$mt=microtime();
-    if($zbp->template->hasTemplate('t_resetpwd')){
-        $article->Template = 't_resetpwd';
+	$s=	'';
+	$article->Content .=$s;	
+    if($zbp->template->hasTemplate('t_articleedt')){
+        $article->Template = 't_articleedt';
 	}
 	$zbp->template->SetTags('title',$article->Title);
 	$zbp->template->SetTags('article',$article);
 	$zbp->template->SetTags('type','page');
-    
 	$zbp->template->SetTemplate($article->Template);
 	$zbp->template->SetTags('page',1);
 	$zbp->template->SetTags('pagebar',null);
 	$zbp->template->SetTags('comments',array());
 	$zbp->template->Display();
-	die();
-	}
-
-    if(isset($_GET['Resetpassword'])){
-    YtUser_Resetpassword();
-    }
-
-    if(isset($_GET['Nameedit'])){
-    $zbp->header .='<script src="'.$zbp->host.'zb_users/plugin/YtUser/Upgrade.js" type="text/javascript"></script>' . "\r\n";
-    if (substr($zbp->user->Name,0,3) != 'yt_'){
-        echo "链接已失效！";die();
-    }
-	$article = new Post;
-	$article->Title="修改账户名（仅一次机会）";
-	$article->IsLock=true;
-	$article->Type=ZC_POST_TYPE_PAGE;
-    $article->verifycode ='<img id="reg_verfiycode" style="border:none;vertical-align:middle;width:'.$zbp->option['ZC_VERIFYCODE_WIDTH']. 'px;height:' . $zbp->option['ZC_VERIFYCODE_HEIGHT'] . 'px;cursor:pointer;" src="' .$zbp->validcodeurl . '?id=Nameedit" alt="" title="" onclick="javascript:this.src=\'' . $zbp->validcodeurl . '?id=Nameedit&amp;tm=\'+Math.random();"/>';
-    $article->Content .='<table style="width:90%;border:none;font-size:1.1em;line-height:2.5em;">';
-	$article->Content .='<tr><td style="text-align:right;border:none;">(*)原账户：</td><td  style="border:none;" >'.$zbp->user->Name.'</td></tr>';
-	$article->Content .='<input type="hidden" name="token" id="token" value="'.$zbp->GetToken().'" />';
-    $article->Content .='<tr><td style="text-align:right;border:none;">(*)修改账户：</td><td  style="border:none;" ><input required="required" type="text" name="name" style="width:250px;font-size:1.2em;" /></td></tr>';
-	$article->Content .='<tr><td style="text-align:right;border:none;">(*)确认账户：</td><td  style="border:none;" ><input required="required" type="text" name="rename" style="width:250px;font-size:1.2em;" /></td></tr>';
-	$article->Content .='<tr><td style="text-align:right;border:none;">(*)</td><td  style="border:none;" ><input required="required" type="text" name="verifycode" style="width:150px;font-size:1.2em;" />&nbsp;&nbsp;'.$article->verifycode.'</td></tr>';
-	$article->Content .='<tr><td  style="border:none;" ></td><td  style="border:none;" ><input type="submit" style="width:100px;font-size:1.0em;padding:0.2em" value="提交" onclick="return Nameedit()" /></td></tr>';
-	$article->Content .='</table>';
-    if($zbp->template->hasTemplate('t_nameedit')){
-        $article->Template = 't_nameedit';
-	}
-	$zbp->template->SetTags('title',$article->Title);
-	$zbp->template->SetTags('article',$article);
-	$zbp->template->SetTags('type','page');
-    
-	$zbp->template->SetTemplate($article->Template);
-	$zbp->template->SetTags('page',1);
-	$zbp->template->SetTags('pagebar',null);
-	$zbp->template->SetTags('comments',array());
-	$zbp->template->Display();
-	die();
-	}
-
-    if(isset($_GET['Changepassword'])){
-    if($zbp->user->ID){
-    $zbp->header .='<script src="'.$zbp->host.'zb_users/plugin/YtUser/Upgrade.js" type="text/javascript"></script>' . "\r\n";
-    $zbp->header .='<script src="'.$zbp->host.'zb_system/script/md5.js" type="text/javascript"></script>' . "\r\n";
-	$article = new Post;
-	$article->Title="修改密码";
-	$article->IsLock=true;
-	$article->Type=ZC_POST_TYPE_PAGE;
-    $article->verifycode ='<img id="reg_verfiycode" style="border:none;vertical-align:middle;width:'.$zbp->option['ZC_VERIFYCODE_WIDTH']. 'px;height:' . $zbp->option['ZC_VERIFYCODE_HEIGHT'] . 'px;cursor:pointer;" src="' .$zbp->validcodeurl . '?id=Changepassword" alt="" title="" onclick="javascript:this.src=\'' . $zbp->validcodeurl . '?id=Changepassword&amp;tm=\'+Math.random();"/>';
-    $article->Content .='<table style="width:90%;border:none;font-size:1.1em;line-height:2.5em;">';
-	$article->Content .='<tr><td style="text-align:right;border:none;">(*)账户：</td><td  style="border:none;" >'.$zbp->user->Name.'</td></tr>';
-	$article->Content .='<input type="hidden" name="token" id="token" value="'.$zbp->GetToken().'" />';
-            if($zbp->user->Password!='0e681aa506fc191c5f2fa9be6abddd01'){
-            $article->Content .='<tr><td style="text-align:right;border:none;">(*)原密码：</td><td  style="border:none;" ><input required="required" type="password" name="password" style="width:250px;font-size:1.2em;" /></td></tr>';
-            }
-	$article->Content .='<tr><td style="text-align:right;border:none;">(*)重置密码：</td><td  style="border:none;" ><input required="required" type="password" name="newpassword" style="width:250px;font-size:1.2em;" /></td></tr>';
-	$article->Content .='<tr><td style="text-align:right;border:none;">(*)确认密码：</td><td  style="border:none;" ><input required="required" type="password" name="repassword" style="width:250px;font-size:1.2em;" /></td></tr>';
-	$article->Content .='<tr><td style="text-align:right;border:none;">(*)</td><td  style="border:none;" ><input required="required" type="text" name="verifycode" style="width:150px;font-size:1.2em;" />&nbsp;&nbsp;'.$article->verifycode.'</td></tr>';
-	$article->Content .='<tr><td  style="border:none;" ></td><td  style="border:none;" ><input type="submit" style="width:100px;font-size:1.0em;padding:0.2em" value="提交" onclick="return Changepassword()" /></td></tr>';
-	$article->Content .='</table>';
-    }else{
-        Redirect($zbp->host."?Login");die();
-    }
-    if($zbp->template->hasTemplate('t_changepassword')){
-        $article->Template = 't_changepassword';
-	}
-	$zbp->template->SetTags('title',$article->Title);
-	$zbp->template->SetTags('article',$article);
-	$zbp->template->SetTags('type','page');
-    
-	$zbp->template->SetTemplate($article->Template);
-	$zbp->template->SetTags('page',1);
-	$zbp->template->SetTags('pagebar',null);
-	$zbp->template->SetTags('comments',array());
-	$zbp->template->Display();
-	die();
-	}
-	
-	if(isset($_GET['Binding'])){
-    if($zbp->user->ID){
-    $article = new Post;
-	$article->Title="绑定第三方";
-	$article->IsLock=true;
-	$article->Type=ZC_POST_TYPE_PAGE;
-    $article->Content .='<table style="width:90%;border:none;font-size:1.1em;line-height:2.5em;">';
-	if($zbp->user->Oid!='0'){
-	$article->BindingQQ = 1;
-	$article->Content .='<tr><td style="text-align:right;border:none;">绑定QQ：</td><td  style="border:none;" >
-	已绑定QQ</td></tr>';
-	}else{
-	$article->BindingQQ = 0;
-	$article->Content .='<tr><td style="text-align:right;border:none;">绑定QQ：</td><td  style="border:none;" >
-	<a href="'.$zbp->host.'zb_users/plugin/YtUser/login.php" target="_blank">绑定QQ</a></td></tr>';
-	}
-	$article->Content .='</table>';
-    }else{
-        Redirect($zbp->host."?Login");die();
-    }
-    if($zbp->template->hasTemplate('t_binding')){
-        $article->Template = 't_binding';
-	}
-	$zbp->template->SetTags('title',$article->Title);
-	$zbp->template->SetTags('article',$article);
-	$zbp->template->SetTags('type','page');
-    
-	$zbp->template->SetTemplate($article->Template);
-	$zbp->template->SetTags('page',1);
-	$zbp->template->SetTags('pagebar',null);
-	$zbp->template->SetTags('comments',array());
-	$zbp->template->Display();
-	die();
-	}
-
-    if(isset($_GET['Favorite'])){
-    YtUser_Favorite();
-    }
-
-    if(isset($_GET['Consume'])){
-        YtUser_Consume();
-    }
 }
 
 //消费记录
-function YtUser_Consume() {
+function YtUser_Consume($page=1) {
     global $zbp;
     $template = 'index';
     if($zbp->template->hasTemplate('t_consume')){
         $template = 't_consume';
     }
-    $page = GetVars('page', 'GET');
+    if($zbp->option['ZC_STATIC_MODE'] != 'REWRITE') $page = GetVars('page', 'GET');
     $page = (int) $page == 0 ? 1 : (int) $page;
     $article = new Post;
     $article->ID = 0;
@@ -534,12 +550,14 @@ function YtUser_Consume() {
         Redirect($zbp->host."?Login");
         die();
     }
-    $p=new Pagebar('{%host%}?Consume{&page=%page%}',false);
+    if ($zbp->option['ZC_STATIC_MODE'] == 'REWRITE'){
+        $p=new Pagebar('{%host%}'.$zbp->Config('YtUser')->YtUser_RWURL.'/Consume{/page/%page%}',false);
+    }else{
+        $p=new Pagebar('{%host%}?Consume{&page=%page%}',false);
+    }
     $p->PageCount = $zbp->option['ZC_DISPLAY_COUNT'];
-    $p->PageNow=(int)GetVars('page','GET')==0?1:(int)GetVars('page','GET');
+    $p->PageNow=$page;
     $p->PageBarCount=$zbp->pagebarcount;
-    $p->UrlRule->Rules['{%search%}']=urlencode(GetVars('search'));
-    $p->UrlRule->Rules['{%ischecking%}']=(boolean)GetVars('ischecking');
     $l = array(($p->PageNow - 1) * $p->PageCount, $p->PageCount);
     $op = array('pagebar' => $p);
     $favorite = new YtConsume;
@@ -547,17 +565,11 @@ function YtUser_Consume() {
     foreach ($array as $a) {
         $articles = $zbp->GetPostByID($a->Pid);
         if (!$articles->ID){
-        $title='已删除的文章 ID='.$a->Pid;
+            $a->Url="#";
         }else{
-        $title=$articles->Title;    
+            $a->Url=$articles->Url;
         }
-        if ($a->Type){
-            $a->Title="购买".$title."消费".$a->Money."积分";
-        }else{
-            $a->Title="出售".$title."获得".$a->Money."积分";
-        }
-        $a->Intro=$articles->Intro;
-        $a->Url=$articles->Url;
+        $a->Intro="";
         $a->IsTop=0;
         $a->ViewNums=$articles->ViewNums;
         $a->CommNums=$articles->CommNums;
@@ -580,14 +592,15 @@ function YtUser_Consume() {
 }
 
 //文章收藏列表
-function YtUser_Favorite() {
+function YtUser_Favorite($page=1) {
     global $zbp;
-    $zbp->header .='<script src="'.$zbp->host.'zb_users/plugin/YtUser/Upgrade.js" type="text/javascript"></script>' . "\r\n";
+    $zbp->header .='<script src="'.$zbp->host.'zb_users/plugin/YtUser/js/ytjs.php" type="text/javascript"></script>' . "\r\n";
+	$zbp->header .='<script src="'.$zbp->host.'zb_users/plugin/YtUser/js/layui/layui.all.js" type="text/javascript"></script>' . "\r\n";
     $template = 'index';
     if($zbp->template->hasTemplate('t_favorite')){
         $template = 't_favorite';
     }
-    $page = GetVars('page', 'GET');
+    if($zbp->option['ZC_STATIC_MODE'] != 'REWRITE') $page = GetVars('page', 'GET');
     $page = (int) $page == 0 ? 1 : (int) $page;
     $article = new Post;
     $article->ID = 0;
@@ -598,12 +611,14 @@ function YtUser_Favorite() {
         Redirect($zbp->host."?Login");
         die();
     }
-    $p=new Pagebar('{%host%}?Favorite{&page=%page%}',false);
+    if ($zbp->option['ZC_STATIC_MODE'] == 'REWRITE'){
+        $p=new Pagebar('{%host%}'.$zbp->Config('YtUser')->YtUser_RWURL.'/Favorite{/page/%page%}',false);
+        }else{
+        $p=new Pagebar('{%host%}?Favorite{&page=%page%}',false);
+    }
     $p->PageCount = $zbp->option['ZC_DISPLAY_COUNT'];
-    $p->PageNow=(int)GetVars('page','GET')==0?1:(int)GetVars('page','GET');
+    $p->PageNow=$page;
     $p->PageBarCount=$zbp->pagebarcount;
-    $p->UrlRule->Rules['{%search%}']=urlencode(GetVars('search'));
-    $p->UrlRule->Rules['{%ischecking%}']=(boolean)GetVars('ischecking');
     $l = array(($p->PageNow - 1) * $p->PageCount, $p->PageCount);
     $op = array('pagebar' => $p);
     $favorite = new YtFavorite;
@@ -637,14 +652,16 @@ function YtUser_Favorite() {
     $zbp->template->Display();
     die();
 }
-//会员登陆
+
+//登录页面
 function YtUser_Login() {
     global $zbp;
     if($zbp->user->ID){
         Redirect($zbp->host."?User");die();
     }
     $zbp->header .='<script src="'.$zbp->host.'zb_system/script/md5.js" type="text/javascript"></script>' . "\r\n";
-    $zbp->header .='<script src="'.$zbp->host.'zb_users/plugin/YtUser/Upgrade.js" type="text/javascript"></script>' . "\r\n";
+    $zbp->header .='<script src="'.$zbp->host.'zb_users/plugin/YtUser/js/ytjs.php" type="text/javascript"></script>' . "\r\n";
+	$zbp->header .='<script src="'.$zbp->host.'zb_users/plugin/YtUser/js/layui/layui.all.js" type="text/javascript"></script>' . "\r\n";
     $article = new Post;
     $article->Title="会员登录";
     $article->IsLock=true;
@@ -662,7 +679,7 @@ function YtUser_Login() {
     }
     $article->Content .='</td></tr>';
     $article->Content .='<tr><td style="text-align:right;border:none;"><input type="checkbox" name="chkRemember" id="chkRemember"  tabindex="3" /></td><td  style="border:none;" >下次自动登录</td></tr>';
-    $article->Content .='<tr><td  style="border:none;" ></td><td  style="border:none;" ><input id="loginbtnPost" onclick="return Ytuser_Login()" name="loginbtnPost" type="submit" value="登录" class="button" tabindex="4"/><a href="'.$zbp->host.'?Resetpwd">找回密码</a>
+    $article->Content .='<tr><td  style="border:none;" ></td><td  style="border:none;" ><input id="YtUserbnt" onclick="return Ytuser_Login()" name="loginbtnPost" type="submit" value="登录" class="button" tabindex="4"/><a href="'.$zbp->host.'?Resetpwd">找回密码</a>
     </td></tr>';
     $article->Content .='</table>';
     if($zbp->Config('YtUser')->appkey !=""){
@@ -681,19 +698,22 @@ function YtUser_Login() {
     $zbp->template->SetTags('comments',array());
     $zbp->template->Display();
 }
+
 //会员中心首页
 function YtUser_User() {
     global $zbp;
     if($zbp->user->Level<3){
         Redirect($zbp->host."zb_system/login.php");
     }
+    $zbp->header .='<script src="'.$zbp->host.'zb_users/plugin/YtUser/js/ytjs.php" type="text/javascript"></script>' . "\r\n";
+	$zbp->header .='<script src="'.$zbp->host.'zb_users/plugin/YtUser/js/layui/layui.all.js" type="text/javascript"></script>' . "\r\n";
 	$article = new Post;
 	$article->Title="用户中心";
 	$article->IsLock=true;
 	$article->Type=ZC_POST_TYPE_PAGE;
 	$article->verifycode ='<img id="reg_verfiycode" style="border:none;vertical-align:middle;width:'.$zbp->option['ZC_VERIFYCODE_WIDTH']. 'px;height:' . $zbp->option['ZC_VERIFYCODE_HEIGHT'] . 'px;cursor:pointer;" src="' .$zbp->validcodeurl . '?id=User" alt="" title="" onclick="javascript:this.src=\'' . $zbp->validcodeurl . '?id=User&amp;tm=\'+Math.random();"/>';
     if($zbp->user->ID){
-        $article->Content .='<input id="edtID" name="ID" type="hidden" value="'.$zbp->user->ID.'" />';
+        $article->Content .='<form role="form" action="#" method="POST" id="signup-form"><input id="edtID" name="ID" type="hidden" value="'.$zbp->user->ID.'" />';
         $article->Content .='<input id="edtGuid" name="Guid" type="hidden" value="'.$zbp->user->Guid.'" />';
         $article->Content .='<table style="width:90%;border:none;font-size:1.1em;line-height:2.5em;">';
         if($zbp->user->Level < 5){$temp="VIP会员";}else{$temp="普通会员";}
@@ -717,39 +737,9 @@ function YtUser_User() {
 	    $article->Content .='<tr><td style="text-align:right;border:none;">(*)摘要：</td><td  style="border:none;" ><textarea cols="3" rows="6" id="edtIntro" name="Intro" style="width:250px;font-size:1.2em;">'.$zbp->user->Intro.'</textarea>';
 	    $article->Content .='</td></tr>';
 	    $article->Content .='<tr><td style="text-align:right;border:none;">(*)</td><td  style="border:none;" ><input required="required" type="text" name="verifycode" style="width:150px;font-size:1.2em;" />&nbsp;&nbsp;'.$article->verifycode.'</td></tr>';
-	    $article->Content .='<tr><td  style="border:none;" ></td><td  style="border:none;" ><button onclick="return checkInfo();">确定</button></td></tr>';
-	    $article->Content .='</table>';
-        $article->js =<<<js
-    <script type="text/javascript">function checkInfo(){
-    $.post(bloghost+'zb_users/plugin/YtUser/cmd.php?act=MemberPst&token={$zbp->GetToken()}',
-        {
-        "ID":$("input[name='ID']").val(),
-        "Guid":$("input[name='Guid']").val(),
-        "Alias":$("input[name='Alias']").val(),
-        "meta_Tel":$("input[name='meta_Tel']").val(),
-        "meta_Add":$("input[name='meta_Add']").val(),
-		"meta_Rname":$("input[name='meta_Rname']").val(),
-        "Email":$("input[name='Email']").val(),
-        "HomePage":$("input[name='HomePage']").val(),
-        "Intro":$("textarea[name='Intro']").val(),
-        "verifycode":$("input[name='verifycode']").val(),
-        },
-        function(data){
-            var s =data;
-            if((s.search("faultCode")>0)&&(s.search("faultString")>0))
-            {
-                alert(s.match("<string>.+?</string>")[0].replace("<string>","").replace("</string>",""));
-				$("#reg_verfiycode").attr("src",bloghost+"zb_system/script/c_validcode.php?id=User&amp;tm="+Math.random());
-            }
-            else{
-                var s =data;
-                alert(s);
-                window.location=bloghost+'?User';
-            }
-        }
-    );
-    }</script>
-js;
+        $article->Content .='<tr><td style="border:none;" ></td><td style="border:none;"><input id="YtUserbnt" onclick="return checkInfo()"  type="submit" value="确定" class="button" tabindex="4"/></td></tr>';
+	    $article->Content .='</table></form>';
+        $article->js ='';
     }else{
         Redirect($zbp->host."?Login");die();
     }
@@ -764,7 +754,6 @@ js;
 	$zbp->template->SetTags('title',$article->Title);
 	$zbp->template->SetTags('article',$article);
 	$zbp->template->SetTags('type','page');
-    
 	$zbp->template->SetTemplate($article->Template);
 	$zbp->template->SetTags('page',1);
 	$zbp->template->SetTags('pagebar',null);
@@ -776,7 +765,8 @@ js;
 function YtUser_Resetpassword() {
     global $zbp;
     $zbp->header .='<script src="'.$zbp->host.'zb_system/script/md5.js" type="text/javascript"></script>' . "\r\n";
-    $zbp->header .='<script src="'.$zbp->host.'zb_users/plugin/YtUser/Upgrade.js" type="text/javascript"></script>' . "\r\n";
+    $zbp->header .='<script src="'.$zbp->host.'zb_users/plugin/YtUser/js/ytjs.php" type="text/javascript"></script>' . "\r\n";
+	$zbp->header .='<script src="'.$zbp->host.'zb_users/plugin/YtUser/js/layui/layui.all.js" type="text/javascript"></script>' . "\r\n";
     if (isset($_GET["username"])) {
         $username=TransferHTML($_GET['username'], '[noscript]');
     }else{
@@ -795,9 +785,9 @@ function YtUser_Resetpassword() {
 	$article->Title="重置密码";
 	$article->IsLock=true;
 	$article->Type=ZC_POST_TYPE_PAGE;
-            $article->username=$username;
-            $article->hash=$hash;
-            $article->verifycode ='<img id="reg_verfiycode" style="border:none;vertical-align:middle;width:'.$zbp->option['ZC_VERIFYCODE_WIDTH']. 'px;height:' . $zbp->option['ZC_VERIFYCODE_HEIGHT'] . 'px;cursor:pointer;" src="' .$zbp->validcodeurl . '?id=Resetpassword" alt="" title="" onclick="javascript:this.src=\'' . $zbp->validcodeurl . '?id=Resetpassword&amp;tm=\'+Math.random();"/>';
+    $article->username=$username;
+    $article->hash=$hash;
+    $article->verifycode ='<img id="reg_verfiycode" style="border:none;vertical-align:middle;width:'.$zbp->option['ZC_VERIFYCODE_WIDTH']. 'px;height:' . $zbp->option['ZC_VERIFYCODE_HEIGHT'] . 'px;cursor:pointer;" src="' .$zbp->validcodeurl . '?id=Resetpassword" alt="" title="" onclick="javascript:this.src=\'' . $zbp->validcodeurl . '?id=Resetpassword&amp;tm=\'+Math.random();"/>';
     $article->Content .='<table style="width:90%;border:none;font-size:1.1em;line-height:2.5em;">';
 	$article->Content .='<tr><td style="text-align:right;border:none;">(*)名称：</td><td  style="border:none;" >'.$username.'</td></tr>';
     $article->Content .='<input type="hidden" name="username" id="inpId" value="'.$username.'" />';
@@ -827,7 +817,8 @@ function YtUser_Register() {
     global $zbp;
     if($zbp->user->ID) Redirect($zbp->host."?User");
     if($zbp->Config('YtUser')->open_reg) Redirect($zbp->host."?reg");
-	$zbp->header .='<script src="'.$zbp->host.'zb_users/plugin/YtUser/Upgrade.js" type="text/javascript"></script>' . "\r\n";
+	$zbp->header .='<script src="'.$zbp->host.'zb_users/plugin/YtUser/js/ytjs.php" type="text/javascript"></script>' . "\r\n";
+	$zbp->header .='<script src="'.$zbp->host.'zb_users/plugin/YtUser/js/layui/layui.all.js" type="text/javascript"></script>' . "\r\n";
 	$article = new Post;
 	$article->Title="会员注册";
 	$article->IsLock=true;
@@ -840,7 +831,7 @@ function YtUser_Register() {
 	$article->Content .='<tr><td style="text-align:right;border:none;">(*)确认密码：</td><td  style="border:none;" ><input required="required" type="password" name="repassword" style="width:250px;font-size:1.2em;" /></td></tr>';
 	$article->Content .='</td></tr>';
 	$article->Content .='<tr><td style="text-align:right;border:none;">(*)</td><td  style="border:none;" ><input required="required" type="text" name="verifycode" style="width:150px;font-size:1.2em;" />&nbsp;&nbsp;'.$article->verifycode.'</td></tr>';
-	$article->Content .='<tr><td  style="border:none;" ></td><td  style="border:none;" ><input type="submit" style="width:100px;font-size:1.0em;padding:0.2em" value="提交" onclick="return register()" /></td></tr>';
+	$article->Content .='<tr><td  style="border:none;" ></td><td  style="border:none;" ><input id="YtUserbnt" type="submit" style="width:100px;font-size:1.0em;padding:0.2em" value="提交" onclick="return register()" /></td></tr>';
 	$article->Content .='</table>';
     if($zbp->Config('YtUser')->appkey !=""){
     $article->Content .='使用其它帐号登录：<a href="'.$zbp->host.'zb_users/plugin/YtUser/login.php" class="">QQ登录</a>';
@@ -863,7 +854,8 @@ function YtUser_Register() {
 //使用VIP充值卡
 function YtUser_Upgrade(){
     global $zbp;
-    $zbp->header .='<script src="'.$zbp->host.'zb_users/plugin/YtUser/Upgrade.js" type="text/javascript"></script>' . "\r\n";
+    $zbp->header .='<script src="'.$zbp->host.'zb_users/plugin/YtUser/js/ytjs.php" type="text/javascript"></script>' . "\r\n";
+	$zbp->header .='<script src="'.$zbp->host.'zb_users/plugin/YtUser/js/layui/layui.all.js" type="text/javascript"></script>' . "\r\n";
 	$article = new Post;
 	$article->Title="使用VIP卡";
 	$article->IsLock=true;
@@ -882,7 +874,7 @@ function YtUser_Upgrade(){
 		$article->Content .='<tr><td style="text-align:right;border:none;">(*)</td><td  style="border:none;" ><input required="required" type="text" name="verifycode" style="width:150px;font-size:1.2em;" />&nbsp;&nbsp;';
         $article->Content .= $article->verifycode;
         $article->Content .='</td></tr>';
-		$article->Content .='<tr><td  style="border:none;" ></td><td  style="border:none;" ><input type="submit" style="width:100px;font-size:1.0em;padding:0.2em" value="提交" onclick="return RegPage()" /></td></tr>';
+		$article->Content .='<tr><td  style="border:none;" ></td><td  style="border:none;" ><input type="submit" id="YtUserbnt" style="width:100px;font-size:1.0em;padding:0.2em" value="提交" onclick="return RegPage()" /></td></tr>';
 		$article->Content .='</table>';
     }else{
         Redirect($zbp->host."?Login");die();
@@ -896,13 +888,9 @@ function YtUser_Upgrade(){
 	$zbp->template->SetTags('title',$article->Title);
 	$zbp->template->SetTags('article',$article);
 	$zbp->template->SetTags('type','page');
-    
 	$zbp->template->SetTemplate($article->Template);
 	$zbp->template->SetTags('page',1);
 	$zbp->template->SetTags('pagebar',null);
 	$zbp->template->SetTags('comments',array());
-	foreach ($GLOBALS['Filter_Plugin_ViewPost_Template'] as $fpname => &$fpsignal) {
-		$fpreturn=$fpname($zbp->template);
-	}
 	$zbp->template->Display();
 }

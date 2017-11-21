@@ -15,21 +15,57 @@ if($zbp->user->Level >4){
 }
     $a = new Post();
     $a->CateID = 0;
+	if (isset($_POST['CateID'])) {
+		$a->CateID = $_POST['CateID'];
+	}
     $a->AuthorID = $zbp->user->ID;
-    $a->Tag = '';
+	$a->Tag = '';
+    if (isset($_POST['Tag'])) {
+        $_POST['Tag'] = TransferHTML($_POST['Tag'], '[noscript]');
+        $_POST['Tag'] = PostArticle_CheckTagAndConvertIDtoString($_POST['Tag']);
+		$a->Tag = $_POST['Tag'];
+    }
     $a->Status = 2;
     $a->Type = ZC_POST_TYPE_ARTICLE;
     $a->Alias = '';
+    if (isset($_POST['Alias'])) {
+        $_POST['Alias'] = TransferHTML($_POST['Alias'], '[noscript]');
+		$a->Alias = $_POST['Alias'];
+    }
     $a->IsTop = false;
     $a->IsLock = false;
-    $a->Title = $_POST['Title'];
-    $a->Content = $_POST['Content'];
+    $a->Title = TransferHTML($_POST['Title'], '[noscript]');
+    if((int)$zbp->Config('YtUser')->certifititle > 0){
+        if(mb_strwidth($a->Title) > ($zbp->Config('YtUser')->certifititle) ){
+            $zbp->ShowError('标题长度不能大于'.(int)$zbp->Config('YtUser')->certifititle);die();
+        }
+    }
+	$a->Content = '';
+	$a->Intro = '';
+	if (isset($_POST['Content'])) {
+        $_POST['Content'] = str_replace('<hr class="more" />', '<!--more-->', $_POST['Content']);
+        $_POST['Content'] = str_replace('<hr class="more"/>', '<!--more-->', $_POST['Content']);
+		$a->Content = $_POST['Content'];
+        if (strpos($_POST['Content'], '<!--more-->') !== false) {
+            if (isset($_POST['Intro'])) {
+                $_POST['Intro'] = GetValueInArray(explode('<!--more-->', $_POST['Content']), 0);
+				$a->Intro = $_POST['Intro'];
+            }
+        } 
+    }
     $a->IP = GetGuestIP();
     $a->PostTime = time();
     $a->CommNums = 0;
     $a->ViewNums = 0;
     $a->Template = '';
-    $a->Meta = '';
+    foreach ($_POST as $key => $value) {
+        if (substr($key, 0, 5) == 'meta_') {
+            $name = substr($key, 5 - strlen($key));
+            $a->Metas->$name = $value;
+        }
+    }
     $a->Save();
-    echo '投稿成功！';die();
+    FilterPost($a);
+    echo '投稿成功！';
+    die();
 ?>

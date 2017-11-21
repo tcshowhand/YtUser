@@ -59,6 +59,7 @@ if(!$zbp->user->ID){
         $YtConsume->Time=time();
         $YtConsume->Money=$article->Metas->price;
         $YtConsume->Type=1;
+        $YtConsume->Title="购买".$article->Title."消费".$article->Metas->price."金币";
         $YtConsume->Save();
         //更新作者信息
         $ytuser->YtInfoByField('Uid',$article->Author->ID);
@@ -70,6 +71,7 @@ if(!$zbp->user->ID){
         $YtConsume->Time=time();
         $YtConsume->Money=$article->Metas->price;
         $YtConsume->Type=0;
+        $YtConsume->Title="出售".$article->Title."获得".$article->Metas->price."金币";
         $YtConsume->Save();
     }
     echo '购买成功！';

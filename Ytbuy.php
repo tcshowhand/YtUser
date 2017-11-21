@@ -8,7 +8,7 @@ Add_Filter_Plugin('Filter_Plugin_Zbp_ShowError','RespondError',PLUGIN_EXITSIGNAL
 
     if(!$zbp->user->ID){
 	    $zbp->ShowError('请登录账户');
-	    header('Location: ' . $zbp->host .'?Login');
+	    header('Location: ' . $zbp->host .$zbp->Config('YtUser')->YtUser_Login);
 	    die();
     }
     $LogID=trim($_POST['LogID']);
