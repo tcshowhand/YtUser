@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <plugin version="php">
-<id>dm_uc</id>
+<id>yt_uc</id>
 <name>【YtUser插件模版】</name>
 <url>https://www.ytecn.com</url>
 <note>YT通用用户中心模版</note>
