@@ -8,7 +8,7 @@ if (!$zbp->CheckPlugin('yt_uc')) {$zbp->ShowError(48);die();}
 
 if (isset($_GET['act'])){$act = $_GET['act'];}else{$act = 'base';}
 
-$blogtitle='用户中心模版配置';
+$blogtitle='YtUser用户中心模版编辑';
   global $zbp;
   $yt_uc_templates = array();
   $yt_uc_theme = 0;
@@ -73,6 +73,21 @@ function yt_uc_SubMenu($id){
 	font-size: 20px;
 }
 </style>
+<STYLE type=text/css>
+BODY { FONT-SIZE: 14px; FONT-FAMILY: "宋体" }
+OL LI { MARGIN: 8px }
+#con { FONT-SIZE: 12px; MARGIN: 0px auto; WIDTH: 100% }
+#tags { PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px 0px 0px 10px; WIDTH: 400px; PADDING-TOP: 0px; HEIGHT: 23px }
+#tags LI { BACKGROUND: url(<?php echo $zbp->host.'zb_users/plugin/yt_uc/';?>/images/tagleft.gif) no-repeat left bottom; FLOAT: left; MARGIN-RIGHT: 1px; LIST-STYLE-TYPE: none; HEIGHT: 23px }
+#tags LI A { PADDING-RIGHT: 10px; PADDING-LEFT: 10px; BACKGROUND: url(<?php echo $zbp->host.'zb_users/plugin/yt_uc/';?>images/tagright.gif) no-repeat right bottom; FLOAT: left; PADDING-BOTTOM: 0px; COLOR: #999; LINE-HEIGHT: 23px; PADDING-TOP: 0px; HEIGHT: 23px; TEXT-DECORATION: none }
+#tags LI.emptyTag { BACKGROUND: none transparent scroll repeat 0% 0%; WIDTH: 4px }
+#tags LI.selectTag { BACKGROUND-POSITION: left top; MARGIN-BOTTOM: -2px; POSITION: relative; HEIGHT: 25px }
+#tags LI.selectTag A { BACKGROUND-POSITION: right top; COLOR: #000; LINE-HEIGHT: 25px; HEIGHT: 25px }
+#tagContent { BORDER-RIGHT: #aecbd4 1px solid; PADDING-RIGHT: 1px; BORDER-TOP: #aecbd4 1px solid; PADDING-LEFT: 1px; PADDING-BOTTOM: 1px; BORDER-LEFT: #aecbd4 1px solid; PADDING-TOP: 1px; BORDER-BOTTOM: #aecbd4 1px solid; BACKGROUND-COLOR: #fff }
+.tagContent { PADDING-RIGHT: 10px; DISPLAY: none; PADDING-LEFT: 10px; BACKGROUND: url(<?php echo $zbp->host.'zb_users/plugin/yt_uc/';?>images/bg.gif) repeat-x; PADDING-BOTTOM: 10px; WIDTH:100%; COLOR: #474747; PADDING-TOP: 10px; HEIGHT: 250px }
+#tagContent DIV.selectTag { DISPLAY: block }
+</STYLE>
+
 <div id="divMain">
 
   <div class="divHeader"><?php echo $blogtitle;?></div>
@@ -93,7 +108,7 @@ function yt_uc_SubMenu($id){
 	<th  class="td30"></th>
 </tr>
 <tr>
-	<td  class="td30"><p align='left'><b>编辑器CSS样式</b></p></td>
+	<td  class="td30"><p align='center'><b>编辑器代码的样式</b></p></td>
     <td  class="td30"><p align="left"><select style="width: 20%; height: 32px; padding: 0" id="CssSelect" name="tplCss">
   	<option value="dreamweaver"<?php if($zbp->Config('yt_uc')->tpl_Css == 'dreamweaver'){echo ' selected';}?>>Dreamweaver</option>
   	<option value="github"<?php if($zbp->Config('yt_uc')->tpl_Css == 'github'){echo ' selected';}?>>GitHub</option>
@@ -104,12 +119,12 @@ function yt_uc_SubMenu($id){
   </select></p></td>
 </tr>
 <tr>
-	<td  class="td30"><p align='left'><b>模版启用方式</b></p></td>
-    <td  class="td30"><p align="left"><input type="radio" name="tplaction"  id="tplaction" value="0"<?php if($zbp->Config('yt_uc')->tpl_action == 0){echo ' checked';}?>>仅修改，暂时不启用</p><p align="left"><input type="radio" name="tplaction"  id="tplaction" value="1"<?php if($zbp->Config('yt_uc')->tpl_action == 1){echo ' checked';}?>>已经完成修改，全部启用</p></td>
+	<td  class="td30"><p align='center'><b>启用用户中心模版</b></p></td>
+    <td  class="td30"><p align="left"><input type="radio" name="tplaction"  id="tplaction" value="0"<?php if($zbp->Config('yt_uc')->tpl_action == 0){echo ' checked';}?>>  仅修改模版，暂时不启用</p><p align="left"><input type="radio" name="tplaction"  id="tplaction" value="1"<?php if($zbp->Config('yt_uc')->tpl_action == 1){echo ' checked';}?>>  启用新的用户中心模版</p></td>
 </tr>	
 </table>
 	  <hr/>
-	  <p>
+	  <p  align='center'>
 		<input type="submit" class="button" value="<?php echo $lang['msg']['submit']?>" />
 	  </p>
 </form>
@@ -117,64 +132,37 @@ function yt_uc_SubMenu($id){
 	}
 
 	if ($act == 'tpl'){
-
 		?>
 <form method="post" action="main.php?act=edit"  id="formSubmit">  
 <input id="tplid" name="tplid" type="hidden" value="" />
+<input type="hidden" name="token" id="token" value="<?php echo $zbp->GetToken();?>" />
 <table border="1" class="tableFull tableBorder">
 <tr>
-	<th><p align='center'><b>模版编辑</b><br><span class='note'></span></p></th>
-	<th><p align='center'><b>常用标签</b><br><span class='note'></span></p></th>
+	<th><p align='center'><b>YtUser用户中心模版编辑</b><br><span class='note'></span></p></th>
 <tr>
-    <td class="td30">					
+    <td class="td30"  valign="top"><input class="button" type="button" value="保存模版" id="saveButton" style="margin: 0; height: 32px;" style="display:none">					
 	<select style="width: 60%; height: 32px; padding: 0;" id="fileSelect" name="fileSelect">
-  	<option value="" disabled="disabled" selected="selected">请选择...</option>
+  	<option value="" disabled="disabled" selected="selected">请选择您需要编辑的模版文件...</option>
   <?php
 $options = scan_plugin_Dir();
 foreach ($options as $id => $value) {
 	echo '<option value="' . $value . '">' . $value . '</option>';
 }
 ?>
-  </select><input class="button" type="button" value="保存" id="saveButton" style="margin: 0; height: 32px;">
+  </select>
 	</td>
-    <td class="td30">	</td>
 </tr>
 <tr>
-<td>
+<td  valign="top">
 <p><div id="editor"></div></p>
-<div class="hideLayer">
-	<div class="messageBox">
-		<div class="content">
-			<img src="../../../zb_system/image/admin/loading.gif" style="margin-right: 10px"/>操作进行中..
-		</div>
-	</div>
-</div>
-</td>
-<td>
-
 </td>
 </tr>
-</tr>
-		<?php
-  if( is_array($yt_uc_templates) && count($yt_uc_templates) && $yt_uc_theme ){
-    foreach($yt_uc_templates as $vo){
-        $fullname=$zbp->usersdir .'plugin/'.$yt_uc_theme.'/template/'.$vo.'.php';
-		?>
-<tr>
-	<td><p align='left'><b><?php echo $yt_uc_templatesname[$yt_uc_index];?></b></p></td>
-    <td><p align="left"><b><?php echo $yt_uc_theme.'/template/'.$vo.'.php';?></b></p></td>
-	<td><p align="left"><input type="submit" name="" value="配置模版" onclick="tplgo(<?php echo $yt_uc_index;?>);"></td>
-</tr>	
-	<?php
-		$yt_uc_index = $yt_uc_index +1 ;
-    }
-  }
-	?>
 </table>
 <script src="ace/ace.js" type="text/javascript"></script>
 <script src="ace/ext-emmet.js" type="text/javascript"></script>
 <script src="ace/ext-beautify.js" type="text/javascript"></script>
 <script src="ace/emmet.js"></script>
+<script src="<?php echo $zbp->host . 'zb_users/plugin/YtUser/js'?>/layui/layui.all.js"></script>
 <script>
 $(function() {
 
@@ -184,10 +172,11 @@ $(function() {
 	var beautify = require('ace/ext/beautify');
 	var editor = ace.edit("editor");
 	var editorSession = editor.getSession();
+	$("#saveButton").hide();
 	var saveEditor = function() {
 		$(".hideLayer").show();
 		$.ajax({
-			url: 'ajax.php?action=save&filename=' + encodeURI($("#fileSelect").val()),
+			url: 'ajax.php?action=save&token=' + $("#token").val() + '&filename=' + encodeURI($("#fileSelect").val()),
 			data: {
 				content: editorSession.getValue()
 			},
@@ -196,8 +185,7 @@ $(function() {
 		}).done(function(data) {
 			fileChangeState = false;
 			document.title = document.title.replace("(*) ", "");
-		}).always(function() {
-			$(".hideLayer").hide();
+			layer.msg('模版文件保存完毕!');
 		});
 	};
 
@@ -227,6 +215,7 @@ $(function() {
 	editorSession.on('change', function() {
 		if (!fileChangeState) {
 			fileChangeState = true;
+			$("#saveButton").show();
 			document.title = "(*) " + document.title;
 		}
 	});
@@ -234,7 +223,7 @@ $(function() {
 		if (!fileChangeState || confirm('你当前编辑的文件还没保存，确定要切换文件吗？')) {
 			$(".hideLayer").show();
 			$.ajax({
-				url: 'ajax.php?action=load&filename=' + encodeURI($(this).val()),
+				url: 'ajax.php?action=load&token=' + $("#token").val() + '&filename=' + encodeURI($(this).val()),
 				type: 'GET',
 				dataType: 'json'
 			}).done(function(data) {
@@ -242,27 +231,21 @@ $(function() {
 				editorSession.setValue(data.content);
 				fileChangeState = false;
 				document.title = "Editing " + $("#fileSelect").val();
-			}).always(function() {
-				$(".hideLayer").hide();
+				layer.msg('模版文件加载完毕!');
 			});
 		}
 	});
 	$("#saveButton").click(saveEditor);
 	window.onbeforeunload = function() {
 		if (fileChangeState) {
-			return '你当前编辑的文件还没保存，确定要退出吗？'
+        return '你当前编辑的文件还没保存，确定要退出吗？'
 		} else {
 			return;
 		}
 	}
 });
-</script></form>
- <script language="javascript">
-             function tplgo(tid){
-          document.getElementById("tplid").value = tid;
-                     return true;
-             }
-     </script>
+</script>
+</form> 
   	<?php
 	}
 	if ($act == 'guide'){
@@ -283,49 +266,6 @@ $(function() {
   	<?php
 	}
 	?>
-	<?php
-	if ($act == 'edit'){	
-		if (isset($_POST['tplid'])){
-	$tplid = $_POST['tplid'];
-	$yt_uc_file_path = $zbp->usersdir .'plugin/' .$yt_uc_theme.'/template/'.$yt_uc_templates[$tplid].'.php';
-   if(file_exists($yt_uc_file_path)){
-   $yt_uc_str = file_get_contents($yt_uc_file_path);//将整个文件内容读入到一个字符串中
-   }
-	?>
-<form enctype="multipart/form-data" method="post" action="main.php?act=editsave">
-<input id="tplname" name="tplname" type="hidden" value="<?php echo $yt_uc_templatesname[$tplid];?>" />
-<input id="tplfile" name="tplfile" type="hidden" value="<?php echo $yt_uc_file_path;?>" />
-<table border="1" class="tableFull tableBorder">
-<tr>
-	<th><p align='left'><b>模版:<?php echo $yt_uc_templatesname[$tplid];?></b><br><span class='note'>模版文件:<?php echo $yt_uc_theme.'/template/'.$yt_uc_templates[$tplid].'.php';?></span></p></th>
-	<th>标签列表</th>
-</tr>
-<tr>
-    <td class="td30">					
-	<textarea name="tplhtml" rows="25" cols="110"><?php echo $yt_uc_str;?></textarea>
-	</td>
-    <td class="td30">					
-	<?php echo $yt_uc_templatesLabel;?>
-	</td>
-</tr>
-</table>
-	  <hr/>
-	  <p>
-		<input type="submit" class="button" value="<?php echo $lang['msg']['submit']?>" />
-	  </p>
-</form>
-	<?php
-	}else{
-?>
-<table border="1" class="tableFull tableBorder">
-<tr>
-	<th><p align='left'><b>提示：</b><br><span class='note'>请从 模版列表 页进入本编辑页面</span></p></th>
-</tr>
-</table>
-<?php
-	}
-	}
-	?>
 <?php
 if ($act == 'basesave'){
 if (isset($_POST['tplCss']) && isset($_POST['tplaction'])){
@@ -342,7 +282,7 @@ Redirect('./main.php?act=base');
 ?>
 
 	<script type="text/javascript">ActiveLeftMenu("aPluginMng");</script>
-	<script type="text/javascript">AddHeaderIcon("<?php echo $bloghost . 'zb_users/plugin/yt_uc/logo.png';?>");</script>	
+	<script type="text/javascript">AddHeaderIcon("<?php echo $bloghost . 'zb_users/plugin/Ux_Plus/logo.png';?>");</script>	
   </div>
 </div>
 <?php

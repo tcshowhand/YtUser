@@ -7,6 +7,7 @@ if (!$zbp->CheckRights($action)) {$zbp->ShowError(6);die();}
 if (!$zbp->CheckPlugin('yt_uc')) {$zbp->ShowError(48);die();}
 require './function.php';
 header('Content-Type: application/json');
+if(!$zbp->ValidToken(GetVars('token','GET'))){$zbp->ShowError(5,__FILE__,__LINE__);die();}
 switch (GetVars('action', 'GET')) {
 	case 'load':
 		echo json_encode(yt_uc_loadFile(GetVars('filename', 'GET')));

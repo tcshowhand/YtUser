@@ -25,7 +25,7 @@
 <price>0</price>
 <phpver>5.2</phpver>
 <advanced>
-  <dependency></dependency>
+  <dependency>YtUser</dependency>
   <rewritefunctions></rewritefunctions>
   <existsfunctions></existsfunctions>
   <conflict></conflict>
