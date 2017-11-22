@@ -1,6 +1,5 @@
-{* Template Name:dm_uc 我的评论*}
+{* Template Name: 我的评论*}
 {template:t_header}
-
 我的评论
 <br>
 ID---评论内容---评论文章---评论日期

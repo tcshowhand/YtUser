@@ -1,4 +1,4 @@
-{* Template Name:dm_uc 分页*}
+{* Template Name: 分页*}
 {if $pagebar}
 {foreach $pagebar.buttons as $k=>$v}
 {if $pagebar.PageNow==$k}
@@ -9,5 +9,3 @@
 {/foreach}
 <li><span>总计{$pagebar.PageAll}页</span></li>
 {/if}
-
-

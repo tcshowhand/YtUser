@@ -1,4 +1,4 @@
-{* Template Name:dm_uc 用户登录*}
+{* Template Name: 用户登录*}
 {template:t_header}
 
 登录{$user.Name}

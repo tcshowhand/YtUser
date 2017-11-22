@@ -1,4 +1,4 @@
-{* Template Name:密码重置 *}
+{* Template Name: 密码重置 *}
 {template:t_header}
 
 修改密码

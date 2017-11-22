@@ -3,9 +3,9 @@
 <id>yt_uc</id>
 <name>【YtUser插件模版】</name>
 <url>https://www.ytecn.com</url>
-<note>YT通用用户中心模版</note>
-<description>YT通用用户中心模版【YtUser插件模版】</description>
-<path></path>
+<note>用户中心模版</note>
+<description>【YtUser插件模版】</description>
+<path>main.php</path>
 <include>include.php</include>
 <level>1</level>
 <author>
@@ -19,9 +19,9 @@
   <url></url>
 </source>
 <adapted>151740</adapted>
-<version>1</version>
+<version>1.1</version>
 <pubdate>2017-11-21</pubdate>
-<modified>2017-11-21</modified>
+<modified>2017-11-22</modified>
 <price>0</price>
 <phpver>5.2</phpver>
 <advanced>

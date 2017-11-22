@@ -1,7 +1,6 @@
 {* Template Name: 重置密码*}
 {template:t_header}
 
-
 重置密码
 {if $article.username && $article.hash}
 <input type="hidden" value="{$article.username}" id="edtUserName" name="username">

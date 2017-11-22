@@ -1,4 +1,4 @@
-{* Template Name:dm_uc 购买列表*}
+{* Template Name: 购买列表*}
 {template:t_header}
 ID--交易类型--订单编号--标题--交易日期--状态<BR>
 
