@@ -27,8 +27,9 @@ https://www.kancloud.cn/showhand/zbloguser
 ### 反馈问题
 https://github.com/tcshowhand/YtUser/issues
 
-### 免费用户免费升级付费的方法
+### 免费用户免费升级付费用户的方法
 * 完善现插件不足的部分，并通过插件作者审核
 * 基于本插件开发插件或主题
+* 完善现有比较简易的功能
 
 
