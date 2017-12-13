@@ -25,10 +25,66 @@ function ActivePlugin_YtUser() {
     Add_Filter_Plugin('Filter_Plugin_Login_Header','YtUser_Login_Header');
     Add_Filter_Plugin('Filter_Plugin_Autoload','YtUser_Autoload');
     Add_Filter_Plugin('Filter_Plugin_Zbp_BuildTemplate','YtUser_Temp');
+    Add_Filter_Plugin('Filter_Plugin_ViewSearch_Begin','YtUser_ViewSearch_Begin');
+    Add_Filter_Plugin('Filter_Plugin_Member_Call', 'YtUser_Member_HelloWorld');
+    Add_Filter_Plugin('Filter_Plugin_Post_Call', 'YtUser_Post_HelloWorld');
     AutoloadClass('ytuser');
     AutoloadClass('ytuserbuy');
     AutoloadClass('yt_favorite');
     AutoloadClass('ytconsume');
+}
+
+
+function YtUser_Post_HelloWorld($member,$method, $args){
+    global $zbp;
+    if($method == 'Favorite'){
+        $GLOBALS['hooks']['Filter_Plugin_Post_Call']['YtUser_Post_HelloWorld']=PLUGIN_EXITSIGNAL_RETURN;
+        $favorite = new YtFavorite;
+        $array = $favorite->YtInfoByField('Pid',$member->ID);
+        if ($array) {
+            return 1;
+        }else{
+            return 0;
+        }
+    }
+}
+
+function YtUser_Member_HelloWorld($member,$method, $args){
+    global $zbp;
+    if($method == 'YtUser'){
+        $GLOBALS['hooks']['Filter_Plugin_Member_Call']['YtUser_Member_HelloWorld']=PLUGIN_EXITSIGNAL_RETURN;
+        $ytuser = new Ytuser();
+        $ytuser->YtInfoByField('Uid',$zbp->user->ID);
+        if($args[0] == 'Vipendtime'){
+            return date('Y-m-d H:i:s', (int) $ytuser->$args[0]);
+        }else{
+            return $ytuser->$args[0];
+        }
+    }
+}
+
+function YtUser_ViewSearch_Begin(){
+    global $zbp;
+	if($zbp->user->ID){
+        $ytuser = new Ytuser();
+        $array = $ytuser->YtInfoByField('Uid',$zbp->user->ID);
+        if($array){
+            $zbp->user->Price=$ytuser->Price;
+            $zbp->user->Vipendtime=$ytuser->Vipendtime;
+            $zbp->user->Oid=$ytuser->Oid;
+        }else{
+            $zbp->user->Price=0;
+            $zbp->user->Vipendtime=0;
+            $zbp->user->Oid="0";
+        }
+        if($zbp->user->Vipendtime < time() && $zbp->user->Level==4){
+            $member = new Member;
+            $member->LoadInfoByID($zbp->user->ID);
+            $member->Level=5;
+            $member->Save();
+        }
+        $zbp->user->Vipendtime=date('Y-m-d H:i:s', (int) $zbp->user->Vipendtime);
+    }
 }
 
 function Yt_Categories($default) {
@@ -180,6 +236,7 @@ function YtUser_Content(&$template){
     $userid = $article->ID;
     $article->Buypay = 0;
     if($article->Type==ZC_POST_TYPE_ARTICLE){
+        if($zbp->user->Level>2){
         if((int)$article->Metas->price > 0){
         $userbuy=new YtuserBuy();
         $array = $userbuy->YtBuyByField('LogID',$article->ID);
@@ -199,7 +256,6 @@ function YtUser_Content(&$template){
                 $content = preg_replace("/\[BuyView\](.*?)\[\/BuyView\]/sm",$alipay,$content);
                 }
             }
-        $article->Content = $content;
         $ytuser = new Ytuser();
         $array = $ytuser->YtInfoByField('Uid',$zbp->user->ID);
             if($array){
@@ -209,12 +265,15 @@ function YtUser_Content(&$template){
             }
         $num = $userbuy->YtSumByField('LogID',$article->ID);
         $article->paysum = $num;
-        $template->SetTags('article', $article);
         $articlebuys = $userbuy->YtArticleByField('LogID',$article->ID);
         $template->SetTags('articlebuys', $articlebuys);
         }
+        }
     }
-
+    $content = str_replace("[BuyView]",'',$content);
+    $content = str_replace("[/BuyView]",'',$content);
+    $article->Content = $content;
+    $template->SetTags('article', $article);
     $favorite = new YtFavorite;
     $array = $favorite->YtInfoByField('Pid',$article->ID);
     if ($array) {
@@ -236,6 +295,7 @@ function YtUser_SyntaxHighlighter_print() {
 function InstallPlugin_YtUser() {
 	global $zbp;
     YtUser_CreateTable();
+    if(!$zbp->Config('YtUser')->HasKey('dsurl')){
 	$zbp->Config('YtUser')->dsurl = 'zbloguser';
 	$zbp->Config('YtUser')->readme_text = '充满吧？';
 	$zbp->Config('YtUser')->integral_text = '';
@@ -275,6 +335,7 @@ function InstallPlugin_YtUser() {
     $zbp->Config('YtUser')->Oncertif = 1;
     $zbp->Config('YtUser')->certifititle = '0';
 	$zbp->SaveConfig('YtUser');
+    }
 }
 
 function UninstallPlugin_YtUser() {
@@ -294,6 +355,8 @@ function YtUser_CreateTable(){
     $s=$zbp->db->sql->CreateTable($GLOBALS['YtFavorite_Table'],$GLOBALS['YtFavorite_DataInfo']);
     $zbp->db->QueryMulit($s);
     $s=$zbp->db->sql->CreateTable($GLOBALS['YtConsume_Table'],$GLOBALS['YtConsume_DataInfo']);
+    $zbp->db->QueryMulit($s);
+    $s=$zbp->db->sql->CreateTable($GLOBALS['YtVerification_Table'],$GLOBALS['YtVerification_DataInfo']);
     $zbp->db->QueryMulit($s);
 }
 

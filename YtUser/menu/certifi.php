@@ -73,8 +73,8 @@ $op = array('pagebar' => $p);
 	  echo '<tr>';
 	  echo '<td class="td15">'.$reg->ID.'</td>';
 	  echo '<td>'.$reg->Uid.'('.$reg->User->Name.')'.'</td>';
-	  echo '<td>'.$reg->Idcard.'</td>';
-	  echo '<td class="td20">'.$reg->Name.'</td>';
+	  echo '<td>'.$reg->Name.'</td>';
+	  echo '<td class="td20">'.$reg->Idcard.'</td>';
 	  echo '<td class="td20">'.($reg->Isidcard==1 ? "待审核" : ($reg->Isidcard==2 ? "已通过" : "未通过")).'</td>';
 	  echo '<td class="td20">';
 		if($reg->Isidcard==1){

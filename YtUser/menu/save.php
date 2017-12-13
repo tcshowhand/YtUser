@@ -250,9 +250,10 @@ if(GetVars('type','GET') == 'setidjf' ){
 	global $zbp;
 	$uid = GetVars('UID','POST');
 	if (isset($zbp->members[$uid])){
+        
 		$add = GetVars('Price','POST');
         $ytuser = new Ytuser();
-        $array=$ytuser->YtInfoByField('Uid',$zbp->user->ID);
+        $array=$ytuser->YtInfoByField('Uid',$uid);
         if(!$array){
             $ytuser = new Ytuser();
             $ytuser->Uid=$uid;
@@ -285,9 +286,12 @@ if(GetVars('type','GET') == 'setidjf' ){
 			$YtConsume->Type=1;
 			$YtConsume->Title="管理员赠送".(int)$add."积分";
 			$YtConsume->Save();
-			$zbp->SetHint('good',"用户ID: $uid 当前积分 $add");
+			$zbp->SetHint('good',"用户ID: $uid 当前积分 $ytuser->Price");
 			Redirect('./recharge.php');
 		}
+	}else{
+	    $zbp->SetHint('good',"用户ID错误");
+        Redirect('./recharge.php');
 	}
 }
 

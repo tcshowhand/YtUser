@@ -9,6 +9,7 @@ $tysuer_DataInfo=array(
     'Isidcard'=>array('tc_isidcard','integer','',0),
     'Idcard'=>array('tc_idcard','string',255,''),
     'Name'=>array('tc_name','string',255,''),
+    'Tel'=>array('tc_tel','string',255,''),
 );
 $tyactivate_Table='%pre%activate';
 $tyactivate_DataInfo=array(
@@ -86,3 +87,13 @@ $YtConsume_DataInfo=array(
         'Type'=>array('cs_type','integer','',0),
 );
 
+$YtVerification_Table='%pre%ytverification';
+$YtVerification_DataInfo=array(
+        'ID'=>array('vf_id','integer','',0),
+        'Uid'=>array('vf_uid','integer','',0),
+        'Count'=>array('vf_count','integer','',0),
+        'Send'=>array('vf_sendtime','integer','',0),
+        'Expire'=>array('vf_expiretime','integer','',0),
+        'IP'=>array('comm_IP', 'string', 15, ''),
+        'Type'=>array('vf_type','integer','',0),
+);

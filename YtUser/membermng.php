@@ -134,7 +134,7 @@ $tabletds[] = '     <td valign="middle" align="left">' . $member->LevelName . ($
 $tabletds[] = '     <td valign="middle" align="right">';
 $tabletds[] = '         积分余额：';
 $tabletds[] = '     </td>';
-$tabletds[] = '     <td valign="middle" align="left">' . $ytmember[0]->Price . '</td>';
+$tabletds[] = '     <td valign="middle" align="left">' . $member->YtUser('Price') . '</td>';
 $tabletds[] = '     <td valign="middle" align="right">';
 $tabletds[] = '         VIP：';
 $tabletds[] = '     </td>';

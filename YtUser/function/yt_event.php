@@ -631,6 +631,8 @@ function YtUser_Favorite($page=1) {
         $a->Title=$articles->Title;    
         }
         $a->Intro=$articles->Intro;
+        $a->Content=$articles->Content;
+        $a->Status=$articles->Status;
         $a->Url=$articles->Url;
         $a->IsTop=0;
         $a->ViewNums=$articles->ViewNums;

@@ -56,6 +56,12 @@ if ($zbp->Config('YtUser')->regneedemail){
 	}else{
 		$zbp->ShowError('必须输入邮箱.');die();
 	}
+
+if (YT_CheckEmail($member->Email) == true) {
+    $zbp->ShowError('该邮箱已被注册使用.');
+    die();
+}
+
 }else{
 	if ($email && CheckRegExp($email,'[email]')){
 		$member->Email = $email;
@@ -81,4 +87,16 @@ foreach ($GLOBALS['hooks']['Filter_Plugin_RegPage_RegSucceed'] as $fpname => &$f
     $fpname($member);
 }
 echo '恭喜您注册成功,请在登录页面登录.';
+
+
+function YT_CheckEmail($email)
+{
+    global $zbp;
+    $email = trim(strtolower($email));
+    $sql = $zbp->db->sql->Select($zbp->table['Member'], '*', array(array('LIKE', 'mem_Email', $email)), null, 1, null);
+    $am = $zbp->GetListType('Member', $sql);
+    if (count($am) > 0) {
+        return true;
+    };
+}
 ?>
