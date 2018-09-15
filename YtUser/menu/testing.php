@@ -1,21 +1,16 @@
-<?php
-require '../../../../zb_system/function/c_system_base.php';
-require '../../../../zb_system/function/c_system_admin.php';
-$zbp->Load();
-$action='root';
-if (!$zbp->CheckRights($action)) {$zbp->ShowError(6);die();}
-if (!$zbp->CheckPlugin('YtUser')) {$zbp->ShowError(48);die();}
-
-if (isset($_GET['act'])){$act = $_GET['act'];}else{$act = 'base';}
-
-$blogtitle='用户中心';
-require $blogpath . 'zb_system/admin/admin_header.php';
-require $blogpath . 'zb_system/admin/admin_top.php';
-
+<?php /* EL PSY CONGROO */ /* EL PSY CONGROO */ /* EL PSY CONGROO */      			  	     					 	     	  	   
+require '../../../../zb_system/function/c_system_base.php';    		 	 	 	     				 		    	      	
+require '../../../../zb_system/function/c_system_admin.php';    	 	 		 	    	  	        			  			
+$zbp->Load();    	 	   		     		  	 	     	  		 	
+$action='root';        			       				      			 	   
+if (!$zbp->CheckRights($action)) {$zbp->ShowError(6);die();}    	  			 	    				  	       	 	  	
+if (!$zbp->CheckPlugin('YtUser')) {$zbp->ShowError(48);die();}        		        			 	      			 			
+if (isset($_GET['act'])){$act = $_GET['act'];}else{$act = 'base';}    	  	  	      		         	 				  
+$blogtitle='用户中心';    	  	 		     	 	 				     	      
+require $blogpath . 'zb_system/admin/admin_header.php';     				         	  			    	 		  	 
+require $blogpath . 'zb_system/admin/admin_top.php';       					     	   	 	    	 		 	  
 ?>
-
 <div id="divMain">
-
   <div class="divHeader"><?php echo $blogtitle;?></div>
 	<div class="SubMenu">
 		<?php echo YtUser_SubMenu('testing'); ?>
@@ -31,13 +26,16 @@ require $blogpath . 'zb_system/admin/admin_top.php';
 		<input type="submit" class="button" value="一键修复插件表" />
 	  </p>
 	</form>
-
+  <form enctype="multipart/form-data" method="post" action="save.php?type=testingdel"> 
+	  <p>
+		<input type="submit" class="button" value="一键删除无效数据" />
+	  </p>
+	</form>
 	<script type="text/javascript">ActiveLeftMenu("aPluginMng");</script>
 	<script type="text/javascript">AddHeaderIcon("<?php echo $bloghost . 'zb_users/plugin/YtUser/logo.png';?>");</script>	
   </div>
 </div>
-
 <?php
-require $blogpath . 'zb_system/admin/admin_footer.php';
-RunTime();
+require $blogpath . 'zb_system/admin/admin_footer.php';      	    	       	  		      		  	 
+RunTime();    			 		 	      	  		      			  		
 ?>

@@ -1,31 +1,31 @@
-<?php
-require '../../../zb_system/function/c_system_base.php';
-$zbp->Load();
-Add_Filter_Plugin('Filter_Plugin_Zbp_ShowError','RespondError',PLUGIN_EXITSIGNAL_RETURN);
-if (!$zbp->CheckPlugin('YtUser')) {$zbp->ShowError(48);die();}
-
-$verifycode=trim($_POST['verifycode']);
-if(!$zbp->CheckValidCode($verifycode,'resetpwd')){
-	$zbp->ShowError('验证码错误，请重新输入.');die();
-}
-
-$name=trim($_POST['name']);
-$email=trim($_POST['email']);
-if(CheckRegExp($email,'[email]')){
-}else{
-	$zbp->ShowError('邮箱格式不正确.');die();
-}
-if(isset($zbp->membersbyname[$name])){
-    $m=$zbp->membersbyname[$name];
-}else{
-    $zbp->ShowError('用户名不存在');die();
-}
-
-if($m->Email!=$email){
-    $zbp->ShowError('账户与邮箱不匹配');die();
-}
-$hash = YtUser_password_verify_emailhash($name);
-$mailurl = $zbp->host."?Resetpassword&username=$name&hash=$hash";
+<?php /* EL PSY CONGROO */ /* EL PSY CONGROO */ /* EL PSY CONGROO */     			 	      		  	       	   	 		
+require '../../../zb_system/function/c_system_base.php';    		  		      			 	  	       	 		 
+$zbp->Load();     	 		       					 		    		  		  
+Add_Filter_Plugin('Filter_Plugin_Zbp_ShowError','RespondError',PLUGIN_EXITSIGNAL_RETURN);    					  	     			 	      	 	   	 
+if (!$zbp->CheckPlugin('YtUser')) {$zbp->ShowError(48);die();}    	 		 	 	     		    	    	    	 	
+    		 	  		    			    	    		 				 
+$verifycode=trim($_POST['verifycode']);     	 			      		 		  	    					 	 
+if(!$zbp->CheckValidCode($verifycode,'resetpwd')){    	 	 		 	    		 		       	 		  	 
+	$zbp->ShowError('验证码错误，请重新输入.');die();    			 				     				 	     		 	 			
+}       			        		         			 	 	
+    		               	 	    	   		  
+$name=trim($_POST['name']);    	 			  	    			 	        		 	 	 
+$email=trim($_POST['email']);     	 	 			    					  	     					  
+if(CheckRegExp($email,'[email]')){    		   	      		          		 	 		 
+}else{       	  		                   		   
+	$zbp->ShowError('邮箱格式不正确.');die();    			 		 	      			       		 		 		
+}    	  	         			 		       	   		
+if(isset($zbp->membersbyname[$name])){    	   	         						    	    	  
+    $m=$zbp->membersbyname[$name];       					        		 	     	   		 
+}else{    				 	        	 	        				 	 
+    $zbp->ShowError('用户名不存在');die();    	     		          		     	 		 	 
+}    	   	  	    	 	 			      			 	  
+     		  	 	    	  	 		          	 	
+if($m->Email!=$email){     				 	      		  		      	 	 			
+    $zbp->ShowError('账户与邮箱不匹配');die();     			  	     		 	  		    			     
+}    					 		    		   	 	    	    			
+$hash = YtUser_password_verify_emailhash($name);    			 				     				 	      	 			 	
+$mailurl = $zbp->host."?Resetpassword&username=$name&hash=$hash";     		 	       	 	    	     	  		 	
 $content = <<<EOT
         <div><includetail><table cellpadding="0" cellspacing="0" align="center" style="text-align:left;font-family:'微软雅黑','黑体',arial;" width="742">
     <tbody><tr>
@@ -99,7 +99,7 @@ $content = <<<EOT
     </tr>
 </tbody></table></table></includetail></div>
 EOT;
-$emailtitle='您正在找回在'.$zbp->name.'的登录密码';
-send_mail($email,$emailtitle,$content);
-echo "请进入邮箱重置密码";
+$emailtitle='您正在找回在'.$zbp->name.'的登录密码';     				 		    	 	 	 	     		 		 	 
+send_mail($email,$emailtitle,$content);     	 	 		          	       		  	  
+echo "请进入邮箱重置密码";    		  	        	 			      		   		 
 ?>

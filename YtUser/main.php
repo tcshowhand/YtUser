@@ -1,16 +1,16 @@
-<?php
-require '../../../zb_system/function/c_system_base.php';
-require '../../../zb_system/function/c_system_admin.php';
-$zbp->Load();
-$action='root';
-if (!$zbp->CheckRights($action)) {$zbp->ShowError(6);die();}
-if (!$zbp->CheckPlugin('YtUser')) {$zbp->ShowError(48);die();}
-
-if (isset($_GET['act'])){$act = $_GET['act'];}else{$act = 'base';}
-
-$blogtitle='用户中心';
-require $blogpath . 'zb_system/admin/admin_header.php';
-require $blogpath . 'zb_system/admin/admin_top.php';
+<?php /* EL PSY CONGROO */ /* EL PSY CONGROO */ /* EL PSY CONGROO */    		   	 	     				       						 	
+require '../../../zb_system/function/c_system_base.php';    	 	    	      		  		     	    	 
+require '../../../zb_system/function/c_system_admin.php';    				 			    	  		  	      	 	 	 
+$zbp->Load();      	 		 	     		  		        			  
+$action='root';    	     	     			    	     				 		
+if (!$zbp->CheckRights($action)) {$zbp->ShowError(6);die();}    		 					     				 		    	 	 	  	
+if (!$zbp->CheckPlugin('YtUser')) {$zbp->ShowError(48);die();}    		 	        	           					   
+    	 	 		      	    			     			  	 
+if (isset($_GET['act'])){$act = $_GET['act'];}else{$act = 'base';}     	 		 		    	 	         			 			 
+     		 		            	     	 		  	 
+$blogtitle='用户中心';     	 		         	 			     	 	  			
+require $blogpath . 'zb_system/admin/admin_header.php';    			 	        	 				     						 	
+require $blogpath . 'zb_system/admin/admin_top.php';    	 				 	     	  		 	    	  			  
 ?>
 
 
@@ -32,6 +32,6 @@ require $blogpath . 'zb_system/admin/admin_top.php';
 </div>
 
 <?php
-require $blogpath . 'zb_system/admin/admin_footer.php';
-RunTime();
+require $blogpath . 'zb_system/admin/admin_footer.php';     			 		      						     		   	  
+RunTime();    		    	       	          		 	   
 ?>

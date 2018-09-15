@@ -1,17 +1,17 @@
-<?php
-require '../../../../zb_system/function/c_system_base.php';
-require '../../../../zb_system/function/c_system_admin.php';
-$zbp->Load();
-$action='root';
-if (!$zbp->CheckRights($action)) {$zbp->ShowError(6);die();}
-if (!$zbp->CheckPlugin('YtUser')) {$zbp->ShowError(48);die();}
-
-if (isset($_GET['act'])){$act = $_GET['act'];}else{$act = 'base';}
-
-$blogtitle='用户中心';
-require $blogpath . 'zb_system/admin/admin_header.php';
-require $blogpath . 'zb_system/admin/admin_top.php';
-
+<?php /* EL PSY CONGROO */ /* EL PSY CONGROO */ /* EL PSY CONGROO */     	 	 		     		    	     	       
+require '../../../../zb_system/function/c_system_base.php';     		  			    		 	 	 	        			 
+require '../../../../zb_system/function/c_system_admin.php';      		  	     		 	 	 	     			 	  
+$zbp->Load();     		  	          			       	   	 
+$action='root';       			 	    	 			  	     	   			
+if (!$zbp->CheckRights($action)) {$zbp->ShowError(6);die();}    	   		 	    			  		        	 		 
+if (!$zbp->CheckPlugin('YtUser')) {$zbp->ShowError(48);die();}    						      	 	 	       				 			
+      	   		    	 	 	 		     				  	
+if (isset($_GET['act'])){$act = $_GET['act'];}else{$act = 'base';}    	 	   		    	 	 				      					 
+    	  				     		  		        			 		
+$blogtitle='用户中心';    	 		 	        						     			   	
+require $blogpath . 'zb_system/admin/admin_header.php';      	 	  	    	 	 				      	  			
+require $blogpath . 'zb_system/admin/admin_top.php';     	  		 	     			  		      	  			
+    			 		      			 	 	     	       
 ?>
 
 <div id="divMain">
@@ -39,7 +39,7 @@ require $blogpath . 'zb_system/admin/admin_top.php';
 	  <tr>
 	  <td class="td30"><p align='center'>给用户ID为 
 		  <input type="text" name="UID" style="width:50px;" value="1" /> 的用户充值 
-		  <input type="text" name="Price" style="width:50px;" value="100" /> 天的VIP
+		  <input type="text" name="Price" style="width:50px;" value="30" /> 天的VIP
 		  </td>
 		  <td>
 			  <p align='center'><input type="submit" class="button" value="确认充值" /></p>
@@ -74,27 +74,28 @@ require $blogpath . 'zb_system/admin/admin_top.php';
 	  <th >VIP卡</th>
 	  <th >增长天数</th>
 	  <th >使用用户</th>
+	  <th>使用时间</th>
   </tr>
   <?php
-  $sql= $zbp->db->sql->Select($tyactivate_Table,'*',null,null,null,null);
-  $array=$zbp->GetListCustom($tyactivate_Table,$tyactivate_DataInfo,$sql);
-  foreach ($array as $key => $reg) {
-	  echo '<tr>';
+  $sql= $zbp->db->sql->Select($tyactivate_Table,'*',null,null,null,null);         			     				  	    	 			 		
+  $array=$zbp->GetListCustom($tyactivate_Table,$tyactivate_DataInfo,$sql);    	 			 	     		            		 	 	
+  foreach ($array as $key => $reg) {    			         		   	 	     	  		  
+	  echo '<tr>';        	 		    		 	 		     	  		   
 	  echo '<td class="td15">'.$reg->ID.'</td>';
 	  echo '<td>'.$reg->InviteCode.'</td>';
 	  echo '<td class="td20">'.$reg->Level.'</td>';
 	  echo '<td class="td20">'.($reg->AuthorID==0?'':$zbp->GetMemberByID($reg->AuthorID)->Name).'</td>';
+	  echo '<td class="td20">'.($reg->UpTime==0?'':date('Y-m-d H:i:s', $reg->UpTime)).'</td>';
 	  echo '</tr>';
   }
   ?>
   </table>
-
 	<script type="text/javascript">ActiveLeftMenu("aPluginMng");</script>
 	<script type="text/javascript">AddHeaderIcon("<?php echo $bloghost . 'zb_users/plugin/YtUser/logo.png';?>");</script>	
   </div>
 </div>
 
 <?php
-require $blogpath . 'zb_system/admin/admin_footer.php';
-RunTime();
+require $blogpath . 'zb_system/admin/admin_footer.php';    		  	  	    	 		   	     	  				
+RunTime();    	 				         	 			         			
 ?>

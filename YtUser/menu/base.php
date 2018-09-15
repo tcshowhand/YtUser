@@ -1,17 +1,17 @@
-<?php
-require '../../../../zb_system/function/c_system_base.php';
-require '../../../../zb_system/function/c_system_admin.php';
-$zbp->Load();
-$action='root';
-if (!$zbp->CheckRights($action)) {$zbp->ShowError(6);die();}
-if (!$zbp->CheckPlugin('YtUser')) {$zbp->ShowError(48);die();}
-
-if (isset($_GET['act'])){$act = $_GET['act'];}else{$act = 'base';}
-
-$blogtitle='用户中心';
-require $blogpath . 'zb_system/admin/admin_header.php';
-require $blogpath . 'zb_system/admin/admin_top.php';
-
+<?php /* EL PSY CONGROO */ /* EL PSY CONGROO */ /* EL PSY CONGROO */      	  	      	  		 	      	  			 
+require '../../../../zb_system/function/c_system_base.php';    				 	 	     	   	 	    						  
+require '../../../../zb_system/function/c_system_admin.php';    	 		   	    		 				     			    	
+$zbp->Load();    		 		 		    	 	   		     	 	 		 
+$action='root';     			  	     	  	 		     	   		 	
+if (!$zbp->CheckRights($action)) {$zbp->ShowError(6);die();}    	 			  	    	  	          	 				
+if (!$zbp->CheckPlugin('YtUser')) {$zbp->ShowError(48);die();}     						      	 	  		      	  	 	
+    			  		     	 		 	 	    	  	 	  
+if (isset($_GET['act'])){$act = $_GET['act'];}else{$act = 'base';}    	 	 		      		 		        	  				
+      		 		     		 	  	     			     
+$blogtitle='用户中心';     	  		 	      	 		      	 		 		 
+require $blogpath . 'zb_system/admin/admin_header.php';    						 	       		       	 				  
+require $blogpath . 'zb_system/admin/admin_top.php';       	  	     	  					    	   	 		
+      				         		 	       	   	 
 ?>
 
 <div id="divMain">
@@ -36,6 +36,12 @@ require $blogpath . 'zb_system/admin/admin_top.php';
 	<th>
 	</th>
 </tr>
+
+<tr>
+	<td class="td30"><p align='left'><b>是否开启插件自带主题</b></p></td>
+    <td><input type="text" class="checkbox" name="user_ytecn" value="<?php echo $zbp->Config('YtUser')->user_ytecn;?>" /></td>
+</tr>
+
 <tr>
 	<td class="td30"><p align='left'><b>QQ互联APPID</b></p></td>
 	<td><input type="text" name="appid" style="width:200px;" value="<?php echo htmlspecialchars($zbp->Config('YtUser')->appid);?>" style="width:89%;" /></td>
@@ -84,10 +90,8 @@ require $blogpath . 'zb_system/admin/admin_top.php';
 </tr>
 
 <tr>
-	<td class="td30"><p align='left'><b>支付方式</b></p></td>
-	<td>
-	    <?php echo YtUser_payment_radio((int)htmlspecialchars($zbp->Config('YtUser')->payment))?>
-	</td>
+	<td class="td30"><p align='left'><b>每日签到</b></p></td>
+	<td><input type="text" name="sign" style="width:50px;" value="<?php echo (int)htmlspecialchars($zbp->Config('YtUser')->sign);?>" style="width:89%;" />金币</td>
 </tr>
 
 </table>
@@ -105,6 +109,6 @@ require $blogpath . 'zb_system/admin/admin_top.php';
 </div>
 
 <?php
-require $blogpath . 'zb_system/admin/admin_footer.php';
-RunTime();
+require $blogpath . 'zb_system/admin/admin_footer.php';      	  	       	 	 	      	  		 		
+RunTime();    	 						      	         		 			  
 ?>

@@ -1,6 +1,6 @@
 <?php
-require '../../../../zb_system/function/c_system_base.php';
-$zbp->Load();
+require '../../../../zb_system/function/c_system_base.php';    		  			     					 		      		 			
+$zbp->Load();     		   		    	 	    	         	  
 echo <<<YtUjs
 document.onkeydown = function (e) { 
 var theEvent = window.event || e; 
@@ -37,12 +37,22 @@ function YtFavorite_custom(yt_type,yt_mms,yt_obj,yt_isok) {
 	if (yt_isok == 'success'){
 		layer.msg(yt_mms);
 		if (yt_type == 'add'){
+			if (yt_obj){
 			$(yt_obj).removeClass('am-icon-star-o');
 			$(yt_obj).addClass('am-icon-star');
 			$(yt_obj).text('已收藏');
 			$(yt_obj).removeAttr('onclick');
+			}else{
+			layer.msg('已加入收藏');
+			 window.location.reload();
+			}
 		}else if (yt_type == 'del'){
+			if (yt_obj){
 			$(yt_obj).closest('tr').remove();
+			}else{
+			layer.msg('已取消收藏');
+			 window.location.reload();
+			}
 		}else{
 			layer.msg('no zuo no die');
 		}
@@ -52,6 +62,7 @@ function YtFavorite_custom(yt_type,yt_mms,yt_obj,yt_isok) {
 		layer.msg('no zuo no die');
 	}
 }
+
 function YtFavorite(fvtype, pid, obj){
 	if (fvtype == 'add'){
 		var posturl=bloghost+'zb_users/plugin/YtUser/favorite/add.php';
@@ -114,6 +125,11 @@ function Ytbuy(){
 		}
 	);
 }
+
+YtUjs;
+
+if($zbp->Config('YtUser')->open_reg == 0){
+echo <<<YtUjs
 function RegPage(){
 	$.post(bloghost+'zb_users/plugin/YtUser/Upgrade.php',
 		{
@@ -135,7 +151,10 @@ function RegPage(){
 	);
 
 }
+YtUjs;
+}
 
+echo <<<YtUjs
 function Ytbuypay(){
 	$.post(bloghost+'zb_users/plugin/YtUser/Ytbuypay.php',
 		{
@@ -185,11 +204,14 @@ function register(){
 	$.post(bloghost+'zb_users/plugin/YtUser/register.php',
 		{
 		"name":$("input[name='name']").val(),
+		"mobile":$("input[name='mobile']").val(),
+		"mobilecode":$("input[name='mobilecode']").val(),
 		"password":$("input[name='password']").val(),
 		"repassword":$("input[name='repassword']").val(),
 		"email":$("input[name='email']").val(),
 		"homepage":$("input[name='homepage']").val(),
 		"verifycode":$("input[name='verifycode']").val(),
+		"rootid":$("input[name='rootid']").val(),
 		},
 		function(data){
 			var s =data;
@@ -267,6 +289,7 @@ function resetpwd(){
 		}
 	);
 }
+
 function Resetpassword(){
 	$.post(bloghost+'zb_users/plugin/YtUser/resetpassword.php',
 		{
@@ -377,6 +400,36 @@ function checkInfo(){
             }
         }
     );
+}
+
+function YtSign(){
+	$.post(bloghost+'zb_users/plugin/YtUser/common/sign.php',
+		function(data){
+			var s = data;
+			alert(s);
+			setTimeout(window.location.reload(),2000);
+		}
+	);
+}
+
+function ytmobilecode(){
+	$.post(bloghost+'zb_users/plugin/YtUser/common/mobilecode.php',
+	{
+		"mobile":$("input[name='mobile']").val(),
+		"verifycode":$("input[name='verifycode']").val(),
+	},
+		function(data){
+			var s = data;
+			if((s.search("faultCode")>0)&&(s.search("faultString")>0))
+            {
+                layer.msg(s.match("<string>.+?</string>")[0].replace("<string>","").replace("</string>",""))
+				$("#reg_verfiycode").attr("src",bloghost+"zb_system/script/c_validcode.php?id=register&amp;tm="+Math.random());
+            }
+            else{
+                layer.msg(s);
+            }
+		}
+	);
 }
 YtUjs;
 ?>

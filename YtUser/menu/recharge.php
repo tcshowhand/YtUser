@@ -1,17 +1,17 @@
-<?php
-require '../../../../zb_system/function/c_system_base.php';
-require '../../../../zb_system/function/c_system_admin.php';
-$zbp->Load();
-$action='root';
-if (!$zbp->CheckRights($action)) {$zbp->ShowError(6);die();}
-if (!$zbp->CheckPlugin('YtUser')) {$zbp->ShowError(48);die();}
-
-if (isset($_GET['act'])){$act = $_GET['act'];}else{$act = 'base';}
-
-$blogtitle='用户中心';
-require $blogpath . 'zb_system/admin/admin_header.php';
-require $blogpath . 'zb_system/admin/admin_top.php';
-
+<?php /* EL PSY CONGROO */ /* EL PSY CONGROO */ /* EL PSY CONGROO */    	  	 		     	  	  		    		  	 		
+require '../../../../zb_system/function/c_system_base.php';         	        	 		 	     		  	 	
+require '../../../../zb_system/function/c_system_admin.php';      			 	       			        	 					
+$zbp->Load();    			 				     	  		 	    	 	 			 
+$action='root';     		 			     					 		     	    	 
+if (!$zbp->CheckRights($action)) {$zbp->ShowError(6);die();}      	 	 	     				 	 	    	  					
+if (!$zbp->CheckPlugin('YtUser')) {$zbp->ShowError(48);die();}    		 		  	        	  	     	   	 	
+     	 		  	    		    		    	 			 	 
+if (isset($_GET['act'])){$act = $_GET['act'];}else{$act = 'base';}      	  	 	     			   	    	 	  		 
+    		 	 		     		  				    				   	
+$blogtitle='用户中心';    	 		 		                   	 	  	
+require $blogpath . 'zb_system/admin/admin_header.php';       	  	     		  	              	
+require $blogpath . 'zb_system/admin/admin_top.php';       	  		    	 			 		     		  		 
+      	 		 	     				         		    
 ?>
 
 <div id="divMain">
@@ -63,9 +63,9 @@ require $blogpath . 'zb_system/admin/admin_top.php';
 		<input type="text" name="Price" style="width:50px;" value="100" /> 积分充值卡</p></td>
 	    <td>
             <input type="submit" class="button" value="<?php echo $lang['msg']['submit']?>" />
-            <input type="submit" class="button" onclick="$('#resetd').val('Pricedel');" value="删除已使用的充值卡" />
-			<input type="submit" class="button" onclick="$('#resetd').val('Pricedeln');" value="删除未使用的充值卡" />
-            <input type="submit" class="button" onclick="$('#resetd').val('Priceept');" value="清空所有充值卡" />
+            <input type="submit" class="button" onclick="return confirm('点击确认将会删除已使用的充值卡，数据无法恢复，确定要这样做吗？')?$('#resetd').val('Pricedel'):false;" value="删除已使用的充值卡" />
+			<input type="submit" class="button" onclick="return confirm('点击确认将会删除未使用的充值卡，数据无法恢复，确定要这样做吗？')?$('#resetd').val('Pricedeln'):false;" value="删除未使用的充值卡" />
+            <input type="submit" class="button" onclick="return confirm('点击确认将会清空所有充值卡，数据无法恢复，确定要这样做吗？')?$('#resetd').val('Priceept'):false;" value="清空所有充值卡" />
         </td>
     </tr>
 </table>
@@ -74,30 +74,31 @@ require $blogpath . 'zb_system/admin/admin_top.php';
 <table border="1" class="tableFull tableBorder">
 <tr>
 	<th class="td10"></th>
-	<th >充值卡</th>
-	<th >面值</th>
-	<th >使用用户</th>
+	<th>充值卡</th>
+	<th>面值</th>
+	<th>使用用户</th>
+	<th>使用时间</th>
 </tr>
 <?php
-$sql= $zbp->db->sql->Select($typrepaid_Table,'*',null,null,null,null);
-$array=$zbp->GetListCustom($typrepaid_Table,$typrepaid_DataInfo,$sql);
-foreach ($array as $key => $reg) {
-	echo '<tr>';
-	echo '<td class="td15">'.$reg->ID.'</td>';
+$sql= $zbp->db->sql->Select($typrepaid_Table,'*',null,null,null,null);     		          			 	      		 		 		
+$array=$zbp->GetListCustom($typrepaid_Table,$typrepaid_DataInfo,$sql);    	 	         	 				       		  			
+foreach ($array as $key => $reg) {    	 		  	     	 	  	 	    						 	
+	echo '<tr>';    						 	    			    	     		  			
+	echo '<td class="td15">'.$reg->ID.'</td>';    			 		          	  	      	 		  
 	echo '<td>'.$reg->InviteCode.'</td>';
 	echo '<td class="td20">'.$reg->Price.'</td>';
 	echo '<td class="td20">'.($reg->AuthorID==0?'':$zbp->GetMemberByID($reg->AuthorID)->Name).'</td>';
-	echo '</tr>';
-}
+	echo '<td class="td20">'.($reg->UpTime==0?'':date('Y-m-d H:i:s', $reg->UpTime)).'</td>'; 
+	echo '</tr>';    			   	      		 			     		 				 
+}     			 	      				   	    		 	   	
 ?>
 </table>
-
 	<script type="text/javascript">ActiveLeftMenu("aPluginMng");</script>
 	<script type="text/javascript">AddHeaderIcon("<?php echo $bloghost . 'zb_users/plugin/YtUser/logo.png';?>");</script>	
   </div>
 </div>
 
 <?php
-require $blogpath . 'zb_system/admin/admin_footer.php';
-RunTime();
+require $blogpath . 'zb_system/admin/admin_footer.php';    		 			 	    	  	 	       		 	 	 
+RunTime();      	 	 	      	 	  		    	  		  	
 ?>

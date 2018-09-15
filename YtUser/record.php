@@ -1,14 +1,14 @@
-<?php
-require '../../../zb_system/function/c_system_base.php';
-require '../../../zb_system/function/c_system_admin.php';
-$zbp->Load();
-$action='root';
-if (!$zbp->CheckRights($action)) {$zbp->ShowError(6);die();}
-if (!$zbp->CheckPlugin('YtUser')) {$zbp->ShowError(48);die();}
-
-$blogtitle='用户中心';
-require $blogpath . 'zb_system/admin/admin_header.php';
-require $blogpath . 'zb_system/admin/admin_top.php';
+<?php /* EL PSY CONGROO */ /* EL PSY CONGROO */ /* EL PSY CONGROO */      		 	 	      	 	 		    			 	 		
+require '../../../zb_system/function/c_system_base.php';    			  			    	 			 	      			    
+require '../../../zb_system/function/c_system_admin.php';       	  		    		   	      		  	 	 
+$zbp->Load();     							    			  			     	      
+$action='root';     		 			     		 		  	    							 
+if (!$zbp->CheckRights($action)) {$zbp->ShowError(6);die();}    	 		 	 	     	          	 	 	 		
+if (!$zbp->CheckPlugin('YtUser')) {$zbp->ShowError(48);die();}    	    	      			         			     
+     	  	  	    			 	         	   	 
+$blogtitle='用户中心';    				 	 	    		   	 	      		   	
+require $blogpath . 'zb_system/admin/admin_header.php';     	  		 	     	  		            	 
+require $blogpath . 'zb_system/admin/admin_top.php';    		 			 	    	  			       			 	  
 ?>
 
 <div id="divMain">
@@ -30,19 +30,19 @@ require $blogpath . 'zb_system/admin/admin_top.php';
     <th >时间</th>
 </tr>
 <?php
-$sql= $zbp->db->sql->Select($YtUser_buy_Table,'*',array(array('=', 'buy_State', 1)),null,null,null);
-$array=$zbp->GetListCustom($YtUser_buy_Table,$YtUser_buy_DataInfo,$sql);
-foreach ($array as $key => $reg) {
-	echo '<tr>';
-    echo '<td class="td15">'.$reg->ID.'</td>';
-	echo '<td class="td15">'.$reg->OrderID.'</td>';
-	$post=GetPost((int)$reg->LogID);
-	echo '<td>'.$zbp->members[$reg->AuthorID]->StaticName.'</td>';
-	echo '<td class="td20">'.$reg->Title.'</td>';
-	echo '<td>'.$post->Metas->price.'</td>';
-    echo '<td class="td20">'.date("Y-m-d H:i:s",$reg->PostTime).'</td>';
-	echo '</tr>';
-}
+$sql= $zbp->db->sql->Select($YtUser_buy_Table,'*',array(array('=', 'buy_State', 1)),null,null,null);    	   				     						       	 			 
+$array=$zbp->GetListCustom($YtUser_buy_Table,$YtUser_buy_DataInfo,$sql);    		   			    					 		     			  		
+foreach ($array as $key => $reg) {    	 				 	    		 					    		 			 	
+	echo '<tr>';        	  	     						       	  			
+    echo '<td class="td15">'.$reg->ID.'</td>';    			 	 		     	 			 	        	  	
+	echo '<td class="td15">'.$reg->OrderID.'</td>';    	 	 				    	 		 	       					  
+	$post=GetPost((int)$reg->LogID);    					 	      			 		      		 	  	
+	echo '<td>'.$zbp->members[$reg->AuthorID]->StaticName.'</td>';     	 			 	    	           	  	 	 	
+	echo '<td class="td20">'.$reg->Title.'</td>';       		  	    	 		  		    		      
+	echo '<td>'.$post->Metas->price.'</td>';        				    	 	    	    		 	 			
+    echo '<td class="td20">'.date("Y-m-d H:i:s",$reg->PostTime).'</td>';    		 	 	       			  	     				    
+	echo '</tr>';    	  		 		       	 		       	 			 
+}      			       	  	 			    	    		 
 ?>
 </table>
 
@@ -52,6 +52,6 @@ foreach ($array as $key => $reg) {
 </div>
 
 <?php
-require $blogpath . 'zb_system/admin/admin_footer.php';
-RunTime();
+require $blogpath . 'zb_system/admin/admin_footer.php';    		 	 	 	     	   	       		   	 
+RunTime();     		   		    	 	  	         			  
 ?>
