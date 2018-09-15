@@ -5,9 +5,6 @@ YtUser 11.5 用户中心（百搭） 先行版
 
 兴奋的是，制作本插件主题的作者越来越多了。啦啦啦啦啦啦啦
 
-### 协议说明
-本插件遵循MIT协议
-
 ### 用户中心（百搭）主要特性
 * 基于Zblog-PHP
 * 高度自由
@@ -27,10 +24,5 @@ https://www.kancloud.cn/showhand/zbloguser
 
 ### 反馈问题
 https://github.com/tcshowhand/YtUser/issues
-
-### 免费用户免费升级付费用户的方法
-* 完善现插件不足的部分，并通过插件作者审核
-* 基于本插件开发插件或主题
-* 完善现有比较简易的功能
 
 
