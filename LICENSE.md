@@ -1,6 +1,6 @@
 YtUser遵循Apache2开源协议发布，并提供免费使用。
-版权所有Copyright © 2018-2018 by 豫唐 (https://www.ytecn.com)
-All rights reserved。
+
+版权所有Copyright © 2018-2018 by 豫唐 (https://www.ytecn.com)All rights reserved。
 
 Apache Licence是著名的非盈利开源组织Apache采用的协议。
 
