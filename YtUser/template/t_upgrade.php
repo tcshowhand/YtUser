@@ -1,103 +1,53 @@
-{* Template Name: VIP卡充值 *}
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <title>VIP卡充值</title>
-  <meta name="renderer" content="webkit">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
-  <link rel="stylesheet" href="{$host}zb_users/plugin/YtUser/layuiadmin/layui/css/layui.css" media="all">
-  <link rel="stylesheet" href="{$host}zb_users/plugin/YtUser/layuiadmin/style/admin.css" media="all">
-</head>
-<body>
-
-  <div class="layui-fluid">
-    <div class="layui-row layui-col-space15">
-      <div class="layui-col-md12">
-        <div class="layui-card">
-          <div class="layui-card-header">VIP卡充值</div>
-          <div class="layui-card-body">
-          <div class="layui-col-md12">
-            <div class="layui-card">
-              <div class="layui-card-body">
-              用户级别：{$lang['user_level_name'][$user.Level]}<br>
-              {if $user.Level < 5}
-              到期时间:{$user.Vipendtime}<br>
-              {/if}
-              页面介绍：{$zbp.Config('YtUser').readme_text}<br>
-              </div>
-            </div>
-          </div>
-
-            <form id="signup-form" class="layui-form" action="" lay-filter="component-form-element">
-              <div class="layui-row layui-col-space10 layui-form-item">
-                <div class="layui-col-lg12">
-                  <label class="layui-form-label">充值卡：</label>
-                  <div class="layui-input-block">
-                    <input type="text" name="name" lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
-                  </div>
-                </div>
-              </div>
-
-            <div class="layui-form-item">
-                <label class="layui-form-label">验证码：</label>
-                <div class="layui-input-inline">
-                    <input type="text" name="verifycode" lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
-                </div>
-                <div class="layui-form-mid layui-word-aux">{$article.verifycode}</div>
-            </div>
-              <div class="layui-form-item">
-                <div class="layui-input-block">
-                  <button class="layui-btn" lay-submit lay-filter="component-form-element">立即提交</button>
-                  <button type="reset" class="layui-btn layui-btn-primary">重置</button>
-                </div>
-              </div>
-            </form>
-
-          </div>
-        </div>
-      </div>
+{* Template Name: VIP卡充值*}
+<?php echo'<meta charset="UTF-8"><div style="text-align:center;padding:60px 0;font-size:16px;"><h2 style="font-size:60px;margin-bottom:32px;">这里是用户中心模版</h2>哈哈</div>';die();?>
+{template:t_header}
+<div class="col-19 col-m-24">
+    <div class="tx-box bg-white pd15 mb15">
+        <h2 class="f-22 mb10">会员级别：{$user.Vip} {if $user->Vipendtime}<span class="f-14">到期时间：{$user.Vipendtime}</span>{/if}</h2>
+        <p>{$zbp.Config('YtUser').readme_text}</p>
     </div>
-  </div>
-  
-  <script src="{$host}zb_users/plugin/YtUser/layuiadmin/layui/layui.js"></script>  
-  <script>
-    var  basehost= '{$host}'
-    var  zbloghost= '{$host}zb_users/plugin/YtUser/'
-  layui.config({
-    base: '{$host}zb_users/plugin/YtUser/layuiadmin/'
-  }).extend({
-    index: 'lib/index' //主入口模块
-  }).use(['index', 'form'], function(){
-    var $ = layui.$
-    ,admin = layui.admin
-    ,element = layui.element
-    ,form = layui.form;
-    form.render(null, 'component-form-element');
-    element.render('breadcrumb', 'breadcrumb');
-    form.on('submit(component-form-element)', function(data){
-        admin.req({
-        url: zbloghost + 'Upgrade.php'
-        ,type:'post'
-        ,data:  $("#signup-form").serialize()
-        ,done: function(res){
-          layer.msg('修改成功', {
-            offset: '15px'
-            ,icon: 1
-            ,time: 1000
-          }, function(){
-            location.href = '{$host}{$zbp->Config('YtUser')->YtUser_User}';
-          });
-        },
-        error:function(res){
-            layer.msg($(res.responseText).find('member value string').text());
-            $("#reg_verfiycode").attr("src",basehost+"zb_system/script/c_validcode.php?id=RegPage&amp;tm="+Math.random());
-        }
-      });
-      return false;
+
+    <div class="tx-box bg-white mb15">
+        <div class="txuser-tab-hd">
+            <ul>
+                <li class="tx-on">充值卡充值</li>
+                {if $zbp->Config('YtUser')->payment=='1'}<li>支付宝在线充值</li>{/if}
+            </ul>
+        </div>
+        <div class="txuser-tab-bd">
+            <div class="pd15" style="display:block">
+                <ul class="tx-form-li row">
+                <form class="js-ajax-form" action="{$zbp->Config('YtUser')->api_upgrade}" method="post" novalidate="novalidate">
+                    <input type="hidden" name="token" id="token" value="{$zbp->GetToken()}" />
+                    <li class="col-24 col-m-24"><p><input required="required" type="text" name="invitecode" class="tx-input"><i>充值卡号(*)</i></p></li>
+                    <li class="col-24 col-m-24"><p class="input-ma"><input required="required" type="text" name="verifycode" class="tx-input"  placeholder="验证码">{$article.verifycode}</p></li>
+                    <li class="col-24 col-m-24"><p class="tx-input-full"><input type="submit" value="提交" class="js-ajax-submit tx-btn tx-btn-big bg-black"></p></li>
+                </form>
+                </ul>
+            </div>
+            {if $zbp->Config('YtUser')->payment=='1'}
+            <div class="pd15">
+                <form class="ytarticleedt" action="{$zbp->Config('YtUser')->api_zfbbuy}" method="post" novalidate="novalidate">
+                    <input type="hidden" name="LogID" id="LogID" value="0">
+                    <input type="hidden" name="token" id="token" value="{$zbp->GetToken()}" />
+                    <ul class="tx-form-li clearfix mb15">
+                        <li class="fl mr10"><input name="vipstate" type="radio" value="1" data-labelauty="一个月({$zbp->Config('YtUser')->pricetemp1}RMB)" checked></li>
+                        <li class="fl mr10"><input name="vipstate" type="radio" value="2" data-labelauty="三个月({$zbp->Config('YtUser')->pricetemp2}RMB)"></li>
+                        <li class="fl mr10"><input name="vipstate" type="radio" value="3" data-labelauty="一年({$zbp->Config('YtUser')->pricetemp3}RMB)"></li>
+                        <li class="fl mr10"><input name="vipstate" type="radio" value="4" data-labelauty="终身会员({$zbp->Config('YtUser')->pricetemp4}RMB)"></li>
+                    </ul>
+                    <p><button id="btnPost" class="tx-btn tx-btn-big bg-black">确定</button></p>    
+                </form>
+            </div>
+            {/if}
+        </div>
+
+    </div>
+
+</div>
+<script>
+    $(function(){
+        $(':input').labelauty();
     });
-  });
-  </script>
-</body>
-</html>
+</script>
+{template:t_footer}

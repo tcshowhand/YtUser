@@ -1,117 +1,24 @@
-{* Template Name: 密码重置 *}
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <title>密码重置</title>
-  <meta name="renderer" content="webkit">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
-  <link rel="stylesheet" href="{$host}zb_users/plugin/YtUser/layuiadmin/layui/css/layui.css" media="all">
-  <link rel="stylesheet" href="{$host}zb_users/plugin/YtUser/layuiadmin/style/admin.css" media="all">
-</head>
-<body>
-
-  <div class="layui-fluid">
-    <div class="layui-row layui-col-space15">
-      <div class="layui-col-md12">
-        <div class="layui-card">
-          <div class="layui-card-header">密码重置</div>
-          <div class="layui-card-body">
-
-
-            <form id="signup-form" class="layui-form" action="" lay-filter="component-form-element">
-              <div class="layui-row layui-col-space10 layui-form-item">
-                <div class="layui-col-lg12">
-                  <label class="layui-form-label">用户名：</label>
-                  <div class="layui-input-block">
-                    <input type="text" lay-verify="required" placeholder="" autocomplete="off" class="layui-input" value="{$user.Name}" disabled>
-                  </div>
-                </div>
-
+{* Template Name:密码重置 *}
+<?php echo'<meta charset="UTF-8"><div style="text-align:center;padding:60px 0;font-size:16px;"><h2 style="font-size:60px;margin-bottom:32px;">这里是用户中心模版</h2>哈哈</div>';die();?>
+{template:t_header}
+<div class="col-19 col-m-24">
+    <div class="tx-box bg-white mb15">
+        <h2 class="tx-title">修改密码</h2>
+        <div class="pd15">
+            <form class="js-ajax-form"  action="{$zbp->Config('YtUser')->api_changepassword}" method="post" novalidate="novalidate">
+            <ul class="tx-form-li row">
+                <li class="col-24 col-m-24"><p><input type="text" id="edtaccount" value="{$user.Name}" class="tx-input" disabled/><i>用户名</i></p></li>
+                <input type="hidden" name="token" id="token" value="{$zbp->GetToken()}">
                 {if $user.Password != '0e681aa506fc191c5f2fa9be6abddd01'}
-                <div class="layui-col-lg12">
-                  <label class="layui-form-label">原密码：</label>
-                  <div class="layui-input-block">
-                    <input type="password" name="password" lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
-                  </div>
-                </div>
+                <li class="col-24 col-m-24"><p><input type="password" id="edtpassword" name="password" placeholder="原密码" class="tx-input"><i>原密码(*)</i></p></li>
                 {/if}
-
-                <div class="layui-col-lg12">
-                  <label class="layui-form-label">新密码</label>
-                  <div class="layui-input-block">
-                    <input type="password" name="edtnewpassword" lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
-                  </div>
-                </div>
-
-                <div class="layui-col-lg12">
-                  <label class="layui-form-label">确认密码：</label>
-                  <div class="layui-input-block">
-                    <input type="password" name="edtrepassword" lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
-                  </div>
-                </div>
-              </div>
-
-            <div class="layui-form-item">
-                <label class="layui-form-label">验证码：</label>
-                <div class="layui-input-inline">
-                    <input type="text" name="verifycode" lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
-                </div>
-                <div class="layui-form-mid layui-word-aux">{$article.verifycode}</div>
-            </div>
-            <input type="hidden" name="token" id="token" value="{$zbp->GetToken()}" />
-              <div class="layui-form-item">
-                <div class="layui-input-block">
-                  <button class="layui-btn" lay-submit lay-filter="component-form-element">立即提交</button>
-                  <button type="reset" class="layui-btn layui-btn-primary">重置</button>
-                </div>
-              </div>
+                <li class="col-24 col-m-24"><p><input type="password" id="edtnewpassword" name="newpassword" placeholder="设置一个新的密码" class="tx-input"><i>新密码(*)</i></p></li>
+                <li class="col-24 col-m-24"><p><input type="password" id="edtrepassword" name="repassword" placeholder="确认新密码" class="tx-input"><i>新密码(*)</i></p></li>
+                <li class="col-24 col-m-24"><p class="input-ma"><input required="required" type="text" name="verifycode" class="tx-input"  placeholder="验证码">{$article.verifycode}</p></li>
+                <li class="col-24 col-m-24"><p class="tx-input-full"><button type="submit" class="js-ajax-submit tx-btn tx-btn-big bg-black">提交</button></p></li>
+            </ul>
             </form>
-
-          </div>
         </div>
-      </div>
-    </div>
-  </div>
-  
-  <script src="{$host}zb_users/plugin/YtUser/layuiadmin/layui/layui.js"></script>  
-  <script>
-    var  basehost= '{$host}'
-    var  zbloghost= '{$host}zb_users/plugin/YtUser/'
-  layui.config({
-    base: '{$host}zb_users/plugin/YtUser/layuiadmin/'
-  }).extend({
-    index: 'lib/index' //主入口模块
-  }).use(['index', 'form'], function(){
-    var $ = layui.$
-    ,admin = layui.admin
-    ,element = layui.element
-    ,form = layui.form;
-    form.render(null, 'component-form-element');
-    element.render('breadcrumb', 'breadcrumb');
-    form.on('submit(component-form-element)', function(data){
-        admin.req({
-        url: zbloghost + 'changepassword.php'
-        ,type:'post'
-        ,data:  $("#signup-form").serialize()
-        ,done: function(res){
-          layer.msg('修改成功', {
-            offset: '15px'
-            ,icon: 1
-            ,time: 1000
-          }, function(){
-            location.href = '{$host}{$zbp->Config('YtUser')->YtUser_Login}';
-          });
-        },
-        error:function(res){
-            layer.msg($(res.responseText).find('member value string').text());
-            $("#reg_verfiycode").attr("src",basehost+"zb_system/script/c_validcode.php?id=Changepassword&amp;tm="+Math.random());
-        }
-      });
-      return false;
-    });
-  });
-  </script>
-</body>
-</html>
+    </div> 
+</div>
+{template:t_footer}

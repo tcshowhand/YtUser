@@ -3,9 +3,9 @@
 <id>YtUser</id>
 <name>用户中心（百搭）</name>
 <url>https://www.ytecn.com/</url>
-<note>会员中心,支持订单、投稿、积分、快捷登录.</note>
+<note>会员中心、订单管理系统、在线投稿、积分系统、快捷登录、知识付费、QQ登录、在线充值、VIP、邀请注册、邀请码、商城、下载站</note>
 <description>用户中心</description>
-<path>menu/base.php</path>
+<path>menu/show.php</path>
 <include>include.php</include>
 <level>1</level>
 <author>
@@ -18,12 +18,12 @@
   <email></email>
   <url></url>
 </source>
-<adapted>151740</adapted>
-<version>11.5</version>
+<adapted>173430</adapted>
+<version>13.6.7</version>
 <pubdate>2016-10-30</pubdate>
-<modified>2018-07-30</modified>
-<price>524</price>
-<phpver>5.4</phpver>
+<modified>2026-01-14</modified>
+<price>168</price>
+<phpver>5.6</phpver>
 <advanced>
   <dependency></dependency>
   <rewritefunctions></rewritefunctions>
@@ -36,5 +36,9 @@
   <sidebar3></sidebar3>
   <sidebar4></sidebar4>
   <sidebar5></sidebar5>
+  <sidebar6></sidebar6>
+  <sidebar7></sidebar7>
+  <sidebar8></sidebar8>
+  <sidebar9></sidebar9>
 </sidebars>
 </plugin>

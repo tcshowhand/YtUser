@@ -1,0 +1,470 @@
+.cp-login>p>a {
+    display: inline-block !important;
+    margin: 0 10px 0 0 !important;
+}
+
+.ds-login,
+.ds-login>div {
+    min-height: 32px !important;
+    height: 32px !important;
+    overflow: hidden !important;
+    line-height: 32px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: 0 !important;
+}
+
+.ds-login {
+    margin: 10px 0 0 0 !important;
+}
+
+.ytarticleedt .error {
+    margin: .5em 0 0.5em;
+    background-repeat: no-repeat;
+    background-position: 10px 50%;
+    padding: 10px 10px 10px 10px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    color: #000;
+    background: pink;
+    text-align: center;
+}
+
+.ytarticleedt .submit {
+    position: relative;
+    display: inline-block;
+    background: #D0EEFF;
+    border: 1px solid #99D3F5;
+    border-radius: 4px;
+    padding: 4px 12px;
+    overflow: hidden;
+    color: #1E88C7;
+    text-decoration: none;
+    text-indent: 0;
+    line-height: 20px;
+}
+
+.ytecn_btn {
+    color: #fff !important;
+    background-color: #2780E3;
+    border-color: #2780E3;
+    width: 100%;
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: normal;
+    text-align: center;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    padding: 8px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    border-radius: 0;
+    user-select: none;
+    margin-bottom: 20px;
+}
+
+.ytecn_btn:hover {
+    color: #fff !important;
+    background-color: #15569f;
+    border-color: #10427b;
+}
+
+.ytecn-input {
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    line-height: 38px;
+    height: 38px;
+    width: 50%;
+    padding: 0 10px;
+    color: #5e5e5e;
+}
+
+.ytecn-inputmax {
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    line-height: 38px;
+    height: 38px;
+    width: 100%;
+    padding: 0 10px;
+    color: #5e5e5e;
+    box-sizing: border-box;
+}
+
+.ytecn-center {
+    text-align: center !important;
+}
+
+/* YtUser Plugin Custom Styles */
+.ytuser_css {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+.ytuser_css p {
+    margin: 0 0 15px 0 !important;
+    line-height: 1.6;
+}
+
+.ytuser_css .title {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #333;
+    font-size: 14px;
+}
+
+.ytuser_css input[type="text"],
+.ytuser_css input[type="password"],
+.ytuser_css input[type="email"],
+.ytuser_css textarea,
+.ytuser_css select,
+.ytuser_css .edit {
+    width: 100%;
+    padding: 10px 12px;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    box-sizing: border-box;
+}
+
+.ytuser_css input[type="text"]:focus,
+.ytuser_css input[type="password"]:focus,
+.ytuser_css textarea:focus,
+.ytuser_css select:focus,
+.ytuser_css .edit:focus {
+    color: #495057;
+    background-color: #fff;
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.ytuser_css select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 16px;
+    padding-right: 40px;
+}
+
+.ytuser_css .verify_img {
+    vertical-align: middle;
+    margin-left: 10px;
+    height: 38px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* 针对验证码行的特殊布局处理 */
+.ytuser_css p:has(input[name="verifycode"]) {
+    display: flex;
+    align-items: center;
+}
+
+.ytuser_css input[name="verifycode"] {
+    width: auto;
+    flex-grow: 1;
+    max-width: 200px;
+}
+
+.ytuser_css button,
+.ytuser_css .js-ajax-submit,
+.ytuser_css input[type="submit"] {
+    display: inline-block;
+    font-weight: 400;
+    color: #fff;
+    text-align: center;
+    vertical-align: middle;
+    user-select: none;
+    background-color: #007bff;
+    border: 1px solid #007bff;
+    padding: 10px 20px;
+    font-size: 16px;
+    line-height: 1.5;
+    border-radius: 4px;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.ytuser_css button:hover,
+.ytuser_css .js-ajax-submit:hover,
+.ytuser_css input[type="submit"]:hover {
+    background-color: #0069d9;
+    border-color: #0062cc;
+}
+
+/* 处理表格布局的表单 (注册/登录等) */
+.ytuser_css table {
+    width: 100% !important;
+    border-collapse: collapse;
+}
+
+.ytuser_css table td {
+    padding: 10px 0;
+    border: none !important;
+}
+
+.ytuser_css table td:first-child {
+    text-align: right;
+    padding-right: 15px;
+    font-weight: 600;
+    color: #555;
+}
+
+.ytuser_css .yt_captcha_div {
+    display: flex;
+    align-items: center;
+}
+
+/* 手机验证码按钮样式 */
+.ytuser_css .btn.js-get-mobile-code {
+    display: inline-block;
+    padding: 0 15px;
+    height: 38px;
+    line-height: 38px;
+    background-color: #28a745;
+    color: #fff !important;
+    border: 1px solid #28a745;
+    border-radius: 4px;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 14px;
+    margin-left: 10px;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.ytuser_css .btn.js-get-mobile-code:hover {
+    background-color: #218838;
+    border-color: #1e7e34;
+    color: #fff !important;
+    text-decoration: none;
+    opacity: 0.9;
+}
+
+
+
+.user-menu-wrap {
+    position: relative;
+    cursor: pointer;
+}
+
+.user-menu-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 260px;
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 4px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    z-index: 999;
+    display: none;
+    margin-top: 5px;
+}
+
+.user-menu-dropdown.active {
+    display: block;
+}
+
+.menu-header {
+    padding: 15px;
+    background: #f9f9f9;
+    border-bottom: 1px solid #eee;
+    border-radius: 4px 4px 0 0;
+}
+
+.menu-user-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.menu-avatar-wrap {
+    display: flex;
+    align-items: center;
+}
+
+.menu-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+    object-fit: cover;
+}
+
+.menu-details {
+    flex: 1;
+    overflow: hidden;
+    margin-right: 10px;
+}
+
+.menu-name {
+    font-weight: bold;
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 14px;
+    color: #333;
+    line-height: 1.2;
+    margin-bottom: 2px;
+}
+
+.menu-bio {
+    color: #999;
+    font-size: 12px;
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    line-height: 1.2;
+    margin-top: 0;
+}
+
+.menu-logout {
+    color: #888;
+    font-size: 18px;
+    transition: color 0.2s;
+}
+
+.menu-logout:hover {
+    color: #f44336;
+}
+
+.menu-stats {
+    margin-top: 10px;
+    background: #fff;
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #f0f0f0;
+    line-height: 1.2;
+}
+
+.menu-stat-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    color: #666;
+}
+
+.menu-stat-value {
+    color: #00bcd4;
+    font-weight: bold;
+}
+
+.menu-actions {
+    padding-top: 10px;
+    margin-top: 10px;
+    border-top: 1px solid #eee;
+    display: flex;
+    gap: 10px; /* Add gap between items */
+    line-height: 1.2;
+}
+
+.menu-checkin {
+    flex: 1; /* Occupy remaining space */
+    text-align: center;
+    font-size: 12px;
+    background: #e8f5e9;
+    color: #4caf50;
+    padding: 6px 0; /* Adjust padding for height */
+    border-radius: 4px;
+    cursor: default;
+}
+
+.menu-btn {
+    flex: 1; /* Occupy remaining space */
+    background: #ff9800;
+    color: #fff;
+    border: none;
+    padding: 6px 0; /* Adjust padding for height */
+    border-radius: 4px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    width: auto; /* Reset width if set */
+    text-align: center; /* Ensure text is centered */
+    display: block; /* Ensure block behavior */
+    text-decoration: none; /* Remove underline */
+    line-height: normal;
+}
+
+.menu-btn:hover {
+    opacity: 0.9;
+    color: #fff; /* Ensure color stays white on hover */
+    text-decoration: none;
+}
+
+.menu-list {
+    padding: 10px 5px; /* Adjust padding */
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping if needed, but intended for 1 row */
+}
+
+.menu-link {
+    width: 25%; /* 4 items per row */
+    padding: 10px 0;
+    color: #333;
+    font-size: 12px; /* Smaller font for compact layout */
+    display: flex;
+    flex-direction: column; /* Icon top, text bottom */
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+    border-radius: 4px;
+    text-align: center;
+    line-height: 1.2;
+}
+
+.menu-link:hover {
+    background: #f5f5f5;
+    color: #00bcd4;
+}
+
+.menu-link i {
+    margin-right: 0; /* Remove right margin */
+    margin-bottom: 5px; /* Add bottom margin */
+    font-size: 20px; /* Larger icon */
+    color: #999;
+    width: auto;
+    text-align: center;
+    display: block;
+}
+
+#avatar_preview{
+    width: 38px; height: 38px; border-radius: 50%; margin-right: 15px; object-fit: cover; border: 1px solid #ddd;
+}
+#user-imgFile{
+    padding: 2px 0 0 10px; flex: 1;
+}
+.user-avatar{
+    display: flex; align-items: center;
+}
+
+.user-menu-wrap img{
+    max-width: 38px;
+    max-height: 38px;
+}

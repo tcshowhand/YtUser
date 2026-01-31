@@ -1,120 +1,41 @@
-{* Template Name: 发布投稿 *}
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <title>发布投稿</title>
-  <meta name="renderer" content="webkit">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
-  <link rel="stylesheet" href="{$host}zb_users/plugin/YtUser/layuiadmin/layui/css/layui.css" media="all">
-  <link rel="stylesheet" href="{$host}zb_users/plugin/YtUser/layuiadmin/style/admin.css" media="all">
-  <script src="{$host}zb_system/script/jquery-2.2.4.min.js" type="text/javascript"></script>
-  <script src="{$host}zb_system/script/zblogphp.js" type="text/javascript"></script>
-  <script src="{$host}zb_system/script/c_html_js_add.php" type="text/javascript"></script>
-</head>
-<body>
+{* Template Name: 发布投稿*}
+<?php echo'<meta charset="UTF-8"><div style="text-align:center;padding:60px 0;font-size:16px;"><h2 style="font-size:60px;margin-bottom:32px;">这里是用户中心模版</h2>哈哈</div>';die();?>
+{template:t_header}
 
-  <div class="layui-fluid">
-    <div class="layui-row layui-col-space15">
-      <div class="layui-col-md12">
-        
-        <div class="layui-card">
-          <div class="layui-card-header">发布投稿</div>
-          <div class="layui-card-body">
-            <form id="signup-form" class="layui-form" action="" lay-filter="component-form-element">
-            <input id="edtID" name="ID" type="hidden" value="{$user.ID}" />
-            <input id="edtGuid" name="Guid" type="hidden" value="{$user.Guid}" />
-              <div class="layui-row layui-col-space10 layui-form-item">
-                <div class="layui-col-lg12">
-                  <label class="layui-form-label">标题：</label>
-                  <div class="layui-input-block">
-                    <input type="text" name="Alias" value="{$user.StaticName}" lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
-                  </div>
-                </div>
-                <div class="layui-col-lg12">
-                  <label class="layui-form-label">分类：</label>
-                  <div class="layui-input-block">
-                  <div class="layui-col-md6">
-                  <select name="city" lay-verify="">
-                    {Yt_Categories(0)}
-                  </select> 
-                </div>
+<div class="col-19 col-m-24">
+    <div class="tx-box bg-white mb15">
+        <h2 class="tx-title">发布文章</h2>
 
-
-                  </div>
-                </div>
-              </div>
-              <div class="layui-row layui-col-space10 layui-form-item">
-                <div class="layui-col-lg12">
-                  <label class="layui-form-label">内容：</label>
-                  <div class="layui-input-block">
-                    {$article.UEditor}
-                  </div>
-                </div>
-
-              </div>
-
-
-            <div class="layui-form-item">
-                <label class="layui-form-label">验证码：</label>
-                <div class="layui-input-inline">
-                    <input type="text" name="verifycode" lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
-                </div>
-                <div class="layui-form-mid layui-word-aux">{$article.verifycode}</div>
-            </div>
-
-              <div class="layui-form-item">
-                <div class="layui-input-block">
-                  <button class="layui-btn" lay-submit lay-filter="component-form-element">立即提交</button>
-                  <button type="reset" class="layui-btn layui-btn-primary">重置</button>
-                </div>
-              </div>
+        <div class="pd15">
+            {if $user.Level <= $zbp->Config('YtUser')->contribute_level}
+            <ul class="tx-form-li row">
+            <form class="js-ajax-form" action="{$zbp->Config('YtUser')->api_articleinfo}" method="post" novalidate="novalidate">
+                <input type="hidden" name="token" id="token" value="{$zbp->GetToken()}">
+                <li class="col-24 col-m-24"><p>{$zbp->Config('YtUser')->contribute_text}</p></li>
+                <li class="col-24 col-m-24"><p><input id="edtTitle" name="Title" type="text" class="tx-input" placeholder="文章标题"></p></li>
+                {if !empty($zbp->Config('YtUser')->limit_dirz1)}
+                {php}$list = json_decode($zbp->Config('YtUser')->limit_dirz1,true);$list2 = json_decode($zbp->Config('YtUser')->limit_dirz2,true);{/php}
+                {foreach $list as $key=>$add}
+                    <li class="col-12 col-m-24"><p><input type="text" name="meta_{$list2[$key]}" value="" class="tx-input"><i>{$add}</i></p></li>
+                {/foreach}
+                {/if}
+                <li class="col-24 col-m-24"><p>{$article.UEditor}</p></li>
+                {if $zbp->Config('YtUser')->tverifycode_on}
+                <li class="col-24 col-m-24"><p><select name="CateID" size="1" class="form-control user_input tx-select">{Yt_Categories(0)}</select></p></li>
+                {else}
+                <li class="col-12 col-m-24"><p><select name="CateID" size="1" class="form-control user_input tx-select">{Yt_Categories(0)}</select></p></li>
+                <li class="col-12 col-m-24"><p class="input-ma"><input required="required" type="text" name="verifycode" class="tx-input"  placeholder="验证码">{$article.verifycode}</p></li>
+                {/if}
+                <li class="col-24 col-m-24"><p class="tx-input-full"><button class="js-ajax-submit tx-btn tx-btn-big bg-black">提交</button></p></li>
             </form>
-          </div>
+            </ul>
+            {else}
+            <p class="tx-red f-22 ta-c">你的权限不足！！！请联系站长。</p>
+            {/if} 
         </div>
-      </div>
-    </div>
-  </div>
-  
-  <script src="{$host}zb_users/plugin/YtUser/layuiadmin/layui/layui.js"></script>  
-  <script>
-    var  basehost= '{$host}'
-    var  zbloghost= '{$host}zb_users/plugin/YtUser/'
-  layui.config({
-    base: '{$host}zb_users/plugin/YtUser/layuiadmin/'
-  }).extend({
-    index: 'lib/index' //主入口模块
-  }).use(['index', 'form'], function(){
-    var $ = layui.$
-    ,admin = layui.admin
-    ,element = layui.element
-    ,form = layui.form;
-    form.render(null, 'component-form-element');
-    element.render('breadcrumb', 'breadcrumb');
-    form.on('submit(component-form-element)', function(data){
-        admin.req({
-        url: zbloghost + 'cmd.php?act=MemberPst&token={$zbp->GetToken()}'
-        ,type:'post'
-        ,data:  $("#signup-form").serialize()
-        ,done: function(res){
-          layer.msg('修改成功', {
-            offset: '15px'
-            ,icon: 1
-            ,time: 1000
-          }, function(){
-            location.href = '{$host}{$zbp->Config('YtUser')->YtUser_User}';
-          });
-        },
-        error:function(res){
-            layer.msg($(res.responseText).find('member value string').text());
-            $("#reg_verfiycode").attr("src",basehost+"zb_system/script/c_validcode.php?id=User&amp;tm="+Math.random());
-        }
-      });
-      return false;
+    </div> 
+</div>
+{template:t_footer}
 
-    });
-  });
-  </script>
-</body>
-</html>
+
+

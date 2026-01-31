@@ -1,107 +1,37 @@
-{* Template Name: 实名验证 *}
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <title>实名验证</title>
-  <meta name="renderer" content="webkit">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
-  <link rel="stylesheet" href="{$host}zb_users/plugin/YtUser/layuiadmin/layui/css/layui.css" media="all">
-  <link rel="stylesheet" href="{$host}zb_users/plugin/YtUser/layuiadmin/style/admin.css" media="all">
-</head>
-<body>
-
-  <div class="layui-fluid">
-    <div class="layui-row layui-col-space15">
-      <div class="layui-col-md12">
-        <div class="layui-card">
-          <div class="layui-card-header">实名验证</div>
-          <div class="layui-card-body">
-
-        {if $isidcard == 1}
-            <blockquote class="layui-elem-quote">待审核</blockquote>
-        {elseif $isidcard == 2}
-            <blockquote class="layui-elem-quote">已验证</blockquote>
-            
-        {else}
-            {if $isidcard == 3}
-            <blockquote class="layui-elem-quote">未通过</blockquote>
-            {/if}
-            <form id="signup-form" class="layui-form" action="" lay-filter="component-form-element">
-              <div class="layui-row layui-col-space10 layui-form-item">
-                <div class="layui-col-lg12">
-                  <label class="layui-form-label">姓名：</label>
-                  <div class="layui-input-block">
-                    <input type="text" name="name" lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
-                  </div>
-                </div>
-                <div class="layui-col-lg12">
-                  <label class="layui-form-label">身份证号：</label>
-                  <div class="layui-input-block">
-                    <input type="text" name="idcard" lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
-                  </div>
-                </div>
-              </div>
-
-            <div class="layui-form-item">
-                <label class="layui-form-label">验证码：</label>
-                <div class="layui-input-inline">
-                    <input type="text" name="verifycode" lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
-                </div>
-                <div class="layui-form-mid layui-word-aux">{$article.verifycode}</div>
-            </div>
-              <div class="layui-form-item">
-                <div class="layui-input-block">
-                  <button class="layui-btn" lay-submit lay-filter="component-form-element">立即提交</button>
-                  <button type="reset" class="layui-btn layui-btn-primary">重置</button>
-                </div>
-              </div>
-            </form>
-            {/if}
-          </div>
+{* Template Name: 实名验证*}
+<?php echo'<meta charset="UTF-8"><div style="text-align:center;padding:60px 0;font-size:16px;"><h2 style="font-size:60px;margin-bottom:32px;">打开这个网页的是傻逼</h2>吼吼!</div>';die();?>
+{template:t_header}
+<div class="col-19 col-m-24">
+    <div class="tx-box bg-white mb15">
+        <h2 class="tx-title">实名验证</h2>
+        <div class="pd15">
+            <ul class="tx-form-li row">
+                {if $isidcard == 1}
+                <li class="col-24 col-m-24"><i class="iconfont icon-tishi"></i> 待审核</li>
+                {elseif $isidcard == 2}
+                <li class="col-24 col-m-24"><i class="iconfont icon-tishi"></i> 已验证</li>
+                {else}
+                {if $isidcard == 3}
+                <li class="col-24 col-m-24"><i class="iconfont icon-tishi"></i> 未通过</li>
+                {/if}
+                <form class="js-ajax-form" action="{$zbp->Config('YtUser')->api_certifi}" method="post" novalidate="novalidate">
+                <li class="col-24 col-m-24"><p>
+                {php}
+                $array=array();
+                $array['0']="个人认证";
+                $array['1']="企业认证";
+                echo zbpform::radio('type', $array, 0);
+                {/php}
+                </p></li>
+                <li class="col-24 col-m-24"><p><input required="required" type="text" id="edtname" name="name" class="tx-input"/><i>姓名或企业名</i></p></li>
+                <li class="col-24 col-m-24"><p><input required="required" type="text" id="edtidcard" name="idcard" class="tx-input"/><i>证号号码</i></p></li>
+                <li class="col-24 col-m-24"><p class="input-ma"><input required="required" type="text" name="verifycode" class="tx-input"  placeholder="验证码">{$article.verifycode}</p></li>
+                <li class="col-24 col-m-24"><p class="tx-input-full"><button type="submit" class="js-ajax-submit tx-btn tx-btn-big bg-black">提交</button></p></li>
+                </form>
+                {/if}
+            </ul>
         </div>
-      </div>
     </div>
-  </div>
-  
-  <script src="{$host}zb_users/plugin/YtUser/layuiadmin/layui/layui.js"></script>  
-  <script>
-    var  basehost= '{$host}'
-    var  zbloghost= '{$host}zb_users/plugin/YtUser/'
-  layui.config({
-    base: '{$host}zb_users/plugin/YtUser/layuiadmin/'
-  }).extend({
-    index: 'lib/index' //主入口模块
-  }).use(['index', 'form'], function(){
-    var $ = layui.$
-    ,admin = layui.admin
-    ,element = layui.element
-    ,form = layui.form;
-    form.render(null, 'component-form-element');
-    element.render('breadcrumb', 'breadcrumb');
-    form.on('submit(component-form-element)', function(data){
-        admin.req({
-        url: zbloghost + 'common/certifi.php'
-        ,type:'post'
-        ,data:  $("#signup-form").serialize()
-        ,done: function(res){
-          layer.msg('修改成功', {
-            offset: '15px'
-            ,icon: 1
-            ,time: 1000
-          }, function(){
-            location.href = '{$host}{$zbp->Config('YtUser')->YtUser_Certifi}';
-          });
-        },
-        error:function(res){
-            layer.msg($(res.responseText).find('member value string').text());
-            $("#reg_verfiycode").attr("src",basehost+"zb_system/script/c_validcode.php?id=Certifi&amp;tm="+Math.random());
-        }
-      });
-      return false;
-    });
-  });
-  </script>
-</body>
-</html>
+</div>
+{template:t_footer}
+
